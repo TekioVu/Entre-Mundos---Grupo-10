@@ -73,12 +73,35 @@ a {
 a:hover {
   color: #1abc9c;
 }
+/* Contenedor de redes */
+.redes {
+  max-width: 800px;
+  margin: 0 auto 20px auto;
+  padding: 12px 18px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* Cada link de red */
+.redes div {
+  margin: 8px 0;
+  text-align: left; /* centra cada fila */
+}
+
+.redes img {
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
 
 /* Nombre del estudio */
 .studio {
+  max-width: 800px;
+  margin: 0 auto 20px auto;
+  padding: 12px 18px;
   text-align: center;
   font-weight: bold;
-  margin: 25px 0;
   font-size: 1.1rem;
   color: #2c3e50;
 }
