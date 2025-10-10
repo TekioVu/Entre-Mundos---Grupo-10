@@ -37,6 +37,12 @@ p {
   font-size: 1rem;
 }
 
+canvas {
+  display: block;
+  margin: 0 auto; /* centro horizontal */
+  border: 1px solid black; /* opcional, para ver el borde */
+}
+
 /* Lista de autores */
 ul {
   max-width: 800px;
