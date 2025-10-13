@@ -1,4 +1,4 @@
-window.onload = function()
+/*window.onload = function()
 {
     var party = [
         {name: 'Goblin', id: 'goblin', hp: 10, maxHp: 20},
@@ -8,7 +8,7 @@ window.onload = function()
         {name: 'Soldado', id: 'soldado', hp: 50, maxHp: 50},
         {name: 'Troglodita', id: 'trolgodita', hp: 50, maxHp: 50},
         {name: 'Bufon', id: 'bufon', hp: 50, maxHp: 50},
-        {name: 'Comediante', id: 'comediante', hp: 50, maxHp: 50}*/
+        {name: 'Comediante', id: 'comediante', hp: 50, maxHp: 50}
     ];
     
     var canvas = document.querySelector("canvas");
@@ -42,25 +42,25 @@ window.onload = function()
         'Goblin': new Image(),
         'Espectro': new Image(),
         'Amantes': new Image(),
-        /*
+        
         'Corazon': new Image(),
         'Soldado': new Image(),
         'Troglodita': new Image(),
         'Bufon': new Image(),
         'Comediante': new Image()
-        */
+        
     };
     
     enemyImages['Goblin'].src = 'assets/Enemigos/bat.png';
     enemyImages['Espectro'].src = 'assets/Enemigos/goblin.png';
     enemyImages['Amantes'].src = 'assets/Enemigos/goblin.png';
 
-    /*enemyImages['Corazon'].src = 'assets/Enemigos/goblin.png';
+    enemyImages['Corazon'].src = 'assets/Enemigos/goblin.png';
     enemyImages['Soldado'].src = 'assets/Enemigos/goblin.png';
     enemyImages['Troglodita'].src = 'assets/Enemigos/goblin.png';
     enemyImages['Bufon'].src = 'assets/Enemigos/goblin.png';
     enemyImages['Comediante'].src = 'assets/Enemigos/goblin.png';
-    */
+    
 
     function renderCharacters(t) {
 
@@ -120,5 +120,5 @@ window.onload = function()
     }
     render();
 
-}
+}*/
 
