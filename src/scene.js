@@ -13,7 +13,7 @@ var BootScene = new Phaser.Class({
     {
         //Enemy
         this.load.spritesheet('player', './assets/Timmy/IDLE.png', { frameWidth: 96, frameHeight: 84 });
-        this.load.image('goblin', './assets/Enemigos/EnemyPlaceHolder.png');
+        this.load.spritesheet('goblin', './assets/Enemigos/Goblin/Attack3.png', { frameWidth: 150, frameHeight: 150 });
         this.load.spritesheet('ghost', './assets/Enemigos/Ghost/Idle.png', { frameWidth: 128, frameHeight: 128 });
 
         //Background
@@ -58,16 +58,23 @@ var BattleScene = new Phaser.Class({
             frameRate: 5,  
             repeat: -1     
         });
+
+        this.anims.create({
+            key: 'goblin-idle', 
+            frames: this.anims.generateFrameNumbers('goblin', { start: 0, end: 4 }),
+            frameRate: 5,  
+            repeat: -1     
+        });
         
         // player character - timmy
         var timmy = new PlayerCharacter(this, 250, 75, 'player', 6, 'Timmy', 100, 20);        
         this.add.existing(timmy);
         timmy.anims.play('timmy-idle');          
         
-        
-        var goblin1 = new Enemy(this, 50, 100, "goblin", null, "Goblin", 50, 3);
+        var goblin1 = new Enemy(this, 50, 100, "goblin", 4, "Goblin", 50, 3);
         goblin1.setScale(1.2); 
         this.add.existing(goblin1);
+        goblin1.anims.play('goblin-idle');          
         
         var ghost1 = new Enemy(this, 50, 50, "ghost", 11,"Ghost", 50, 3);
         this.add.existing(ghost1);
