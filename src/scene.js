@@ -113,7 +113,14 @@ var BattleScene = new Phaser.Class({
         }
         // next turn in 3 seconds
         this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });        
-    }
+    },
+    update: function() {
+    this.units.forEach(unit => {
+        if (unit.hpText && unit.alive !== false) {
+            unit.updateHpText();
+        }
+    });
+}
 });
 
 // base class for heroes and enemies
@@ -126,8 +133,28 @@ var Unit = new Phaser.Class({
         Phaser.GameObjects.Sprite.call(this, scene, x, y, texture, frame)
         this.type = type;
         this.maxHp = this.hp = hp;
-        this.damage = damage; // default damage                
+        this.damage = damage; // default damage 
+        
+        const offsets = {
+            "Timmy": 40,
+            "Goblin": 25,
+            "Ghost": 25
+        };
+        this.hpOffsetY = offsets[this.type] || 30; // valor por defecto 30
+
+        // Texto de HP
+        this.hpText = scene.add.text(this.x, this.y - this.hpOffsetY, this.hp, {
+            font: "14px Arial",
+            fill: "#ff0000",
+            stroke: "#000000",
+            strokeThickness: 2
+        }).setOrigin(0.5);
     },
+    updateHpText() {
+        this.hpText.setPosition(this.x, this.y - this.hpOffsetY);
+        this.hpText.setText(this.hp);
+    },
+    
     attack: function(target) {
         target.takeDamage(this.damage);
         this.scene.events.emit("Message", this.type + " attacks " + target.type + " for " + this.damage + " damage");
@@ -137,6 +164,7 @@ var Unit = new Phaser.Class({
         if(this.hp <= 0) {
             this.hp = 0;
             this.alive = false;
+            this.hpText.setVisible(false);
         }
     }
 });
