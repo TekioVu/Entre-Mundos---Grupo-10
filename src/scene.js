@@ -11,10 +11,13 @@ var BootScene = new Phaser.Class({
 
     preload: function ()
     {
-        // load resources
+        //Enemy
         this.load.spritesheet('player', './assets/Timmy/IDLE.png', { frameWidth: 96, frameHeight: 84 });
-        this.load.image('dragonblue', './assets/Enemigos/EnemyPlaceHolder.png');
-        this.load.image('dragonorrange', './assets/Enemigos/EnemyPlaceHolder.png');
+        this.load.image('goblin', './assets/Enemigos/EnemyPlaceHolder.png');
+        this.load.spritesheet('ghost', './assets/Enemigos/Ghost/Idle.png', { frameWidth: 128, frameHeight: 128 });
+
+        //Background
+        this.load.image('fantasy_background', './assets/Backgrounds/graveyard.png');
     },
 
     create: function ()
@@ -35,36 +38,46 @@ var BattleScene = new Phaser.Class({
     },
     create: function ()
     {
-        // change the background to green
-        this.cameras.main.setBackgroundColor("rgba(0, 200, 0, 0.5)");
-        
+        this.cameras.main.setBackgroundColor("#1a1f2b");
+
+        this.add.image(0, 0, 'fantasy_background')
+        .setOrigin(0, 0.3)
+        .setDisplaySize(this.cameras.main.width, this.cameras.main.height)
+        .setScrollFactor(0);
+
         this.anims.create({
-            key: 'mage-idle', // nombre de la animación
+            key: 'timmy-idle', // nombre de la animación
             frames: this.anims.generateFrameNumbers('player', { start: 0, end: 6 }), // tus 7 frames
             frameRate: 5,   // 5 frames por segundo, ajusta como quieras
             repeat: -1      // repetir infinitamente
         });
+
+        this.anims.create({
+            key: 'ghost-idle', // nombre de la animación
+            frames: this.anims.generateFrameNumbers('ghost', { start: 0, end: 11 }), // tus 7 frames
+            frameRate: 5,   // 5 frames por segundo, ajusta como quieras
+            repeat: -1      // repetir infinitamente
+        });
         
-        // player character - warrior
-        var warrior = new PlayerCharacter(this, 250, 50, 'player', 6, 'Warrior', 100, 20);        
-        this.add.existing(warrior);
-        warrior.anims.play('mage-idle');          
+        // player character - timmy
+        var timmy = new PlayerCharacter(this, 250, 75, 'player', 6, 'Timmy', 100, 20);        
+        this.add.existing(timmy);
+        timmy.anims.play('timmy-idle');          
         
-        // player character - mage
-        var mage = new PlayerCharacter(this, 250, 100, 'player', 6, 'Mage', 80, 8);
-        this.add.existing(mage);  
-        mage.anims.play('mage-idle');         
         
-        var dragonblue = new Enemy(this, 50, 50, "dragonblue", null, "Dragon", 50, 3);
-        this.add.existing(dragonblue);
+        var goblin1 = new Enemy(this, 50, 100, "goblin", null, "Goblin", 50, 3);
+        goblin1.setScale(1.2); 
+        this.add.existing(goblin1);
         
-        var dragonOrange = new Enemy(this, 50, 100, "dragonorrange", null,"Dragon2", 50, 3);
-        this.add.existing(dragonOrange);
+        var ghost1 = new Enemy(this, 50, 50, "ghost", 11,"Ghost", 50, 3);
+        this.add.existing(ghost1);
+        ghost1.setScale(0.3); 
+        ghost1.anims.play('ghost-idle');         
         
         // array with heroes
-        this.heroes = [ warrior, mage ];
+        this.heroes = [ timmy ];
         // array with enemies
-        this.enemies = [ dragonblue, dragonOrange ];
+        this.enemies = [ goblin1, ghost1 ];
         // array with both parties, who will attack
         this.units = this.heroes.concat(this.enemies);
         
