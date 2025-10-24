@@ -46,17 +46,17 @@ var BattleScene = new Phaser.Class({
         .setScrollFactor(0);
 
         this.anims.create({
-            key: 'timmy-idle', // nombre de la animación
-            frames: this.anims.generateFrameNumbers('player', { start: 0, end: 6 }), // tus 7 frames
-            frameRate: 5,   // 5 frames por segundo, ajusta como quieras
-            repeat: -1      // repetir infinitamente
+            key: 'timmy-idle',
+            frames: this.anims.generateFrameNumbers('player', { start: 0, end: 6 }), 
+            frameRate: 5,   
+            repeat: -1     
         });
 
         this.anims.create({
-            key: 'ghost-idle', // nombre de la animación
-            frames: this.anims.generateFrameNumbers('ghost', { start: 0, end: 11 }), // tus 7 frames
-            frameRate: 5,   // 5 frames por segundo, ajusta como quieras
-            repeat: -1      // repetir infinitamente
+            key: 'ghost-idle', 
+            frames: this.anims.generateFrameNumbers('ghost', { start: 0, end: 11 }),
+            frameRate: 5,  
+            repeat: -1     
         });
         
         // player character - timmy
@@ -164,8 +164,31 @@ var Unit = new Phaser.Class({
         if(this.hp <= 0) {
             this.hp = 0;
             this.alive = false;
+
+            this.scene.tweens.add({
+                targets: this,
+                alpha: 0,
+                duration: 600,
+                onComplete: () => {
+                    this.setVisible(false);
+                }
+            });
             this.hpText.setVisible(false);
+
+            this.scene.units = this.scene.units.filter(u => u !== this);
+        if (this instanceof Enemy) {
+            this.scene.enemies = this.scene.enemies.filter(e => e !== this);
+        } else {
+            this.scene.heroes = this.scene.heroes.filter(h => h !== this);
         }
+
+        if (this instanceof Enemy) {
+            const uiScene = this.scene.scene.get("UIScene");
+            uiScene.remapEnemies();
+        }
+
+        }
+        
     }
 });
 
@@ -192,23 +215,51 @@ var PlayerCharacter = new Phaser.Class({
 });
 
 var MenuItem = new Phaser.Class({
-    Extends: Phaser.GameObjects.Text,
+    Extends: Phaser.GameObjects.Container,
     
     initialize:
-            
     function MenuItem(x, y, text, scene) {
-        Phaser.GameObjects.Text.call(this, scene, x, y, text, { color: "#ffffff", align: "left", fontSize: 15});
+        Phaser.GameObjects.Container.call(this, scene, x, y);
+        
+        const boxWidth = 90;
+        const boxHeight = 20;
+        const bgColor = 0x000000;
+        const bgAlpha = 0.6;
+        
+        // Fondo del botón
+        this.bg = scene.add.graphics();
+        this.bg.fillStyle(bgColor, bgAlpha);
+        this.bg.fillRoundedRect(-boxWidth/2, -boxHeight/2, boxWidth, boxHeight, 4);
+        this.add(this.bg);
+
+        // Texto centrado
+        this.text = scene.add.text(0, 0, text, {
+            color: "#ffffff",
+            align: "center",
+            fontSize: "14px"
+        }).setOrigin(0.5);
+        this.add(this.text);
+
+        // Guardamos el tamaño por si luego lo quieres usar
+        this.boxWidth = boxWidth;
+        this.boxHeight = boxHeight;
     },
     
     select: function() {
-        this.setColor("#f8ff38");
+        this.bg.clear();
+        this.bg.fillStyle(0xf8ff38, 0.8); // fondo amarillo al seleccionar
+        this.bg.fillRoundedRect(-this.boxWidth/2, -this.boxHeight/2, this.boxWidth, this.boxHeight, 4);
+        this.text.setColor("#000000");
     },
     
     deselect: function() {
-        this.setColor("#ffffff");
+        this.bg.clear();
+        this.bg.fillStyle(0x000000, 0.6); // fondo normal
+        this.bg.fillRoundedRect(-this.boxWidth/2, -this.boxHeight/2, this.boxWidth, this.boxHeight, 4);
+        this.text.setColor("#ffffff");
     }
-    
 });
+
 
 var Menu = new Phaser.Class({
     Extends: Phaser.GameObjects.Container,
@@ -224,10 +275,13 @@ var Menu = new Phaser.Class({
         this.y = y;
     },     
     addMenuItem: function(unit) {
-        var menuItem = new MenuItem(0, this.menuItems.length * 20, unit, this.scene);
+        const itemHeight = 25; // separación vertical entre ítems
+        const yOffset = this.menuItems.length * itemHeight + 12; // compensación vertical
+        const menuItem = new MenuItem(45, yOffset, unit, this.scene);
         this.menuItems.push(menuItem);
-        this.add(menuItem);        
-    },            
+        this.add(menuItem);
+    },
+          
     moveSelectionUp: function() {
         this.menuItems[this.menuItemIndex].deselect();
         this.menuItemIndex--;
@@ -328,19 +382,20 @@ var UIScene = new Phaser.Class({
         this.graphics = this.add.graphics();
         this.graphics.lineStyle(1, 0xffffff);
         this.graphics.fillStyle(0x031f4c, 1);        
-        this.graphics.strokeRect(2, 150, 90, 100);
-        this.graphics.fillRect(2, 150, 90, 100);
-        this.graphics.strokeRect(95, 150, 90, 100);
-        this.graphics.fillRect(95, 150, 90, 100);
-        this.graphics.strokeRect(188, 150, 130, 100);
-        this.graphics.fillRect(188, 150, 130, 100);
+        this.graphics.strokeRect(1, 150, 90, 100);
+        this.graphics.fillRect(1, 150, 130, 100);
+        this.graphics.strokeRect(105, 150, 90, 90);
+        this.graphics.fillRect(105, 150, 190, 90);
+        this.graphics.strokeRect(205, 150, 130, 100);
+        this.graphics.fillRect(205, 150, 130, 100);
         
         // basic container to hold all menus
         this.menus = this.add.container();
                 
-        this.heroesMenu = new HeroesMenu(195, 153, this);           
-        this.actionsMenu = new ActionsMenu(100, 153, this);            
-        this.enemiesMenu = new EnemiesMenu(8, 153, this);   
+        this.heroesMenu = new HeroesMenu(218, 155, this);
+        this.actionsMenu = new ActionsMenu(110, 155, this);
+        this.enemiesMenu = new EnemiesMenu(8, 155, this);
+   
         
         // the currently selected menu 
         this.currentMenu = this.actionsMenu;
