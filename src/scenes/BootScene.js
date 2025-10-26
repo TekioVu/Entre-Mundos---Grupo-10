@@ -1,0 +1,16 @@
+export default class BootScene extends Phaser.Scene {
+    constructor() {
+        super({ key: "BootScene" });
+    }
+
+    preload() {
+        this.load.spritesheet('player', './assets/Timmy/IDLE.png', { frameWidth: 96, frameHeight: 84 });
+        this.load.spritesheet('goblin', './assets/Enemigos/Goblin/Attack3.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('ghost', './assets/Enemigos/Ghost/Idle.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.image('fantasy_background', './assets/Backgrounds/graveyard.png');
+    }
+
+    create() {
+        this.scene.start("BattleScene");
+    }
+}
