@@ -1,6 +1,7 @@
 import BootScene from "./scenes/BootScene.js";
 import BattleScene from "./scenes/BattleScene.js";
 import UIScene from "./scenes/UIScene.js";
+import MenuScene from "./scenes/MenuScene.js";
 
 const config = {
     type: Phaser.AUTO,
@@ -13,7 +14,7 @@ const config = {
         default: "arcade",
         arcade: { gravity: { y: 0 } }
     },
-    scene: [BootScene, BattleScene, UIScene]
+    scene: [BootScene, BattleScene, UIScene, MenuScene]
 };
 
 new Phaser.Game(config);
