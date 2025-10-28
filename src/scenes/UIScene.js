@@ -38,6 +38,7 @@ export default class UIScene extends Phaser.Scene {
         this.events.on("SelectEnemies", this.onSelectEnemies, this);
         this.events.on("SelectActions", this.onSelectActions, this);
         this.events.on("Enemy", this.onEnemy, this);
+        this.events.on("Back", this.onSelectActions, this);
 
         this.message = new Message(this, this.battleScene.events);
         this.add.existing(this.message);
@@ -62,6 +63,7 @@ export default class UIScene extends Phaser.Scene {
     }
 
     onSelectActions() {
+        this.enemiesMenu.deselect();
         this.currentMenu = this.actionsMenu;
         this.actionsMenu.select(0);
     }
