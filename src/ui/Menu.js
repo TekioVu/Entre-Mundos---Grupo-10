@@ -41,9 +41,6 @@ export default class Menu extends Phaser.GameObjects.Container {
         this.menuItemIndex = 0;
     }
 
-    confirm() {}
-    back() {}
-
     clear() {
         this.menuItems.forEach(item => item.destroy());
         this.menuItems.length = 0;
