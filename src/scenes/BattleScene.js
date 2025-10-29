@@ -1,6 +1,5 @@
 import PlayerCharacter from "../characters/PlayerCharacter.js";
 import Enemy from "../characters/Enemy.js";
-import Inventory from "../characters/Inventory.js";
 
 export default class BattleScene extends Phaser.Scene {
     constructor() {
@@ -31,7 +30,7 @@ export default class BattleScene extends Phaser.Scene {
         this.units = this.heroes.concat(this.enemies);
 
         this.scene.launch("UIScene");
-        this.index = -1;
+        this.index = -1;  
     }
 
     nextTurn() {
