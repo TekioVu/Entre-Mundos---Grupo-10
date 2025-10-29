@@ -532,27 +532,7 @@ var config = {
             gravity: { y: 0 }
         }
     },
-    scene: [ BootScene, BattleScene, UIScene, GameOverScene ]
+    scene: [ BootScene, BattleScene, UIScene]
 };
-
-var GameOverScene = new Phaser.Class({
-    Extends: Phaser.Scene,
-    inicialize:
-
-    function GameOverScene(){
-        Phaser.Scene.call(this,{key: GameOverScene});
-    },
-
-    create: function(){
-         this.add.text(160, 120, "GAME OVER",{
-            font: "20px Arial",
-            fill: "#ffffff"
-         }).setOrigin(0.5);
-
-         this.input.keyboard.once ("SPACE", ()=>{
-            this.scene.start("BootScene");
-         });
-    }
-});
 
 var game = new Phaser.Game(config);

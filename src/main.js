@@ -2,6 +2,7 @@ import BootScene from "./scenes/BootScene.js";
 import BattleScene from "./scenes/BattleScene.js";
 import UIScene from "./scenes/UIScene.js";
 import MenuScene from "./scenes/MenuScene.js";
+import GameOverScene from "./scenes/GameOverScene.js";
 
 const config = {
     type: Phaser.AUTO,
