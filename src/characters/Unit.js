@@ -62,6 +62,17 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                     delay: 1000,
                     callback: () => {
                         this.scene.scene.stop("UIScene");
+                        this.scene.scene.start("VictoryScene");
+                    }
+                });
+            }
+
+            
+            if (this.scene.heroes.length === 0){
+                this.scene.time.addEvent({
+                    delay: 1000,
+                    callback: () => {
+                        this.scene.scene.stop("UIScene");
                         this.scene.scene.start("GameOverScene");
                     }
                 });

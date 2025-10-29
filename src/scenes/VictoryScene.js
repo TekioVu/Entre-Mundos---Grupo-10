@@ -1,15 +1,15 @@
-export default class GameOverScene extends Phaser.Scene {
+export default class VictoryScene extends Phaser.Scene {
     constructor() {
-        super("GameOverScene");
+        super("VictoryScene");
     }
 
     create() {
-        this.add.text(160, 120, "Game over", {
+        this.add.text(160, 120, "Victory", {
             font: "20px Arial",
             fill: "#ff0000"
         }).setOrigin(0.5);
 
-        this.add.text(160, 150, "Presiona ESPACIO para reiniciar", {
+        this.add.text(160, 150, "Presiona ESPACIO para continuar", {
             font: "12px Arial",
             fill: "#ffffff"
         }).setOrigin(0.5);
