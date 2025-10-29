@@ -1,6 +1,5 @@
 import PlayerCharacter from "../characters/PlayerCharacter.js";
 import Enemy from "../characters/Enemy.js";
-import Inventory from "../characters/Inventory.js";
 
 export default class BattleScene extends Phaser.Scene {
     constructor() {
