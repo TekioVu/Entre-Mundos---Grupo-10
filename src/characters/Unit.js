@@ -56,6 +56,16 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                 const uiScene = this.scene.scene.get("UIScene");
                 uiScene.remapEnemies();
             }
+
+            if (this.scene.enemies.length === 0){
+                this.scene.time.addEvent({
+                    delay: 1000,
+                    callback: () => {
+                        this.scene.scene.stop("UIScene");
+                        this.scene.scene.start("GameOverScene");
+                    }
+                });
+            }
         }
     }
 }
