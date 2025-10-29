@@ -9,6 +9,8 @@ export default class UIScene extends Phaser.Scene {
     }
 
     create() {
+        this.id = 0;
+
         this.graphics = this.add.graphics();
         this.graphics.lineStyle(1, 0xffffff);
         this.graphics.fillStyle(0x031f4c, 1);
@@ -36,9 +38,9 @@ export default class UIScene extends Phaser.Scene {
 
         this.battleScene.events.on("PlayerSelect", this.onPlayerSelect, this);
         this.events.on("SelectEnemies", this.onSelectEnemies, this);
-        this.events.on("SelectActions", this.onSelectActions, this);
+        this.events.on("SelectActions", this.onBack, this);
         this.events.on("Enemy", this.onEnemy, this);
-        this.events.on("Back", this.onSelectActions, this);
+        this.events.on("Back", this.onBack, this);
 
         this.message = new Message(this, this.battleScene.events);
         this.add.existing(this.message);
@@ -52,6 +54,7 @@ export default class UIScene extends Phaser.Scene {
     }
 
     onPlayerSelect(id) {
+        this.id = id;
         this.heroesMenu.select(id);
         this.actionsMenu.select(0);
         this.currentMenu = this.actionsMenu;
@@ -62,10 +65,17 @@ export default class UIScene extends Phaser.Scene {
         this.enemiesMenu.select(0);
     }
 
-    onSelectActions() {
-        this.enemiesMenu.deselect();
-        this.currentMenu = this.actionsMenu;
-        this.actionsMenu.select(0);
+    onBack() {
+        if(this.currentMenu === enemiesMenu){
+            this.enemiesMenu.deselect();
+            this.currentMenu = this.actionsMenu;
+            this.actionsMenu.select(0);
+        }
+        else if(this.currentMenu === actionsMenu){
+            this.actionsMenu.deselect();
+            this.currentMenu = this.actionsMenu;
+            this.heroesMenu.select(this.id);
+        }
     }
 
     remapHeroes() {
