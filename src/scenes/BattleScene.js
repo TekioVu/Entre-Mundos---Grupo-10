@@ -17,11 +17,11 @@ export default class BattleScene extends Phaser.Scene {
         const timmy = new PlayerCharacter(this, 250, 75, 'player', 6, 'Timmy', 100, 20);
         this.add.existing(timmy).anims.play('timmy-idle');
 
-        const goblin1 = new Enemy(this, 50, 100, "goblin", 4, "Goblin", 50, 3);
+        const goblin1 = new Enemy(this, 50, 100, "goblin", 4, "Goblin", 3, 3);
         goblin1.setScale(1.2);
         this.add.existing(goblin1).anims.play('goblin-idle');
 
-        const ghost1 = new Enemy(this, 50, 50, "ghost", 11, "Ghost", 50, 3);
+        const ghost1 = new Enemy(this, 50, 50, "ghost", 11, "Ghost", 3, 3);
         ghost1.setScale(0.3);
         this.add.existing(ghost1).anims.play('ghost-idle');
 

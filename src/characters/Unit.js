@@ -46,13 +46,14 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             this.hpText.setVisible(false);
 
             this.scene.units = this.scene.units.filter(u => u !== this);
-            if (this instanceof Enemy) {
-                this.scene.enemies = this.scene.enemies.filter(e => e !== this);
-            } else {
-                this.scene.heroes = this.scene.heroes.filter(h => h !== this);
-            }
+            if (this.type === "Goblin" || this.type === "Ghost") {
+    this.scene.enemies = this.scene.enemies.filter(e => e !== this);
+} else {
+    this.scene.heroes = this.scene.heroes.filter(h => h !== this);
+}
 
-            if (this instanceof Enemy) {
+
+            if (this.type === "Goblin" || this.type === "Ghost") {
                 const uiScene = this.scene.scene.get("UIScene");
                 uiScene.remapEnemies();
             }
