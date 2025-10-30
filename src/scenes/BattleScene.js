@@ -29,7 +29,8 @@ export default class BattleScene extends Phaser.Scene {
         this.enemies = [goblin1, ghost1];
         this.units = this.heroes.concat(this.enemies);
 
-        this.scene.launch("UIScene");
+        //this.scene.launch("UIScene");
+        this.scene.launch("CharacterSelectionScene");
         this.index = -1;  
     }
 
