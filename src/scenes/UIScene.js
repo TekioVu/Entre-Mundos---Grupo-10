@@ -36,9 +36,9 @@ export default class UIScene extends Phaser.Scene {
 
         this.input.keyboard.on("keydown", this.onKeyInput, this);
 
-        this.battleScene.events.on("PlayerSelect", this.onPlayerSelect, this);
+        this.battleScene.events.on("PlayerSelect", this.onFirstPlayerSelect, this); // Para dejar el primer personaje de la lista al empezar cada turno
+        this.events.on("PlayerSelect", this.onPlayerSelect, this);                  // Cuando se selecciona el personaje con el que actuar
         this.events.on("SelectEnemies", this.onSelectEnemies, this);
-        this.events.on("SelectActions", this.onBack, this);
         this.events.on("Enemy", this.onEnemy, this);
         this.events.on("Back", this.onBack, this);
 
@@ -53,9 +53,12 @@ export default class UIScene extends Phaser.Scene {
         this.battleScene.receivePlayerSelection("attack", index);
     }
 
-    onPlayerSelect(id) {
-        this.id = id;
-        this.heroesMenu.select(id);
+    onFirstPlayerSelect() {
+        this.currentMenu = this.heroesMenu;
+        this.heroesMenu.select(0);
+    }
+
+    onPlayerSelect(){
         this.actionsMenu.select(0);
         this.currentMenu = this.actionsMenu;
     }
@@ -66,14 +69,14 @@ export default class UIScene extends Phaser.Scene {
     }
 
     onBack() {
-        if(this.currentMenu === enemiesMenu){
+        if(this.currentMenu === this.enemiesMenu){
             this.enemiesMenu.deselect();
             this.currentMenu = this.actionsMenu;
             this.actionsMenu.select(0);
         }
-        else if(this.currentMenu === actionsMenu){
+        else if(this.currentMenu === this.actionsMenu){
             this.actionsMenu.deselect();
-            this.currentMenu = this.actionsMenu;
+            this.currentMenu = this.heroesMenu;
             this.heroesMenu.select(this.id);
         }
     }
