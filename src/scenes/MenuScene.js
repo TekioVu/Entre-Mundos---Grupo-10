@@ -76,7 +76,7 @@ export default class MenuScene extends Phaser.Scene {
             else if (seleccion === "Historia") this.scene.start("BattleScene");
             else if (seleccion === "Comedia") this.scene.start("BattleScene");
             else if (seleccion === "Terror") this.scene.start("BattleScene");
-            else if (seleccion === "Tienda") this.scene.start("BattleScene");
+            else if (seleccion === "Tienda") this.scene.start("ShopScene");
 
         });
     }
