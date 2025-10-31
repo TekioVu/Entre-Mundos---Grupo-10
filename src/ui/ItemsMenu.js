@@ -6,10 +6,10 @@ export default class ActionsMenu extends Menu {
     }
 
     confirm() {
-        this.scene.events.emit("SelectEnemies");
+        this.scene.events.emit("Item");
     }
 
     back() {
-        this.scene.events.emit("SelectActions");
+        this.scene.events.emit("Back");
     }
 }

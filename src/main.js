@@ -4,6 +4,7 @@ import UIScene from "./scenes/UIScene.js";
 import MenuScene from "./scenes/MenuScene.js";
 import GameOverScene from "./scenes/GameOverScene.js";
 import VictoryScene from "./scenes/VictoryScene.js";
+import ShopScene from "./scenes/ShopScene.js";
 import CharacterSelectionScene from "./scenes/CharacterSelectionScene.js";
 
 const config = {
@@ -17,7 +18,7 @@ const config = {
         default: "arcade",
         arcade: { gravity: { y: 0 } }
     },
-    scene: [BootScene, BattleScene, UIScene, MenuScene, GameOverScene, VictoryScene, CharacterSelectionScene]
+    scene: [BootScene, BattleScene, UIScene, MenuScene, GameOverScene, VictoryScene, CharacterSelectionScene, ShopScene]
 };
 
 new Phaser.Game(config);

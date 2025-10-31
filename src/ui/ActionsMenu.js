@@ -12,6 +12,6 @@ export default class ActionsMenu extends Menu {
     }
 
     back() {
-        this.scene.events.emit("SelectActions");
+        this.scene.events.emit("Back");
     }
 }
