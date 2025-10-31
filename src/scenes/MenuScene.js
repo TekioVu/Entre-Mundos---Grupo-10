@@ -71,12 +71,12 @@ export default class MenuScene extends Phaser.Scene {
             const seleccion = opciones[this.selectedIndex];
             console.log("Seleccionado:", seleccion);
 
-            if (seleccion === "Fantasía") this.scene.start("BattleScene");
-            else if (seleccion === "Romance") this.scene.start("BattleScene");
-            else if (seleccion === "Historia") this.scene.start("BattleScene");
-            else if (seleccion === "Comedia") this.scene.start("BattleScene");
-            else if (seleccion === "Terror") this.scene.start("BattleScene");
-            else if (seleccion === "Tienda") this.scene.start("ShopScene");
+            if (seleccion === "Fantasía") this.scene.switch("BattleScene");
+            else if (seleccion === "Romance") this.scene.switch("BattleScene");
+            else if (seleccion === "Historia") this.scene.switch("BattleScene");
+            else if (seleccion === "Comedia") this.scene.switch("BattleScene");
+            else if (seleccion === "Terror") this.scene.switch("BattleScene");
+            else if (seleccion === "Tienda") this.scene.switch("ShopScene");
 
         });
     }

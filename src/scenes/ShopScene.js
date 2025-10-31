@@ -13,7 +13,7 @@ export default class ShopScene extends Phaser.Scene {
                 { name: "Poción Dorada", texture: "pocion_dorada", description: "Otorga invulnerabilidad por unos segundos." }
             ],
             "Poción daño": [
-                { name: "Espada de Hierro", texture: "espada_hierro", description: "Una espada simple pero confiable." },
+                { name: "Poción Daño Área", texture: "espada_hierro", description: "Una espada simple pero confiable." },
                 { name: "Hacha de Batalla", texture: "hacha_batalla", description: "Inflige gran daño a corta distancia." },
                 { name: "Arco de Roble", texture: "arco_roble", description: "Permite atacar desde lejos." },
                 { name: "Daga Envenenada", texture: "daga_veneno", description: "Causa daño prolongado al enemigo." }
@@ -122,7 +122,7 @@ export default class ShopScene extends Phaser.Scene {
 
         // === Volver al menú con ESC ===
         if (Phaser.Input.Keyboard.JustDown(this.keyEsc)) {
-            this.scene.start('MenuScene');
+            this.scene.switch('MenuScene');
         }
     }
 
