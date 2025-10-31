@@ -12,6 +12,8 @@ export default class BootScene extends Phaser.Scene {
         this.load.image('pocion_verde', './assets/Pociones/Icon3.png');
         this.load.image('pocion_azul', './assets/Pociones/Icon5.png');
         this.load.image('pocion_dorada', './assets/Pociones/Icon2.png');
+
+        // Aqui se cargaran los objetos que se podran utilizar:
     }
 
     create() {

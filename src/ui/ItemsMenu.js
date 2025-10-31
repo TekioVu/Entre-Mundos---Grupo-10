@@ -1,6 +1,6 @@
 import Menu from "./Menu.js";
 
-export default class ActionsMenu extends Menu {
+export default class ItemsMenu extends Menu {
     constructor(x, y, scene) {
         super(x, y, scene);
     }

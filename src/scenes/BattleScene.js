@@ -51,6 +51,9 @@ export default class BattleScene extends Phaser.Scene {
         if (action === "attack") {
             this.units[this.index].attack(this.enemies[target]);
         }
+        else if (action === "item"){
+
+        }
         this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
     }
 

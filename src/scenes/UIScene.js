@@ -1,6 +1,7 @@
 import HeroesMenu from "../ui/HeroesMenu.js";
 import ActionsMenu from "../ui/ActionsMenu.js";
 import EnemiesMenu from "../ui/EnemiesMenu.js";
+import ItemsMenu from "../ui/ItemsMenu.js";
 import Message from "../ui/Message.js";
 
 export default class UIScene extends Phaser.Scene {
@@ -25,6 +26,7 @@ export default class UIScene extends Phaser.Scene {
         this.heroesMenu = new HeroesMenu(218, 155, this);
         this.actionsMenu = new ActionsMenu(110, 155, this);
         this.enemiesMenu = new EnemiesMenu(8, 155, this);
+        this.itemsMenu = new ItemsMenu(8, 155, this);
 
         this.currentMenu = this.actionsMenu;
         this.menus.add([this.heroesMenu, this.actionsMenu, this.enemiesMenu]);
@@ -40,6 +42,7 @@ export default class UIScene extends Phaser.Scene {
         this.events.on("PlayerSelect", this.onPlayerSelect, this);                  // Cuando se selecciona el personaje con el que actuar
         this.events.on("SelectEnemies", this.onSelectEnemies, this);
         this.events.on("Enemy", this.onEnemy, this);
+        this.events.on("Item", this.onItem, this);
         this.events.on("Back", this.onBack, this);
 
         this.message = new Message(this, this.battleScene.events);
@@ -51,6 +54,10 @@ export default class UIScene extends Phaser.Scene {
     onEnemy(index) {
         this.currentMenu = null;
         this.battleScene.receivePlayerSelection("attack", index);
+    }
+
+    onItem(index){
+        
     }
 
     onFirstPlayerSelect() {
@@ -96,7 +103,7 @@ export default class UIScene extends Phaser.Scene {
         if (this.currentMenu) {
             if (event.code === "ArrowUp") this.currentMenu.moveSelectionUp();
             else if (event.code === "ArrowDown") this.currentMenu.moveSelectionDown();
-            else if (event.code === "ArrowRight" || event.code === "Shift") this.currentMenu.back();
+            else if (event.code === "ArrowRight" || event.code === "Shift") { if(this.currentMenu !== this.heroesMenu) { this.currentMenu.back(); } }
             else if (event.code === "Space" || event.code === "ArrowLeft") this.currentMenu.confirm();
         }
     }
