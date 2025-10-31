@@ -12,7 +12,7 @@ export default class CharacterSelectionScene extends Phaser.Scene {
             fill: "#ffffffff"
         }).setOrigin(0.5);
 
-         this.add.text(160, 40, "Presiona ESPACIO para iniciar la batalla", {
+         this.add.text(160, 40, "Presiona ENTER para iniciar la batalla", {
             font: "10px Arial",
             fill: "#ffffffff"
         }).setOrigin(0.5);
@@ -57,7 +57,7 @@ export default class CharacterSelectionScene extends Phaser.Scene {
 
 
 
-        this.input.keyboard.once("keydown-SPACE", () => {
+        this.input.keyboard.once("keydown-ENTER", () => {
             this.scene.start("UIScene");
         });
     }
