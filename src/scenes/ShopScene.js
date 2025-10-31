@@ -103,6 +103,7 @@ export default class ShopScene extends Phaser.Scene {
 
         // === Teclas ===
         this.cursors = this.input.keyboard.createCursorKeys();
+        this.keyEsc = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 
         // === Selección inicial ===
         this.updateSelection(0, 0);
@@ -117,6 +118,11 @@ export default class ShopScene extends Phaser.Scene {
             this.moveSelection(0, -1);
         } else if (Phaser.Input.Keyboard.JustDown(this.cursors.down)) {
             this.moveSelection(0, 1);
+        }
+
+        // === Volver al menú con ESC ===
+        if (Phaser.Input.Keyboard.JustDown(this.keyEsc)) {
+            this.scene.start('MenuScene');
         }
     }
 
