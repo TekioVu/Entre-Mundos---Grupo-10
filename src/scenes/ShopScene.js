@@ -13,20 +13,20 @@ export default class ShopScene extends Phaser.Scene {
                 { name: "Poción Dorada", texture: "pocion_dorada", description: "Otorga invulnerabilidad por unos segundos." }
             ],
             "Poción daño": [
-                { name: "Poción Daño Área", texture: "espada_hierro", description: "Una espada simple pero confiable." },
+                { name: "Poción Daño Área", texture: "pocion_daño_area", description: "Una espada simple pero confiable." },
                 { name: "Hacha de Batalla", texture: "hacha_batalla", description: "Inflige gran daño a corta distancia." },
                 { name: "Arco de Roble", texture: "arco_roble", description: "Permite atacar desde lejos." },
                 { name: "Daga Envenenada", texture: "daga_veneno", description: "Causa daño prolongado al enemigo." }
             ],
             "Poción utilidad": [
-                { name: "Pan", texture: "pan", description: "Recupera un poco de energía." },
+                { name: "Poción Ataque", texture: "pocion_ataque", description: "Sube el ataque" },
                 { name: "Carne Asada", texture: "carne_asada", description: "Restablece gran parte de tu salud." },
                 { name: "Manzana", texture: "manzana", description: "Una opción ligera y nutritiva." },
                 { name: "Queso", texture: "queso", description: "Aumenta tu defensa durante unos segundos." }
             ],
             "Personajes": [
-                { name: "Pan", texture: "pan", description: "Recupera un poco de energía." },
-                { name: "Carne Asada", texture: "carne_asada", description: "Restablece gran parte de tu salud." },
+                { name: "Goblin", texture: "goblin_image", description: "Bicho verde agresivo" },
+                { name: "Ghost", texture: "ghost_image", description: "BOO" },
                 { name: "Manzana", texture: "manzana", description: "Una opción ligera y nutritiva." },
                 { name: "Queso", texture: "queso", description: "Aumenta tu defensa durante unos segundos." }
             ],
@@ -85,13 +85,17 @@ export default class ShopScene extends Phaser.Scene {
 
         // === Vista previa (lado derecho) ===
         const firstItem = this.categories[this.categoryNames[0]][0];
+
+        const previewSize = 100; 
         this.preview = this.add.image(width * 0.75, height * 0.4, firstItem.texture)
-            .setScale(3.5)
-            .setOrigin(0.5);
+            .setOrigin(0.5)
+            .setDisplaySize(previewSize, previewSize);
 
         this.previewName = this.add.text(width * 0.75, height * 0.7, firstItem.name, {
             fontSize: "20px",
             color: "#ffff00",
+            wordWrap: { width: 150, useAdvancedWrap: true },
+            align: "center"
         }).setOrigin(0.5);
 
         this.previewDescription = this.add.text(width * 0.75, height * 0.85, firstItem.description, {
@@ -158,7 +162,7 @@ export default class ShopScene extends Phaser.Scene {
         selected.rect.setFillStyle(0xffff00);
 
         // Actualizar vista previa
-        this.preview.setTexture(selected.item.texture);
+        this.preview.setTexture(selected.item.texture).setDisplaySize(100, 100);
         this.previewName.setText(selected.item.name);
         this.previewDescription.setText(selected.item.description);
     }

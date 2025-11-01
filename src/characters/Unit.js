@@ -64,6 +64,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                     callback: () => {
                         this.scene.scene.stop("UIScene");
                         this.scene.scene.start("VictoryScene");
+                        this.scene.events.removeAllListeners();
                     }
                 });
             }
@@ -75,6 +76,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                     callback: () => {
                         this.scene.scene.stop("UIScene");
                         this.scene.scene.start("GameOverScene");
+                        this.scene.events.removeAllListeners();
                     }
                 });
             }
