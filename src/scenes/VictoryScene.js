@@ -15,7 +15,16 @@ export default class VictoryScene extends Phaser.Scene {
         }).setOrigin(0.5);
 
         this.input.keyboard.once("keydown-SPACE", () => {
+            
+            this.unlockNewBook();
             this.scene.switch("MenuScene");
         });
+    }
+
+    unlockNewBook() {
+        const menuScene = this.scene.get('MenuScene');
+        menuScene.unlockedbooks++;
+        menuScene.updateText();
+        menuScene.updateSelection();
     }
 }

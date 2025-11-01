@@ -4,7 +4,7 @@ export default class MenuScene extends Phaser.Scene {
     }
 
     create() {
-        const opciones = [
+        this.opciones = [
             "Fantasía",
             "Romance",
             "Historia",
@@ -14,14 +14,15 @@ export default class MenuScene extends Phaser.Scene {
         ];
 
         this.selectedIndex = 0;
+        this.unlockedbooks = 1;
         this.optionObjects = [];
 
         const { width, height } = this.scale;
+        this.width = width;
+        this.height = height;
 
         // Fondo
         this.cameras.main.setBackgroundColor("#1a1a1a");
-
-        const rectWidth = width / opciones.length;
 
         this.input.keyboard.addCapture([
             Phaser.Input.Keyboard.KeyCodes.LEFT,
@@ -30,45 +31,33 @@ export default class MenuScene extends Phaser.Scene {
             Phaser.Input.Keyboard.KeyCodes.ENTER
         ]);
 
-        // Crear rectángulos y textos (en horizontal)
-        for (let i = 0; i < opciones.length; i++) {
-            const x = i * rectWidth + rectWidth / 2;
-
-            const rect = this.add.rectangle(
-                x,
-                height / 2,
-                rectWidth * 0.9,
-                height * 0.8,
-                0x333333
-            ).setOrigin(0.5);
-
-            const text = this.add.text(x, height / 2, opciones[i], {
-                fontFamily: "Arial",
-                fontSize: 20,
-                color: "#ffffff",
-                wordWrap: { width: rectWidth * 0.8 }
-            }).setOrigin(0.5);
-            text.setRotation(- Math.PI / 2); 
-
-            this.optionObjects.push({ rect, text });
-        }
+        this.updateText();
 
         // Resaltar la opción inicial
         this.updateSelection();
 
         // Controles izquierda/derecha
         this.input.keyboard.on("keydown-LEFT", () => {
-            this.selectedIndex = (this.selectedIndex - 1 + opciones.length) % opciones.length;
+
+            this.selectedIndex = (this.selectedIndex - 1);
+
+            if(this.selectedIndex < 0) this.selectedIndex = this.opciones.length - 1;
+            else if(this.selectedIndex > this.unlockedbooks - 1) this.selectedIndex = this.unlockedbooks - 1;
+
             this.updateSelection();
         });
 
         this.input.keyboard.on("keydown-RIGHT", () => {
-            this.selectedIndex = (this.selectedIndex + 1) % opciones.length;
+            this.selectedIndex = (this.selectedIndex + 1);
+
+            if(this.selectedIndex >= this.opciones.length) this.selectedIndex = 0;
+            else if(this.selectedIndex > this.unlockedbooks - 1) this.selectedIndex = this.opciones.length - 1;
+
             this.updateSelection();
         });
 
         this.input.keyboard.on("keydown-SPACE", () => {
-            const seleccion = opciones[this.selectedIndex];
+            const seleccion = this.opciones[this.selectedIndex];
             console.log("Seleccionado:", seleccion);
 
             if (seleccion === "Fantasía") this.scene.switch("BattleScene");
@@ -93,5 +82,44 @@ export default class MenuScene extends Phaser.Scene {
                 obj.text.setStyle({ fontSize: 20 });
             }
         });
+    }
+
+    updateText()
+    {
+        // Limpiar los objetos anteriores
+        this.optionObjects.forEach(obj => {
+            obj.rect.destroy();
+            obj.text.destroy();
+        });
+        this.optionObjects = [];
+
+        const rectWidth = this.width / this.opciones.length;
+        // Crear rectángulos y textos (en horizontal)
+        for (let i = 0; i < this.opciones.length; i++) {
+            const x = i * rectWidth + rectWidth / 2;
+
+            const rect = this.add.rectangle(
+                x,
+                this.height / 2,
+                rectWidth * 0.9,
+                this.height * 0.8,
+                0x333333
+            ).setOrigin(0.5);
+
+            let txt = "LOCKED";
+            if(i < this.unlockedbooks || i == this.opciones.length - 1){
+                txt = this.opciones[i];
+            }
+
+            const text = this.add.text(x, this.height / 2, txt, {
+                fontFamily: "Arial",
+                fontSize: 20,
+                color: "#ffffff",
+                wordWrap: { width: rectWidth * 0.8 }
+            }).setOrigin(0.5);
+            text.setRotation(- Math.PI / 2); 
+
+            this.optionObjects.push({ rect, text });
+        }
     }
 }
