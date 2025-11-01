@@ -1,6 +1,9 @@
 export default class Message extends Phaser.GameObjects.Container {
     constructor(scene, events) {
         super(scene, 160, 30);
+
+        this.events = events; // 🔹 Guarda referencia al EventEmitter
+
         const graphics = this.scene.add.graphics();
         this.add(graphics);
 
@@ -18,20 +21,34 @@ export default class Message extends Phaser.GameObjects.Container {
         this.add(this.text);
         this.text.setOrigin(0.5);
 
-        events.on("Message", this.showMessage, this);
+        // 🔹 Suscripción
+        this.events.on("Message", this.showMessage, this);
+
         this.visible = false;
+
+        // 🔹 Asegura que al destruir el objeto se desuscriba
+        this.once(Phaser.GameObjects.Events.DESTROY, this.cleanup, this);
     }
 
     showMessage(text) {
         this.text.setText(text);
         this.visible = true;
         if (this.hideEvent) this.hideEvent.remove(false);
-        this.hideEvent = this.scene.time.addEvent({ delay: 2000, callback: this.hideMessage, callbackScope: this });
-        //this.scene.events.removeAllListeners();
+        this.hideEvent = this.scene.time.addEvent({
+            delay: 2000,
+            callback: this.hideMessage,
+            callbackScope: this
+        });
     }
 
     hideMessage() {
         this.hideEvent = null;
         this.visible = false;
+    }
+
+    cleanup() {
+        if (this.events) {
+            this.events.off("Message", this.showMessage, this);
+        }
     }
 }
