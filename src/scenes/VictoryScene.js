@@ -26,5 +26,8 @@ export default class VictoryScene extends Phaser.Scene {
         menuScene.unlockedbooks++;
         menuScene.updateText();
         menuScene.updateSelection();
+
+        const shopScene = this.scene.get('ShopScene');
+        shopScene.resetShop();
     }
 }

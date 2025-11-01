@@ -16,8 +16,14 @@ export default class BootScene extends Phaser.Scene {
         this.load.image('pocion_azul', './assets/Pociones/Icon5.png');
         this.load.image('pocion_dorada', './assets/Pociones/Icon2.png');
 
-        this.load.image('pocion_daño_area', './assets/Pociones/Icon20.png');
+        this.load.image('pocion_daño_area', './assets/Pociones/Icon18.png');
+        this.load.image('pocion_daño_pequeña', './assets/Pociones/Icon4.png')
+        this.load.image('pocion_daño_grande', './assets/Pociones/Icon20.png')
+        this.load.image('pocion_cataclismo', './assets/Pociones/Icon35.png')
+
         this.load.image('pocion_ataque', './assets/Pociones/Icon40.png')
+        this.load.image('pocion_defensa', './assets/Pociones/Icon36.png')
+        this.load.image('pocion_aturdidora', './assets/Pociones/Icon25.png')
 
         this.load.image('goblin_image', './assets/Enemigos/Enemigos_Tienda/Goblin_Image.png')
         this.load.image('ghost_image', './assets/Enemigos/Enemigos_Tienda/Ghost_Image.png')
