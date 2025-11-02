@@ -23,11 +23,10 @@ export default class VictoryScene extends Phaser.Scene {
 
     unlockNewBook() {
         const menuScene = this.scene.get('MenuScene');
-        menuScene.unlockedbooks++;
-        menuScene.updateText();
-        menuScene.updateSelection();
+        menuScene.unlockBook();
 
         const shopScene = this.scene.get('ShopScene');
+        shopScene.addNewItems(menuScene.unlockedbooks);
         shopScene.resetShop();
     }
 }

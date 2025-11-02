@@ -8,23 +8,16 @@ export default class ShopScene extends Phaser.Scene {
         this.categories = {
             "Pociones curación": [
                 { name: "Poción Roja", texture: "pocion_roja", description: "Restaura una pequeña cantidad de salud." },
-                { name: "Poción Roja", texture: "pocion_roja", description: "Restaura una pequeña cantidad de salud." },
                 { name: "Poción Azul", texture: "pocion_azul", description: "Recupera energía mágica o maná." },
-                { name: "Poción Azul", texture: "pocion_azul", description: "Recupera energía mágica o maná." },
-                { name: "Poción Verde", texture: "pocion_verde", description: "Aumenta la velocidad temporalmente." },
-                { name: "Poción Dorada", texture: "pocion_dorada", description: "Otorga invulnerabilidad por unos segundos." }
             ],
-            "Poción daño": [
+            "Pociones daño": [
                 { name: "Poción Daño Área", texture: "pocion_daño_area", description: "Inflinge daño en área al equipo rival" },
                 { name: "Poción Daño Pequeña", texture: "pocion_daño_pequeña", description: "Inflinge daño a un objetivo" },
                 { name: "Poción Daño Grande", texture: "pocion_daño_grande", description: "Inflinge una gran cantidad de daño a un objetivo" },
-                { name: "Poción Cataclismo", texture: "pocion_cataclismo", description: "Inflinge una gran cantidad de daño a todos los personajes del campo de batalla" }
             ],
-            "Poción utilidad": [
+            "Pociones utilidad": [
                 { name: "Poción Ataque", texture: "pocion_ataque", description: "Sube el ataque" },
                 { name: "Poción Defensa", texture: "pocion_defensa", description: "Aumenta la defensa del equipo aliado" },
-                { name: "Poción Aturdidora", texture: "pocion_aturdidora", description: "Evita el ataque del próximo turno del enemigo" },
-                { name: "Poción Aturdidora", texture: "pocion_aturdidora", description: "Evita el ataque del próximo turno del enemigo" },
             ],
             "Personajes": [
                 { name: "Goblin", texture: "goblin_image", description: "Bicho verde agresivo" },
@@ -59,7 +52,7 @@ export default class ShopScene extends Phaser.Scene {
         const newCategoryIndex = Phaser.Math.Clamp(this.selectedCategoryIndex + deltaY, 0, maxCategories - 1);
 
         const currentCategory = this.categories[this.categoryNames[newCategoryIndex]];
-        const maxItems = currentCategory.length;
+        const maxItems = 4;
 
         let newItemIndex = this.selectedItemIndex;
         if (deltaX !== 0) {
@@ -91,9 +84,43 @@ export default class ShopScene extends Phaser.Scene {
         this.previewDescription.setText(selected.item.description);
     }
 
+    addNewItems(unlockedBooks)
+    {
+        if(unlockedBooks == 2){
+
+            const greenPotion = {
+            name: "Poción Verde", texture: "pocion_verde", description: "Aumenta la velocidad temporalmente." };
+            this.categories["Pociones curación"].push(greenPotion);
+            
+            const stunPotion ={
+            name: "Poción Aturdidora", texture: "pocion_aturdidora", description: "Evita el ataque del próximo turno del enemigo" };
+            this.categories["Pociones utilidad"].push(stunPotion);
+
+
+        }
+        else if(unlockedBooks == 3)
+        {
+            const goldenPotion = {
+            name: "Poción Dorada", texture: "pocion_dorada", description: "Otorga invulnerabilidad por unos segundos." };
+            this.categories["Pociones curación"].push(goldenPotion);
+
+            const cataclismPotion = {
+            name: "Poción Cataclismo", texture: "pocion_cataclismo", description: "Inflinge una gran cantidad de daño a todos los personajes del campo de batalla" };
+            this.categories["Pociones daño"].push(cataclismPotion);
+
+
+        }else if(unlockedBooks == 4)
+        {
+            
+        }else if(unlockedBooks == 5)
+        {
+            
+        }
+    }
+
     resetShop()
     {
-            // 🔹 1. Si ya existen elementos anteriores, destruirlos
+        // 🔹 1. Si ya existen elementos anteriores, destruirlos
         if (this.categoryGroups) {
             this.categoryGroups.forEach(group => {
                 // Eliminar el texto de la categoría
@@ -120,7 +147,6 @@ export default class ShopScene extends Phaser.Scene {
 
         const { width, height } = this.scale;
 
-
         const categorySpacingY = 50; // separación vertical entre categorías
         const startY = 5;
 
@@ -143,8 +169,15 @@ export default class ShopScene extends Phaser.Scene {
             const y = categoryY + 40;
 
             let itemsIndex = [];
+
             for(let i = 0; i < items.length; i++)
-                itemsIndex.push(i);
+                    itemsIndex.push(i);
+
+            while (itemsIndex.length < 4) {
+                const randomIndex = Math.floor(Math.random() * items.length);
+                itemsIndex.push(randomIndex);
+            }
+
 
             for(let i = 0; i < 4; i++)
             {

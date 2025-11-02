@@ -60,14 +60,14 @@ export default class MenuScene extends Phaser.Scene {
             const seleccion = this.opciones[this.selectedIndex];
             console.log("Seleccionado:", seleccion);
 
-            if (seleccion === "Fantasía") this.scene.switch("BattleScene");
-            else if (seleccion === "Romance") this.scene.switch("BattleScene");
-            else if (seleccion === "Historia") this.scene.switch("BattleScene");
-            else if (seleccion === "Comedia") this.scene.switch("BattleScene");
-            else if (seleccion === "Terror") this.scene.switch("BattleScene");
-            else if (seleccion === "Tienda") this.scene.switch("ShopScene");
+            if (seleccion !== "Tienda") this.scene.switch("BattleScene");
+            else this.scene.switch("ShopScene");
 
         });
+
+        //Crear la tienda por primera vez
+        this.scene.launch("ShopScene");
+        this.scene.sleep("ShopScene");
     }
 
     updateSelection() {
@@ -120,6 +120,21 @@ export default class MenuScene extends Phaser.Scene {
             text.setRotation(- Math.PI / 2); 
 
             this.optionObjects.push({ rect, text });
+        }
+    }
+    getSelectedScene()
+    {
+        const seleccion = this.opciones[this.selectedIndex];
+        return seleccion;
+    }
+
+    unlockBook()
+    {
+        if(this.selectedIndex == this.unlockedbooks - 1)
+        {
+            this.unlockedbooks++;
+            this.updateText();
+            this.updateSelection();
         }
     }
 }
