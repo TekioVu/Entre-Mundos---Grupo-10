@@ -1,5 +1,6 @@
-import HeroesMenu from "../ui/HeroesMenu.js";
+import CharactersMenu from "../ui/CharactersMenu.js";
 import PositionsMenu from "../ui/PositionsMenu.js";
+
 
 export default class CharacterSelectionScene extends Phaser.Scene {
     constructor() {
@@ -31,62 +32,98 @@ export default class CharacterSelectionScene extends Phaser.Scene {
                 this.graphics.strokeRect(1, 150, 318.5, 100);
 
                 this.menus = this.add.container();
-                this.heroesMenu = new HeroesMenu(180, 155, this);
-                this.positionsMenu = new PositionsMenu(10, 155, this);
+                this.positionsMenu = new PositionsMenu(40, 160, this);
+                this.charactersMenu = new CharactersMenu(170, 160, this);
 
-                this.menus.add([this.positionsMenu, this.heroesMenu]);
+                this.currentMenu = this.charactersMenu;
 
-                this.positionsMenu.addMenuItem("Pos1");
-                this.positionsMenu.addMenuItem("Pos2");
-                this.positionsMenu.addMenuItem("Pos3");
-                this.positionsMenu.addMenuItem("Pos4");
-                this.positionsMenu.addMenuItem("Pos6");
+                this.menus.add([this.positionsMenu, this.charactersMenu]);
 
- 
-                this.heroesMenu.addMenuItem("A1");
-                this.heroesMenu.addMenuItem("A2");
-                this.heroesMenu.addMenuItem("A3");
+                 
+                this.positionsMenu.itemsPerColumn = 3;
+                this.positionsMenu.columnSpacing = 70;
+                const positions = ["Pos1", "Pos2", "Pos3", "Pos4", "Pos5", "Pos6"]; 
+                
+                this.positionsMenu.remap(positions);
 
-                this.currentMenu = this.heroesMenu;
+                const battleScene = this.scene.get("BattleScene");
+                this.charactersMenu.itemsPerColumn = 3;
+                this.charactersMenu.columnSpacing = 70;
+                const heroes = battleScene.heroes; 
+                
+                this.charactersMenu.remap(heroes);
+
                 this.currentMenu.select(0)
 
                 this.positionMarker = this.add.circle(0, 0, 10, 0xff0000); 
                 this.positionMarker.setVisible(false);
+
+                this.events.on("PositionSelect", this.onSelectPosition, this);
+                this.events.on("PlayerSelect", this.onSelectPlayer, this);
+
 
                 this.input.keyboard.on("keydown", this.onKeyInput, this);
 
 
 
         this.input.keyboard.once("keydown-ENTER", () => {
-            this.scene.start("UIScene");
+            this.scene.stop ("CharacterSelectionScene");
+            this.scene.launch("UIScene");
         });
     }
 
     onKeyInput(event) {
-        const keysToPrevent = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Enter"];
-        if (keysToPrevent.includes(event.code)) event.preventDefault();
+    const keysToPrevent = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Enter", "Space"];
+    if (keysToPrevent.includes(event.code)) event.preventDefault();
 
-        if (this.currentMenu) {
-            if (event.code === "ArrowUp") this.currentMenu.moveSelectionUp();
-            else if (event.code === "ArrowDown") this.currentMenu.moveSelectionDown();
-            else if (event.code === "ArrowLeft") {
+    if (!this.currentMenu) return;
 
-                this.currentMenu.deselect();
-                this.currentMenu = this.positionsMenu;
-                this.positionsMenu.select(0);
-            } 
-            else if (event.code === "ArrowRight") {
-                this.currentMenu.deselect();
-                this.currentMenu = this.heroesMenu;
-                this.heroesMenu.select(0);
+    const menu = this.currentMenu;
+    const totalItems = menu.menuItems.length;
+    const perColumn = menu.itemsPerColumn;
+
+    if (event.code === "ArrowUp") {
+        menu.moveSelectionUp();
+    } else if (event.code === "ArrowDown") {
+        menu.moveSelectionDown();
+    } 
+    else if (event.code === "ArrowLeft" || event.code === "ArrowRight") {
+        menu.menuItems[menu.menuItemIndex].deselect();
+        let newIndex = menu.menuItemIndex;
+
+        if (event.code === "ArrowLeft") {
+            newIndex -= perColumn;
+            if (newIndex < 0) {
+                if (menu === this.charactersMenu) {
+                    this.currentMenu = this.positionsMenu;
+                    newIndex = Math.min(this.positionsMenu.menuItemIndex, this.positionsMenu.menuItems.length - 1);
+                } else {
+                    newIndex = menu.menuItemIndex % perColumn;
+                }
             }
-            else if (event.code === "Enter" || event.code === "Space") {
-                this.currentMenu.confirm();
+        } else if (event.code === "ArrowRight") {
+            newIndex += perColumn;
+            if (newIndex >= totalItems) {
+                if (menu === this.positionsMenu) {
+                    this.currentMenu = this.charactersMenu;
+                    newIndex = Math.min(this.charactersMenu.menuItemIndex, this.charactersMenu.menuItems.length - 1);
+                } else {
+                    const lastColumnStart = Math.floor((totalItems - 1) / perColumn) * perColumn;
+                    newIndex = Math.min(lastColumnStart + (menu.menuItemIndex % perColumn), totalItems - 1);
+                }
             }
-            this.updatePositionMarker();
-
         }
+
+        this.currentMenu.select(newIndex);
     }
+    else if (event.code === "Enter" || event.code === "Space") {
+        this.currentMenu.confirm();
+    }
+
+    this.updatePositionMarker();
+}
+
+
 
     updatePositionMarker() {
     if (this.currentMenu !== this.positionsMenu) return;
@@ -105,4 +142,14 @@ export default class CharacterSelectionScene extends Phaser.Scene {
     this.positionMarker.setPosition(coords.x, coords.y);
     this.positionMarker.setVisible(true);
 }
+
+onSelectPlayer(){
+        this.positionsMenu.select(0);
+        this.currentMenu = this.positionsMenu;
+    }
+
+onSelectPosition(){
+        this.charactersMenu.select(0);
+        this.currentMenu = this.charactersMenu;
+    }
 }
