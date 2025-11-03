@@ -7,9 +7,20 @@ export default class Unit extends Phaser.GameObjects.Sprite {
 
         const offsets = {
             "Timmy": 40,
+            "Wizard": 40,
+            
             "Goblin": 25,
-            "Ghost": 25
+            "Ghost": 25,
+            "Pharaoh": 25,
+            "Scarab": 25,
+            "Clown": 25,
+            "Jester": 25,
+            "Dragon": 25,
         };
+
+        this.isEnemy = (this.type === "Goblin" || this.type === "Ghost" || this.type === "Pharaoh" || this.type === "Dragon" ||
+                        this.type === "Scarab" || this.type === "Clown" || this.type === "Jester");
+
         this.hpOffsetY = offsets[this.type] || 30;
 
         this.hpText = scene.add.text(this.x, this.y - this.hpOffsetY, this.hp, {
@@ -46,14 +57,12 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             this.hpText.setVisible(false);
 
             this.scene.units = this.scene.units.filter(u => u !== this);
-            if (this.type === "Goblin" || this.type === "Ghost") {
-    this.scene.enemies = this.scene.enemies.filter(e => e !== this);
-} else {
-    this.scene.heroes = this.scene.heroes.filter(h => h !== this);
-}
-
-
-            if (this.type === "Goblin" || this.type === "Ghost") {
+            if (this.isEnemy) {
+            this.scene.enemies = this.scene.enemies.filter(e => e !== this);
+        } else {
+            this.scene.heroes = this.scene.heroes.filter(h => h !== this);
+        }
+            if (this.isEnemy) {
                 const uiScene = this.scene.scene.get("UIScene");
                 uiScene.remapEnemies();
             }
@@ -62,7 +71,12 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                 this.scene.time.addEvent({
                     delay: 1000,
                     callback: () => {
+
+                        const uiScene = this.scene.scene.get("UIScene");
+                        uiScene.cleanEvents();
+
                         this.scene.scene.stop("UIScene");
+                        this.scene.scene.stop("BattleScene");
                         this.scene.scene.start("VictoryScene");
                     }
                 });
@@ -73,11 +87,12 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                 this.scene.time.addEvent({
                     delay: 1000,
                     callback: () => {
+                        this.scene.scene.stop("BattleScene");
                         this.scene.scene.stop("UIScene");
                         this.scene.scene.start("GameOverScene");
                     }
                 });
             }
+        }   
         }
-    }
 }

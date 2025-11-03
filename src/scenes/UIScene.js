@@ -107,4 +107,12 @@ export default class UIScene extends Phaser.Scene {
             else if (event.code === "Space" || event.code === "ArrowLeft") this.currentMenu.confirm();
         }
     }
+
+    cleanEvents() {
+        this.events.off("PlayerSelect", this.onPlayerSelect, this);
+        this.events.off("SelectEnemies", this.onSelectEnemies, this);
+        this.events.off("Enemy", this.onEnemy, this);
+        this.events.off("Item", this.onItem, this);
+        this.events.off("Back", this.onBack, this);
+    }
 }

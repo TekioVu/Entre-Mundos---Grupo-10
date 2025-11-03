@@ -20,10 +20,7 @@ export default class ShopScene extends Phaser.Scene {
                 { name: "Poción Defensa", texture: "pocion_defensa", description: "Aumenta la defensa del equipo aliado" },
             ],
             "Personajes": [
-                { name: "Goblin", texture: "goblin_image", description: "Bicho verde agresivo" },
-                { name: "Goblin", texture: "goblin_image", description: "Bicho verde agresivo" },
-                { name: "Ghost", texture: "ghost_image", description: "BOO" },
-                { name: "Ghost", texture: "ghost_image", description: "BOO" }
+                { name: "Wizard", texture: "wizard_image", description: "Magic" },
             ],
         };
 
@@ -96,6 +93,13 @@ export default class ShopScene extends Phaser.Scene {
             name: "Poción Aturdidora", texture: "pocion_aturdidora", description: "Evita el ataque del próximo turno del enemigo" };
             this.categories["Pociones utilidad"].push(stunPotion);
 
+            const goblin = {
+            name: "Goblin", texture: "goblin_image", description: "Bicho verde agresivo" }
+            this.categories["Personajes"].push(goblin);
+            
+            const ghost = {
+            name: "Ghost", texture: "ghost_image", description: "BOOOOOOOOOOO!" }
+            this.categories["Personajes"].push(ghost);
 
         }
         else if(unlockedBooks == 3)
@@ -108,13 +112,21 @@ export default class ShopScene extends Phaser.Scene {
             name: "Poción Cataclismo", texture: "pocion_cataclismo", description: "Inflinge una gran cantidad de daño a todos los personajes del campo de batalla" };
             this.categories["Pociones daño"].push(cataclismPotion);
 
-
         }else if(unlockedBooks == 4)
         {
-            
+            const pharaoh = {
+            name: "Pharaoh", texture: "pharaoh", description: "𓀅𓂯𓄠𓃼𓁵𓁥𓁾𓁴𓂋𓐑𓐔𓀗𓐗𓀳" };
+            this.categories["Personajes"].push(pharaoh);
+
+            const scarab = {
+            name: "Scarab", texture: "scarab", description: "𓂯𓁾𓄠𓃼𓁴𓂋𓐑𓐔𓀗𓐗𓀅𓀳𓁵𓁥" };
+            this.categories["Personajes"].push(scarab);
+
         }else if(unlockedBooks == 5)
         {
-            
+            const jester = {
+            name: "Jester", texture: "jester", description: "JIJIJIJIJIJIJIJI" };
+            this.categories["Personajes"].push(jester);
         }
     }
 

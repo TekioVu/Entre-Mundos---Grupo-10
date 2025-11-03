@@ -12,7 +12,10 @@ export default class BootScene extends Phaser.Scene {
         this.load.spritesheet('goblin', './assets/Enemigos/Goblin/Attack3.png', { frameWidth: 150, frameHeight: 150 });
         this.load.spritesheet('ghost', './assets/Enemigos/Ghost/Idle.png', { frameWidth: 128, frameHeight: 128 });
         this.load.spritesheet('clown', './assets/Enemigos/Clown/Clown_Sprite.png', { frameWidth: 32, frameHeight: 32 });
-        this.load.spritesheet('dragon', './assets/Enemigos/Dragon/Idle.png', { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('jester', './assets/Enemigos/Jester/Jester.png', { frameWidth: 64, frameHeight: 64 });
+        this.load.spritesheet('pharaoh', './assets/Enemigos/Egypt/Pharaoh_Stand.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('scarab', './assets/Enemigos/Egypt/Scarab_Stand.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('dragon', './assets/Enemigos/Dragon/Idle1.png', { frameWidth: 32, frameHeight: 32 });
 
         //Backgrounds
         this.load.image('fantasy_background', './assets/Backgrounds/Fantasy.png');
@@ -38,6 +41,7 @@ export default class BootScene extends Phaser.Scene {
 
         this.load.image('goblin_image', './assets/Enemigos/Enemigos_Tienda/Goblin_Image.png')
         this.load.image('ghost_image', './assets/Enemigos/Enemigos_Tienda/Ghost_Image.png')
+        this.load.image('wizard_image', './assets/Enemigos/Enemigos_Tienda/Wizard_Image.png')
 
         // Aqui se cargaran los objetos que se podran utilizar:
         ;
