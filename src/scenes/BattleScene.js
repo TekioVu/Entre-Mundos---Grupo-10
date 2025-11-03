@@ -74,7 +74,7 @@ export default class BattleScene extends Phaser.Scene {
 
         }else if(combatScene === 'Romance')
         {
-            this.add.image(0, 0, 'fantasy_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
+            this.add.image(0, 0, 'romance_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
             this.anims.create({ key: 'timmy-idle', frames: this.anims.generateFrameNumbers('player', { start: 0, end: 6 }), frameRate: 5, repeat: -1 });
             this.anims.create({ key: 'ghost-idle', frames: this.anims.generateFrameNumbers('ghost', { start: 0, end: 11 }), frameRate: 5, repeat: -1 });
@@ -96,7 +96,7 @@ export default class BattleScene extends Phaser.Scene {
             this.units = this.heroes.concat(this.enemies);
         }else if(combatScene === 'Historia')
         {
-            this.add.image(0, 0, 'fantasy_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
+            this.add.image(0, 0, 'history_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
             this.anims.create({ key: 'timmy-idle', frames: this.anims.generateFrameNumbers('player', { start: 0, end: 6 }), frameRate: 5, repeat: -1 });
             this.anims.create({ key: 'ghost-idle', frames: this.anims.generateFrameNumbers('ghost', { start: 0, end: 11 }), frameRate: 5, repeat: -1 });
@@ -118,7 +118,7 @@ export default class BattleScene extends Phaser.Scene {
             this.units = this.heroes.concat(this.enemies);
         }else if(combatScene === 'Comedia')
         {
-            this.add.image(0, 0, 'fantasy_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
+            this.add.image(0, 0, 'comedy_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
             this.anims.create({ key: 'timmy-idle', frames: this.anims.generateFrameNumbers('player', { start: 0, end: 6 }), frameRate: 5, repeat: -1 });
             this.anims.create({ key: 'ghost-idle', frames: this.anims.generateFrameNumbers('ghost', { start: 0, end: 11 }), frameRate: 5, repeat: -1 });
@@ -140,7 +140,7 @@ export default class BattleScene extends Phaser.Scene {
             this.units = this.heroes.concat(this.enemies);
         }else if(combatScene === 'Terror')
         {
-            this.add.image(0, 0, 'fantasy_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
+            this.add.image(0, 0, 'horror_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
             this.anims.create({ key: 'timmy-idle', frames: this.anims.generateFrameNumbers('player', { start: 0, end: 6 }), frameRate: 5, repeat: -1 });
             this.anims.create({ key: 'ghost-idle', frames: this.anims.generateFrameNumbers('ghost', { start: 0, end: 11 }), frameRate: 5, repeat: -1 });

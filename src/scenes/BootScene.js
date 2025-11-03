@@ -8,7 +8,11 @@ export default class BootScene extends Phaser.Scene {
         this.load.spritesheet('goblin', './assets/Enemigos/Goblin/Attack3.png', { frameWidth: 150, frameHeight: 150 });
         this.load.spritesheet('ghost', './assets/Enemigos/Ghost/Idle.png', { frameWidth: 128, frameHeight: 128 });
 
-        this.load.image('fantasy_background', './assets/Backgrounds/Battleground3.png');
+        this.load.image('fantasy_background', './assets/Backgrounds/Fantasy.png');
+        this.load.image('romance_background', './assets/Backgrounds/Romance.png');
+        this.load.image('history_background', './assets/Backgrounds/Egypt3.png');
+        this.load.image('comedy_background', './assets/Backgrounds/Comedy.png');
+        this.load.image('horror_background', './assets/Backgrounds/Horror.png');
 
         //Objetos tienda
         this.load.image('pocion_roja', './assets/Pociones/Icon1.png');
