@@ -108,9 +108,9 @@ Sergio Valiente Urueña
 
 
 
-1. # **Cartas usadas** {#cartas-usadas}
+# 1 Cartas usadas
 
-## **1.1 Cartas del equipo** {#1.1-cartas-del-equipo}
+## 1.1 Cartas del equipo
 
 Estas son las cartas que hemos decidido usar:
 
@@ -120,28 +120,28 @@ Estas son las cartas que hemos decidido usar:
 - Fire Emblem **(M01)7**  
 - En Blanco **(A08)**
 
-## **1.2 Cartas extra** {#1.2-cartas-extra}
+## 1.2 Cartas extra 
 
     Otro equipo nos ha otorgado el efecto de la siguiente carta:
 
 - Tristeza **(P10)**
 
 
-2. # **Resumen** {#resumen}
+# 2 Resumen
 
-   1. ## **Descripción** {#descripción}
+## 2.1 Descripción
 
 En Entre Mundos los jugadores acompañan a Timmy a través de cinco libros, cada uno con un género (Fantasía, Romance, Historia, Comedia y Terror). En cada uno de ellos encontrará combates por turnos al estilo clásico enfrentando diferentes mecánicas y personajes (incluyendo un mini-jefe) que posteriormente podrán unirse a su equipo y utilizando un sistema de formación de equipo separado en vanguardia y retaguardia. La historia culmina con un jefe final triple que encarna a la Ira, la Tristeza y el Miedo, donde ponen a prueba todo lo aprendido por el camino.
 
-2. ## **Género** {#género}
+## 2.2 Género
 
 Combate por turnos, fantasía, roguelike.
 
-3. ## **Setting** {#setting}
+## 2.3 Setting
 
 Timmy, un niño apasionado por la lectura, se ve arrastrado a una peligrosa aventura tras el secuestro de su hermano. Para encontrarlo debe adentrarse en diferentes libros para enfrentar enemigos y encontrar aliados que le ayudarán en su búsqueda.
 
-4. ## **Características principales** {#características-principales}
+## 2.4 Características principales
 
 - **Jugabilidad**: El jugador irá entrando por los libros en orden y pasando por combates hasta llegar al jefe del libro y pasar al siguiente libro hasta terminar los 5 y recuperar a su hermano, entre combates el jugador dispondrá de un menú de formacion de equipo donde cambiar el equipaje (armadura y armas) y habilidades. Tras terminar cada libro el jugador podrá acceder a una tienda cuyos objetos cambian tras cada partida aportando ese elemento de roguelike y rejugabilidad.  
     
@@ -149,16 +149,16 @@ Timmy, un niño apasionado por la lectura, se ve arrastrado a una peligrosa aven
     
 -  Personajes: Cada personaje cuenta con un slot de armadura y un slot de arma, a su vez cuentan con un ataque básico permanente y un slot de habilidad cambiable.
 
-3. # **Gameplay** {#gameplay}
+# 3 Gameplay
 
-   1. ## **Objetivo del juego** {#objetivo-del-juego}
+## 3.1 Objetivo del juego
 
 - **Corto plazo**: Ganar el combate del libro en el que se encuentra el jugador. Si es derrotado (todas sus unidades mueren), pierde la partida. Si por el contrario el jugador derrota a los enemigos, gana el combate y pasa al siguiente combate, al boss del libro o en caso de haberlo terminado, pasa al siguiente libro.  
     
 - **Largo plazo**: Completar los 5 libros. Construir y mejorar el equipo, superar todos los combates y libros y completar la historia (liberar al hermano de Timmy).
 
 
-  2. ## **Core loops** {#core-loops}
+## 3.2 Core loops
 
 **Lucha:** Enfrenta enemigos básicos y mini-jefes en combates por turnos, aprovechando la formación de vanguardia y retaguardia y las habilidades de los aliados para superar cada desafío.
 
@@ -168,11 +168,11 @@ Timmy, un niño apasionado por la lectura, se ve arrastrado a una peligrosa aven
 
 ![](images/image2.png)
 
-4. # **Mecánicas** {#mecánicas}
+# 4 Mecánicas
 
-   1. ## **Combate**
+   ## 4.1 Combate
 
-### **4.1.1 Reglas** {#4.1.1-reglas}
+### 4.1.1 Reglas
 
 Descripción:
 
@@ -194,114 +194,114 @@ Descripción:
 
 ![](images/image3.png)
 
-### **4.1.2 Recompensas** {#4.1.2-recompensas}
+### 4.1.2 Recompensas
 
 Después de cada combate victorioso el jugador será recompensado con una cantidad de oro   aleatoria que puede gastar en la tienda y un consumible elegido aleatoriamente.
 
-2. ## **Equipo** {#equipo}
+## 4.2 Equipo
 
-### **4.2.1 Adquisición de personajes** {#4.2.1-adquisición-de-personajes}
+### 4.2.1 Adquisición de personajes
 
 El jugador puede comprar personajes pertenecientes a los libros que ya ha completado en la sección de personajes de la tienda, que van cambiando de forma aleatoria a lo largo del juego según los personajes que ya se hayan desbloqueado. Los personajes adquiridos se mantienen durante toda la partida. Si son derrotados en combate no se podrán volver a utilizar hasta el siguiente combate salvo que se use el objeto de utilidad *hierba revitalizante*.
 
-### **4.2.2 Formación de equipo** {#4.2.2-formación-de-equipo}
+### 4.2.2 Formación de equipo
 
 Antes de comenzar un combate, el jugador tiene un tiempo para organizar a su equipo. Dentro de los seis espacios disponibles en el campo de batalla podrá posicionar hasta cinco personajes que haya comprado en el orden que prefiera para formar el equipo. La posición A5 es fija, en ella siempre está Timmy, no se puede cambiar.
 
 ![](images/image4.png)
 
-## **4.3 	Tienda** {#4.3-tienda}
+## 4.3 Tienda
 
 El jugador podrá acceder a la tienda desde el menú. No es accesible mientras esté dentro de un libro. En ella podrá comprar diferentes objetos,  habilidades o mejoras  y personajes con las monedas que haya obtenido a lo largo de la partida.
 
-### **4.2.1 Objetos de curación para usar en combate** {#4.2.1-objetos-de-curación-para-usar-en-combate}
+### 4.2.1 Objetos de curación para usar en combate
 
-#### **4.2.1.1 Poción pequeña** {#4.2.1.1-poción-pequeña}
+#### 4.2.1.1 Poción pequeña
 
 **Precio:** 50 monedas  
 **Curación:** 100 HP
 
-#### **4.2.1.2 Poción grande** {#4.2.1.2-poción-grande}
+#### 4.2.1.2 Poción grande
 
 **Precio:** 150 monedas  
 **Curación:** 300 HP
 
-### **4.2.2 Objetos de daño para usar en combate** {#4.2.2-objetos-de-daño-para-usar-en-combate}
+### 4.2.2 Objetos de daño para usar en combate
 
-#### **4.2.2.1 Bomba pequeña** {#4.2.2.1-bomba-pequeña}
+#### 4.2.2.1 Bomba pequeña
 
 **Precio:** 80 monedas  
 **Daño:** 120 a un enemigo
 
-#### **4.2.2.2 Bomba grande** {#4.2.2.2-bomba-grande}
+#### 4.2.2.2 Bomba grande
 
 **Precio:** 200 monedas  
 **Daño:** 200 de daño a todos los enemigos
 
-### **4.2.3 Objetos de utilidad para usar en combate** {#4.2.3-objetos-de-utilidad-para-usar-en-combate}
+### 4.2.3 Objetos de utilidad para usar en combate
 
-#### **4.2.3.1 Hierba revitalizante** {#4.2.3.1-hierba-revitalizante}
+#### 4.2.3.1 Hierba revitalizante
 
 **Precio:** 300 monedas  
 **Efecto:** Revive a un aliado con el 30% de la vida
 
-#### **4.2.3.2 Reloj de arena** {#4.2.3.2-reloj-de-arena}
+#### 4.2.3.2 Reloj de arena
 
 **Precio:** 150 monedas  
 **Efecto:** Retrasa la acción de un enemigo 2 turnos
 
-### **4.2.4 Mejoras de los personajes** {#4.2.4-mejoras-de-los-personajes}
+### 4.2.4 Mejoras de los personajes
 
 En la tienda el jugador podrá comprar mejoras de stats para sus personajes y distintas habilidades .
 
-5. # **Interfaz**	 {#interfaz}
+# 5 Interfaz
 
-   1. ## **Controles** {#controles}
+## 5.1 Controles
 
 El juego se controlará por menús y botones, por lo que principalmente se usará el ratón o alternativamente las flechas del teclado para navegar por ellos.
 
-2. ## **Cámara**
+## 5.2 Cámara
 
-### **5.2.1 Pantalla de combate** {#5.2.1-pantalla-de-combate}
+### 5.2.1 Pantalla de combate
 
 En el centro de la pantalla se encuentra el escenario de combate, a la derecha el protagonista y sus aliados y a la izquierda los enemigos. Además, la escena incluye un fondo con la ambientación del libro y un menú en la parte inferior que contiene todas las habilidades que pueda usar en combate, incluyendo los objetos comprados en la tienda.
 
 ![](images/image5.png)
 
 
-3. ## **HUD** {#hud}
+## 5.3 HUD
 
-## **5.3.1 Menú de niveles** {#5.3.1-menú-de-niveles}
+## 5.3.1 Menú de niveles
 
 El menú de niveles consiste en una estantería en la que cada libro representa un nivel al que el jugador puede acceder. También incluye un libro de acceso a la tienda.
 
 ![](images/image6.jpg)
 
 
-### **5.3.2 Pantalla de tienda** {#5.3.2-pantalla-de-tienda}
+### 5.3.2 Pantalla de tienda
 
 A la izquierda hay un menú con todos los objetos disponibles para comprar y a la derecha una pantalla en la que se especifica la utilidad del objeto seleccionado.  
 ![](images/image7.jpg)
 
-# 
 
-6. # **Mundo del juego** {#mundo-del-juego}
 
-   1. ## **Personajes** {#personajes}
+# 6 Mundo del juego
 
-### **6.1.1 Timmy**  {#6.1.1-timmy}
+   ## 6.1 Personajes
+
+### 6.1.1 Timmy
 
 **HP base:** 200  
 **Ataque base:** 15  
 **Defensa base:** 5
 
-### **6.1.2 Personajes comunes** {#6.1.2-personajes-comunes}
+### 6.1.2 Personajes comunes
 
 Los personajes comunes tendrán todos el mismo comportamiento, solo cambiando sus estadísticas. Dispondrán de un **ataque básico** que hará un daño del **100%** de su ataque, un debuff/buff y un **ataque especial** que podrá usar cada 2 turnos y que hará un daño del **250%** de su ataque.
 
 Los enemigos siempre que puedan usar el ataque especial lo harán, y en caso contrario se elegirá al azar entre el buff/debuff y el ataque básico.
 
-#### **6.1.2.1 Goblin saqueador (Fantasía)** {#6.1.2.1-goblin-saqueador-(fantasía)}
+#### 6.1.2.1 Goblin saqueador (Fantasía)
 
     **HP:** 40  
     **Ataque:** 8  
@@ -311,7 +311,7 @@ Los enemigos siempre que puedan usar el ataque especial lo harán, y en caso con
     **Buff/Debuff:** Aumenta su ataque durante 2 turnos.  
     **Ataque especial:** Golpe saqueador
 
-#### **6.1.2.2 Espectro arcano (Fantasía)** {#6.1.2.2-espectro-arcano-(fantasía)}
+#### 6.1.2.2 Espectro arcano (Fantasía)
 
 **HP:** 45  
     **Ataque:** 10  
@@ -321,7 +321,7 @@ Los enemigos siempre que puedan usar el ataque especial lo harán, y en caso con
 **Buff/Debuff:** Reduce la defensa del jugador un turno  
     **Ataque especial:** Descarga arcana
 
-#### **6.1.2.3 Amantes (Romance)** {#6.1.2.3-amantes-(romance)}
+#### 6.1.2.3 Amantes (Romance)
 
 **HP:** 50  
     **Ataque:** 8  
@@ -331,7 +331,7 @@ Los enemigos siempre que puedan usar el ataque especial lo harán, y en caso con
 **Buff/Debuff:** Aplica enamoramiento (reduce ataque del enemigo)  
 **Ataque especial:** Abrazo apasionado
 
-#### **6.1.2.4 Corazón roto (Romance)** {#6.1.2.4-corazón-roto-(romance)}
+#### 6.1.2.4 Corazón roto (Romance)
 
 **HP:** 55  
     **Ataque:** 9  
@@ -341,7 +341,7 @@ Los enemigos siempre que puedan usar el ataque especial lo harán, y en caso con
 **Buff/Debuff:** Reduce velocidad del jugador un turno  
 **Ataque especial:** Palpitación intensa
 
-#### **6.1.2.5  Faraón (Historia)** {#6.1.2.5-faraón-(historia)}
+#### 6.1.2.5  Faraón (Historia)
 
 **HP:** 60  
     **Ataque:** 10  
@@ -351,7 +351,7 @@ Los enemigos siempre que puedan usar el ataque especial lo harán, y en caso con
 **Buff/Debuff:** Aumenta su defensa un turno  
 **Ataque especial:** Formación defensiva 
 
-#### **6.1.2.6 Escarabajo (Historia)** {#6.1.2.6-escarabajo-(historia)}
+#### 6.1.2.6 Escarabajo (Historia)
 
 **HP:** 65  
     **Ataque:** 11  
@@ -361,7 +361,7 @@ Los enemigos siempre que puedan usar el ataque especial lo harán, y en caso con
 **Buff/Debuff:** Rugido aturdidor (puede hacer que el jugador falle su próximo ataque)  
 **Ataque especial:** Embestida salvaje
 
-#### **6.1.2.7 Bufón (Comedia)** {#6.1.2.7-bufón-(comedia)}
+#### 6.1.2.7 Bufón (Comedia)
 
 **HP:** 70  
     **Ataque:** 15  
@@ -371,7 +371,7 @@ Los enemigos siempre que puedan usar el ataque especial lo harán, y en caso con
 **Buff/Debuff:** Confusión (puede hacer que el jugador falle su próximo turno)  
 **Ataque especial:** Broma pesada
 
-#### **6.1.2.8  Comediante frustrado (Comedia)** {#6.1.2.8-comediante-frustrado-(comedia)}
+#### 6.1.2.8  Comediante frustrado (Comedia)
 
     **HP:** 80  
     **Ataque:** 10  
@@ -381,12 +381,12 @@ Los enemigos siempre que puedan usar el ataque especial lo harán, y en caso con
 **Buff/Debuff:** Reduce defensa del jugador un turno  
 **Ataque especial:** Travesura fatal
 
-### **6.1.3 Mini \- bosses** {#6.1.3-mini---bosses}
+### 6.1.3 Mini \- bosses
 
 Cada libro tendrá un mini-boss al final, a excepción del último (Terror) que simplemente tendrá el combate del final boss.  
 Cada mini-boss aparte del comportamiento de los personajes comunes, tendrá una mecánica propia.
 
-#### **6.1.3.1 Dragon Joven (Fantasía)** {#6.1.3.1-dragon-joven-(fantasía)}
+#### 6.1.3.1 Dragon Joven (Fantasía)
 
     **HP:** 300  
     **Ataque:** 15  
@@ -394,7 +394,7 @@ Cada mini-boss aparte del comportamiento de los personajes comunes, tendrá una 
 
     **Mecánica propia:** Cada 3 turnos, inflige daño de área a todos los personajes del jugador.
 
-#### **6.1.3.2 Cupido (Romance)** {#6.1.3.2-cupido-(romance)}
+#### 6.1.3.2 Cupido (Romance)** {#6.1.3.2-cupido-(romance)}
 
 **HP:** 500  
     **Ataque:** 20  
@@ -402,25 +402,25 @@ Cada mini-boss aparte del comportamiento de los personajes comunes, tendrá una 
       
 **Mecánica propia:** En el segundo turno, “enamora” a un enemigo, y haciendo que pase a formar parte de su equipo.
 
-#### **6.1.3.3 Esfinge (Historia)** {#6.1.3.3-esfinge-(historia)}
+#### 6.1.3.3 Esfinge (Historia)
 
 **HP:** 800  
     **Ataque:** 30  
     **Defensa:** 12  
 **Mecánica propia:** Cada 3 turnos invoca 2 faraones (si ya hay 2 faraones no hace nada, si hay 1 invoca otro)
 
-#### **6.1.3.4 El Payaso del Caos (Comedia)** {#6.1.3.4-el-payaso-del-caos-(comedia)}
+#### 6.1.3.4 El Payaso del Caos (Comedia)
 
 **HP:** 1000  
     **Ataque:** 35  
     **Defensa:** 7  
     **Mecánica propia:** Cada 2 turnos invoca 2 clones de sí mismo.
 
-### **6.1.4 Final boss** {#6.1.4-final-boss}
+### 6.1.4 Final boss
 
 El final boss serán en realidad dos personajes: Ira y Miedo. 
 
-#### **6.1.4.1 Ira** {#6.1.4.1-ira}
+#### 6.1.4.1 Ira
 
     **Vida:** 7000 HP  
     **Ataque:** 170 ATQ  
@@ -443,7 +443,7 @@ Parámetros:
 
 \- Daño *carga descontrolada* (150% ATQ)
 
-#### **6.1.4.2 Miedo** {#6.1.4.2-miedo}
+#### 6.1.4.2 Miedo
 
 **Vida:** 6000 HP  
     **Ataque:** \-  
@@ -457,50 +457,50 @@ Parámetros:
 Parámetros:  
 \-Cantidad de estadísticas que baja con *sombra aplastante* (-20% ATQ y \-20% DEF durante 2 t	urnos)
 
-#### **6.1.4.3 Tristeza** {#6.1.4.3-tristeza}
+#### 6.1.4.3 Tristeza
 
 **Vida:** 5000 HP  
     **Ataque:** \-  
     **Defensa:** 80 DEF  
 **Lágrimas contagiosas:** Las lágrimas de tristeza debilitan a un enemigo reduciendo su daño durante un tiempo.
 
-2. ## **Niveles** {#niveles}
+## 6.2 Niveles
 
 Cada uno de los cinco libros corresponde a un género literario —Fantasía, Romance, Historia, Comedia y Terror— y se convierte en un nivel único que Timmy deberá superar. Cada uno estará ambientado en su género.
 
-### **6.2.1 Fantasía** {#6.2.1-fantasía}
+### 6.2.1 Fantasía
 
 \-2 Goblins saqueadores  
 \-2 Espectros arcanos
 
 **Mini-boss:** Dragón Joven
 
-### **6.2.2 Romance** {#6.2.2-romance}
+### 6.2.2 Romance
 
 \-2 Amantes  
 \-3 Corazones rotos
 
 **Mini-boss:** Cupido
 
-### **6.2.3 Historia** {#6.2.3-historia}
+### 6.2.3 Historia
 
 \-3 Faraón  
 \-2 Escarabajo
 
 **Mini-boss:** Esfinge
 
-### **6.2.4 Comedia** {#6.2.4-comedia}
+### 6.2.4 Comedia
 
 \-3 Bufones  
 \-3 Comediantes frustrados
 
 **Mini-boss:** Payaso del Caos
 
-### **6.2.5 Terror** {#6.2.5-terror}
+### 6.2.5 Terror
 
 Este es el último nivel. El jugador se enfrentará a un triple final boss: Tristeza, Ira y Miedo.
 
-7. # **Experiencia de juego** {#experiencia-de-juego}
+# 7 Experiencia de juego
 
 Una partida comienza cuando el jugador selecciona un libro. Al hacerlo, Timmy y su equipo entran directamente en un combate por turnos contra enemigos temáticos del género de ese libro.
 
@@ -522,16 +522,16 @@ Entre combates, el jugador accede a un **menú de formación**, donde puede reor
 
 El progreso continúa libro tras libro, con cada uno introduciendo un **mini-jefe** que exige nuevas estrategias. Finalmente, el jugador se enfrentará a un combate decisivo contra un jefe triple que encarna a la **Ira, la Tristeza y el Miedo**, poniendo a prueba todo lo aprendido en los niveles anteriores.
 
-8. # **Estética y contenido** {#estética-y-contenido}
+# 8 Estética y contenido
 
 La estética del juego será **pixel art**. 
 
 ![](images/image8.png)
 
 
-9. # **Referencias** {#referencias}
+# 9 Referencias
 
-   1. ## **Juegos de referencia** {#juegos-de-referencia}
+   ## 9.1 Juegos de referencia
 
 Uno de los referentes principales es **Final Fantasy** en sus entregas clásicas, especialmente las que utilizaban la formación de vanguardia y retaguardia. De este título hemos tomado la idea de que la posición dentro del grupo no es meramente estética, sino un factor estratégico: los personajes en primera línea infligen más daño pero están más expuestos, mientras que los de la retaguardia sacrifican fuerza ofensiva a cambio de mayor protección. Esta dualidad añade una capa táctica a cada combate y obliga al jugador a pensar en cómo organizar a sus héroes antes de cada enfrentamiento.
 
