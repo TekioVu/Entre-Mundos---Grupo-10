@@ -4,10 +4,17 @@ export default class BootScene extends Phaser.Scene {
     }
 
     preload() {
+        
+        //Enemigos
         this.load.spritesheet('player', './assets/Timmy/IDLE.png', { frameWidth: 96, frameHeight: 84 });
+        this.load.spritesheet('wizard', './assets/Wizard/Idle.png', { frameWidth: 231, frameHeight: 190 });
+
         this.load.spritesheet('goblin', './assets/Enemigos/Goblin/Attack3.png', { frameWidth: 150, frameHeight: 150 });
         this.load.spritesheet('ghost', './assets/Enemigos/Ghost/Idle.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('clown', './assets/Enemigos/Clown/Clown_Sprite.png', { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('dragon', './assets/Enemigos/Dragon/Idle.png', { frameWidth: 32, frameHeight: 32 });
 
+        //Backgrounds
         this.load.image('fantasy_background', './assets/Backgrounds/Fantasy.png');
         this.load.image('romance_background', './assets/Backgrounds/Romance.png');
         this.load.image('history_background', './assets/Backgrounds/Egypt3.png');
