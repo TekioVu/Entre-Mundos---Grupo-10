@@ -13,8 +13,21 @@ export default class BattleScene extends Phaser.Scene {
 
         this.cameras.main.setBackgroundColor("#1a1f2b");
         this.createEnemies(selectedScene);
-
         this.scene.launch("CharacterSelectionScene");
+
+        this.heroes = [];
+    this.units = [];
+    this.availableHeroes = [
+    new PlayerCharacter(this, 0, 0, 'wizard', 5, 'Wizard', 100, 20),
+    new PlayerCharacter(this, 0, 0, 'player', 6, 'Timmy', 100, 20)
+];
+
+        this.events.on("heroesSelected", this.onHeroSelected, this);
+        this.scene.get("CharacterSelectionScene").events.on('selectionComplete', (placedHeroes) => {
+    this.setSelectedHeroes(placedHeroes);
+    this.units = this.heroes.concat(this.enemies);
+    this.nextTurn();
+});
         this.index = -1;  
     }
 
@@ -53,18 +66,16 @@ export default class BattleScene extends Phaser.Scene {
         {
             this.add.image(0, 0, 'fantasy_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
-            this.anims.create({ key: 'timmy-idle', frames: this.anims.generateFrameNumbers('player', { start: 0, end: 6 }), frameRate: 5, repeat: -1 });
-            this.anims.create({ key: 'wizard-idle', frames: this.anims.generateFrameNumbers('wizard', { start: 0, end: 5 }), frameRate: 5, repeat: -1 });
+            // this.anims.create({ key: 'timmy-idle', frames: this.anims.generateFrameNumbers('player', { start: 0, end: 6 }), frameRate: 5, repeat: -1 });
+            // this.anims.create({ key: 'wizard-idle', frames: this.anims.generateFrameNumbers('wizard', { start: 0, end: 5 }), frameRate: 5, repeat: -1 });
 
             this.anims.create({ key: 'ghost-idle', frames: this.anims.generateFrameNumbers('ghost', { start: 0, end: 11 }), frameRate: 5, repeat: -1 });
             this.anims.create({ key: 'goblin-idle', frames: this.anims.generateFrameNumbers('goblin', { start: 0, end: 4 }), frameRate: 5, repeat: -1 });
 
-            const wizard = new PlayerCharacter(this, 250, 55, 'wizard', 5, 'Wizard', 100, 20);
-            this.add.existing(wizard).anims.play('wizard-idle');
-            wizard.setScale(0.8);
+            // const wizard = new PlayerCharacter(this, 250, 55, 'wizard', 5, 'Wizard', 100, 20);
+            // wizard.setScale(0.8);
 
-            const timmy = new PlayerCharacter(this, 280, 85, 'player', 6, 'Timmy', 100, 20);
-            this.add.existing(timmy).anims.play('timmy-idle');
+            // const timmy = new PlayerCharacter(this, 280, 85, 'player', 6, 'Timmy', 100, 20);
 
             const goblin1 = new Enemy(this, 50, 100, "goblin", 4, "Goblin", 3, 3);
             goblin1.setScale(1.2);
@@ -74,11 +85,24 @@ export default class BattleScene extends Phaser.Scene {
             ghost1.setScale(0.3);
             this.add.existing(ghost1).anims.play('ghost-idle');
 
-            this.heroes = [timmy, wizard];
-            this.enemies = [goblin1, ghost1];
-            this.units = this.heroes.concat(this.enemies);
+    //         this.availableHeroes = [timmy, wizard];
 
-        }else if(combatScene === 'Romance')
+    //         const selectionScene = this.scene.get("CharacterSelectionScene");
+
+    //         this.heroes = (selectionScene && selectionScene.placedHeroes) ? selectionScene.placedHeroes : [];
+    //         this.heroes.forEach(hero => {
+    // const heroObj = this.availableHeroes[hero.name.toLowerCase()];
+    // if (heroObj) {
+    //     this.add.existing(heroObj).anims.play(heroObj.textureKey + '-idle');
+    //     if (heroObj.textureKey === 'wizard') heroObj.setScale(0.8);
+    // }
+//});
+            this.enemies = [goblin1, ghost1];
+            this.units = (this.enemies);
+
+        }
+       
+        else if(combatScene === 'Romance')
         {
             this.add.image(0, 0, 'romance_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
@@ -103,7 +127,10 @@ export default class BattleScene extends Phaser.Scene {
             ghost1.setScale(0.3);
             this.add.existing(ghost1).anims.play('ghost-idle');
 
-            this.heroes = [timmy, wizard];
+            this.availableHeroes = [timmy, wizard];
+            const selectionScene = this.scene.get("CharacterSelectionScene");
+
+            this.heroes = this.selectionScene.placedHeroes;
             this.enemies = [goblin1, ghost1];
             this.units = this.heroes.concat(this.enemies);
         }else if(combatScene === 'Historia')
@@ -187,4 +214,22 @@ export default class BattleScene extends Phaser.Scene {
         }
         
     }
+
+    setSelectedHeroes(placedHeroes) {
+    this.placedHeroes = placedHeroes;
+}
+onHeroSelected(heroData) {
+    const { texture, x, y, name, hp, atk } = heroData;
+console.log (texture);
+    const hero = new PlayerCharacter(this, x, y, texture, 0, name, hp, atk);
+    this.add.existing(hero).anims.play(texture + "-idle");
+    if (texture === "wizard") hero.setScale(0.8);
+
+    this.heroes.push(hero);
+    this.units.push(hero); // agregar al turno de batalla
+}
+
+
+
+
 }

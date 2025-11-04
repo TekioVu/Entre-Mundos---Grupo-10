@@ -1,7 +1,7 @@
 import MenuItemCharacterSelection from "./MenuItemCharacterSelection.js";
 
 export default class MenuCharacterSelection extends Phaser.GameObjects.Container {
-    constructor(x, y, scene, itemsPerColumn = 3, columnSpacing = 80, heroes) {
+    constructor(x, y, scene,itemsPerRow= 5, itemsPerColumn = 3, columnSpacing = 80, heroes) {
         super(scene, x, y);
         this.menuItems = [];
         this.menuItemIndex = 0;
@@ -9,19 +9,21 @@ export default class MenuCharacterSelection extends Phaser.GameObjects.Container
         this.x = x;
         this.y = y;
         this.itemsPerColumn = itemsPerColumn;
+        this.itemsPerRow = itemsPerRow;
         this.columsSpacing = columnSpacing;
     }
 
     addMenuItem(unit) {
-        const itemHeight = 25;
+        const Height = 25;
         const index = this.menuItems.length;
-        
-        const col = Math.floor(index / this.itemsPerColumn);
-        const row = index % this.itemsPerColumn;
 
+        const row = Math.floor(index / this.itemsPerRow);
+        const col = index % this.itemsPerRow;
+        
         const xOffset = col * this.columnSpacing + 10;
-        const yOffset = row * itemHeight + 10;
-        const menuItem = new MenuItemCharacterSelection(xOffset, yOffset, unit, this.scene);
+        const yOffset = row * Height + 10;
+        const menuItem = new MenuItemCharacterSelection(xOffset, yOffset, unit.textureKey ? unit.textureKey : unit, this.scene);
+        menuItem.unit = unit;
         this.menuItems.push(menuItem);
         this.add(menuItem);
     }

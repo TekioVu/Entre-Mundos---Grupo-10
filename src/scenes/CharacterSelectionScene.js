@@ -40,18 +40,19 @@ export default class CharacterSelectionScene extends Phaser.Scene {
                 this.menus.add([this.positionsMenu, this.charactersMenu]);
 
                  
-                this.positionsMenu.itemsPerColumn = 3;
+                this.positionsMenu.itemsPerRow = 2;
                 this.positionsMenu.columnSpacing = 70;
-                const positions = ["Pos1", "Pos2", "Pos3", "Pos4", "Pos5", "Pos6"]; 
+                this.positions = ["Vang1", "Ret1", "Vang2", "Ret2", "Vang3", "Ret3"]; 
                 
-                this.positionsMenu.remap(positions);
+                this.positionsMenu.remap(this.positions);
 
                 const battleScene = this.scene.get("BattleScene");
-                this.charactersMenu.itemsPerColumn = 3;
-                this.charactersMenu.columnSpacing = 70;
-                const heroes = battleScene.heroes; 
-                
-                this.charactersMenu.remap(heroes);
+                this.charactersMenu.itemsPerRow = 5;
+                this.charactersMenu.columnSpacing = 30;
+                this.availableHeroes = battleScene.availableHeroes; 
+                this.placedHeroes = new Array(this.positionsMenu.menuItems.length).fill(null);
+                this.charactersMenu.remap(this.availableHeroes);
+                this.selectedHero = null;
 
                 this.currentMenu.select(0)
 
@@ -68,6 +69,7 @@ export default class CharacterSelectionScene extends Phaser.Scene {
 
         this.input.keyboard.once("keydown-ENTER", () => {
             this.scene.stop ("CharacterSelectionScene");
+            this.events.emit('selectionComplete', this.placedHeroes);
             this.scene.launch("UIScene");
         });
     }
@@ -80,44 +82,43 @@ export default class CharacterSelectionScene extends Phaser.Scene {
 
     const menu = this.currentMenu;
     const totalItems = menu.menuItems.length;
-    const perColumn = menu.itemsPerColumn;
+    const perRow = menu.itemsPerRow || 1;
 
-    if (event.code === "ArrowUp") {
-        menu.moveSelectionUp();
-    } else if (event.code === "ArrowDown") {
-        menu.moveSelectionDown();
+    if (event.code === "ArrowLeft") {
+        if (menu === this.charactersMenu && menu.menuItemIndex % perRow === 0) {
+            this.currentMenu = this.positionsMenu;
+            this.currentMenu.select(this.positionsMenu.menuItemIndex);
+        } else {
+            menu.moveSelectionUp();
+        }
     } 
-    else if (event.code === "ArrowLeft" || event.code === "ArrowRight") {
-        menu.menuItems[menu.menuItemIndex].deselect();
-        let newIndex = menu.menuItemIndex;
-
-        if (event.code === "ArrowLeft") {
-            newIndex -= perColumn;
-            if (newIndex < 0) {
-                if (menu === this.charactersMenu) {
-                    this.currentMenu = this.positionsMenu;
-                    newIndex = Math.min(this.positionsMenu.menuItemIndex, this.positionsMenu.menuItems.length - 1);
-                } else {
-                    newIndex = menu.menuItemIndex % perColumn;
-                }
-            }
-        } else if (event.code === "ArrowRight") {
-            newIndex += perColumn;
-            if (newIndex >= totalItems) {
-                if (menu === this.positionsMenu) {
-                    this.currentMenu = this.charactersMenu;
-                    newIndex = Math.min(this.charactersMenu.menuItemIndex, this.charactersMenu.menuItems.length - 1);
-                } else {
-                    const lastColumnStart = Math.floor((totalItems - 1) / perColumn) * perColumn;
-                    newIndex = Math.min(lastColumnStart + (menu.menuItemIndex % perColumn), totalItems - 1);
-                }
+    else if (event.code === "ArrowRight") {
+        if (menu === this.positionsMenu&& menu.menuItemIndex % perRow === 1) {
+            this.positionsMenu.deselect();
+            this.currentMenu = this.charactersMenu;
+            this.currentMenu.select(this.charactersMenu.menuItemIndex);
+        } else {
+            const isLastInRow = (menu.menuItemIndex % perRow) === perRow - 1 || menu.menuItemIndex === totalItems - 1;
+            if (!isLastInRow) {
+                menu.moveSelectionDown();
             }
         }
+    } 
 
-        this.currentMenu.select(newIndex);
-    }
+    else if (event.code === "ArrowUp") {
+        menu.menuItems[menu.menuItemIndex].deselect();
+        let newIndex = menu.menuItemIndex - perRow;
+        if (newIndex < 0) newIndex = menu.menuItemIndex; 
+        menu.select(newIndex);
+    } 
+    else if (event.code === "ArrowDown") {
+        menu.menuItems[menu.menuItemIndex].deselect();
+        let newIndex = menu.menuItemIndex + perRow;
+        if (newIndex >= totalItems) newIndex = menu.menuItemIndex; 
+        menu.select(newIndex);
+    } 
     else if (event.code === "Enter" || event.code === "Space") {
-        this.currentMenu.confirm();
+        menu.confirm();
     }
 
     this.updatePositionMarker();
@@ -125,15 +126,18 @@ export default class CharacterSelectionScene extends Phaser.Scene {
 
 
 
+
+
     updatePositionMarker() {
     if (this.currentMenu !== this.positionsMenu) return;
 
     const markerPositions = [
+        { x: 250, y: 30 } , 
         { x: 300, y: 30 }, 
+        { x: 250, y: 80 }, 
         { x: 300, y: 80 }, 
-        { x: 300, y: 130 }, 
         { x: 250, y: 130 }, 
-        { x: 250, y: 30 }  
+        { x: 300, y: 130 },
     ];
 
     const index = this.positionsMenu.menuItemIndex; 
@@ -144,12 +148,59 @@ export default class CharacterSelectionScene extends Phaser.Scene {
 }
 
 onSelectPlayer(){
+
+        const hero = this.charactersMenu.menuItems[this.charactersMenu.menuItemIndex].unit;
+
+            console.log("Hero seleccionado:", hero);
+
+        this.selectedHero = hero;
         this.positionsMenu.select(0);
         this.currentMenu = this.positionsMenu;
     }
 
-onSelectPosition(){
-        this.charactersMenu.select(0);
-        this.currentMenu = this.charactersMenu;
-    }
+onSelectPosition() {
+    const positionKey = this.positionsMenu.menuItems[this.positionsMenu.menuItemIndex].unit; // "Vang1", etc.
+    const hero = this.selectedHero;
+
+    const positionCoords = {
+        "Vang1": { x: 250, y: 30 },
+        "Ret1":  { x: 300, y: 30 },
+        "Vang2": { x: 250, y: 80 },
+        "Ret2":  { x: 300, y: 80 },
+        "Vang3": { x: 250, y: 130 },
+        "Ret3":  { x: 300, y: 130 }
+    };
+
+    const coords = positionCoords[positionKey];
+
+    // Emitimos a BattleScene
+    this.scene.get("BattleScene").events.emit("heroesSelected", {
+        texture: hero.texture,
+        name: hero.name,
+        id: hero.id,
+        hp: hero.hp,
+        atk: hero.atk,
+        x: coords.x,
+        y: coords.y
+    });
+
+    // Guardamos héroe en la posición
+    this.placedHeroes[positionKey] = hero;
+
+    // Reseteamos selección
+    this.selectedHero = null;
+    this.charactersMenu.select(0);
+    this.currentMenu = this.charactersMenu;
+    this.positionMarker.setVisible(false); // opcional: ocultar marcador
+}
+
+
+
+
+
+
+// startBattle(){
+//     battleScene.SelectedHeroes(this.placedHeroes);
+// }
+
 }
