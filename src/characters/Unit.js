@@ -15,11 +15,15 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             "Scarab": 25,
             "Clown": 25,
             "Jester": 25,
+            "Mushroom": 25,
+            "Flying Eye": 25,
             "Dragon": 25,
         };
 
         this.isEnemy = (this.type === "Goblin" || this.type === "Ghost" || this.type === "Pharaoh" || this.type === "Dragon" ||
-                        this.type === "Scarab" || this.type === "Clown" || this.type === "Jester");
+                        this.type === "Scarab" || this.type === "Clown" || this.type === "Jester" || this.type === "Mushroom" ||
+                        this.type === "Flying Eye");
+
 
         this.hpOffsetY = offsets[this.type] || 30;
 
@@ -62,37 +66,54 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         } else {
             this.scene.heroes = this.scene.heroes.filter(h => h !== this);
         }
-            if (this.isEnemy) {
-                const uiScene = this.scene.scene.get("UIScene");
-                uiScene.remapEnemies();
-            }
+        const uiScene = this.scene.scene.get("UIScene");
+        const battleScene = this.scene.scene.get("BattleScene");
 
-            if (this.scene.enemies.length === 0){
+        if (this.isEnemy) {
+            uiScene.remapEnemies();
+        }else {
+            uiScene.remapHeroes();
+        }
+
+
+        if (this.scene.enemies.length === 0){
+            if(battleScene.normalCombatCompleted)
+            {
                 this.scene.time.addEvent({
                     delay: 1000,
                     callback: () => {
 
-                        const uiScene = this.scene.scene.get("UIScene");
                         uiScene.cleanEvents();
+
+                        battleScene.normalCombatCompleted = false;
 
                         this.scene.scene.stop("UIScene");
                         this.scene.scene.stop("BattleScene");
                         this.scene.scene.start("VictoryScene");
                     }
                 });
-            }
+            }else {
+                    this.scene.time.delayedCall(3000, () => {
+                    battleScene.createMiniBoss();
+                    battleScene.normalCombatCompleted = true;
 
-            
-            if (this.scene.heroes.length === 0){
-                this.scene.time.addEvent({
-                    delay: 1000,
-                    callback: () => {
-                        this.scene.scene.stop("BattleScene");
-                        this.scene.scene.stop("UIScene");
-                        this.scene.scene.start("GameOverScene");
-                    }
+                    const uiScene = this.scene.scene.get("UIScene");
+                    uiScene.remapEnemies();
                 });
             }
-        }   
         }
+
+            
+        if (this.scene.heroes.length === 0){
+            this.scene.time.addEvent({
+                delay: 1000,
+                callback: () => {
+                    this.scene.scene.stop("BattleScene");
+                    this.scene.scene.stop("UIScene");
+                    this.scene.scene.start("GameOverScene");
+                }
+            });
+        }
+        }   
+    }
 }

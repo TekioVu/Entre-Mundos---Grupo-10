@@ -127,6 +127,16 @@ export default class ShopScene extends Phaser.Scene {
             const jester = {
             name: "Jester", texture: "jester", description: "JIJIJIJIJIJIJIJI" };
             this.categories["Personajes"].push(jester);
+
+        }else if(unclockedBooks == 6)
+        {
+            const mushroom = {
+            name: "Mushroom", texture: "mushroom", description: "Room Room" };
+            this.categories["Personajes"].push(mushroom);
+
+            const flyingeye = {
+            name: "Flying Eye", texture: "flying_eye", description: "Flap flap" };
+            this.categories["Personajes"].push(flyingeye);
         }
     }
 
