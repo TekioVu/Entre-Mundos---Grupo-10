@@ -1,7 +1,7 @@
 import MenuItem from "./MenuItem.js";
 
 export default class Menu extends Phaser.GameObjects.Container {
-    constructor(x, y, scene, itemsPerRow = 2, itemsPerColumn = 3, columnSpacing = 80, icons = false) {
+    constructor(x, y, scene, itemsPerRow = 2, itemsPerColumn = 3, columnSpacing = 20, icons = false) {
         super(scene, x, y);
         this.scene = scene;
         this.menuItems = [];
@@ -17,20 +17,25 @@ export default class Menu extends Phaser.GameObjects.Container {
     addMenuItem(unit) {
         const Height = 30;
         const index = this.menuItems.length;
-
-        const col = Math.floor(index / this.itemsPerColumn);
-        const row = index % this.itemsPerColumn;
-
-        const xOffset = col * this.columnSpacing + 10;
-        const yOffset = row * Height + 10;
-
+        this.columnSpacing= 30;
         let displayData;
 
         if (this.icons && unit && unit.textureKey) {
             displayData = { type: "icon", key: unit.textureKey };
+            this.itemsPerColumn = 3;
+            this.itemsPerRow = 2;
         } else if (typeof unit === "string") {
             displayData = { type: "text", key: unit };
+            this.itemsPerRow = 1;
         }
+        const row = Math.floor(index / this.itemsPerRow);
+        const col = index % this.itemsPerRow;
+
+        const xOffset = col * this.columnSpacing + 10;
+        const yOffset = row * Height + 10;
+
+
+        
 
         const menuItem = new MenuItem(xOffset, yOffset, displayData, this.scene);
         menuItem.unit = unit;

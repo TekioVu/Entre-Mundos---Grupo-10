@@ -1,5 +1,6 @@
 import CharactersMenu from "../ui/CharactersMenu.js";
 import PositionsMenu from "../ui/PositionsMenu.js";
+import Message from "../ui/Message.js";
 
 
 export default class CharacterSelectionScene extends Phaser.Scene {
@@ -8,13 +9,8 @@ export default class CharacterSelectionScene extends Phaser.Scene {
     }
 
     create() {
-        this.add.text(160, 20, "Selección de personajes", {
-            font: "20px Arial",
-            fill: "#ffffffff"
-        }).setOrigin(0.5);
-
-         this.add.text(160, 40, "Presiona ENTER para iniciar la batalla", {
-            font: "10px Arial",
+        this.add.text(160, 140, "Characters selection. Press ENTER to start the battle.", {
+            font: "11px Arial",
             fill: "#ffffffff"
         }).setOrigin(0.5);
 
@@ -51,6 +47,10 @@ export default class CharacterSelectionScene extends Phaser.Scene {
                 this.charactersMenu.columnSpacing = 30;
                 this.availableHeroes = battleScene.availableHeroes; 
                 this.placedHeroes = new Array(this.positionsMenu.menuItems.length).fill(null);
+                this.positionsOccupied = new Array(this.positionsMenu.menuItems.length).fill(false);
+                this.heroSprites = new Array(this.positionsMenu.menuItems.length).fill(null);
+
+
                 this.charactersMenu.remap(this.availableHeroes);
                 this.selectedHero = null;
 
@@ -63,16 +63,26 @@ export default class CharacterSelectionScene extends Phaser.Scene {
                 this.events.on("PlayerSelect", this.onSelectPlayer, this);
 
 
+                this.message = new Message(this, this.events);
+                this.add.existing(this.message);
+
                 this.input.keyboard.on("keydown", this.onKeyInput, this);
 
 
 
-        this.input.keyboard.once("keydown-ENTER", () => {
-            this.scene.stop ("CharacterSelectionScene");
-            this.events.emit('selectionComplete', this.placedHeroes);
-            this.scene.launch("UIScene");
-        });
+        this.input.keyboard.on("keydown-ENTER", () => {
+const hasHeroes = this.placedHeroes.some(hero => hero !== null);
+
+    if (!hasHeroes) {
+        this.events.emit("Message", "Select at least one character.");
     }
+    else{this.scene.stop("CharacterSelectionScene");
+    this.events.emit("selectionComplete", this.placedHeroes);
+    this.scene.launch("UIScene");}
+    }
+        );
+    }
+    
 
     onKeyInput(event) {
     const keysToPrevent = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Enter", "Space"];
@@ -118,7 +128,7 @@ export default class CharacterSelectionScene extends Phaser.Scene {
         if (newIndex >= totalItems) newIndex = menu.menuItemIndex; 
         menu.select(newIndex);
     } 
-    else if (event.code === "Enter" || event.code === "Space") {
+    else if (event.code === "Space") {
         menu.confirm();
     }
 
@@ -160,19 +170,32 @@ onSelectPlayer(){
     }
 
 onSelectPosition() {
-    const positionKey = this.positionsMenu.menuItems[this.positionsMenu.menuItemIndex].unit; // "Vang1", etc.
+const positionKey = this.positionsMenu.menuItemIndex;
     const hero = this.selectedHero;
 
-    const positionCoords = {
-        "Vang1": { x: 200, y: 50 },
-        "Ret1":  { x: 250, y: 50 },
-        "Vang2": { x: 220, y: 75 },
-        "Ret2":  { x: 270, y: 75 },
-        "Vang3": { x: 240, y: 100 },
-        "Ret3":  { x: 290, y: 100 }
-    };
+
+    const positionCoords = [
+        { x: 200, y: 50 } , 
+        { x: 250, y: 50 }, 
+        { x: 220, y: 75 }, 
+        { x: 270, y: 75 }, 
+        { x: 240, y: 100 }, 
+        { x: 290, y: 100 },
+    ];
 
     const coords = positionCoords[positionKey];
+
+
+    if (this.positionsOccupied[positionKey]) {
+        const previousHero = this.placedHeroes[positionKey];
+        if (previousHero) {
+            this.availableHeroes.push(previousHero);
+            this.scene.get("BattleScene").events.emit("removeHero", positionKey)
+        }
+    }
+
+    
+    
 
     this.scene.get("BattleScene").events.emit("heroesSelected", {
         texture: hero.texture,
@@ -185,10 +208,14 @@ onSelectPosition() {
     });
 
     this.placedHeroes[positionKey] = hero;
+    this.positionsOccupied[positionKey] = true;
+
+    this.availableHeroes = this.availableHeroes.filter(h => h !== hero);
+    this.charactersMenu.remap(this.availableHeroes);
 
     this.selectedHero = null;
     this.charactersMenu.select(0);
     this.currentMenu = this.charactersMenu;
-    this.positionMarker.setVisible(false); // opcional: ocultar marcador
+    this.positionMarker.setVisible(false);
 }
 }

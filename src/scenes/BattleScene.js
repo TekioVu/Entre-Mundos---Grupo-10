@@ -29,6 +29,13 @@ export default class BattleScene extends Phaser.Scene {
   { texture: 'player', name: 'Timmy', hp: 100, atk: 20 }
 ];
 
+this.events.on("removeHero", (positionIndex) => {
+    if (this.heroes && this.heroes[positionIndex]) {
+        this.heroes[positionIndex].destroy();
+        this.heroes[positionIndex] = null;
+    }
+});
+
 
         this.events.on("heroesSelected", this.onHeroSelected, this);
         this.scene.get("CharacterSelectionScene").events.on('selectionComplete', (placedHeroes) => {
@@ -132,8 +139,7 @@ export default class BattleScene extends Phaser.Scene {
             // }
         //});
 
-            this.enemies = [goblin1, ghost1];
-            this.units = (this.enemies);
+           
 
         }
        

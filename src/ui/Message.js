@@ -2,7 +2,7 @@ export default class Message extends Phaser.GameObjects.Container {
     constructor(scene, events) {
         super(scene, 160, 30);
 
-        this.events = events; // 🔹 Guarda referencia al EventEmitter
+        this.events = events; 
 
         const graphics = this.scene.add.graphics();
         this.add(graphics);
@@ -21,12 +21,10 @@ export default class Message extends Phaser.GameObjects.Container {
         this.add(this.text);
         this.text.setOrigin(0.5);
 
-        // 🔹 Suscripción
         this.events.on("Message", this.showMessage, this);
 
         this.visible = false;
 
-        // 🔹 Asegura que al destruir el objeto se desuscriba
         this.once(Phaser.GameObjects.Events.DESTROY, this.cleanup, this);
     }
 
