@@ -11,9 +11,6 @@ export default class BattleScene extends Phaser.Scene {
         this.enemyPosX = [60, 50, 40, 110, 100, 90];
         this.enemyPosY = [100, 75, 50];
 
-        // this.allyPosX = [];
-        // this.allyPosY = [];
-
         const menuScene = this.scene.get("MenuScene");
         const selectedScene = menuScene.getSelectedScene();
 
@@ -78,8 +75,6 @@ this.events.on("removeHero", (positionIndex) => {
         this.units.forEach(unit => {
             if (unit.hpText && unit.alive !== false) unit.updateHpText();
         });
-
-        
     }
 
     createEnemies(combatScene)
