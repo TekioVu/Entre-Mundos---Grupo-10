@@ -5,6 +5,18 @@ export default class Inventory extends Phaser.GameObjects.Container{
         this.itemsArray = [];
     }
 
+    size(){
+        return this.itemsArray.size();
+    }
+
+    getItem(id){
+        return this.itemsArray[id];
+    }
+
+    getNum(id){
+        return this.itemsArray[id].getNum();
+    }
+
     insertItem(id){
         this.itemsArray[id].numUp();
     }

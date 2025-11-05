@@ -20,19 +20,20 @@ export default class BattleScene extends Phaser.Scene {
 
         this.heroes = new Array(6).fill(null);
         this.units = [];
-    this.units = [];
-    this.availableHeroes = [
-  { texture: 'wizard', name: 'Wizard', hp: 100, atk: 20 },
-  { texture: 'timmy', name: 'Timmy', hp: 100, atk: 20 }
-];
+        this.units = [];
+        this.availableHeroes = [
+        { texture: 'wizard', name: 'Wizard', hp: 100, atk: 20 },
+        { texture: 'timmy', name: 'Timmy', hp: 100, atk: 20 }
+        ];
 
-this.events.on("removeHero", (positionIndex) => {
-    if (this.heroes && this.heroes[positionIndex]) {
-        this.heroes[positionIndex].destroy();
-        this.heroes[positionIndex] = null;
-    }
-    this.units = this.heroes.filter(h => h !== null).concat(this.enemies);
-});
+        this.events.on("removeHero", (positionIndex) => {
+            if (this.heroes && this.heroes[positionIndex]) {
+                this.heroes[positionIndex].hpText.destroy();
+                this.heroes[positionIndex].destroy();
+                this.heroes[positionIndex] = null;
+            }
+            this.units = this.heroes.filter(h => h !== null).concat(this.enemies);
+        });
 
 
 
@@ -91,11 +92,6 @@ this.events.on("removeHero", (positionIndex) => {
             this.anims.create({ key: 'ghost-idle', frames: this.anims.generateFrameNumbers('ghost', { start: 0, end: 11 }), frameRate: 5, repeat: -1 });
             this.anims.create({ key: 'goblin-idle', frames: this.anims.generateFrameNumbers('goblin', { start: 0, end: 3 }), frameRate: 5, repeat: -1 });
 
-            // const wizard = new PlayerCharacter(this, 250, 55, 'wizard', 5, 'Wizard', 100, 20);
-            // wizard.setScale(0.8);
-
-            // const timmy = new PlayerCharacter(this, 280, 85, 'player', 6, 'Timmy', 100, 20);
-
             const goblin1 = new Enemy(this, this.enemyPosX[3], this.enemyPosY[2], "goblin", 3, "Goblin", 3, 3);
             goblin1.setScale(1.2);
             this.add.existing(goblin1).anims.play('goblin-idle');
@@ -112,7 +108,6 @@ this.events.on("removeHero", (positionIndex) => {
             ghost1.setScale(0.3);
             this.add.existing(ghost1).anims.play('ghost-idle');
 
-            //this.availableHeroes = [timmy, wizard];
             const ghost2 = new Enemy(this, this.enemyPosX[1], this.enemyPosY[1], "ghost", 11, "Ghost", 3, 3);
             ghost2.setScale(0.3);
             this.add.existing(ghost2).anims.play('ghost-idle');
@@ -121,7 +116,6 @@ this.events.on("removeHero", (positionIndex) => {
             ghost3.setScale(0.3);
             this.add.existing(ghost3).anims.play('ghost-idle');
 
-            //this.heroes = [timmy, wizard];
             this.enemies = [goblin1, goblin2, goblin3, ghost1, ghost2, ghost3];
             this.units = (this.enemies);
 
@@ -242,23 +236,23 @@ this.events.on("removeHero", (positionIndex) => {
 
     
     onHeroSelected(heroData) {
-    const { texture, x, y, name, hp, atk, positionKey } = heroData;
+        const { texture, x, y, name, hp, atk, positionKey } = heroData;
 
-     if (this.heroes[positionKey]) {
-        this.heroes[positionKey].destroy();
-        this.heroes[positionKey] = null;
-     }
-    const hero = new PlayerCharacter(this, x, y, texture, 0, name, hp, atk);
-    this.add.existing(hero).anims.play(hero.texture.key + "-idle");
-        if (hero.texture.key === 'wizard') {
-    hero.setScale(0.7);
-} else if (hero.texture.key === 'timmy') {
-    hero.setScale(1.2);
-}
+        if (this.heroes[positionKey]) {
+            this.heroes[positionKey].destroy();
+            this.heroes[positionKey] = null;
+        }
+        const hero = new PlayerCharacter(this, x, y, texture, 0, name, hp, atk);
+        this.add.existing(hero).anims.play(hero.texture.key + "-idle");
+                if (hero.texture.key === 'wizard') {
+            hero.setScale(0.7);
+        } else if (hero.texture.key === 'timmy') {
+            hero.setScale(1.2);
+        }
 
-    this.heroes[positionKey] = hero;
-    this.units = this.heroes.filter(h => h !== null).concat(this.enemies);
-}
+        this.heroes[positionKey] = hero;
+        this.units = this.heroes.filter(h => h !== null).concat(this.enemies);
+    }
 
     createMiniBoss()
     {
@@ -266,7 +260,7 @@ this.events.on("removeHero", (positionIndex) => {
         {
             this.anims.create({ key: 'dragon-idle', frames: this.anims.generateFrameNumbers('dragon', { start: 11, end: 13 }), frameRate: 5, repeat: -1 });
 
-            const dragon = new Enemy(this, this.enemyPosX[1], this.enemyPosY[1], "dragon", 2, "Dragon", 150, 30);
+            const dragon = new Enemy(this, this.enemyPosX[1], this.enemyPosY[1], "dragon", 2, "Dragon", 1, 30);
             dragon.setScale(0.7);
             this.add.existing(dragon).anims.play('dragon-idle');
 
@@ -327,6 +321,27 @@ this.events.on("removeHero", (positionIndex) => {
     this.heroes = this.heroes.filter(h => h !== null);
 
     }
+
+    cleanEvents() {
+        // 🔹 Limpia todos los eventos de la propia escena
+        this.events.off("removeHero");
+        this.events.off("heroesSelected");
+
+        // 🔹 Limpia los eventos de CharacterSelectionScene si existe
+        const charScene = this.scene.get("CharacterSelectionScene");
+        if (charScene && charScene.events) {
+            charScene.events.off("selectionComplete");
+        }
+
+        // 🔹 Si hay otros listeners o escenas conectadas, límpialos aquí también
+        const uiScene = this.scene.get("UIScene");
+        if (uiScene && uiScene.events) {
+            uiScene.events.off("PlayerSelect");
+        }
+        
+        console.log("🧹 Eventos de BattleScene limpiados correctamente");
+    }
+
 }
 
 

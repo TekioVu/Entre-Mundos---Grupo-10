@@ -11,10 +11,13 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             "Wizard": 40,
             "Goblin": 25,
             "Ghost": 25,
+            "Mushroom": 25,
+            "Flying Eye": 25,
             "Pharaoh": 25,
             "Scarab": 25,
             "Clown": 25,
             "Jester": 25,
+
             "Dragon": 25,
             "Medusa": 25,
         };
@@ -22,6 +25,8 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         this.isEnemy = (
             this.type === "Goblin" ||
             this.type === "Ghost" ||
+            this.type === "Mushroom" ||
+            this.type === "Flying Eye" ||
             this.type === "Pharaoh" ||
             this.type === "Dragon" ||
             this.type === "Scarab" ||
@@ -61,7 +66,10 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                 targets: this,
                 alpha: 0,
                 duration: 600,
-                onComplete: () => this.setVisible(false)
+                onComplete: () => 
+                {
+                    this.setVisible(false)
+                }
             });
 
             this.hpText.setVisible(false);
@@ -88,8 +96,8 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                     this.scene.time.addEvent({
                         delay: 1000,
                         callback: () => {
-                            const uiScene = this.scene.scene.get("UIScene");
                             uiScene.cleanEvents();
+                            battleScene.cleanEvents();
 
                             this.scene.scene.stop("UIScene");
                             this.scene.scene.stop("BattleScene");
