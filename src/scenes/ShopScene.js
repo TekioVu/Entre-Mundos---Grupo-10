@@ -7,23 +7,24 @@ export default class ShopScene extends Phaser.Scene {
         // === Datos base ===
         this.categories = {
             "Pociones curación": [
-                { name: "Poción Roja", texture: "pocion_roja", description: "Restaura una pequeña cantidad de salud." },
-                { name: "Poción Azul", texture: "pocion_azul", description: "Recupera energía mágica o maná." },
+                { name: "Poción Roja", texture: "pocion_roja", description: "Restaura una pequeña cantidad de salud.", coins: 25},
+                { name: "Poción Azul", texture: "pocion_azul", description: "Recupera energía mágica o maná.", coins:  25},
             ],
             "Pociones daño": [
-                { name: "Poción Daño Área", texture: "pocion_daño_area", description: "Inflinge daño en área al equipo rival" },
-                { name: "Poción Daño Pequeña", texture: "pocion_daño_pequeña", description: "Inflinge daño a un objetivo" },
-                { name: "Poción Daño Grande", texture: "pocion_daño_grande", description: "Inflinge una gran cantidad de daño a un objetivo" },
+                { name: "Poción Daño Área", texture: "pocion_daño_area", description: "Inflinge daño en área al equipo rival", coins: 40},
+                { name: "Poción Daño Pequeña", texture: "pocion_daño_pequeña", description: "Inflinge daño a un objetivo", coins: 25},
+                { name: "Poción Daño Grande", texture: "pocion_daño_grande", description: "Inflinge una gran cantidad de daño a un objetivo", coins: 50},
             ],
             "Pociones utilidad": [
-                { name: "Poción Ataque", texture: "pocion_ataque", description: "Sube el ataque" },
-                { name: "Poción Defensa", texture: "pocion_defensa", description: "Aumenta la defensa del equipo aliado" },
+                { name: "Poción Ataque", texture: "pocion_ataque", description: "Sube el ataque", coins: 15},
+                { name: "Poción Defensa", texture: "pocion_defensa", description: "Aumenta la defensa del equipo aliado", coins: 15},
             ],
             "Personajes": [
-                { name: "Wizard", texture: "wizard_image", description: "Magic" },
+                { name: "Wizard", texture: "wizard_image", description: "Magic", coins: 100 },
             ],
         };
 
+        this.currentCoins = 100;
         this.resetShop();
     }
 
@@ -36,6 +37,8 @@ export default class ShopScene extends Phaser.Scene {
             this.moveSelection(0, -1);
         } else if (Phaser.Input.Keyboard.JustDown(this.cursors.down)) {
             this.moveSelection(0, 1);
+        } else if (Phaser.Input.Keyboard.JustDown(this.cursors.space)){
+            this.buyItem();
         }
 
         // === Volver al menú con ESC ===
@@ -45,21 +48,53 @@ export default class ShopScene extends Phaser.Scene {
     }
 
     moveSelection(deltaX, deltaY) {
-        const maxCategories = this.categoryGroups.length;
-        const newCategoryIndex = Phaser.Math.Clamp(this.selectedCategoryIndex + deltaY, 0, maxCategories - 1);
-
-        const currentCategory = this.categories[this.categoryNames[newCategoryIndex]];
-        const maxItems = 4;
-
+        let newCategoryIndex = this.selectedCategoryIndex;
         let newItemIndex = this.selectedItemIndex;
+
+        const maxCategories = this.categoryGroups.length;
+
+        // === Movimiento vertical ===
+        if (deltaY !== 0) {
+            let nextCategory = newCategoryIndex + deltaY;
+
+            // Buscar siguiente categoría con ítems disponibles
+            while (
+                nextCategory >= 0 &&
+                nextCategory < maxCategories &&
+                this.categoryGroups[nextCategory].itemSlots.length === 0
+            ) {
+                nextCategory += deltaY; // sigue buscando en la misma dirección
+            }
+
+            // Si hay una categoría válida
+            if (
+                nextCategory >= 0 &&
+                nextCategory < maxCategories &&
+                this.categoryGroups[nextCategory].itemSlots.length > 0
+            ) {
+                newCategoryIndex = nextCategory;
+
+                // Mantener la posición horizontal si existe ese índice
+                const maxItemsInNew = this.categoryGroups[newCategoryIndex].itemSlots.length;
+                newItemIndex = Math.min(this.selectedItemIndex, maxItemsInNew - 1);
+            }
+        }
+
+        // === Movimiento horizontal ===
         if (deltaX !== 0) {
-            newItemIndex = Phaser.Math.Clamp(this.selectedItemIndex + deltaX, 0, maxItems - 1);
+            const currentGroup = this.categoryGroups[newCategoryIndex];
+            const maxItems = currentGroup.itemSlots.length;
+
+            if (maxItems > 0) {
+                newItemIndex = Phaser.Math.Clamp(newItemIndex + deltaX, 0, maxItems - 1);
+            }
         }
 
         this.updateSelection(newItemIndex, newCategoryIndex);
     }
 
-    updateSelection(itemIndex, categoryIndex) {
+
+   updateSelection(itemIndex, categoryIndex) {
         // Quitar resaltado anterior
         const prevGroup = this.categoryGroups[this.selectedCategoryIndex];
         if (prevGroup && prevGroup.itemSlots[this.selectedItemIndex]) {
@@ -75,69 +110,166 @@ export default class ShopScene extends Phaser.Scene {
         const selected = newGroup.itemSlots[this.selectedItemIndex];
         selected.rect.setFillStyle(0xffff00);
 
-        // Actualizar vista previa
-        this.preview.setTexture(selected.item.texture).setDisplaySize(100, 100);
-        this.previewName.setText(selected.item.name);
-        this.previewDescription.setText(selected.item.description);
+        const item = selected.item;
+
+        // === Actualizar imagen de vista previa ===
+        this.preview.setTexture(item.texture).setDisplaySize(100, 100);
+
+        // === Nombre ===
+        this.previewName.setText(item.name);
+        this.previewPrice.setText(`Price: ${item.coins}`);
+
+        // === Crear texto de descripción si no existe ===
+        if (!this.previewDescription) {
+            this.previewDescription = this.add.text(this.previewName.x, this.previewName.y, "", {
+                fontSize: "14px",
+                color: "#ffffff",
+                align: "center",
+                wordWrap: { width: 180 }
+            }).setOrigin(0.5);
+        }
+
+        // Actualizar texto de descripción
+        this.previewDescription.setText(item.description);
+
+        const nameBounds = this.previewName.getBounds();
+        const priceY = nameBounds.bottom + 20;
+        this.previewDescription.setPosition(this.previewName.x, priceY);
     }
+
 
     addNewItems(unlockedBooks)
     {
         if(unlockedBooks == 2){
 
             const greenPotion = {
-            name: "Poción Verde", texture: "pocion_verde", description: "Aumenta la velocidad temporalmente." };
+            name: "Poción Verde", texture: "pocion_verde", description: "Aumenta la velocidad temporalmente.", coins: 25 };
             this.categories["Pociones curación"].push(greenPotion);
             
             const stunPotion ={
-            name: "Poción Aturdidora", texture: "pocion_aturdidora", description: "Evita el ataque del próximo turno del enemigo" };
+            name: "Poción Aturdidora", texture: "pocion_aturdidora", description: "Evita el ataque del próximo turno del enemigo", coins: 25 };
             this.categories["Pociones utilidad"].push(stunPotion);
 
             const goblin = {
-            name: "Goblin", texture: "goblin_image", description: "Bicho verde agresivo" }
+            name: "Goblin", texture: "goblin_image", description: "Bicho verde agresivo", coins: 125}
             this.categories["Personajes"].push(goblin);
             
             const ghost = {
-            name: "Ghost", texture: "ghost_image", description: "BOOOOOOOOOOO!" }
+            name: "Ghost", texture: "ghost_image", description: "BOOOOOOOOOOO!", coins: 125 }
             this.categories["Personajes"].push(ghost);
 
         }
         else if(unlockedBooks == 3)
         {
             const goldenPotion = {
-            name: "Poción Dorada", texture: "pocion_dorada", description: "Otorga invulnerabilidad por unos segundos." };
+            name: "Poción Dorada", texture: "pocion_dorada", description: "Otorga invulnerabilidad por unos segundos.", coins: 25 };
             this.categories["Pociones curación"].push(goldenPotion);
 
             const cataclismPotion = {
-            name: "Poción Cataclismo", texture: "pocion_cataclismo", description: "Inflinge una gran cantidad de daño a todos los personajes del campo de batalla" };
+            name: "Poción Cataclismo", texture: "pocion_cataclismo", description: "Inflinge una gran cantidad de daño a todos los personajes del campo de batalla", coins: 100 };
             this.categories["Pociones daño"].push(cataclismPotion);
 
             const mushroom = {
-            name: "Mushroom", texture: "mushroom", description: "Room Room" };
+            name: "Mushroom", texture: "mushroom", description: "Room Room", coins: 200};
             this.categories["Personajes"].push(mushroom);
 
             const flyingeye = {
-            name: "Flying Eye", texture: "flying_eye", description: "Flap flap" };
+            name: "Flying Eye", texture: "flying_eye", description: "Flap flap", coins: 200 };
             this.categories["Personajes"].push(flyingeye);
 
         }else if(unlockedBooks == 4)
         {
             const pharaoh = {
-            name: "Pharaoh", texture: "pharaoh", description: "𓀅𓂯𓄠𓃼𓁵𓁥𓁾𓁴𓂋𓐑𓐔𓀗𓐗𓀳" };
+            name: "Pharaoh", texture: "pharaoh", description: "𓀅𓂯𓄠𓃼𓁵𓁥𓁾𓁴𓂋𓐑𓐔𓀗𓐗𓀳", coins: 250 };
             this.categories["Personajes"].push(pharaoh);
 
             const scarab = {
-            name: "Scarab", texture: "scarab", description: "𓂯𓁾𓄠𓃼𓁴𓂋𓐑𓐔𓀗𓐗𓀅𓀳𓁵𓁥" };
+            name: "Scarab", texture: "scarab", description: "𓂯𓁾𓄠𓃼𓁴𓂋𓐑𓐔𓀗𓐗𓀅𓀳𓁵𓁥", coins: 250 };
             this.categories["Personajes"].push(scarab);
 
         }else if(unlockedBooks == 5)
         {
             const jester = {
-            name: "Jester", texture: "jester", description: "JIJIJIJIJIJIJIJI" };
+            name: "Jester", texture: "jester", description: "JIJIJIJIJIJIJIJI", coins: 300 };
             this.categories["Personajes"].push(jester);
 
         }
     }
+
+    buyItem() {
+        const selectedGroup = this.categoryGroups[this.selectedCategoryIndex];
+        const selectedSlot = selectedGroup.itemSlots[this.selectedItemIndex];
+        const objeto = selectedSlot.item;
+
+        if (this.currentCoins >= objeto.coins) {
+            // Restar monedas
+            this.updateCoins(-objeto.coins);
+            console.log(`Compraste ${objeto.name} por ${objeto.coins} monedas.`);
+            console.log(`Te quedan ${this.currentCoins} monedas.`);
+
+            // Destruir elementos visuales
+            selectedSlot.rect.destroy();
+            selectedSlot.icon.destroy();
+
+            // Eliminar el slot del grupo
+            selectedGroup.itemSlots.splice(this.selectedItemIndex, 1);
+
+            // === Si la categoría aún tiene ítems ===
+            if (selectedGroup.itemSlots.length > 0) {
+                // Ajustar el índice si el actual ya no existe
+                this.selectedItemIndex = Math.min(this.selectedItemIndex, selectedGroup.itemSlots.length - 1);
+                this.updateSelection(this.selectedItemIndex, this.selectedCategoryIndex);
+            }
+            // === Si la categoría se queda vacía ===
+            else {
+                console.log(`Categoría "${selectedGroup.name}" vacía, buscando otra...`);
+
+                const totalCats = this.categoryGroups.length;
+                let newCatIndex = this.selectedCategoryIndex;
+                let found = false;
+
+                // Buscar hacia abajo primero
+                for (let i = newCatIndex + 1; i < totalCats; i++) {
+                    if (this.categoryGroups[i].itemSlots.length > 0) {
+                        newCatIndex = i;
+                        found = true;
+                        break;
+                    }
+                }
+
+                // Si no encontró hacia abajo, busca hacia arriba
+                if (!found) {
+                    for (let i = newCatIndex - 1; i >= 0; i--) {
+                        if (this.categoryGroups[i].itemSlots.length > 0) {
+                            newCatIndex = i;
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (found) {
+                    // Mantener el índice horizontal si es posible
+                    const maxItemsInNew = this.categoryGroups[newCatIndex].itemSlots.length;
+                    this.selectedCategoryIndex = newCatIndex;
+                    this.selectedItemIndex = Math.min(this.selectedItemIndex, maxItemsInNew - 1);
+                    this.updateSelection(this.selectedItemIndex, this.selectedCategoryIndex);
+                } else {
+                    // Si no hay categorías con ítems, limpiar vista previa
+                    console.log("¡Has comprado todos los objetos de la tienda!");
+                    this.preview.setVisible(false);
+                    this.previewName.setText("");
+                    this.previewDescription.setText("");
+                    this.previewPrice.setText("");
+                }
+            }
+
+        } else {
+            console.log(`No tienes suficientes monedas para comprar ${objeto.name}.`);
+        }
+    }
+
+
 
     resetShop()
     {
@@ -158,7 +290,9 @@ export default class ShopScene extends Phaser.Scene {
         // 🔹 2. Eliminar vista previa si existía
         if (this.preview) this.preview.destroy();
         if (this.previewName) this.previewName.destroy();
+        if (this.previewPrice) this.previewPrice.destroy();
         if (this.previewDescription) this.previewDescription.destroy();
+        if (this.coinsText) this.coinsText.destroy();
 
         // 🔹 3. Reiniciar arrays y propiedades
         this.categoryNames = Object.keys(this.categories);
@@ -169,7 +303,7 @@ export default class ShopScene extends Phaser.Scene {
         const { width, height } = this.scale;
 
         const categorySpacingY = 50; // separación vertical entre categorías
-        const startY = 5;
+        const startY = 15;
 
         this.categoryNames.forEach((categoryName, categoryIndex) => {
             const items = this.categories[categoryName];
@@ -221,6 +355,13 @@ export default class ShopScene extends Phaser.Scene {
             this.categoryGroups.push({ name: categoryName, itemSlots, categoryText });
         });
 
+        this.coinsText = this.add.text(80, 15, "Coins: " + this.currentCoins, {
+            fontSize: "16px",
+            color: "#ffff00",
+            wordWrap: { width: 150, useAdvancedWrap: true },
+            align: "center"
+        }).setOrigin(0.5);
+
         // === Vista previa (lado derecho) ===
         const firstItem = this.categories[this.categoryNames[0]][0];
 
@@ -230,6 +371,13 @@ export default class ShopScene extends Phaser.Scene {
             .setDisplaySize(previewSize, previewSize);
 
         this.previewName = this.add.text(width * 0.75, height * 0.7, firstItem.name, {
+            fontSize: "20px",
+            color: "#ffff00",
+            wordWrap: { width: 150, useAdvancedWrap: true },
+            align: "center"
+        }).setOrigin(0.5);
+
+        this.previewPrice = this.add.text(width * 0.75, height * 0.1, "Price: " + firstItem.coins, {
             fontSize: "20px",
             color: "#ffff00",
             wordWrap: { width: 150, useAdvancedWrap: true },
@@ -249,5 +397,12 @@ export default class ShopScene extends Phaser.Scene {
 
         // === Selección inicial ===
         this.updateSelection(0, 0);
+        this.updateCoins(0);
+    }
+
+    updateCoins(amount)
+    {
+        this.currentCoins += amount;
+        this.coinsText.setText("Coins: " + this.currentCoins);
     }
 }

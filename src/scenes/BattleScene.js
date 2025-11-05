@@ -84,7 +84,7 @@ this.events.on("removeHero", (positionIndex) => {
     {
         this.currentbook = combatScene;
 
-        if(combatScene === 'Fantasía')
+        if(combatScene === 'FANTASÍA')
         {
             this.add.image(0, 0, 'fantasy_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
@@ -143,7 +143,7 @@ this.events.on("removeHero", (positionIndex) => {
 
         }
        
-        else if(combatScene === 'Terror')
+        else if(combatScene === 'TERROR')
         {
             this.add.image(0, 0, 'horror_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
@@ -175,7 +175,7 @@ this.events.on("removeHero", (positionIndex) => {
             this.enemies = [mushroom1, mushroom2, eye1, eye2];
             this.units = this.heroes.concat(this.enemies);
             
-        }else if(combatScene === 'Historia')
+        }else if(combatScene === 'HISTORIA')
         {
             this.add.image(0, 0, 'history_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
@@ -211,7 +211,7 @@ this.events.on("removeHero", (positionIndex) => {
             this.heroes = [timmy, wizard];
             this.enemies = [pharaoh, pharaoh1, scarab, scarab1];
             this.units = this.heroes.concat(this.enemies);
-        }else if(combatScene === 'Comedia')
+        }else if(combatScene === 'COMEDIA')
         {
             this.add.image(0, 0, 'comedy_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
@@ -238,7 +238,7 @@ this.events.on("removeHero", (positionIndex) => {
             this.heroes = [timmy, wizard];
             this.enemies = [jester, clown];
             this.units = this.heroes.concat(this.enemies);
-        }else if(combatScene === 'Final Boss')
+        }else if(combatScene === 'THE END')
         {
             this.add.image(0, 0, 'horror_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
@@ -291,7 +291,7 @@ this.events.on("removeHero", (positionIndex) => {
 
     createMiniBoss()
     {
-        if(this.currentbook === 'Fantasía')
+        if(this.currentbook === 'FANTASÍA')
         {
             this.anims.create({ key: 'dragon-idle', frames: this.anims.generateFrameNumbers('dragon', { start: 11, end: 13 }), frameRate: 5, repeat: -1 });
 
@@ -302,7 +302,7 @@ this.events.on("removeHero", (positionIndex) => {
             this.enemies = [dragon];
             this.units = this.heroes.concat(this.enemies);
 
-        }else if(this.currentbook === 'Terror')
+        }else if(this.currentbook === 'TERROR')
         {
             this.anims.create({ key: 'dragon-idle', frames: this.anims.generateFrameNumbers('dragon', { start: 11, end: 13 }), frameRate: 5, repeat: -1 });
 
@@ -313,7 +313,18 @@ this.events.on("removeHero", (positionIndex) => {
             this.enemies = [dragon];
             this.units = this.heroes.concat(this.enemies);
            
-        }else if(this.currentbook === 'Historia')
+        }else if(this.currentbook === 'HISTORIA')
+        {
+            this.anims.create({ key: 'medusa-idle', frames: this.anims.generateFrameNumbers('medusa', { start: 14, end: 16 }), frameRate: 5, repeat: -1 });
+
+            const medusa = new Enemy(this, 50, 75, "medusa", 2, "Medusa", 1, 25);
+            medusa.setScale(0.7);
+            this.add.existing(medusa).anims.play('medusa-idle');
+
+            this.enemies = [medusa];
+            this.units = this.heroes.concat(this.enemies);
+           
+        }else if(this.currentbook === 'COMEDIA')
         {
             this.anims.create({ key: 'dragon-idle', frames: this.anims.generateFrameNumbers('dragon', { start: 11, end: 13 }), frameRate: 5, repeat: -1 });
 
@@ -324,18 +335,7 @@ this.events.on("removeHero", (positionIndex) => {
             this.enemies = [dragon];
             this.units = this.heroes.concat(this.enemies);
            
-        }else if(this.currentbook === 'Comedia')
-        {
-            this.anims.create({ key: 'dragon-idle', frames: this.anims.generateFrameNumbers('dragon', { start: 11, end: 13 }), frameRate: 5, repeat: -1 });
-
-            const dragon = new Enemy(this, 50, 75, "dragon", 2, "Dragon", 1, 25);
-            dragon.setScale(0.7);
-            this.add.existing(dragon).anims.play('dragon-idle');
-
-            this.enemies = [dragon];
-            this.units = this.heroes.concat(this.enemies);
-           
-        }else if(this.currentbook === 'Final Boss')
+        }else if(this.currentbook === 'THE END')
         {
             this.anims.create({ key: 'dragon-idle', frames: this.anims.generateFrameNumbers('dragon', { start: 11, end: 13 }), frameRate: 5, repeat: -1 });
 

@@ -5,12 +5,12 @@ export default class MenuScene extends Phaser.Scene {
 
     create() {
         this.opciones = [
-            "Fantasía",
-            "Terror",
-            "Historia",
-            "Comedia",
-            "Final Boss",
-            "Tienda"
+            "FANTASÍA",
+            "TERROR",
+            "HISTORIA",
+            "COMEDIA",
+            "THE END",
+            "TIENDA"
         ];
 
         this.selectedIndex = 0;
@@ -60,7 +60,7 @@ export default class MenuScene extends Phaser.Scene {
             const seleccion = this.opciones[this.selectedIndex];
             console.log("Seleccionado:", seleccion);
 
-            if (seleccion !== "Tienda") this.scene.switch("BattleScene");
+            if (seleccion !== "TIENDA") this.scene.switch("BattleScene");
             else this.scene.switch("ShopScene");
 
         });
@@ -115,7 +115,6 @@ export default class MenuScene extends Phaser.Scene {
                 fontFamily: "Arial",
                 fontSize: 20,
                 color: "#ffffff",
-                wordWrap: { width: rectWidth * 0.8 }
             }).setOrigin(0.5);
             text.setRotation(- Math.PI / 2); 
 
