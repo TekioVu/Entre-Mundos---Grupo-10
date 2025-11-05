@@ -23,10 +23,12 @@ export default class BattleScene extends Phaser.Scene {
 
         this.heroes = [];
         this.units = [];
-        this.availableHeroes = [
-        new PlayerCharacter(this, 0, 0, 'wizard', 5, 'Wizard', 100, 20),
-        new PlayerCharacter(this, 0, 0, 'player', 6, 'Timmy', 100, 20)
-        ];
+    this.units = [];
+    this.availableHeroes = [
+  { texture: 'wizard', name: 'Wizard', hp: 100, atk: 20 },
+  { texture: 'player', name: 'Timmy', hp: 100, atk: 20 }
+];
+
 
         this.events.on("heroesSelected", this.onHeroSelected, this);
         this.scene.get("CharacterSelectionScene").events.on('selectionComplete', (placedHeroes) => {
@@ -67,6 +69,8 @@ export default class BattleScene extends Phaser.Scene {
         this.units.forEach(unit => {
             if (unit.hpText && unit.alive !== false) unit.updateHpText();
         });
+
+        
     }
 
     createEnemies(combatScene)
@@ -264,19 +268,20 @@ export default class BattleScene extends Phaser.Scene {
         
     }
 
-    setSelectedHeroes(placedHeroes) {
-    this.placedHeroes = placedHeroes;
-    }
+    
     onHeroSelected(heroData) {
-        const { texture, x, y, name, hp, atk } = heroData;
-    console.log (texture);
-        const hero = new PlayerCharacter(this, x, y, texture, 0, name, hp, atk);
-        this.add.existing(hero).anims.play(texture + "-idle");
-        if (texture === "wizard") hero.setScale(0.8);
+    const { texture, x, y, name, hp, atk } = heroData;
+    const hero = new PlayerCharacter(this, x, y, texture, 0, name, hp, atk);
+    this.add.existing(hero).anims.play(hero.texture.key + "-idle");
+        if (hero.texture.key === 'wizard') {
+    hero.setScale(0.7);
+} else if (hero.texture.key === 'player') {
+    hero.setScale(1.2);
+}
 
-        this.heroes.push(hero);
-        this.units.push(hero); // agregar al turno de batalla
-    }
+    this.heroes.push(hero);
+    this.units.push(hero); 
+}
 
     createMiniBoss()
     {
@@ -339,3 +344,8 @@ export default class BattleScene extends Phaser.Scene {
         
     }
 }
+
+
+
+
+

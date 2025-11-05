@@ -173,7 +173,6 @@ onSelectPosition() {
 
     const coords = positionCoords[positionKey];
 
-    // Emitimos a BattleScene
     this.scene.get("BattleScene").events.emit("heroesSelected", {
         texture: hero.texture,
         name: hero.name,
@@ -184,23 +183,11 @@ onSelectPosition() {
         y: coords.y
     });
 
-    // Guardamos héroe en la posición
     this.placedHeroes[positionKey] = hero;
 
-    // Reseteamos selección
     this.selectedHero = null;
     this.charactersMenu.select(0);
     this.currentMenu = this.charactersMenu;
     this.positionMarker.setVisible(false); // opcional: ocultar marcador
 }
-
-
-
-
-
-
-// startBattle(){
-//     battleScene.SelectedHeroes(this.placedHeroes);
-// }
-
 }
