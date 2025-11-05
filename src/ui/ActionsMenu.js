@@ -2,7 +2,7 @@ import Menu from "./Menu.js";
 
 export default class ActionsMenu extends Menu {
     constructor(x, y, scene) {
-        super(x, y, scene);
+        super(x, y, scene, 1, 3, 80, false);
         this.addMenuItem("Attack");
         this.addMenuItem("Item");
     }

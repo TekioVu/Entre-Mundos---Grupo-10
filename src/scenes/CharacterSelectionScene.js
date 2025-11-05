@@ -86,6 +86,7 @@ export default class CharacterSelectionScene extends Phaser.Scene {
 
     if (event.code === "ArrowLeft") {
         if (menu === this.charactersMenu && menu.menuItemIndex % perRow === 0) {
+            if (!this.selectedHero) menu.confirm();
             this.currentMenu = this.positionsMenu;
             this.currentMenu.select(this.positionsMenu.menuItemIndex);
         } else {
@@ -132,12 +133,12 @@ export default class CharacterSelectionScene extends Phaser.Scene {
     if (this.currentMenu !== this.positionsMenu) return;
 
     const markerPositions = [
-        { x: 250, y: 30 } , 
-        { x: 300, y: 30 }, 
-        { x: 250, y: 80 }, 
-        { x: 300, y: 80 }, 
-        { x: 250, y: 130 }, 
-        { x: 300, y: 130 },
+        { x: 200, y: 50 } , 
+        { x: 250, y: 50 }, 
+        { x: 220, y: 75 }, 
+        { x: 270, y: 75 }, 
+        { x: 240, y: 100 }, 
+        { x: 290, y: 100 },
     ];
 
     const index = this.positionsMenu.menuItemIndex; 
@@ -163,12 +164,12 @@ onSelectPosition() {
     const hero = this.selectedHero;
 
     const positionCoords = {
-        "Vang1": { x: 250, y: 30 },
-        "Ret1":  { x: 300, y: 30 },
-        "Vang2": { x: 250, y: 80 },
-        "Ret2":  { x: 300, y: 80 },
-        "Vang3": { x: 250, y: 130 },
-        "Ret3":  { x: 300, y: 130 }
+        "Vang1": { x: 200, y: 50 },
+        "Ret1":  { x: 250, y: 50 },
+        "Vang2": { x: 220, y: 75 },
+        "Ret2":  { x: 270, y: 75 },
+        "Vang3": { x: 240, y: 100 },
+        "Ret3":  { x: 290, y: 100 }
     };
 
     const coords = positionCoords[positionKey];

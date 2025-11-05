@@ -1,8 +1,8 @@
 import Menu from "./Menu.js";
 
 export default class ItemsMenu extends Menu {
-    constructor(x, y, scene) {
-        super(x, y, scene);
+    constructor(x, y, scene, Icon= false) {
+        super(x, y, scene, Icon);
     }
 
     confirm() {

@@ -117,9 +117,9 @@ export default class BattleScene extends Phaser.Scene {
             ghost3.setScale(0.3);
             this.add.existing(ghost3).anims.play('ghost-idle');
 
-            this.heroes = [timmy, wizard];
+            //this.heroes = [timmy, wizard];
             this.enemies = [goblin1, goblin2, goblin3, ghost1, ghost2, ghost3];
-            this.units = this.heroes.concat(this.enemies);
+            this.units = (this.enemies);
 
             //const selectionScene = this.scene.get("CharacterSelectionScene");
 
@@ -342,6 +342,10 @@ export default class BattleScene extends Phaser.Scene {
            
         }
         
+    }
+
+    setSelectedHeroes(placedHeroes) {
+    this.placedHeroes = placedHeroes;
     }
 }
 

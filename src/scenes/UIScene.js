@@ -23,10 +23,10 @@ export default class UIScene extends Phaser.Scene {
         this.graphics.fillRect(205, 150, 130, 100);
 
         this.menus = this.add.container();
-        this.heroesMenu = new HeroesMenu(218, 155, this);
-        this.actionsMenu = new ActionsMenu(110, 155, this);
-        this.enemiesMenu = new EnemiesMenu(8, 155, this);
-        this.itemsMenu = new ItemsMenu(8, 155, this);
+        this.heroesMenu = new HeroesMenu(240, 155, this, true);
+        this.actionsMenu = new ActionsMenu(140, 155, this, false);
+        this.enemiesMenu = new EnemiesMenu(40, 155, this, true);
+        this.itemsMenu = new ItemsMenu(8, 155, this, false);
 
         this.currentMenu = this.actionsMenu;
         this.menus.add([this.heroesMenu, this.actionsMenu, this.enemiesMenu]);
