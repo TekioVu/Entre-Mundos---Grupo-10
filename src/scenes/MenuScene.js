@@ -5,12 +5,12 @@ export default class MenuScene extends Phaser.Scene {
 
     create() {
         this.opciones = [
-            "Fantasía",
-            "Terror",
-            "Historia",
-            "Comedia",
-            "The End",
-            "Tienda"
+            "FANTASÍA",
+            "TERROR",
+            "HISTORIA",
+            "COMEDIA",
+            "THE END",
+            "TIENDA"
         ];
 
         this.selectedIndex = 0;
@@ -60,7 +60,7 @@ export default class MenuScene extends Phaser.Scene {
             const seleccion = this.opciones[this.selectedIndex];
             console.log("Seleccionado:", seleccion);
 
-            if (seleccion !== "Tienda") this.scene.switch("BattleScene");
+            if (seleccion !== "TIENDA") this.scene.switch("BattleScene");
             else this.scene.switch("ShopScene");
 
         });
