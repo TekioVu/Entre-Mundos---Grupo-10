@@ -36,6 +36,11 @@ export default class Item extends Inventory{
         }
     }
 
+    getNum(){
+        return this.num;
+    }
+
+    // Aumenta o reduce la cantidad que tiene el jugador del objeto
     numUp(){
         this.num++;
     }
