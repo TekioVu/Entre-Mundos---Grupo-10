@@ -112,6 +112,14 @@ export default class ShopScene extends Phaser.Scene {
             name: "Poción Cataclismo", texture: "pocion_cataclismo", description: "Inflinge una gran cantidad de daño a todos los personajes del campo de batalla" };
             this.categories["Pociones daño"].push(cataclismPotion);
 
+            const mushroom = {
+            name: "Mushroom", texture: "mushroom", description: "Room Room" };
+            this.categories["Personajes"].push(mushroom);
+
+            const flyingeye = {
+            name: "Flying Eye", texture: "flying_eye", description: "Flap flap" };
+            this.categories["Personajes"].push(flyingeye);
+
         }else if(unlockedBooks == 4)
         {
             const pharaoh = {
@@ -128,15 +136,6 @@ export default class ShopScene extends Phaser.Scene {
             name: "Jester", texture: "jester", description: "JIJIJIJIJIJIJIJI" };
             this.categories["Personajes"].push(jester);
 
-        }else if(unclockedBooks == 6)
-        {
-            const mushroom = {
-            name: "Mushroom", texture: "mushroom", description: "Room Room" };
-            this.categories["Personajes"].push(mushroom);
-
-            const flyingeye = {
-            name: "Flying Eye", texture: "flying_eye", description: "Flap flap" };
-            this.categories["Personajes"].push(flyingeye);
         }
     }
 

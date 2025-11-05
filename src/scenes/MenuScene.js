@@ -6,10 +6,10 @@ export default class MenuScene extends Phaser.Scene {
     create() {
         this.opciones = [
             "Fantasía",
-            "Romance",
+            "Terror",
             "Historia",
             "Comedia",
-            "Terror",
+            "Final Boss",
             "Tienda"
         ];
 

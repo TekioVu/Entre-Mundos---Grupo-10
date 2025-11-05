@@ -32,7 +32,7 @@ export default class BootScene extends Phaser.Scene {
         this.load.image('fantasy_background', './assets/Backgrounds/Fantasy.png');
         this.load.image('romance_background', './assets/Backgrounds/Romance.png');
         this.load.image('history_background', './assets/Backgrounds/Egypt3.png');
-        this.load.image('comedy_background', './assets/Backgrounds/Comedy.png');
+        this.load.image('comedy_background', './assets/Backgrounds/Comedy2.png');
         this.load.image('horror_background', './assets/Backgrounds/Horror2.png');
 
         //Objetos tienda

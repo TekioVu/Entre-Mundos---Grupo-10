@@ -22,23 +22,23 @@ export default class BattleScene extends Phaser.Scene {
         this.scene.launch("CharacterSelectionScene");
 
         this.heroes = [];
-    this.units = [];
-    this.availableHeroes = [
-    new PlayerCharacter(this, 0, 0, 'wizard', 5, 'Wizard', 100, 20),
-    new PlayerCharacter(this, 0, 0, 'player', 6, 'Timmy', 100, 20)
-];
+        this.units = [];
+        this.availableHeroes = [
+        new PlayerCharacter(this, 0, 0, 'wizard', 5, 'Wizard', 100, 20),
+        new PlayerCharacter(this, 0, 0, 'player', 6, 'Timmy', 100, 20)
+        ];
 
         this.events.on("heroesSelected", this.onHeroSelected, this);
         this.scene.get("CharacterSelectionScene").events.on('selectionComplete', (placedHeroes) => {
-    this.setSelectedHeroes(placedHeroes);
-    this.units = this.heroes.concat(this.enemies);
-    this.nextTurn();
-});
-        this.index = -1;  
+        this.setSelectedHeroes(placedHeroes);
+        this.units = this.heroes.concat(this.enemies);
+        this.nextTurn();
+        });
+            this.index = -1;  
 
-        this.normalCombatCompleted = false; //Variable para ver si ha derrotado al mini-boss de este libro
-        this.currentbook;
-    }
+            this.normalCombatCompleted = false; //Variable para ver si ha derrotado al mini-boss de este libro
+            this.currentbook;
+        }
 
     nextTurn() {
         this.index = (this.index + 1) % this.units.length;
@@ -117,10 +117,10 @@ export default class BattleScene extends Phaser.Scene {
             this.enemies = [goblin1, goblin2, goblin3, ghost1, ghost2, ghost3];
             this.units = this.heroes.concat(this.enemies);
 
-    //         const selectionScene = this.scene.get("CharacterSelectionScene");
+            //const selectionScene = this.scene.get("CharacterSelectionScene");
 
-    //         this.heroes = (selectionScene && selectionScene.placedHeroes) ? selectionScene.placedHeroes : [];
-    //         this.heroes.forEach(hero => {
+            //this.heroes = (selectionScene && selectionScene.placedHeroes) ? selectionScene.placedHeroes : [];
+            //this.heroes.forEach(hero => {
             // const heroObj = this.availableHeroes[hero.name.toLowerCase()];
             // if (heroObj) {
             //     this.add.existing(heroObj).anims.play(heroObj.textureKey + '-idle');
@@ -133,37 +133,38 @@ export default class BattleScene extends Phaser.Scene {
 
         }
        
-        else if(combatScene === 'Romance')
+        else if(combatScene === 'Terror')
         {
-            this.add.image(0, 0, 'romance_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
+            this.add.image(0, 0, 'horror_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
             this.anims.create({ key: 'timmy-idle', frames: this.anims.generateFrameNumbers('player', { start: 0, end: 6 }), frameRate: 5, repeat: -1 });
-            this.anims.create({ key: 'wizard-idle', frames: this.anims.generateFrameNumbers('wizard', { start: 0, end: 5 }), frameRate: 5, repeat: -1 });
 
-            this.anims.create({ key: 'ghost-idle', frames: this.anims.generateFrameNumbers('ghost', { start: 0, end: 11 }), frameRate: 5, repeat: -1 });
-            this.anims.create({ key: 'goblin-idle', frames: this.anims.generateFrameNumbers('goblin', { start: 0, end: 4 }), frameRate: 5, repeat: -1 });
+            this.anims.create({ key: 'mushroom-idle', frames: this.anims.generateFrameNumbers('mushroom', { start: 0, end: 3 }), frameRate: 5, repeat: -1 });
+            this.anims.create({ key: 'eye-idle', frames: this.anims.generateFrameNumbers('flying_eye', { start: 0, end: 7 }), frameRate: 5, repeat: -1 });
 
-            const wizard = new PlayerCharacter(this, 250, 55, 'wizard', 5, 'Wizard', 100, 20);
-            this.add.existing(wizard).anims.play('wizard-idle');
-            wizard.setScale(0.8);
-
-            const timmy = new PlayerCharacter(this, 280, 85, 'player', 6, 'Timmy', 100, 20);
+            const timmy = new PlayerCharacter(this, 250, 75, 'player', 6, 'Timmy', 100, 20);
             this.add.existing(timmy).anims.play('timmy-idle');
 
-            const goblin1 = new Enemy(this, 50, 100, "goblin", 4, "Goblin", 3, 3);
-            goblin1.setScale(1.2);
-            this.add.existing(goblin1).anims.play('goblin-idle');
+            const mushroom1 = new Enemy(this, this.enemyPosX[3], this.enemyPosY[1], "mushroom", 3, "Mushroom", 3, 3);
+            mushroom1.setScale(1.2);
+            this.add.existing(mushroom1).anims.play('mushroom-idle');
 
-            const ghost1 = new Enemy(this, 50, 50, "ghost", 11, "Ghost", 3, 3);
-            ghost1.setScale(0.3);
-            this.add.existing(ghost1).anims.play('ghost-idle');
+            const mushroom2 = new Enemy(this, this.enemyPosX[4], this.enemyPosY[0], "mushroom", 3, "Mushroom", 3, 3);
+            mushroom2.setScale(1.2);
+            this.add.existing(mushroom2).anims.play('mushroom-idle');
 
-            this.availableHeroes = [timmy, wizard];
-            const selectionScene = this.scene.get("CharacterSelectionScene");
+            const eye1 = new Enemy(this, this.enemyPosX[1], this.enemyPosY[1], "flying_eye", 7, "Flying Eye", 3, 3);
+            eye1.setScale(1.2);
+            this.add.existing(eye1).anims.play('eye-idle');
 
-            this.heroes = this.selectionScene.placedHeroes;
-            this.enemies = [goblin1, ghost1];
+            const eye2 = new Enemy(this, this.enemyPosX[2], this.enemyPosY[0], "flying_eye", 7, "Flying Eye", 3, 3);
+            eye2.setScale(1.2);
+            this.add.existing(eye2).anims.play('eye-idle');
+
+            this.heroes = [timmy];
+            this.enemies = [mushroom1, mushroom2, eye1, eye2];
             this.units = this.heroes.concat(this.enemies);
+            
         }else if(combatScene === 'Historia')
         {
             this.add.image(0, 0, 'history_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
@@ -227,7 +228,7 @@ export default class BattleScene extends Phaser.Scene {
             this.heroes = [timmy, wizard];
             this.enemies = [jester, clown];
             this.units = this.heroes.concat(this.enemies);
-        }else if(combatScene === 'Terror')
+        }else if(combatScene === 'Final Boss')
         {
             this.add.image(0, 0, 'horror_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
@@ -258,6 +259,7 @@ export default class BattleScene extends Phaser.Scene {
             this.heroes = [timmy];
             this.enemies = [mushroom1, mushroom2, eye1, eye2];
             this.units = this.heroes.concat(this.enemies);
+            
         }
         
     }
@@ -289,7 +291,7 @@ export default class BattleScene extends Phaser.Scene {
             this.enemies = [dragon];
             this.units = this.heroes.concat(this.enemies);
 
-        }else if(this.currentbook === 'Romance')
+        }else if(this.currentbook === 'Terror')
         {
             this.anims.create({ key: 'dragon-idle', frames: this.anims.generateFrameNumbers('dragon', { start: 11, end: 13 }), frameRate: 5, repeat: -1 });
 
@@ -322,7 +324,7 @@ export default class BattleScene extends Phaser.Scene {
             this.enemies = [dragon];
             this.units = this.heroes.concat(this.enemies);
            
-        }else if(this.currentbook === 'Terror')
+        }else if(this.currentbook === 'Final Boss')
         {
             this.anims.create({ key: 'dragon-idle', frames: this.anims.generateFrameNumbers('dragon', { start: 11, end: 13 }), frameRate: 5, repeat: -1 });
 
