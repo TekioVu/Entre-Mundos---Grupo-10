@@ -232,7 +232,7 @@ export default class BattleScene extends Phaser.Scene {
             this.heroes = [timmy, wizard];
             this.enemies = [jester, clown];
             this.units = this.heroes.concat(this.enemies);
-        }else if(combatScene === 'Final Boss')
+        }else if(combatScene === 'The End')
         {
             this.add.image(0, 0, 'horror_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
@@ -329,7 +329,7 @@ export default class BattleScene extends Phaser.Scene {
             this.enemies = [dragon];
             this.units = this.heroes.concat(this.enemies);
            
-        }else if(this.currentbook === 'Final Boss')
+        }else if(this.currentbook === 'The End')
         {
             this.anims.create({ key: 'dragon-idle', frames: this.anims.generateFrameNumbers('dragon', { start: 11, end: 13 }), frameRate: 5, repeat: -1 });
 

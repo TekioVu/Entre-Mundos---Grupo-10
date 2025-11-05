@@ -9,7 +9,7 @@ export default class MenuScene extends Phaser.Scene {
             "Terror",
             "Historia",
             "Comedia",
-            "Final Boss",
+            "The End",
             "Tienda"
         ];
 
@@ -115,7 +115,6 @@ export default class MenuScene extends Phaser.Scene {
                 fontFamily: "Arial",
                 fontSize: 20,
                 color: "#ffffff",
-                wordWrap: { width: rectWidth * 0.8 }
             }).setOrigin(0.5);
             text.setRotation(- Math.PI / 2); 
 
