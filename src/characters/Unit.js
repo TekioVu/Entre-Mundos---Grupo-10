@@ -9,20 +9,26 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         const offsets = {
             "Timmy": 40,
             "Wizard": 40,
-            
             "Goblin": 25,
             "Ghost": 25,
             "Pharaoh": 25,
             "Scarab": 25,
             "Clown": 25,
             "Jester": 25,
-
             "Dragon": 25,
             "Medusa": 25,
         };
 
-        this.isEnemy = (this.type === "Goblin" || this.type === "Ghost" || this.type === "Pharaoh" || this.type === "Dragon" ||
-                        this.type === "Scarab" || this.type === "Clown" || this.type === "Jester" || this.type === "Medusa");
+        this.isEnemy = (
+            this.type === "Goblin" ||
+            this.type === "Ghost" ||
+            this.type === "Pharaoh" ||
+            this.type === "Dragon" ||
+            this.type === "Scarab" ||
+            this.type === "Clown" ||
+            this.type === "Jester" ||
+            this.type === "Medusa"
+        );
 
         this.hpOffsetY = offsets[this.type] || 30;
 
@@ -46,6 +52,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
 
     takeDamage(damage) {
         this.hp -= damage;
+
         if (this.hp <= 0) {
             this.hp = 0;
             this.alive = false;
@@ -59,34 +66,46 @@ export default class Unit extends Phaser.GameObjects.Sprite {
 
             this.hpText.setVisible(false);
 
+            // Eliminar de las listas correspondientes
             this.scene.units = this.scene.units.filter(u => u !== this);
             if (this.isEnemy) {
-            this.scene.enemies = this.scene.enemies.filter(e => e !== this);
-        } else {
-            this.scene.heroes = this.scene.heroes.filter(h => h !== this);
-        }
+                this.scene.enemies = this.scene.enemies.filter(e => e !== this);
+            } else {
+                this.scene.heroes = this.scene.heroes.filter(h => h !== this);
+            }
+
+            const uiScene = this.scene.scene.get("UIScene");
+            const battleScene = this.scene.scene.get("BattleScene");
+
             if (this.isEnemy) {
-                const uiScene = this.scene.scene.get("UIScene");
                 uiScene.remapEnemies();
+            } else {
+                uiScene.remapHeroes();
             }
 
-            if (this.scene.enemies.length === 0){
-                this.scene.time.addEvent({
-                    delay: 1000,
-                    callback: () => {
+            if (this.scene.enemies.length === 0) {
+                if (battleScene.normalCombatCompleted) {
+                    this.scene.time.addEvent({
+                        delay: 1000,
+                        callback: () => {
+                            const uiScene = this.scene.scene.get("UIScene");
+                            uiScene.cleanEvents();
 
-                        const uiScene = this.scene.scene.get("UIScene");
-                        uiScene.cleanEvents();
-
-                        this.scene.scene.stop("UIScene");
-                        this.scene.scene.stop("BattleScene");
-                        this.scene.scene.start("VictoryScene");
-                    }
-                });
+                            this.scene.scene.stop("UIScene");
+                            this.scene.scene.stop("BattleScene");
+                            this.scene.scene.start("VictoryScene");
+                        }
+                    });
+                } else {
+                    this.scene.time.delayedCall(3000, () => {
+                        battleScene.createMiniBoss();
+                        battleScene.normalCombatCompleted = true;
+                        uiScene.remapEnemies();
+                    });
+                }
             }
 
-            
-            if (this.scene.heroes.length === 0){
+            if (this.scene.heroes.length === 0) {
                 this.scene.time.addEvent({
                     delay: 1000,
                     callback: () => {
@@ -96,6 +115,6 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                     }
                 });
             }
-        }   
         }
+    }
 }

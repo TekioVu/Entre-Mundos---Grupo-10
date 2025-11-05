@@ -11,9 +11,6 @@ export default class BattleScene extends Phaser.Scene {
         this.enemyPosX = [60, 50, 40, 110, 100, 90];
         this.enemyPosY = [100, 75, 50];
 
-        // this.allyPosX = [];
-        // this.allyPosY = [];
-
         const menuScene = this.scene.get("MenuScene");
         const selectedScene = menuScene.getSelectedScene();
 
@@ -23,18 +20,18 @@ export default class BattleScene extends Phaser.Scene {
 
         this.heroes = [];
         this.units = [];
-    this.units = [];
-    this.availableHeroes = [
-  { texture: 'wizard', name: 'Wizard', hp: 100, atk: 20 },
-  { texture: 'player', name: 'Timmy', hp: 100, atk: 20 }
-];
+        this.units = [];
+        this.availableHeroes = [
+        { texture: 'wizard', name: 'Wizard', hp: 100, atk: 20 },
+        { texture: 'player', name: 'Timmy', hp: 100, atk: 20 }
+        ];
 
-this.events.on("removeHero", (positionIndex) => {
-    if (this.heroes && this.heroes[positionIndex]) {
-        this.heroes[positionIndex].destroy();
-        this.heroes[positionIndex] = null;
-    }
-});
+        this.events.on("removeHero", (positionIndex) => {
+            if (this.heroes && this.heroes[positionIndex]) {
+                this.heroes[positionIndex].destroy();
+                this.heroes[positionIndex] = null;
+            }
+        });
 
 
         this.events.on("heroesSelected", this.onHeroSelected, this);
@@ -76,8 +73,6 @@ this.events.on("removeHero", (positionIndex) => {
         this.units.forEach(unit => {
             if (unit.hpText && unit.alive !== false) unit.updateHpText();
         });
-
-        
     }
 
     createEnemies(combatScene)
