@@ -16,6 +16,7 @@ export default class BattleScene extends Phaser.Scene {
 
         this.cameras.main.setBackgroundColor("#1a1f2b");
         this.createEnemies(selectedScene);
+        this.createInventory(menuScene.getInventory());
         this.scene.launch("CharacterSelectionScene");
 
         this.heroes = new Array(6).fill(null);
@@ -232,6 +233,15 @@ export default class BattleScene extends Phaser.Scene {
             
         }
         
+    }
+
+    createInventory(inventory){
+        this.inventory = [];
+        for(let i = 0; i < inventory.size(); i++){
+            if(inventory.getNum(i) > 0){
+                this.inventory.push(inventory.getItem(i));
+            }
+        }
     }
 
     

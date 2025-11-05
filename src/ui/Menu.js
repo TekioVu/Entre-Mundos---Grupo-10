@@ -43,6 +43,10 @@ export default class Menu extends Phaser.GameObjects.Container {
         this.add(menuItem);
     }
 
+    getMenuItemIndex(){
+        return this.menuItemIndex;
+    }
+
     moveSelectionUp() {
         if (!this.menuItems.length) return;
         this.menuItems[this.menuItemIndex].deselect();
@@ -78,6 +82,7 @@ export default class Menu extends Phaser.GameObjects.Container {
 
     remap(units) {
         this.clear();
+        console.log(units.length);
         units.forEach(unit => this.addMenuItem(unit));
     }
 }

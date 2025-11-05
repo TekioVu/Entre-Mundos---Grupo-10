@@ -1,3 +1,5 @@
+import Inventory from "../characters/Inventory.js";
+
 export default class MenuScene extends Phaser.Scene {
     constructor() {
         super("MenuScene");
@@ -68,6 +70,22 @@ export default class MenuScene extends Phaser.Scene {
         //Crear la tienda por primera vez
         this.scene.launch("ShopScene");
         this.scene.sleep("ShopScene");
+
+        //Crea todos los objetos
+        this.inventory = new Inventory();
+        this.inventory.createItem('pocion_roja', 'Pocion roja', 'HealPot', undefined, undefined, 15);
+        this.inventory.createItem('pocion_verde', 'Pocion verde', 'HealPot', undefined, undefined, 25);
+        this.inventory.createItem('pocion_azul', 'Pocion azul', 'HealPot', undefined, undefined, 50);
+        this.inventory.createItem('pocion_dorada', 'Pocion dorada', 'HealPot', undefined, undefined, 90);
+
+        this.inventory.createItem('pocion_daño_area', 'Pocion de daño A', 'DmgPot', undefined, undefined, -10);
+        this.inventory.createItem('pocion_daño_pequeña', 'Pocion de daño P', 'DmgPot', undefined, undefined, -20);
+        this.inventory.createItem('pocion_daño_grande', 'Pocion de daño G', 'DmgPot', undefined, undefined, -35);
+        this.inventory.createItem('pocion_cataclismo', 'Cataclismo embotellado', 'DmgPot', undefined, undefined, -1000);
+
+        this.inventory.createItem('pocion_ataque', 'Pocion de ataque', 'StrPot', 20, undefined, undefined);
+        this.inventory.createItem('pocion_defensa', 'Pocion de defensa', 'DefPot', undefined, 20, undefined);
+        this.inventory.createItem('pocion_aturdidora','Pocion aturdidora', 'MiscPot', undefined, undefined, undefined);
     }
 
     updateSelection() {
@@ -125,6 +143,10 @@ export default class MenuScene extends Phaser.Scene {
     {
         const seleccion = this.opciones[this.selectedIndex];
         return seleccion;
+    }
+
+    getInventory(){
+        return this.inventory;
     }
 
     unlockBook()

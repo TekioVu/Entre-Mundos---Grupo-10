@@ -34,13 +34,14 @@ export default class UIScene extends Phaser.Scene {
         this.battleScene = this.scene.get("BattleScene");
 
         this.remapHeroes();
-        this.remapEnemies();
+        this.heroesMenu.select(0);
+        this.actionsMenu.select(0);
 
         this.input.keyboard.on("keydown", this.onKeyInput, this);
 
         this.battleScene.events.on("PlayerSelect", this.onFirstPlayerSelect, this); // Para dejar el primer personaje de la lista al empezar cada turno
         this.events.on("PlayerSelect", this.onPlayerSelect, this);                  // Cuando se selecciona el personaje con el que actuar
-        this.events.on("SelectEnemies", this.onSelectEnemies, this);
+        this.events.on("Select", this.onSelect, this);
         this.events.on("Enemy", this.onEnemy, this);
         this.events.on("Item", this.onItem, this);
         this.events.on("Back", this.onBack, this);
@@ -57,7 +58,7 @@ export default class UIScene extends Phaser.Scene {
     }
 
     onItem(index){
-        
+
     }
 
     onFirstPlayerSelect() {
@@ -70,30 +71,49 @@ export default class UIScene extends Phaser.Scene {
         this.currentMenu = this.actionsMenu;
     }
 
-    onSelectEnemies() {
-        this.currentMenu = this.enemiesMenu;
-        this.enemiesMenu.select(0);
+    onSelect() {
+        if(this.currentMenu.getMenuItemIndex() === 0){ // En caso de que se escoja "Attack"
+            this.remapEnemies();
+            this.currentMenu = this.enemiesMenu;
+            this.enemiesMenu.select(0);
+        }
+        else if (this.currentMenu.getMenuItemIndex() === 1){ // en caso de que se escoja "Item"
+            this.remapItems();
+            this.currentMenu = this.itemsMenu;
+            this.itemsMenu.select(0);
+        }
     }
 
+    // Retroceder
     onBack() {
-        if(this.currentMenu === this.enemiesMenu){
+        if(this.currentMenu === this.enemiesMenu){ // En caso de estar en el menu de enemigos
+            this.enemiesMenu.clear()
             this.enemiesMenu.deselect();
             this.currentMenu = this.actionsMenu;
             this.actionsMenu.select(0);
-        }
-        else if(this.currentMenu === this.actionsMenu){
+        }else if(this.currentMenu === this.itemsMenu){ // En caso de estar en el menu de items
+            this.itemsMenu.clear();
+            this.itemsMenu.deselect();
+            this.currentMenu = this.actionsMenu;
+            this.actionsMenu.select(0);
+        }else if(this.currentMenu === this.actionsMenu){ // En caso de estar en el menu de acciones
             this.actionsMenu.deselect();
             this.currentMenu = this.heroesMenu;
             this.heroesMenu.select(this.id);
         }
+        
     }
 
-    remapHeroes() {
+    remapHeroes() { //Crea los botones de los aliados
         this.heroesMenu.remap(this.battleScene.heroes);
     }
 
-    remapEnemies() {
+    remapEnemies() { // Crea los botones de los enemigos
         this.enemiesMenu.remap(this.battleScene.enemies);
+    }
+
+    remapItems(){ // Crea los botones de los objetos
+        this.itemsMenu.remap(this.battleScene.inventory);
     }
 
     onKeyInput(event) {

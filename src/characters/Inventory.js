@@ -1,12 +1,16 @@
 import Item from "./Item.js";
 
-export default class Inventory extends Phaser.GameObjects.Container{
+export default class Inventory{
     constructor(){
         this.itemsArray = [];
     }
 
+    createItem(texture, name, type, str, def, hp){
+        this.itemsArray.push(new Item(texture, name, type, str, def, hp));
+    }
+
     size(){
-        return this.itemsArray.size();
+        return this.itemsArray.length;
     }
 
     getItem(id){
