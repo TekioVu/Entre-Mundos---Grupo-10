@@ -11,13 +11,16 @@ export default class MenuItem extends Phaser.GameObjects.Container {
     this.bg.fillStyle(bgColor, bgAlpha);
 
     if (data.type === "icon") {
-        this.boxWidth = 20;
-    this.boxHeight = 20;
+        this.boxWidth = 25;
+        this.boxHeight = 25;
     this.bg.fillRoundedRect(-this.boxWidth / 2, -this.boxHeight / 2, this.boxWidth, this.boxHeight, 6);
     this.add(this.bg);
 
         this.sprite = scene.add.sprite(0, 0, data.key).setDisplaySize(40, 40);
-        if(data.key === 'ghost') this.sprite.setScale(0.1)
+        if(data.key === 'ghost') this.sprite.setScale(0.15)
+        else if(data.key === 'goblin') this.sprite.setScale(0.5)
+        else if(data.key === 'wizard') this.sprite.setScale(0.2)
+        else if(data.key === 'timmy') this.sprite.setScale(0.45)
         this.add(this.sprite);
     } else {
         this.boxWidth = 70;

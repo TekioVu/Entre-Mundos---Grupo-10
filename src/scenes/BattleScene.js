@@ -21,12 +21,12 @@ export default class BattleScene extends Phaser.Scene {
         this.createEnemies(selectedScene);
         this.scene.launch("CharacterSelectionScene");
 
-        this.heroes = [];
+        this.heroes = new Array(6).fill(null);
         this.units = [];
     this.units = [];
     this.availableHeroes = [
   { texture: 'wizard', name: 'Wizard', hp: 100, atk: 20 },
-  { texture: 'player', name: 'Timmy', hp: 100, atk: 20 }
+  { texture: 'timmy', name: 'Timmy', hp: 100, atk: 20 }
 ];
 
 this.events.on("removeHero", (positionIndex) => {
@@ -34,7 +34,9 @@ this.events.on("removeHero", (positionIndex) => {
         this.heroes[positionIndex].destroy();
         this.heroes[positionIndex] = null;
     }
+    this.units = this.heroes.filter(h => h !== null).concat(this.enemies);
 });
+
 
 
         this.events.on("heroesSelected", this.onHeroSelected, this);
@@ -45,7 +47,7 @@ this.events.on("removeHero", (positionIndex) => {
         });
             this.index = -1;  
 
-            this.normalCombatCompleted = false; //Variable para ver si ha derrotado al mini-boss de este libro
+            this.normalCombatCompleted = false; 
             this.currentbook;
         }
 
@@ -88,8 +90,8 @@ this.events.on("removeHero", (positionIndex) => {
         {
             this.add.image(0, 0, 'fantasy_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
-            // this.anims.create({ key: 'timmy-idle', frames: this.anims.generateFrameNumbers('player', { start: 0, end: 6 }), frameRate: 5, repeat: -1 });
-            // this.anims.create({ key: 'wizard-idle', frames: this.anims.generateFrameNumbers('wizard', { start: 0, end: 5 }), frameRate: 5, repeat: -1 });
+            this.anims.create({ key: 'timmy-idle', frames: this.anims.generateFrameNumbers('timmy', { start: 0, end: 6 }), frameRate: 5, repeat: -1 });
+            this.anims.create({ key: 'wizard-idle', frames: this.anims.generateFrameNumbers('wizard', { start: 0, end: 5 }), frameRate: 5, repeat: -1 });
 
             this.anims.create({ key: 'ghost-idle', frames: this.anims.generateFrameNumbers('ghost', { start: 0, end: 11 }), frameRate: 5, repeat: -1 });
             this.anims.create({ key: 'goblin-idle', frames: this.anims.generateFrameNumbers('goblin', { start: 0, end: 3 }), frameRate: 5, repeat: -1 });
@@ -128,33 +130,19 @@ this.events.on("removeHero", (positionIndex) => {
             this.enemies = [goblin1, goblin2, goblin3, ghost1, ghost2, ghost3];
             this.units = (this.enemies);
 
-            //const selectionScene = this.scene.get("CharacterSelectionScene");
-
-            //this.heroes = (selectionScene && selectionScene.placedHeroes) ? selectionScene.placedHeroes : [];
-            //this.heroes.forEach(hero => {
-            // const heroObj = this.availableHeroes[hero.name.toLowerCase()];
-            // if (heroObj) {
-            //     this.add.existing(heroObj).anims.play(heroObj.textureKey + '-idle');
-            //     if (heroObj.textureKey === 'wizard') heroObj.setScale(0.8);
-            // }
-        //});
-
-           
-
         }
        
         else if(combatScene === 'TERROR')
         {
             this.add.image(0, 0, 'horror_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
-            this.anims.create({ key: 'timmy-idle', frames: this.anims.generateFrameNumbers('player', { start: 0, end: 6 }), frameRate: 5, repeat: -1 });
+            this.anims.create({ key: 'timmy-idle', frames: this.anims.generateFrameNumbers('timmy', { start: 0, end: 6 }), frameRate: 5, repeat: -1 });
+            this.anims.create({ key: 'wizard-idle', frames: this.anims.generateFrameNumbers('wizard', { start: 0, end: 5 }), frameRate: 5, repeat: -1 });
 
             this.anims.create({ key: 'mushroom-idle', frames: this.anims.generateFrameNumbers('mushroom', { start: 0, end: 3 }), frameRate: 5, repeat: -1 });
             this.anims.create({ key: 'eye-idle', frames: this.anims.generateFrameNumbers('flying_eye', { start: 0, end: 7 }), frameRate: 5, repeat: -1 });
 
-            const timmy = new PlayerCharacter(this, 250, 75, 'player', 6, 'Timmy', 100, 20);
-            this.add.existing(timmy).anims.play('timmy-idle');
-
+            
             const mushroom1 = new Enemy(this, this.enemyPosX[3], this.enemyPosY[1], "mushroom", 3, "Mushroom", 3, 3);
             mushroom1.setScale(1.2);
             this.add.existing(mushroom1).anims.play('mushroom-idle');
@@ -171,27 +159,20 @@ this.events.on("removeHero", (positionIndex) => {
             eye2.setScale(1.2);
             this.add.existing(eye2).anims.play('eye-idle');
 
-            this.heroes = [timmy];
             this.enemies = [mushroom1, mushroom2, eye1, eye2];
-            this.units = this.heroes.concat(this.enemies);
+            this.units = (this.enemies);
             
         }else if(combatScene === 'HISTORIA')
         {
             this.add.image(0, 0, 'history_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
-            this.anims.create({ key: 'timmy-idle', frames: this.anims.generateFrameNumbers('player', { start: 0, end: 6 }), frameRate: 5, repeat: -1 });
+            this.anims.create({ key: 'timmy-idle', frames: this.anims.generateFrameNumbers('timmy', { start: 0, end: 6 }), frameRate: 5, repeat: -1 });
             this.anims.create({ key: 'wizard-idle', frames: this.anims.generateFrameNumbers('wizard', { start: 0, end: 5 }), frameRate: 5, repeat: -1 });
 
             this.anims.create({ key: 'pharaoh-idle', frames: this.anims.generateFrameNumbers('pharaoh', { start: 0, end: 2 }), frameRate: 5, repeat: -1 });
             this.anims.create({ key: 'scarab-idle', frames: this.anims.generateFrameNumbers('scarab', { start: 0, end: 1 }), frameRate: 5, repeat: -1 });
 
-            const wizard = new PlayerCharacter(this, 250, 55, 'wizard', 5, 'Wizard', 100, 20);
-            this.add.existing(wizard).anims.play('wizard-idle');
-            wizard.setScale(0.8);
-
-            const timmy = new PlayerCharacter(this, 280, 85, 'player', 6, 'Timmy', 100, 20);
-            this.add.existing(timmy).anims.play('timmy-idle');
-
+            
             const scarab = new Enemy(this, this.enemyPosX[3], this.enemyPosY[1], "scarab", 1, "Scarab", 3, 3);
             scarab.setScale(0.6);
             this.add.existing(scarab).anims.play('scarab-idle');
@@ -208,26 +189,19 @@ this.events.on("removeHero", (positionIndex) => {
             pharaoh1.setScale(0.6);
             this.add.existing(pharaoh1).anims.play('pharaoh-idle');
 
-            this.heroes = [timmy, wizard];
             this.enemies = [pharaoh, pharaoh1, scarab, scarab1];
-            this.units = this.heroes.concat(this.enemies);
+            this.units = (this.enemies);
         }else if(combatScene === 'COMEDIA')
         {
             this.add.image(0, 0, 'comedy_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
             this.anims.create({ key: 'wizard-idle', frames: this.anims.generateFrameNumbers('wizard', { start: 0, end: 5 }), frameRate: 5, repeat: -1 });
-            this.anims.create({ key: 'timmy-idle', frames: this.anims.generateFrameNumbers('player', { start: 0, end: 6 }), frameRate: 5, repeat: -1 });
+            this.anims.create({ key: 'timmy-idle', frames: this.anims.generateFrameNumbers('timmy', { start: 0, end: 6 }), frameRate: 5, repeat: -1 });
 
             this.anims.create({ key: 'clown-idle', frames: this.anims.generateFrameNumbers('clown', { start: 0, end: 8 }), frameRate: 5, repeat: -1 });
             this.anims.create({ key: 'jester-idle', frames: this.anims.generateFrameNumbers('jester', { start: 0, end: 6 }), frameRate: 5, repeat: -1 });
 
-            const wizard = new PlayerCharacter(this, 250, 55, 'wizard', 5, 'Wizard', 100, 20);
-            this.add.existing(wizard).anims.play('wizard-idle');
-            wizard.setScale(0.8);
-
-            const timmy = new PlayerCharacter(this, 280, 85, 'player', 6, 'Timmy', 100, 20);
-            this.add.existing(timmy).anims.play('timmy-idle');
-
+            
             const jester = new Enemy(this, 50, 100, "jester", 4, "Jester", 3, 3);
             this.add.existing(jester).anims.play('jester-idle');
 
@@ -235,21 +209,19 @@ this.events.on("removeHero", (positionIndex) => {
             clown.setScale(2);
             this.add.existing(clown).anims.play('clown-idle');
 
-            this.heroes = [timmy, wizard];
             this.enemies = [jester, clown];
-            this.units = this.heroes.concat(this.enemies);
+            this.units =(this.enemies);
         }else if(combatScene === 'THE END')
         {
             this.add.image(0, 0, 'horror_background').setOrigin(0, 0.3).setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
-            this.anims.create({ key: 'timmy-idle', frames: this.anims.generateFrameNumbers('player', { start: 0, end: 6 }), frameRate: 5, repeat: -1 });
+            this.anims.create({ key: 'timmy-idle', frames: this.anims.generateFrameNumbers('timmy', { start: 0, end: 6 }), frameRate: 5, repeat: -1 });
+            this.anims.create({ key: 'wizard-idle', frames: this.anims.generateFrameNumbers('wizard', { start: 0, end: 5 }), frameRate: 5, repeat: -1 });
 
             this.anims.create({ key: 'mushroom-idle', frames: this.anims.generateFrameNumbers('mushroom', { start: 0, end: 3 }), frameRate: 5, repeat: -1 });
             this.anims.create({ key: 'eye-idle', frames: this.anims.generateFrameNumbers('flying_eye', { start: 0, end: 7 }), frameRate: 5, repeat: -1 });
 
-            const timmy = new PlayerCharacter(this, 250, 75, 'player', 6, 'Timmy', 100, 20);
-            this.add.existing(timmy).anims.play('timmy-idle');
-
+            
             const mushroom1 = new Enemy(this, this.enemyPosX[3], this.enemyPosY[1], "mushroom", 3, "Mushroom", 3, 3);
             mushroom1.setScale(1.2);
             this.add.existing(mushroom1).anims.play('mushroom-idle');
@@ -266,9 +238,8 @@ this.events.on("removeHero", (positionIndex) => {
             eye2.setScale(1.2);
             this.add.existing(eye2).anims.play('eye-idle');
 
-            this.heroes = [timmy];
             this.enemies = [mushroom1, mushroom2, eye1, eye2];
-            this.units = this.heroes.concat(this.enemies);
+            this.units = (this.enemies);
             
         }
         
@@ -276,17 +247,22 @@ this.events.on("removeHero", (positionIndex) => {
 
     
     onHeroSelected(heroData) {
-    const { texture, x, y, name, hp, atk } = heroData;
+    const { texture, x, y, name, hp, atk, positionKey } = heroData;
+
+     if (this.heroes[positionKey]) {
+        this.heroes[positionKey].destroy();
+        this.heroes[positionKey] = null;
+     }
     const hero = new PlayerCharacter(this, x, y, texture, 0, name, hp, atk);
     this.add.existing(hero).anims.play(hero.texture.key + "-idle");
         if (hero.texture.key === 'wizard') {
     hero.setScale(0.7);
-} else if (hero.texture.key === 'player') {
+} else if (hero.texture.key === 'timmy') {
     hero.setScale(1.2);
 }
 
-    this.heroes.push(hero);
-    this.units.push(hero); 
+    this.heroes[positionKey] = hero;
+    this.units = this.heroes.filter(h => h !== null).concat(this.enemies);
 }
 
     createMiniBoss()
@@ -336,7 +312,8 @@ this.events.on("removeHero", (positionIndex) => {
             this.units = this.heroes.concat(this.enemies);
            
         }else if(this.currentbook === 'THE END')
-        {
+
+            {
             this.anims.create({ key: 'dragon-idle', frames: this.anims.generateFrameNumbers('dragon', { start: 11, end: 13 }), frameRate: 5, repeat: -1 });
 
             const dragon = new Enemy(this, 50, 75, "dragon", 2, "Dragon", 1, 25);
@@ -352,6 +329,8 @@ this.events.on("removeHero", (positionIndex) => {
 
     setSelectedHeroes(placedHeroes) {
     this.placedHeroes = placedHeroes;
+    this.heroes = this.heroes.filter(h => h !== null);
+
     }
 }
 

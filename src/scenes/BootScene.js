@@ -6,7 +6,7 @@ export default class BootScene extends Phaser.Scene {
     preload() {
         
         //Enemigos
-        this.load.spritesheet('player', './assets/Timmy/IDLE.png', { frameWidth: 96, frameHeight: 84 });
+        this.load.spritesheet('timmy', './assets/Timmy/IDLE.png', { frameWidth: 96, frameHeight: 84 });
         this.load.spritesheet('player_attack1', './assets/Timmy/ATTACK_1.png', { frameWidth: 96, frameHeight: 84 });
         this.load.spritesheet('player_attack2', './assets/Timmy/ATTACK_3.png', { frameWidth: 96, frameHeight: 84 });
         this.load.spritesheet('player_hurt', './assets/Timmy/HURT.png', { frameWidth: 96, frameHeight: 84 });

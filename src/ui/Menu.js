@@ -22,8 +22,8 @@ export default class Menu extends Phaser.GameObjects.Container {
 
         if (this.icons && unit && unit.textureKey) {
             displayData = { type: "icon", key: unit.textureKey };
-            this.itemsPerColumn = 3;
-            this.itemsPerRow = 2;
+            this.itemsPerColumn = 2;
+            this.itemsPerRow = 3;
         } else if (typeof unit === "string") {
             displayData = { type: "text", key: unit };
             this.itemsPerRow = 1;

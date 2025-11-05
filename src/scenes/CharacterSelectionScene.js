@@ -77,7 +77,8 @@ const hasHeroes = this.placedHeroes.some(hero => hero !== null);
         this.events.emit("Message", "Select at least one character.");
     }
     else{this.scene.stop("CharacterSelectionScene");
-    this.events.emit("selectionComplete", this.placedHeroes);
+const validHeroes = this.placedHeroes.filter(h => h !== null);
+this.events.emit("selectionComplete", validHeroes);
     this.scene.launch("UIScene");}
     }
         );
@@ -162,7 +163,6 @@ onSelectPlayer(){
 
         const hero = this.charactersMenu.menuItems[this.charactersMenu.menuItemIndex].unit;
 
-            console.log("Hero seleccionado:", hero);
 
         this.selectedHero = hero;
         this.positionsMenu.select(0);
@@ -191,6 +191,8 @@ const positionKey = this.positionsMenu.menuItemIndex;
         if (previousHero) {
             this.availableHeroes.push(previousHero);
             this.scene.get("BattleScene").events.emit("removeHero", positionKey)
+            this.placedHeroes[positionKey] = null;
+            this.positionsOccupied[positionKey] = false;
         }
     }
 
@@ -204,7 +206,8 @@ const positionKey = this.positionsMenu.menuItemIndex;
         hp: hero.hp,
         atk: hero.atk,
         x: coords.x,
-        y: coords.y
+        y: coords.y,
+        positionKey: positionKey
     });
 
     this.placedHeroes[positionKey] = hero;
