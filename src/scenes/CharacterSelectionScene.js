@@ -84,6 +84,16 @@ this.events.emit("selectionComplete", validHeroes);
         );
     }
     
+    update(){
+        if (this.availableHeroes.length===0)
+        {
+            this.scene.stop("CharacterSelectionScene");
+const validHeroes = this.placedHeroes.filter(h => h !== null);
+this.events.emit("selectionComplete", validHeroes);
+    this.scene.launch("UIScene");
+        }
+    }
+    
 
     onKeyInput(event) {
     const keysToPrevent = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Enter", "Space"];
