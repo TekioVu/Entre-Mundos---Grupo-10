@@ -25,6 +25,23 @@ export default class ShopScene extends Phaser.Scene {
         };
 
         this.currentCoins = 100;
+        this.availableCharacters =[
+        { texture: 'wizard', name: 'Wizard', hp: 100, atk: 20 },
+        { texture: 'goblin', name: 'Goblin', hp: 120, atk: 15 },
+        { texture: 'ghost', name: 'Ghost', hp: 120, atk: 15 },
+        { texture: 'mushroom', name: 'Mushroom', hp: 120, atk: 15 },
+        { texture: 'flying_eye', name: 'Flying Eye', hp: 120, atk: 15 },
+        { texture: 'pharaoh', name: 'Pharaoh', hp: 120, atk: 15 },
+        { texture: 'scarab', name: 'Scarab', hp: 120, atk: 15 },
+        { texture: 'jester', name: 'Jester', hp: 120, atk: 15 },
+        ];
+
+        this.characterDict = Object.fromEntries(
+        this.availableCharacters.map(c => [c.name, c])
+        );
+
+        this.boughtCharacters = [];
+        
         this.resetShop();
     }
 
@@ -200,6 +217,13 @@ export default class ShopScene extends Phaser.Scene {
         const selectedGroup = this.categoryGroups[this.selectedCategoryIndex];
         const selectedSlot = selectedGroup.itemSlots[this.selectedItemIndex];
         const objeto = selectedSlot.item;
+
+        if(selectedGroup.name === 'Personajes')
+        {
+            this.boughtCharacters.push(this.characterDict[objeto.name]);
+            console.log("Comprados:", this.boughtCharacters);
+        }
+
 
         if (this.currentCoins >= objeto.coins) {
             // Restar monedas

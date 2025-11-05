@@ -9,12 +9,13 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         const offsets = {
             "Timmy": 40,
             "Wizard": 40,
+
             "Goblin": 25,
-            "Ghost": 25,
+            "Ghost": 30,
             "Mushroom": 25,
             "Flying Eye": 25,
-            "Pharaoh": 25,
-            "Scarab": 25,
+            "Pharaoh": 50,
+            "Scarab": 1,
             "Clown": 25,
             "Jester": 25,
 
@@ -25,14 +26,17 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         this.isEnemy = (
             this.type === "Goblin" ||
             this.type === "Ghost" ||
+            this.type === "Dragon" ||
+
             this.type === "Mushroom" ||
             this.type === "Flying Eye" ||
+
             this.type === "Pharaoh" ||
-            this.type === "Dragon" ||
             this.type === "Scarab" ||
+            this.type === "Medusa" ||
+
             this.type === "Clown" ||
-            this.type === "Jester" ||
-            this.type === "Medusa"
+            this.type === "Jester" 
         );
 
         this.hpOffsetY = offsets[this.type] || 30;
