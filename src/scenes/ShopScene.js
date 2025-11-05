@@ -290,7 +290,9 @@ export default class ShopScene extends Phaser.Scene {
         // 🔹 2. Eliminar vista previa si existía
         if (this.preview) this.preview.destroy();
         if (this.previewName) this.previewName.destroy();
+        if (this.previewPrice) this.previewPrice.destroy();
         if (this.previewDescription) this.previewDescription.destroy();
+        if (this.coinsText) this.coinsText.destroy();
 
         // 🔹 3. Reiniciar arrays y propiedades
         this.categoryNames = Object.keys(this.categories);
@@ -395,6 +397,7 @@ export default class ShopScene extends Phaser.Scene {
 
         // === Selección inicial ===
         this.updateSelection(0, 0);
+        this.updateCoins(0);
     }
 
     updateCoins(amount)

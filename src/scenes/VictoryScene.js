@@ -4,6 +4,7 @@ export default class VictoryScene extends Phaser.Scene {
     }
 
     create() {
+        console.log("GG");
         this.add.text(160, 120, "Victory", {
             font: "20px Arial",
             fill: "#ff0000"
@@ -27,6 +28,7 @@ export default class VictoryScene extends Phaser.Scene {
 
         const shopScene = this.scene.get('ShopScene');
         shopScene.addNewItems(menuScene.unlockedbooks);
+        shopScene.updateCoins(250);
         shopScene.resetShop();
     }
 }
