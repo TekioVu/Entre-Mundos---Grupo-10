@@ -192,6 +192,9 @@ export default class BattleScene extends Phaser.Scene {
         }
         const hero = new PlayerCharacter(this, x, y, texture, 0, name, hp, atk);
         this.add.existing(hero).anims.play(hero.texture.key + "-idle");
+        if (positionKey=== 0 || positionKey === 1) { hero.setDepth(1); hero.hpText.setDepth(1);}
+        if (positionKey=== 2 || positionKey === 3) { hero.setDepth(2); hero.hpText.setDepth(2);}
+        if (positionKey=== 4 || positionKey === 5) { hero.setDepth(3); hero.hpText.setDepth(3);}
                 if (hero.texture.key === 'wizard') {
             hero.setScale(0.7);
         } else if (hero.texture.key === 'timmy') {

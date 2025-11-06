@@ -24,7 +24,7 @@ export default class ShopScene extends Phaser.Scene {
             ],
         };
 
-        this.currentCoins = 100;
+        this.currentCoins = 1000;
         this.availableCharacters =[
         { texture: 'wizard', name: 'Wizard', hp: 100, atk: 20 },
         { texture: 'goblin', name: 'Goblin', hp: 120, atk: 15 },
