@@ -7,22 +7,24 @@ export default class ShopScene extends Phaser.Scene {
         // === Datos base ===
         this.categories = {
             "Pociones curación": [
-                { name: "Poción Roja", texture: "pocion_roja", description: "Restaura una pequeña cantidad de salud.", coins: 25},
-                { name: "Poción Azul", texture: "pocion_azul", description: "Recupera energía mágica o maná.", coins:  25},
+                { name: "Poción Roja", texture: "pocion_roja", description: "Restaura una pequeña cantidad de salud.", coins: 25, id: 0},
+                { name: "Poción Azul", texture: "pocion_azul", description: "Recupera una cantidad decente de salud.", coins:  25, id: 2},
             ],
             "Pociones daño": [
-                { name: "Poción Daño Área", texture: "pocion_daño_area", description: "Inflinge daño en área al equipo rival", coins: 40},
-                { name: "Poción Daño Pequeña", texture: "pocion_daño_pequeña", description: "Inflinge daño a un objetivo", coins: 25},
-                { name: "Poción Daño Grande", texture: "pocion_daño_grande", description: "Inflinge una gran cantidad de daño a un objetivo", coins: 50},
+                { name: "Poción Daño Área", texture: "pocion_daño_area", description: "Inflinge daño en área al equipo rival", coins: 40, id: 4},
+                { name: "Poción Daño Pequeña", texture: "pocion_daño_pequeña", description: "Inflinge daño a un objetivo", coins: 25, id: 5},
+                { name: "Poción Daño Grande", texture: "pocion_daño_grande", description: "Inflinge una gran cantidad de daño a un objetivo", coins: 50, id: 6},
             ],
             "Pociones utilidad": [
-                { name: "Poción Ataque", texture: "pocion_ataque", description: "Sube el ataque", coins: 15},
-                { name: "Poción Defensa", texture: "pocion_defensa", description: "Aumenta la defensa del equipo aliado", coins: 15},
+                { name: "Poción De Ataque", texture: "pocion_ataque", description: "Sube el ataque", coins: 15, id: 8},
+                { name: "Poción De Defensa", texture: "pocion_defensa", description: "Aumenta la defensa del equipo aliado", coins: 15, id: 9},
             ],
             "Personajes": [
                 { name: "Wizard", texture: "wizard_image", description: "Magic", coins: 100 },
             ],
         };
+
+        this.inventory = this.registry.get('inventory'); // Coge el objeto que maneja el inventario del registro de escenas
 
         this.currentCoins = 1000;
         this.availableCharacters =[
@@ -222,6 +224,8 @@ export default class ShopScene extends Phaser.Scene {
         {
             this.boughtCharacters.push(this.characterDict[objeto.name]);
             console.log("Comprados:", this.boughtCharacters);
+        }else if(selectedGroup.name === 'Pociones curación'){
+            this.inventory.insertItem(objeto.id);
         }
 
 

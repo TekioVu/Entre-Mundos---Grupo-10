@@ -22,7 +22,23 @@ export default class Inventory{
     }
 
     insertItem(id){
+        console.log('Cantidad antes: ' + this.itemsArray[id].getNum());
         this.itemsArray[id].numUp();
+        console.log('Cantidad despues: ' + this.itemsArray[id].getNum());
+    }
+
+    insertItemByName(name){
+        let i = 0;
+        while(i < this.itemsArray.length && this.itemsArray[i].getName() !== name){
+            i++;
+        }
+        if(this.itemsArray[i] === name){
+            console.log('insertado: ' + name);
+            this.itemsArray[id].numUp();
+        }
+        else{
+            console.log('no insertado :( ' + name);
+        }
     }
 
     useItem(id){

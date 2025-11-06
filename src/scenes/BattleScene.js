@@ -14,9 +14,11 @@ export default class BattleScene extends Phaser.Scene {
         const menuScene = this.scene.get("MenuScene");
         const selectedScene = menuScene.getSelectedScene();
 
+        this.itemsArray = this.registry.get('inventory');
+
         this.cameras.main.setBackgroundColor("#1a1f2b");
         this.createEnemies(selectedScene);
-        this.createInventory(menuScene.getInventory());
+        this.createInventory(this.itemsArray);
         this.scene.launch("CharacterSelectionScene");
 
         this.heroes = new Array(6).fill(null);
@@ -70,16 +72,17 @@ export default class BattleScene extends Phaser.Scene {
             this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
         }
     }
-
-    receivePlayerSelection(action, target, item) {
+    
+    // === Manager de acciones ===
+    receivePlayerSelection(action, targetIndex, itemIndex) {
         if (action === "attack") {
-            this.units[this.index].attack(this.enemies[target]);
+            this.units[this.index].attack(this.enemies[targetIndex]);
         }
         else if (action === "heal"){
-            console.log("Curacion: " + this.inventory[item].getStat());
-            this.units[this.index].heal(this.inventory[item].getStat());
-            this.inventory[item].numDown();
-            this.createInventory();
+            console.log("Curacion: " + this.inventory[itemIndex].getStat());
+            this.units[this.index].heal(this.inventory[itemIndex].getStat());
+            this.itemsArray.useItem(itemIndex);
+            this.createInventory(this.itemsArray);
         }
 
         this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
@@ -187,6 +190,7 @@ export default class BattleScene extends Phaser.Scene {
                 this.inventory.push(inventory.getItem(i));
             }
         }
+        console.log('tamaño inventario: ' + this.inventory.length);
     }
 
     
