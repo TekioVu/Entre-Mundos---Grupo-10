@@ -81,8 +81,18 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             // Eliminar de las listas correspondientes
             this.scene.units = this.scene.units.filter(u => u !== this);
             if (this.isEnemy) {
-                this.scene.enemies = this.scene.enemies.filter(e => e !== this);
-            } else {
+let removedIndex = -1;
+
+this.scene.enemies = this.scene.enemies.filter((e, i) => {
+    if (e === this) {
+        removedIndex = i;   
+        return false;       
+    }
+    return true;
+});    
+this.scene.events.emit("enemyRemoved", removedIndex);
+
+      } else {
                 this.scene.heroes = this.scene.heroes.filter(h => h !== this);
             }
 

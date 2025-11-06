@@ -41,6 +41,11 @@ export default class BattleScene extends Phaser.Scene {
             this.units = this.heroes.filter(h => h !== null).concat(this.enemies);
         });
 
+        this.events.on("enemyRemoved", (index) => {
+    console.log("Índice de enemigo eliminado:", index);
+
+});
+
 
 
         this.events.on("heroesSelected", this.onHeroSelected, this);
