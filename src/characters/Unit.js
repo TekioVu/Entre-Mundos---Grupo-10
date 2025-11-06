@@ -104,11 +104,8 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             const uiScene = this.scene.scene.get("UIScene");
             const battleScene = this.scene.scene.get("BattleScene");
 
-            if (this.isEnemy) {
-                uiScene.remapEnemies();
-            } else {
-                uiScene.remapHeroes();
-            }
+            uiScene.remapHeroes();
+            
 
             if (this.scene.enemies.length === 0) {
                 if (battleScene.normalCombatCompleted) {

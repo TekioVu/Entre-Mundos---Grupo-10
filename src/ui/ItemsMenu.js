@@ -10,6 +10,6 @@ export default class ItemsMenu extends Menu {
     }
 
     back(){
-        this.scene.events.emit("Back", this.menuItemIndex);
+        this.scene.events.emit("Back");
     }
 }

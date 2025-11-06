@@ -35,21 +35,21 @@ export default class UIScene extends Phaser.Scene {
 
         
 
-    this.markerEnemies = [
+        this.markerEnemies = [
         { x: 110, y: 50, d: 1 }, 
         { x: 100, y: 75, d: 2 }, 
         { x: 90, y: 100, d: 3 } , 
         { x: 60, y: 50, d: 1},
         { x: 50, y: 75, d: 2 }, 
         { x: 40, y: 100, d: 3 }, 
+        ];
 
-    ];
-    this.enemiesMarker = this.add.graphics();
+        this.enemiesMarker = this.add.graphics();
         this.enemiesMarker.lineStyle(4, 0xffffff, 0.8); 
         
         this.scene.get("BattleScene").events.on("enemyRemoved", (index) => {
-    this.removeEnemyMarker(index);
-});
+            this.removeEnemyMarker(index);
+        });
 
 
         this.remapHeroes();
@@ -66,24 +66,25 @@ export default class UIScene extends Phaser.Scene {
         this.events.on("Item", this.onItem, this);
         this.events.on("Back", this.onBack, this);
 
-
-
         this.message = new Message(this, this.battleScene.events);
         this.add.existing(this.message);
 
         this.battleScene.nextTurn();
     }
 
-    onEnemy(index) {
-        this.enemiesMenu.clear();
+    // Cuando se ha seleccionado un enemigo al que atacar
+    onEnemy(enemyIndex) {
+        this.enemiesMenu.clear();   
+        this.actionsMenu.deselect();
         this.currentMenu = null;
-        this.battleScene.receivePlayerSelection("attack", index, undefined);
+        this.battleScene.receivePlayerSelection("attack", enemyIndex, undefined);
     }
 
-    onItem(){
-        this.enemiesMenu.clear();
+    // Cuando se ha seleccionado un item para usar (Sin terminar)
+    onItem(itemIndex){
+        this.itemsMenu .clear();
         this.currentMenu = null;
-        this.battleScene.receivePlayerSelection("heal", undefined, undefined);
+        this.battleScene.receivePlayerSelection("heal", undefined, itemIndex);
     }
 
     onFirstPlayerSelect() {
@@ -130,40 +131,38 @@ export default class UIScene extends Phaser.Scene {
     }
 
     updateEnemiesMarker() {
-    if (this.currentMenu !== this.enemiesMenu) {
-    this.enemiesMarker.setVisible(false);
-        return;
+        if (this.currentMenu !== this.enemiesMenu) {
+        this.enemiesMarker.setVisible(false);
+            return;
+        }
+
+        const index = this.enemiesMenu.menuItemIndex; 
+        const coords = this.markerEnemies[index];
+
+        if (!coords) {
+            this.enemiesMarker.clear();
+            this.enemiesMarker.setVisible(false);
+            return;
+        }
+
+        this.enemiesMarker.clear();
+        this.enemiesMarker.lineStyle(4, 0xffffff, 0.8); 
+        this.enemiesMarker.strokeRect(coords.x-25, coords.y-25, 50, 50);
+        this.enemiesMarker.setDepth(coords.d)
+        this.enemiesMarker.setVisible(true);
     }
+    removeEnemyMarker(index) {
+        if (index >= 0 && index < this.markerEnemies.length) {
+            this.markerEnemies.splice(index, 1);
+        }
 
-    const index = this.enemiesMenu.menuItemIndex; 
-    const coords = this.markerEnemies[index];
-
-    if (!coords) {
         this.enemiesMarker.clear();
         this.enemiesMarker.setVisible(false);
-        return;
+
+        if (this.enemiesMenu.menuItemIndex >= this.markerEnemies.length) {
+            this.enemiesMenu.select(0);
+        }
     }
-
-    this.enemiesMarker.clear();
-    this.enemiesMarker.lineStyle(4, 0xffffff, 0.8); 
-    this.enemiesMarker.strokeRect(coords.x-25, coords.y-25, 50, 50);
-    this.enemiesMarker.setDepth(coords.d)
-    this.enemiesMarker.setVisible(true);
-}
- removeEnemyMarker(index) {
-    if (index >= 0 && index < this.markerEnemies.length) {
-        this.markerEnemies.splice(index, 1);
-    }
-
-    this.enemiesMarker.clear();
-    this.enemiesMarker.setVisible(false);
-
-    this.remapEnemies();
-
-    if (this.enemiesMenu.menuItemIndex >= this.markerEnemies.length) {
-        this.enemiesMenu.select(0);
-    }
-}
 
 
 
@@ -172,8 +171,8 @@ export default class UIScene extends Phaser.Scene {
     }
 
     remapEnemies() { // Crea los botones de los enemigos
-    this.enemiesMenu.remap(this.battleScene.enemies);
-}
+        this.enemiesMenu.remap(this.battleScene.enemies);
+    }
 
     remapItems(){ // Crea los botones de los objetos
         this.itemsMenu.remap(this.battleScene.inventory);
@@ -193,7 +192,7 @@ export default class UIScene extends Phaser.Scene {
         }
             else if (event.code === "Space" || (event.code === "ArrowLeft" && this.currentMenu !== this.enemiesMenu)) this.currentMenu.confirm();
         }
-    this.updateEnemiesMarker();
+        this.updateEnemiesMarker();
 
     }
 

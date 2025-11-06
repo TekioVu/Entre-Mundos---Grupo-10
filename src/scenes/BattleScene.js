@@ -21,7 +21,6 @@ export default class BattleScene extends Phaser.Scene {
 
         this.heroes = new Array(6).fill(null);
         this.units = [];
-        this.units = [];
 
         this.availableHeroes = [
         { texture: 'timmy', name: 'Timmy', hp: 100, atk: 20 }
@@ -77,7 +76,10 @@ export default class BattleScene extends Phaser.Scene {
             this.units[this.index].attack(this.enemies[target]);
         }
         else if (action === "heal"){
-            this.units[this.index].heal(item.getStat());
+            console.log("Curacion: " + this.inventory[item].getStat());
+            this.units[this.index].heal(this.inventory[item].getStat());
+            this.inventory[item].numDown();
+            this.createInventory();
         }
 
         this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
