@@ -14,24 +14,42 @@
   </header>
 
   <main>
-    <section class="descripcion">
-      <h2>Descripción</h2>
-      <p id="magico">En este juego viajas a través de cinco libros, y cada uno representa un género distinto: 
-        <strong>Fantasía</strong>, <strong>Romance</strong>, <strong>Historia</strong>, <strong>Comedia</strong> y <strong>Terror</strong>. 
-        Cada libro es un nivel con sus propios enemigos, situaciones y un mini-jefe que pone a prueba una mecánica diferente.  
-        Al final, te espera un combate contra un jefe doble que encarna a la <em>Ira</em> y el <em>Miedo</em>, donde todo lo aprendido antes se pone en práctica.  
-        La jugabilidad se basa en combates por turnos al estilo clásico, con un sistema de formación de equipo separado en vanguardia y retaguardia.
-      </p>
-    </section>
 
     <section class ="canvas">
-      <h2>Juego</h2>
       <div id="phaser-example"></div>
     </section>
 
   
     <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
     <script type="module" src="./src/main.js"></script>
+
+    <section class="configuracion">
+    <h2>Objetivos y controles</h2>
+
+    <p>
+      El objetivo del juego es derrotar a los enemigos de cada libro para ganar monedas, 
+      comprar objetos en la tienda y desbloquear nuevos volúmenes hasta alcanzar el último.
+    </p>
+
+    <ul class="lista-controles">
+      <li><kbd>[↑↓←→]</kbd> Navegar por los menús</li>
+      <li><kbd>[SPACE]</kbd> Seleccionar</li>
+      <li><kbd>[ESC]</kbd> Salir de la tienda</li>
+    </ul>
+  </section>
+
+
+    <section class="descripcion">
+      <h2>Descripción</h2>
+      <p id="magico">En este juego viajas a través de cinco libros, y cada uno representa un género distinto: 
+        <strong>Fantasía</strong>, <strong>Romance</strong>, <strong>Historia</strong>, <strong>Comedia</strong> y <strong>Terror</strong>. 
+        Cada libro es un nivel con sus propios enemigos, situaciones y un mini-jefe que pone a prueba una mecánica diferente.  <br>
+        Al final, te espera un combate contra un jefe doble que encarna a la <em>Ira</em> y el <em>Miedo</em>, donde todo lo aprendido antes se pone en práctica.  
+        La jugabilidad se basa en combates por turnos al estilo clásico, con un sistema de formación de equipo separado en vanguardia y retaguardia.
+      </p>
+    </section>
+
+    
     
     <!-- PANTALLA DE CARGA
     <script src="./src/script.js"></script>-->
@@ -129,18 +147,6 @@
         <li>Sergio Valiente Urueña</li>
       </ul>
     </section>
-
-        <section class="configuracion">
-      <h2>Controles</h2>
-      <ul class="lista-controles">
-            <li><kbd>↑</kbd> —— Mover arriba</li>
-            <li><kbd>↓</kbd> —— Mover abajo</li>
-            <li><kbd>←</kbd> —— Mover izquierda</li>
-            <li><kbd>→</kbd> —— Mover derecha</li>
-            <li><kbd>Espacio</kbd> —— Interactuar</li>
-        </ul>
-    </section>
-
 
     <section class="redes">
       <h2>Redes y Repositorio</h2>

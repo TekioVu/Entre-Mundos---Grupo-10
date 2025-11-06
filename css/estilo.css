@@ -1,113 +1,158 @@
-/* Fuente y estilo base */
+/* =========================
+   ESTILO "ENTRE MUNDOS"
+   ========================= */
+
+/* Fuente general */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
+
+/* Fondo general */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #fdfbfb, #ebedee);
   margin: 0;
   padding: 0;
-  color: #333;
+  font-family: 'Roboto', sans-serif;
+  background: radial-gradient(circle at center, #0a0a0f 0%, #000000 100%);
+  color: #e0e0e0;
   line-height: 1.6;
+  background-attachment: fixed;
+  overflow-x: hidden;
 }
 
-/* Título principal */
-h1 {
+/* Encabezado */
+header {
   text-align: center;
-  font-size: 2.5rem;
-  margin: 30px 0;
-  color: #2c3e50;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+  padding: 40px 0 20px 0;
+  background: linear-gradient(180deg, #1a1a24, #0d0d14);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 3rem;
+  letter-spacing: 3px;
+  color: #d1b87f;
+  text-shadow: 0 0 15px rgba(209, 184, 127, 0.5);
+  margin: 0;
 }
 
 /* Subtítulos */
 h2 {
-  color: #34495e;
-  border-left: 4px solid #2980b9;
-  padding-left: 8px;
-  margin: 20px auto 10px auto;
-  max-width: 800px;
+  font-family: 'Cinzel', serif;
+  color: #d1b87f;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-left: 4px solid #d1b87f;
+  padding-left: 10px;
+  margin: 40px auto 15px auto;
+  max-width: 900px;
 }
 
-/* Párrafos */
+/* Texto principal */
 p {
-  max-width: 800px;
-  margin: 0 auto 20px auto;
-  padding: 12px 18px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  font-size: 1rem;
+  max-width: 900px;
+  margin: 0 auto 25px auto;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 3px solid #d1b87f;
+  border-radius: 6px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+  font-size: 1.05rem;
+  color: #ddd;
+}
+
+/* Canvas del juego */
+.canvas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
 }
 
 canvas {
-  display: block;
-  margin: 0 auto; /* centro horizontal */
-  border: 1px solid black; /* opcional, para ver el borde */
+  border: 2px solid rgba(209, 184, 127, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(209, 184, 127, 0.2);
 }
 
-/* Lista de autores */
+/* Listas */
 ul {
-  max-width: 800px;
-  margin: 0 auto 20px auto;
-  padding: 12px 18px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  max-width: 900px;
+  margin: 0 auto 25px auto;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
   list-style: none;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
 }
 
 ul li {
-  padding: 6px 0;
-  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 ul li:last-child {
   border-bottom: none;
 }
 
-/* Redes sociales */
-div img {
-  vertical-align: middle;
-  margin-right: 6px;
+/* Teclas */
+kbd {
+  background: rgba(209, 184, 127, 0.1);
+  border: 1px solid rgba(209, 184, 127, 0.5);
+  border-radius: 4px;
+  padding: 2px 6px;
+  color: #f2e3b1;
+  font-weight: bold;
 }
 
-a {
-  text-decoration: none;
-  color: #2980b9;
-  font-weight: 500;
-  transition: color 0.3s;
-}
-
-a:hover {
-  color: #1abc9c;
-}
-/* Contenedor de redes */
+/* Sección de redes */
 .redes {
-  max-width: 800px;
-  margin: 0 auto 20px auto;
-  padding: 12px 18px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  max-width: 900px;
+  margin: 0 auto 30px auto;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
 }
 
-/* Cada link de red */
 .redes div {
-  margin: 8px 0;
-  text-align: left; /* centra cada fila */
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
 }
 
 .redes img {
-  vertical-align: middle;
-  margin-right: 6px;
+  margin-right: 10px;
+  width: 22px;
+  filter: brightness(0.8);
 }
 
+a {
+  color: #d1b87f;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+a:hover {
+  color: #f5e3a1;
+  text-shadow: 0 0 8px rgba(245, 227, 161, 0.4);
+}
 
 /* Nombre del estudio */
 .studio {
-  max-width: 800px;
-  margin: 0 auto 20px auto;
-  padding: 12px 18px;
   text-align: center;
   font-weight: bold;
-  font-size: 1.1rem;
-  color: #2c3e50;
+  font-size: 1.2rem;
+  color: #d1b87f;
+  margin: 40px auto;
+  text-shadow: 0 0 10px rgba(209, 184, 127, 0.3);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 15px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  background: #0b0b10;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
