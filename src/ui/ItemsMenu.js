@@ -7,8 +7,10 @@ export default class ItemsMenu extends Menu {
     }
 
     confirm() {
+        if(!typeof this.menuItems[this.menuItemIndex]){
         let itemIndex = this.inventory.getItemIndexByTexture(this.getMenuItemTexture(this.menuItemIndex));
         this.scene.events.emit("Item", itemIndex);
+        }
     }
 
     back(){

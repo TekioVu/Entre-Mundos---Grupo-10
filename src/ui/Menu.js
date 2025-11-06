@@ -88,5 +88,8 @@ export default class Menu extends Phaser.GameObjects.Container {
         this.clear();
         console.log(units.length);
         units.forEach(unit => this.addMenuItem(unit));
+        if(units.length <= 0){
+            this.addMenuItem('VACIO');
+        }
     }
 }
