@@ -47,7 +47,6 @@ export default class BattleScene extends Phaser.Scene {
         this.scene.get("CharacterSelectionScene").events.on('selectionComplete', (placedHeroes) => {
         this.setSelectedHeroes(placedHeroes);
         this.units = this.heroes.concat(this.enemies);
-        this.nextTurn();
         });
             this.index = -1;  
 
