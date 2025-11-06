@@ -72,11 +72,12 @@ export default class BattleScene extends Phaser.Scene {
         }
     }
 
-    receivePlayerSelection(action, target) {
+    receivePlayerSelection(action, target, item) {
         if (action === "attack") {
             this.units[this.index].attack(this.enemies[target]);
         }
-        else if (action === "item"){
+        else if (action === "heal"){
+            this.units[this.index].heal(item.getStat());
         }
 
         this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
