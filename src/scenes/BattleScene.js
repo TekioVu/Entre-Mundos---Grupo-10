@@ -15,10 +15,11 @@ export default class BattleScene extends Phaser.Scene {
         const selectedScene = menuScene.getSelectedScene();
 
         this.itemsArray = this.registry.get('inventory');
+        console.log('Quiero irme a dormir: ' +  this.itemsArray.getItem(1).getNum());
 
         this.cameras.main.setBackgroundColor("#1a1f2b");
         this.createEnemies(selectedScene);
-        this.createInventory(this.itemsArray);
+        this.createInventory();
         this.scene.launch("CharacterSelectionScene");
 
         this.heroes = new Array(6).fill(null);
@@ -43,9 +44,8 @@ export default class BattleScene extends Phaser.Scene {
         });
 
         this.events.on("enemyRemoved", (index) => {
-    console.log("Índice de enemigo eliminado:", index);
-
-});
+            console.log("Índice de enemigo eliminado:", index);
+        });
 
 
 
@@ -79,10 +79,10 @@ export default class BattleScene extends Phaser.Scene {
             this.units[this.index].attack(this.enemies[targetIndex]);
         }
         else if (action === "heal"){
-            console.log("Curacion: " + this.inventory[itemIndex].getStat());
-            this.units[this.index].heal(this.inventory[itemIndex].getStat());
+            console.log("Curacion: " + this.itemsArray.getItem(itemIndex).getStat());
+            this.units[this.index].heal(this.itemsArray.getItem(itemIndex).getStat());
             this.itemsArray.useItem(itemIndex);
-            this.createInventory(this.itemsArray);
+            this.createInventory();
         }
 
         this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
@@ -183,11 +183,11 @@ export default class BattleScene extends Phaser.Scene {
         });
     }
 
-    createInventory(inventory){
+    createInventory(){
         this.inventory = [];
-        for(let i = 0; i < inventory.size(); i++){
-            if(inventory.getNum(i) > 0){
-                this.inventory.push(inventory.getItem(i));
+        for(let i = 0; i < this.itemsArray.size(); i++){
+            if(this.itemsArray.getNum(i) > 0){
+                this.inventory.push(this.itemsArray.getItem(i));
             }
         }
         console.log('tamaño inventario: ' + this.inventory.length);

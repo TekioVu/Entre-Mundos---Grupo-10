@@ -17,6 +17,10 @@ export default class Item{
         }
     }
 
+    getTexture(){
+        return this.textureKey;
+    }
+
     getName(){
         return this.name;
     }

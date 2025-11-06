@@ -34,7 +34,7 @@ export default class Menu extends Phaser.GameObjects.Container {
         const xOffset = col * this.columnSpacing + 10;
         const yOffset = row * Height + 10;
 
-
+        console.log('Nombre imagen: ' + displayData.key);
         
 
         const menuItem = new MenuItem(xOffset, yOffset, displayData, this.scene);
@@ -45,6 +45,10 @@ export default class Menu extends Phaser.GameObjects.Container {
 
     getMenuItemIndex(){
         return this.menuItemIndex;
+    }
+
+    getMenuItemTexture(menuItemIndex){
+        return this.menuItems[menuItemIndex].getDataKey();
     }
 
     moveSelectionUp() {

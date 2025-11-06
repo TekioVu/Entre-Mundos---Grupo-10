@@ -22,9 +22,7 @@ export default class Inventory{
     }
 
     insertItem(id){
-        console.log('Cantidad antes: ' + this.itemsArray[id].getNum());
         this.itemsArray[id].numUp();
-        console.log('Cantidad despues: ' + this.itemsArray[id].getNum());
     }
 
     insertItemByName(name){
@@ -38,6 +36,19 @@ export default class Inventory{
         }
         else{
             console.log('no insertado :( ' + name);
+        }
+    }
+
+    getItemIndexByTexture(texture){
+        let i = 0;
+        while(i < this.itemsArray.length && this.itemsArray[i].getTexture() !== texture){
+            i++;
+        }
+        if(this.itemsArray[i].getTexture() === texture){
+            console.log('encontrado: ' + texture);
+            return i;
+        }else{
+            console.log('no encontrado :( ' + texture);
         }
     }
 
