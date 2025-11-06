@@ -86,6 +86,10 @@ export default class MenuScene extends Phaser.Scene {
         this.inventory.createItem('pocion_ataque', 'Pocion de ataque', 'StrPot', 20, undefined, undefined);
         this.inventory.createItem('pocion_defensa', 'Pocion de defensa', 'DefPot', undefined, 20, undefined);
         this.inventory.createItem('pocion_aturdidora','Pocion aturdidora', 'MiscPot', undefined, undefined, undefined);
+        
+        this.inventory.insertItem(0);
+        this.inventory.insertItem(0);
+        this.inventory.insertItem(1);
     }
 
     updateSelection() {

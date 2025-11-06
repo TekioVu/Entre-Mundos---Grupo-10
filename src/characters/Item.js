@@ -1,6 +1,8 @@
+import Unit from "./Unit.js";
+
 export default class Item{
     constructor(texture, name, type, str, def, hp){
-        this.texture = texture;
+        this.textureKey = texture;
         this.frame = 0;
         this.num = 0;
         this.name = name;
@@ -30,7 +32,7 @@ export default class Item{
             case('Weapon'): return this.str;
             case('Armor'): return this.def;
             case('HealPot'): return this.hp;
-            case('DMGPot'): return this.hp;
+            case('DmgPot'): return this.hp;
             case('SrtPot'): return this.str;
             case('DefPot'): return this.def;
         }
@@ -47,5 +49,9 @@ export default class Item{
 
     numDown(){
         this.num--;
+    }
+
+    heal(unit){
+        unit.healPlayer(this.hp);
     }
 }

@@ -1,15 +1,15 @@
 import Menu from "./Menu.js";
 
 export default class ItemsMenu extends Menu {
-    constructor(x, y, scene, Icon= false) {
-        super(x, y, scene, Icon);
+    constructor(x, y, scene) {
+        super(x, y, scene, 2, 3, 80, true);
     }
 
     confirm() {
-        this.scene.events.emit("Item");
+        this.scene.events.emit("Item", this.menuItemIndex);
     }
 
-    back() {
-        this.scene.events.emit("Back");
+    back(){
+        this.scene.events.emit("Back", this.menuItemIndex);
     }
 }

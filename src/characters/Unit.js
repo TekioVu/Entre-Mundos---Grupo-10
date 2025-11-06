@@ -59,6 +59,11 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         this.scene.events.emit("Message", `${this.type} attacks ${target.type} for ${this.damage} damage`);
     }
 
+    heal(hp){
+        this.healPlayer(hp);
+        this.scene.events.emit("Message", `${this.type} heals ${hp}HP`);
+    }
+
     takeDamage(damage) {
         this.hp -= damage;
 
@@ -81,18 +86,18 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             // Eliminar de las listas correspondientes
             this.scene.units = this.scene.units.filter(u => u !== this);
             if (this.isEnemy) {
-let removedIndex = -1;
+                let removedIndex = -1;
 
-this.scene.enemies = this.scene.enemies.filter((e, i) => {
-    if (e === this) {
-        removedIndex = i;   
-        return false;       
-    }
-    return true;
-});    
-this.scene.events.emit("enemyRemoved", removedIndex);
+                this.scene.enemies = this.scene.enemies.filter((e, i) => {
+                    if (e === this) {
+                        removedIndex = i;   
+                        return false;       
+                    }
+                    return true;
+                });    
+                this.scene.events.emit("enemyRemoved", removedIndex);
 
-      } else {
+            } else {
                 this.scene.heroes = this.scene.heroes.filter(h => h !== this);
             }
 
@@ -138,5 +143,10 @@ this.scene.events.emit("enemyRemoved", removedIndex);
                 });
             }
         }
+    }
+
+    healPlayer(hp){
+        this.hp += hp;
+        this.updateHpText();
     }
 }

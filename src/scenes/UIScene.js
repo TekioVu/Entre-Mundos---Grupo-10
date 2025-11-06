@@ -26,10 +26,10 @@ export default class UIScene extends Phaser.Scene {
         this.heroesMenu = new HeroesMenu(220, 170, this, true);
         this.actionsMenu = new ActionsMenu(145, 170, this, false);
         this.enemiesMenu = new EnemiesMenu(10, 170, this, true);
-        this.itemsMenu = new ItemsMenu(8, 155, this, false);
+        this.itemsMenu = new ItemsMenu(10, 170, this, false);
 
         this.currentMenu = this.actionsMenu;
-        this.menus.add([this.heroesMenu, this.actionsMenu, this.enemiesMenu]);
+        this.menus.add([this.heroesMenu, this.actionsMenu, this.enemiesMenu, this.itemsMenu]);
 
         this.battleScene = this.scene.get("BattleScene");
 
@@ -75,16 +75,19 @@ export default class UIScene extends Phaser.Scene {
     }
 
     onEnemy(index) {
+        this.enemiesMenu.clear();
         this.currentMenu = null;
-        this.battleScene.receivePlayerSelection("attack", index);
+        this.battleScene.receivePlayerSelection("attack", index, undefined);
     }
 
-    onItem(index){
-
+    onItem(){
+        this.enemiesMenu.clear();
+        this.currentMenu = null;
+        this.battleScene.receivePlayerSelection("heal", undefined, undefined);
     }
 
     onFirstPlayerSelect() {
-        this.currentMenu = this.heroesMenu;
+        this.currentMenu = this.actionsMenu;
         this.heroesMenu.select(0);
     }
 
@@ -117,7 +120,7 @@ export default class UIScene extends Phaser.Scene {
             this.itemsMenu.clear();
             this.itemsMenu.deselect();
             this.currentMenu = this.actionsMenu;
-            this.actionsMenu.select(0);
+            this.actionsMenu.select(1);
         }else if(this.currentMenu === this.actionsMenu){ // En caso de estar en el menu de acciones
             this.actionsMenu.deselect();
             this.currentMenu = this.heroesMenu;

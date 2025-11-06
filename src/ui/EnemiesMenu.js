@@ -2,7 +2,7 @@ import Menu from "./Menu.js";
 
 export default class EnemiesMenu extends Menu {
     constructor(x, y, scene) {
-        super(x, y, scene, 2,3 , 80, true);
+        super(x, y, scene, 2, 3, 80, true);
     }
 
     confirm() {
@@ -10,6 +10,6 @@ export default class EnemiesMenu extends Menu {
     }
 
     back(){
-        this.scene.events.emit("Back", this.menuItemIndex)
+        this.scene.events.emit("Back", this.menuItemIndex);
     }
 }
