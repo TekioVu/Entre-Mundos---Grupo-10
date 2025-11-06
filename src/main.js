@@ -12,7 +12,7 @@ const config = {
     parent: "phaser-example",
     width: 320,
     height: 240,
-    zoom: 2,
+    zoom: 3,
     pixelArt: true,
     physics: {
         default: "arcade",
