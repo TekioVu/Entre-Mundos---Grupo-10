@@ -260,6 +260,7 @@ export default class BattleScene extends Phaser.Scene {
         // 🔹 Limpia todos los eventos de la propia escena
         this.events.off("removeHero");
         this.events.off("heroesSelected");
+        this.events.off("enemyRemoved");
 
         // 🔹 Limpia los eventos de CharacterSelectionScene si existe
         const charScene = this.scene.get("CharacterSelectionScene");
