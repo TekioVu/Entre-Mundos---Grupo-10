@@ -161,13 +161,13 @@ export default class ShopScene extends Phaser.Scene {
     {
         if(unlockedBooks == 2){
 
-            const greenPotion = {
-            name: "Poción Verde", texture: "pocion_verde", description: "Aumenta la velocidad temporalmente.", coins: 25 };
-            this.categories["Pociones curación"].push(greenPotion);
+            // const greenPotion = {
+            // name: "Poción Verde", texture: "pocion_verde", description: "Aumenta la velocidad temporalmente.", coins: 25, id: 10 };
+            // this.categories["Pociones curación"].push(greenPotion);
             
-            const stunPotion ={
-            name: "Poción Aturdidora", texture: "pocion_aturdidora", description: "Evita el ataque del próximo turno del enemigo", coins: 25 };
-            this.categories["Pociones utilidad"].push(stunPotion);
+            // const stunPotion ={
+            // name: "Poción Aturdidora", texture: "pocion_aturdidora", description: "Evita el ataque del próximo turno del enemigo", coins: 25, id: 11 };
+            // this.categories["Pociones utilidad"].push(stunPotion);
 
             const goblin = {
             name: "Goblin", texture: "goblin_image", description: "Bicho verde agresivo", coins: 125}
@@ -180,13 +180,13 @@ export default class ShopScene extends Phaser.Scene {
         }
         else if(unlockedBooks == 3)
         {
-            const goldenPotion = {
-            name: "Poción Dorada", texture: "pocion_dorada", description: "Otorga invulnerabilidad por unos segundos.", coins: 25 };
-            this.categories["Pociones curación"].push(goldenPotion);
+            // const goldenPotion = {
+            // name: "Poción Dorada", texture: "pocion_dorada", description: "Otorga invulnerabilidad por unos segundos.", coins: 25 , id:12};
+            // this.categories["Pociones curación"].push(goldenPotion);
 
-            const cataclismPotion = {
-            name: "Poción Cataclismo", texture: "pocion_cataclismo", description: "Inflinge una gran cantidad de daño a todos los personajes del campo de batalla", coins: 100 };
-            this.categories["Pociones daño"].push(cataclismPotion);
+            // const cataclismPotion = {
+            // name: "Poción Cataclismo", texture: "pocion_cataclismo", description: "Inflinge una gran cantidad de daño a todos los personajes del campo de batalla", coins: 100, id:13 };
+            // this.categories["Pociones daño"].push(cataclismPotion);
 
             const mushroom = {
             name: "Mushroom", texture: "mushroom", description: "Room Room", coins: 200};

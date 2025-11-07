@@ -103,6 +103,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
 
             const uiScene = this.scene.scene.get("UIScene");
             const battleScene = this.scene.scene.get("BattleScene");
+            const charSelectScene = this.scene.scene.get("CharacterSelectionScene");
 
             uiScene.remapHeroes();
             
@@ -114,6 +115,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                         callback: () => {
                             uiScene.cleanEvents();
                             battleScene.cleanEvents();
+                            charSelectScene.cleanEvents();
 
                             this.scene.scene.stop("UIScene");
                             this.scene.scene.stop("BattleScene");
