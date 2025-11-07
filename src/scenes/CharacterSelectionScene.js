@@ -70,82 +70,83 @@ export default class CharacterSelectionScene extends Phaser.Scene {
 
 
 
-        this.input.keyboard.on("keydown-ENTER", () => {
+                this.input.keyboard.on("keydown-ENTER", () => {
 
-            const hasHeroes = this.placedHeroes.some(hero => hero !== null);
+                    const hasHeroes = this.placedHeroes.some(hero => hero !== null);
 
-                if (!hasHeroes) {
-                    this.events.emit("Message", "Select at least one character.");
-                }
-                else{this.scene.stop("CharacterSelectionScene");
-            const validHeroes = this.placedHeroes.filter(h => h !== null);
-            this.events.emit("selectionComplete", validHeroes);
-                this.scene.launch("UIScene");}
-                }
-                    );
-                }
-                
-                update(){
-                    if (this.availableHeroes.length===0)
-                    {
-                        this.scene.stop("CharacterSelectionScene");
-            const validHeroes = this.placedHeroes.filter(h => h !== null);
-            this.events.emit("selectionComplete", validHeroes);
-                this.scene.launch("UIScene");
+                    if (!hasHeroes) {
+                        this.events.emit("Message", "Select at least one character.");
                     }
-                }
-                
+                    else{this.scene.stop("CharacterSelectionScene");
 
-                onKeyInput(event) {
-                const keysToPrevent = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Enter", "Space"];
-                if (keysToPrevent.includes(event.code)) event.preventDefault();
+                    const validHeroes = this.placedHeroes.filter(h => h !== null);
+                    this.events.emit("selectionComplete", validHeroes);
+                    this.scene.launch("UIScene");}
+                });
 
-                if (!this.currentMenu) return;
-
-                const menu = this.currentMenu;
-                const totalItems = menu.menuItems.length;
-                const perRow = menu.itemsPerRow || 1;
-
-                if (event.code === "ArrowLeft") {
-                    if (menu === this.charactersMenu && menu.menuItemIndex % perRow === 0) {
-                        if (!this.selectedHero) menu.confirm();
-                        this.currentMenu = this.positionsMenu;
-                        this.currentMenu.select(this.positionsMenu.menuItemIndex);
-                    } else {
-                        menu.moveSelectionUp();
-                    }
-                } 
-                else if (event.code === "ArrowRight") {
-                    if (menu === this.positionsMenu&& menu.menuItemIndex % perRow === 1) {
-                        this.positionsMenu.deselect();
-                        this.currentMenu = this.charactersMenu;
-                        this.currentMenu.select(this.charactersMenu.menuItemIndex);
-                    } else {
-                        const isLastInRow = (menu.menuItemIndex % perRow) === perRow - 1 || menu.menuItemIndex === totalItems - 1;
-                        if (!isLastInRow) {
-                            menu.moveSelectionDown();
-                        }
-                    }
-                } 
-
-                else if (event.code === "ArrowUp") {
-                    menu.menuItems[menu.menuItemIndex].deselect();
-                    let newIndex = menu.menuItemIndex - perRow;
-                    if (newIndex < 0) newIndex = menu.menuItemIndex; 
-                    menu.select(newIndex);
-                } 
-                else if (event.code === "ArrowDown") {
-                    menu.menuItems[menu.menuItemIndex].deselect();
-                    let newIndex = menu.menuItemIndex + perRow;
-                    if (newIndex >= totalItems) newIndex = menu.menuItemIndex; 
-                    menu.select(newIndex);
-                } 
-                else if (event.code === "Space") {
-                    menu.confirm();
-                }
-
-                this.updatePositionMarker();
             }
+                
+        update(){
+            if (this.availableHeroes.length===0)
+            {
+                this.scene.stop("CharacterSelectionScene");
+                const validHeroes = this.placedHeroes.filter(h => h !== null);
+                this.events.emit("selectionComplete", validHeroes);
+                this.scene.launch("UIScene");
+            }
+        }
+        
+
+        onKeyInput(event) {
+        const keysToPrevent = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Enter", "Space"];
+        if (keysToPrevent.includes(event.code)) event.preventDefault();
+
+        if (!this.currentMenu) return;
+
+        const menu = this.currentMenu;
+        const totalItems = menu.menuItems.length;
+        const perRow = menu.itemsPerRow || 1;
+
+        if (event.code === "ArrowLeft") {
+            if (menu === this.charactersMenu && menu.menuItemIndex % perRow === 0) {
+                if (!this.selectedHero) menu.confirm();
+                this.currentMenu = this.positionsMenu;
+                this.currentMenu.select(this.positionsMenu.menuItemIndex);
+            } else {
+                menu.moveSelectionUp();
+            }
+        } 
+        else if (event.code === "ArrowRight") {
+            if (menu === this.positionsMenu&& menu.menuItemIndex % perRow === 1) {
+                this.positionsMenu.deselect();
+                this.currentMenu = this.charactersMenu;
+                this.currentMenu.select(this.charactersMenu.menuItemIndex);
+            } else {
+                const isLastInRow = (menu.menuItemIndex % perRow) === perRow - 1 || menu.menuItemIndex === totalItems - 1;
+                if (!isLastInRow) {
+                    menu.moveSelectionDown();
+                }
+            }
+        } 
+
+        else if (event.code === "ArrowUp") {
+            menu.menuItems[menu.menuItemIndex].deselect();
+            let newIndex = menu.menuItemIndex - perRow;
+            if (newIndex < 0) newIndex = menu.menuItemIndex; 
+            menu.select(newIndex);
+        } 
+        else if (event.code === "ArrowDown") {
+            menu.menuItems[menu.menuItemIndex].deselect();
+            let newIndex = menu.menuItemIndex + perRow;
+            if (newIndex >= totalItems) newIndex = menu.menuItemIndex; 
+            menu.select(newIndex);
+        } 
+        else if (event.code === "Space") {
+            menu.confirm();
+        }
+
+        this.updatePositionMarker();
+    }
 
     updatePositionMarker() {
     if (this.currentMenu !== this.positionsMenu) return;

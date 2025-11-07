@@ -94,7 +94,7 @@ export default class BattleScene extends Phaser.Scene {
         });
     }
 
-    createEnemies(combatScene) {
+   createEnemies(combatScene) {
         this.currentbook = combatScene;
         this.enemies = [];
 
@@ -102,36 +102,76 @@ export default class BattleScene extends Phaser.Scene {
             'FANTASÍA': {
                 background: 'fantasy_background',
                 enemyDefs: [
-                    { key: 'goblin', anim: [0, 3], scale: 1.2, positions: [[4, 1], [5, 0]], name: 'Goblin' },
-                    { key: 'ghost', anim: [0, 11], scale: 0.3, positions: [[1, 1], [2, 0]], name: 'Ghost' },
+                    { 
+                        key: 'goblin', anim: [0, 3], scale: 1.2, name: 'Goblin',
+                        hp: 25, atk: 6,
+                        positions: [[4, 1], [5, 0]],
+                    },
+                    { 
+                        key: 'ghost', anim: [0, 11], scale: 0.3, name: 'Ghost',
+                        hp: 18, atk: 9,
+                        positions: [[1, 1], [2, 0]],
+                    },
                 ],
             },
             'TERROR': {
                 background: 'horror_background',
                 enemyDefs: [
-                    { key: 'mushroom', anim: [0, 3], scale: 1.2, positions: [[3, 1], [4, 0]], name: 'Mushroom' },
-                    { key: 'flying_eye', anim: [0, 7], scale: 1.2, positions: [[1, 1], [2, 0]], name: 'Flying Eye' },
+                    { 
+                        key: 'mushroom', anim: [0, 3], scale: 1.2, name: 'Mushroom',
+                        hp: 35, atk: 5,
+                        positions: [[3, 1], [4, 0]],
+                    },
+                    { 
+                        key: 'flying_eye', anim: [0, 7], scale: 1.2, name: 'Flying Eye',
+                        hp: 22, atk: 11,
+                        positions: [[1, 1], [2, 0]],
+                    },
                 ],
             },
             'HISTORIA': {
                 background: 'history_background',
                 enemyDefs: [
-                    { key: 'pharaoh', anim: [0, 2], scale: 0.6, positions: [[1, 1], [2, 0]], name: 'Pharaoh' },
-                    { key: 'scarab', anim: [0, 1], scale: 0.6, positions: [[3, 1], [4, 0]], name: 'Scarab' },
+                    { 
+                        key: 'pharaoh', anim: [0, 2], scale: 0.6, name: 'Pharaoh',
+                        hp: 45, atk: 8,
+                        positions: [[1, 1], [2, 0]],
+                    },
+                    { 
+                        key: 'scarab', anim: [0, 1], scale: 0.6, name: 'Scarab',
+                        hp: 28, atk: 5,
+                        positions: [[3, 1], [4, 0]],
+                    },
                 ],
             },
             'COMEDIA': {
                 background: 'comedy_background',
                 enemyDefs: [
-                    { key: 'jester', anim: [0, 6], scale: 1, positions: [[0, 1]], name: 'Jester' },
-                    { key: 'clown', anim: [0, 8], scale: 2, positions: [[1, 0]], name: 'Clown' },
+                    { 
+                        key: 'jester', anim: [0, 6], scale: 1, name: 'Jester',
+                        hp: 18, atk: 7,
+                        positions: [[0, 1], [1, 0]],
+                    },
+                    // { 
+                    //     key: 'clown', anim: [0, 8], scale: 2, name: 'Clown',
+                    //     hp: 35, atk: 9,
+                    //     positions: [[1, 0]],
+                    // },
                 ],
             },
             'THE END': {
                 background: 'horror_background',
                 enemyDefs: [
-                    { key: 'mushroom', anim: [0, 3], scale: 1.2, positions: [[3, 1], [4, 0]], name: 'Mushroom' },
-                    { key: 'flying_eye', anim: [0, 7], scale: 1.2, positions: [[1, 1], [2, 0]], name: 'Flying Eye' },
+                    { 
+                        key: 'mushroom', anim: [0, 3], scale: 1.2, name: 'Mushroom',
+                        hp: 45, atk: 7,
+                        positions: [[3, 1], [4, 0]],
+                    },
+                    { 
+                        key: 'flying_eye', anim: [0, 7], scale: 1.2, name: 'Flying Eye',
+                        hp: 32, atk: 12,
+                        positions: [[1, 1], [2, 0]],
+                    },
                 ],
             },
         };
@@ -147,23 +187,21 @@ export default class BattleScene extends Phaser.Scene {
             .setOrigin(0, 0.3)
             .setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
-        // Animaciones base del jugador
+        // Animaciones base de los héroes
         this._createIdleAnim('timmy', 0, 6);
         this._createIdleAnim('wizard', 0, 5);
 
         // Crear enemigos
         config.enemyDefs.forEach(def => {
-            // Crear animación si no existe
             if (!this.anims.exists(`${def.key}-idle`)) {
                 this._createIdleAnim(def.key, def.anim[0], def.anim[1], `${def.key}-idle`);
             }
 
-            // Crear instancias de enemigos
             def.positions.forEach(([xIdx, yIdx]) => {
                 const posX = this.enemyPosX[xIdx];
                 const posY = this.enemyPosY[yIdx];
-                const enemy = new Enemy(this, posX, posY, def.key, def.anim[1], def.name, 15, 5);
 
+                const enemy = new Enemy(this, posX, posY, def.key, def.anim[1], def.name, def.hp, def.atk);
                 enemy.setScale(def.scale);
                 this.add.existing(enemy).anims.play(`${def.key}-idle`);
                 this.enemies.push(enemy);
@@ -207,12 +245,19 @@ export default class BattleScene extends Phaser.Scene {
         if (positionKey=== 0 || positionKey === 1) { hero.setDepth(1); hero.hpText.setDepth(1);}
         if (positionKey=== 2 || positionKey === 3) { hero.setDepth(2); hero.hpText.setDepth(2);}
         if (positionKey=== 4 || positionKey === 5) { hero.setDepth(3); hero.hpText.setDepth(3);}
-                if (hero.texture.key === 'wizard') {
+
+        if (hero.texture.key === 'wizard') {
             hero.setScale(0.7);
         } else if (hero.texture.key === 'timmy') {
             hero.setScale(1.2);
         }else if (hero.texture.key === 'ghost') {
             hero.setScale(0.3);
+        }else if (hero.texture.key === 'ghost') {
+            hero.setScale(0.3);
+        }else if (hero.texture.key === 'scarab') {
+            hero.setScale(0.4);
+        }else if (hero.texture.key === 'pharaoh') {
+            hero.setScale(0.4);
         }
 
         this.heroes[positionKey] = hero;
@@ -221,11 +266,11 @@ export default class BattleScene extends Phaser.Scene {
 
     createMiniBoss() {
         const bossConfig = {
-            'FANTASÍA': { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [1, 1], scale: 0.7, atk: 80, hp: 30 },
-            'TERROR':   { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [50, 75], scale: 0.7, atk: 1, hp: 25 },
-            'HISTORIA': { key: 'medusa', anim: [14, 16], name: 'Medusa', pos: [50, 75], scale: 0.7, atk: 150, hp: 25 },
-            'COMEDIA':  { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [50, 75], scale: 0.7, atk: 1, hp: 25 },
-            'THE END':  { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [50, 75], scale: 0.7, atk: 1, hp: 25 },
+            'FANTASÍA': { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [1, 1], scale: 0.7, hp: 120, atk: 30 },
+            'TERROR':   { key: 'cacodaemon', anim: [0, 5], name: 'Cacodaemon', pos: [50, 75], scale: 0.7, hp: 150, atk: 25 },
+            'HISTORIA': { key: 'medusa', anim: [14, 16], name: 'Medusa', pos: [50, 75], scale: 0.7, hp: 150, atk: 25 },
+            'COMEDIA':  { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [50, 75], scale: 0.7, hp: 1, atk: 25 },
+            'THE END':  { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [50, 75], scale: 0.7, hp: 1, atk: 25 },
         };
 
         const config = bossConfig[this.currentbook];
@@ -251,7 +296,7 @@ export default class BattleScene extends Phaser.Scene {
             ? [this.enemyPosX[config.pos[0]], this.enemyPosY[config.pos[1]]]
             : config.pos;
 
-        const boss = new Enemy(this, x, y, config.key, config.anim[1], config.name, config.atk, config.hp);
+        const boss = new Enemy(this, x, y, config.key, config.anim[1], config.name, config.hp, config.atk);
         boss.setScale(config.scale);
         this.add.existing(boss).anims.play(animKey);
 
