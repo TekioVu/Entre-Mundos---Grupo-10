@@ -1,5 +1,3 @@
-import Unit from "./Unit.js";
-
 export default class Item{
     constructor(texture, name, type, str, def, hp){
         this.textureKey = texture;
@@ -42,6 +40,7 @@ export default class Item{
         }
     }
 
+    // Devuelve la cantidad de un item
     getNum(){
         return this.num;
     }
@@ -55,6 +54,7 @@ export default class Item{
         this.num--;
     }
 
+    // Cura a una unidad en base a la hp del item (exclusivo de pociones de vida)
     heal(unit){
         unit.healPlayer(this.hp);
     }

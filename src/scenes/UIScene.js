@@ -61,10 +61,10 @@ export default class UIScene extends Phaser.Scene {
 
         this.battleScene.events.on("PlayerSelect", this.onFirstPlayerSelect, this); // Para dejar el primer personaje de la lista al empezar cada turno
         this.events.on("PlayerSelect", this.onPlayerSelect, this);                  // Cuando se selecciona el personaje con el que actuar
-        this.events.on("Select", this.onSelect, this);
-        this.events.on("Enemy", this.onEnemy, this);
-        this.events.on("Item", this.onItem, this);
-        this.events.on("Back", this.onBack, this);
+        this.events.on("Select", this.onSelect, this);                              // Cuando se escoje la accion que se quiere realizar
+        this.events.on("Enemy", this.onEnemy, this);                                // Al escojer a que enemigo atacar
+        this.events.on("Item", this.onItem, this);                                  // Al escojer que item usar
+        this.events.on("Back", this.onBack, this);                                  // Cuando el jugador quiere retirar que ha seleccionado (a excepcion de "Enemy" e "Item")
 
         this.message = new Message(this, this.battleScene.events);
         this.add.existing(this.message);
@@ -174,10 +174,11 @@ export default class UIScene extends Phaser.Scene {
         this.enemiesMenu.remap(this.battleScene.enemies);
     }
 
-    remapItems(){ // Crea los botones de los objetos
+    remapItems(){ // Crea los botones de los items
         this.itemsMenu.remap(this.battleScene.inventory);
     }
 
+    // === Imput Manager ===
     onKeyInput(event) {
         const keysToPrevent = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space"];
         if (keysToPrevent.includes(event.code)) event.preventDefault();

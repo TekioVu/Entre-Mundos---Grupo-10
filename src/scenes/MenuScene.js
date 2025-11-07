@@ -71,7 +71,7 @@ export default class MenuScene extends Phaser.Scene {
         this.scene.launch("ShopScene");
         this.scene.sleep("ShopScene");
 
-        //Crea todos los objetos
+        //Crea todos los items disponibles en el juego y sus estadisticas
         this.inventory = new Inventory();
 
         this.inventory.createItem('pocion_roja', 'Poción Roja', 'HealPot', undefined, undefined, 15);
@@ -88,6 +88,7 @@ export default class MenuScene extends Phaser.Scene {
         this.inventory.createItem('pocion_defensa', 'Poción De Defensa', 'DefPot', undefined, 20, undefined);
         this.inventory.createItem('pocion_aturdidora','Poción aturdidora', 'MiscPot', undefined, undefined, undefined);
         
+        // Inserta los items con los que empieza siempre el jugador
         this.inventory.insertItem(0);
         this.inventory.insertItem(1);
 

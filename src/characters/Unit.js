@@ -59,8 +59,10 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         this.scene.events.emit("Message", `${this.type} attacks ${target.type} for ${this.damage} damage`);
     }
 
+    // Cura a la unidad en base a 'hp'
     heal(hp){
-        this.healPlayer(hp);
+        this.hp += hp;
+        this.updateHpText();
         this.scene.events.emit("Message", `${this.type} heals ${hp}HP`);
     }
 
@@ -142,10 +144,5 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                 });
             }
         }
-    }
-
-    healPlayer(hp){
-        this.hp += hp;
-        this.updateHpText();
     }
 }

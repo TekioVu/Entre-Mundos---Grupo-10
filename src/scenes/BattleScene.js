@@ -183,6 +183,7 @@ export default class BattleScene extends Phaser.Scene {
         });
     }
 
+    // Actualiza el inventario
     createInventory(){
         this.inventory = [];
         for(let i = 0; i < this.itemsArray.size(); i++){
@@ -258,8 +259,8 @@ export default class BattleScene extends Phaser.Scene {
 
 
     setSelectedHeroes(placedHeroes) {
-    this.placedHeroes = placedHeroes;
-    this.heroes = this.heroes.filter(h => h !== null);
+        this.placedHeroes = placedHeroes;
+        this.heroes = this.heroes.filter(h => h !== null);
 
     }
 

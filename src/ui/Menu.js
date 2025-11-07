@@ -31,8 +31,16 @@ export default class Menu extends Phaser.GameObjects.Container {
         const row = Math.floor(index / this.itemsPerRow);
         const col = index % this.itemsPerRow;
 
-        const xOffset = col * this.columnSpacing + 10;
-        const yOffset = row * Height + 10;
+        let xOffset;
+        let yOffset
+        if(unit === 'VACIO'){   // Exclusivo en caso de necesitar indicar que esta vacio el inventario
+            xOffset = col * this.columnSpacing + 40;
+            yOffset = row * Height + 25;
+        }
+        else{
+            xOffset = col * this.columnSpacing + 10;
+            yOffset = row * Height + 10;
+        }
 
         console.log('Nombre imagen: ' + displayData.key);
         
