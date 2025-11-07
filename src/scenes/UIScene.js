@@ -16,8 +16,7 @@ export default class UIScene extends Phaser.Scene {
         this.graphics = this.add.graphics();
         this.graphics.lineStyle(1, 0xffffff);
         this.graphics.fillStyle(0x031f4c, 1);
-        this.graphics.strokeRect(1, 150, 90, 100);
-        this.graphics.fillRect(1, 150, 130, 100);
+        this.graphics.fillRect(0, 150, 130, 100);
         this.graphics.strokeRect(105, 150, 90, 90);
         this.graphics.fillRect(105, 150, 190, 90);
         this.graphics.strokeRect(205, 150, 130, 100);
@@ -37,10 +36,10 @@ export default class UIScene extends Phaser.Scene {
         
 
         this.markerEnemies = [
-        { x: 110, y: 50, d: 1 }, 
+        //{ x: 110, y: 50, d: 1 }, 
         { x: 100, y: 75, d: 2 }, 
         { x: 90, y: 100, d: 3 } , 
-        { x: 60, y: 50, d: 1},
+        //{ x: 60, y: 50, d: 1},
         { x: 50, y: 75, d: 2 }, 
         { x: 40, y: 100, d: 3 }, 
         ];

@@ -161,9 +161,9 @@ export default class ShopScene extends Phaser.Scene {
     {
         if(unlockedBooks == 2){
 
-            // const greenPotion = {
-            // name: "Poción Verde", texture: "pocion_verde", description: "Aumenta la velocidad temporalmente.", coins: 25, id: 10 };
-            // this.categories["Pociones curación"].push(greenPotion);
+            const greenPotion = {
+            name: "Poción Verde", texture: "pocion_verde", description: "Cura una cantidad mediana de vida", coins: 25, id:2 };
+            this.categories["Pociones curación"].push(greenPotion);
             
             // const stunPotion ={
             // name: "Poción Aturdidora", texture: "pocion_aturdidora", description: "Evita el ataque del próximo turno del enemigo", coins: 25, id: 11 };
@@ -181,7 +181,7 @@ export default class ShopScene extends Phaser.Scene {
         else if(unlockedBooks == 3)
         {
             // const goldenPotion = {
-            // name: "Poción Dorada", texture: "pocion_dorada", description: "Otorga invulnerabilidad por unos segundos.", coins: 25 , id:12};
+            // name: "Poción Dorada", texture: "pocion_dorada", description: "Cura una gran cantidad de vida", coins: 25 , id:4};
             // this.categories["Pociones curación"].push(goldenPotion);
 
             // const cataclismPotion = {
