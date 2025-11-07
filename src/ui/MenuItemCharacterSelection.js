@@ -28,11 +28,11 @@ export default class MenuItemCharacterSelection extends Phaser.GameObjects.Conta
             this.bg.fillStyle(bgColor, bgAlpha);
             this.bg.fillRoundedRect(-boxWidth / 2, -boxHeight / 2, boxWidth, boxHeight, 4);
             this.add(this.bg);
-
-            this.sprite = scene.add.sprite(0, 0, item.texture).setDisplaySize(40, 40);
-            if (item.texture.key === 'ghost') {
-            item.setScale(0.1);
+            if (item.texture === 'ghost') {
+                        this.sprite = scene.add.sprite(0, 0, item.texture).setDisplaySize(20, 20);
         }
+        else this.sprite = scene.add.sprite(0, 0, item.texture).setDisplaySize(40, 40);
+
             this.add(this.sprite);
         }
 

@@ -221,7 +221,7 @@ export default class BattleScene extends Phaser.Scene {
 
     createMiniBoss() {
         const bossConfig = {
-            'FANTASÍA': { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [1, 1], scale: 0.7, atk: 120, hp: 30 },
+            'FANTASÍA': { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [1, 1], scale: 0.7, atk: 80, hp: 30 },
             'TERROR':   { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [50, 75], scale: 0.7, atk: 1, hp: 25 },
             'HISTORIA': { key: 'medusa', anim: [14, 16], name: 'Medusa', pos: [50, 75], scale: 0.7, atk: 150, hp: 25 },
             'COMEDIA':  { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [50, 75], scale: 0.7, atk: 1, hp: 25 },
