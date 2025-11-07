@@ -162,7 +162,7 @@ export default class BattleScene extends Phaser.Scene {
             def.positions.forEach(([xIdx, yIdx]) => {
                 const posX = this.enemyPosX[xIdx];
                 const posY = this.enemyPosY[yIdx];
-                const enemy = new Enemy(this, posX, posY, def.key, def.anim[1], def.name, 3, 3);
+                const enemy = new Enemy(this, posX, posY, def.key, def.anim[1], def.name, 15, 3);
 
                 enemy.setScale(def.scale);
                 this.add.existing(enemy).anims.play(`${def.key}-idle`);
@@ -218,9 +218,9 @@ export default class BattleScene extends Phaser.Scene {
 
     createMiniBoss() {
         const bossConfig = {
-            'FANTASÍA': { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [1, 1], scale: 0.7, atk: 1, hp: 30 },
+            'FANTASÍA': { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [1, 1], scale: 0.7, atk: 150, hp: 25 },
             'TERROR':   { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [50, 75], scale: 0.7, atk: 1, hp: 25 },
-            'HISTORIA': { key: 'medusa', anim: [14, 16], name: 'Medusa', pos: [50, 75], scale: 0.7, atk: 1, hp: 25 },
+            'HISTORIA': { key: 'medusa', anim: [14, 16], name: 'Medusa', pos: [50, 75], scale: 0.7, atk: 150, hp: 25 },
             'COMEDIA':  { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [50, 75], scale: 0.7, atk: 1, hp: 25 },
             'THE END':  { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [50, 75], scale: 0.7, atk: 1, hp: 25 },
         };
