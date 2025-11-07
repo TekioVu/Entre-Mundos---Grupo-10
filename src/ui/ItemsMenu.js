@@ -6,6 +6,7 @@ export default class ItemsMenu extends Menu {
         this.inventory = inv;
     }
 
+    // Se asegura que el item a usar es un item
     confirm() {
         if(typeof this.menuItems[this.menuItemIndex] !== 'string'){
         let itemIndex = this.inventory.getItemIndexByTexture(this.getMenuItemTexture(this.menuItemIndex));
