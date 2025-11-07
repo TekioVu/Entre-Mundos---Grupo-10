@@ -211,6 +211,8 @@ export default class BattleScene extends Phaser.Scene {
             hero.setScale(0.7);
         } else if (hero.texture.key === 'timmy') {
             hero.setScale(1.2);
+        }else if (hero.texture.key === 'ghost') {
+            hero.setScale(0.3);
         }
 
         this.heroes[positionKey] = hero;
