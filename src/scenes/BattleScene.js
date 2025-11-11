@@ -104,12 +104,12 @@ export default class BattleScene extends Phaser.Scene {
                 enemyDefs: [
                     { 
                         key: 'goblin', anim: [0, 3], scale: 1.2, name: 'Goblin',
-                        hp: 25, atk: 6,
+                        hp: 1/*25*/, atk: 6,
                         positions: [[4, 1], [5, 0]],
                     },
                     { 
                         key: 'ghost', anim: [0, 11], scale: 0.3, name: 'Ghost',
-                        hp: 18, atk: 9,
+                        hp: 1/*18*/, atk: 9,
                         positions: [[1, 1], [2, 0]],
                     },
                 ],
@@ -184,7 +184,7 @@ export default class BattleScene extends Phaser.Scene {
 
         // Fondo
         this.add.image(0, 0, config.background)
-            .setOrigin(0, 0.3)
+            .setOrigin(0, 0.28)
             .setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
         // Animaciones base de los héroes
@@ -266,11 +266,11 @@ export default class BattleScene extends Phaser.Scene {
 
     createMiniBoss() {
         const bossConfig = {
-            'FANTASÍA': { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [1, 1], scale: 0.7, hp: 120, atk: 30 },
-            'TERROR':   { key: 'cacodaemon', anim: [0, 5], name: 'Cacodaemon', pos: [50, 75], scale: 0.7, hp: 150, atk: 25 },
-            'HISTORIA': { key: 'medusa', anim: [14, 16], name: 'Medusa', pos: [50, 75], scale: 0.7, hp: 150, atk: 25 },
-            'COMEDIA':  { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [50, 75], scale: 0.7, hp: 1, atk: 25 },
-            'THE END':  { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [50, 75], scale: 0.7, hp: 1, atk: 25 },
+            'FANTASÍA': { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [1, 1], scale: 1, hp: 1, atk: 30 },
+            'TERROR':   { key: 'cacodaemon', anim: [0, 5], name: 'Cacodaemon', pos: [50, 75], scale: 1, hp: 1, atk: 25 },
+            'HISTORIA': { key: 'medusa', anim: [14, 16], name: 'Medusa', pos: [50, 75], scale: 1, hp: 1, atk: 25 },
+            'COMEDIA':  { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [50, 75], scale: 1, hp: 1, atk: 25 },
+            'THE END':  { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [50, 75], scale: 1, hp: 1, atk: 25 },
         };
 
         const config = bossConfig[this.currentbook];

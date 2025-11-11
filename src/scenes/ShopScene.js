@@ -26,15 +26,22 @@ export default class ShopScene extends Phaser.Scene {
 
         this.inventory = this.registry.get('inventory'); // Coge el objeto que maneja el inventario del registro de escenas
 
-        this.currentCoins = 1000;
+        this.currentCoins = 5000;
         this.availableCharacters =[
         { texture: 'wizard', name: 'Wizard', hp: 100, atk: 20 },
+
         { texture: 'goblin', name: 'Goblin', hp: 120, atk: 15 },
         { texture: 'ghost', name: 'Ghost', hp: 120, atk: 15 },
+        { texture: 'dragon', name: 'Dragon', hp: 200, atk: 25 },
+
         { texture: 'mushroom', name: 'Mushroom', hp: 120, atk: 15 },
         { texture: 'flying_eye', name: 'Flying Eye', hp: 120, atk: 15 },
+        { texture: 'cacodaemon', name: 'Cacodaemon', hp: 150, atk: 35 },
+
         { texture: 'pharaoh', name: 'Pharaoh', hp: 120, atk: 15 },
         { texture: 'scarab', name: 'Scarab', hp: 120, atk: 15 },
+        { texture: 'medusa', name: 'Medusa', hp: 300, atk: 15 },
+
         { texture: 'jester', name: 'Jester', hp: 120, atk: 15 },
         ];
 
@@ -177,6 +184,10 @@ export default class ShopScene extends Phaser.Scene {
             name: "Ghost", texture: "ghost_image", description: "BOOOOOOOOOOO!", coins: 125 }
             this.categories["Personajes"].push(ghost);
 
+            const dragon = {
+            name: "Dragon", texture: "dragon", description: "Grrrrraaaaaahhhhhh", coins: 250 };
+            this.categories["Personajes"].push(dragon);
+
         }
         else if(unlockedBooks == 3)
         {
@@ -196,6 +207,10 @@ export default class ShopScene extends Phaser.Scene {
             name: "Flying Eye", texture: "flying_eye", description: "Flap flap", coins: 200 };
             this.categories["Personajes"].push(flyingeye);
 
+            const cacodaemon = {
+            name: "Cacodaemon", texture: "cacodaemon", description: "SEEEEE YOUUU", coins: 350 };
+            this.categories["Personajes"].push(cacodaemon);
+
         }else if(unlockedBooks == 4)
         {
             const pharaoh = {
@@ -205,6 +220,10 @@ export default class ShopScene extends Phaser.Scene {
             const scarab = {
             name: "Scarab", texture: "scarab", description: "𓂯𓁾𓄠𓃼𓁴𓂋𓐑𓐔𓀗𓐗𓀅𓀳𓁵𓁥", coins: 250 };
             this.categories["Personajes"].push(scarab);
+
+            const medusa = {
+            name: "Medusa", texture: "medusa", description: "SSSSSSSSSSSSSSSS", coins: 450 };
+            this.categories["Personajes"].push(medusa);
 
         }else if(unlockedBooks == 5)
         {
@@ -224,6 +243,15 @@ export default class ShopScene extends Phaser.Scene {
         {
             this.boughtCharacters.push(this.characterDict[objeto.name]);
             console.log("Comprados:", this.boughtCharacters);
+
+            // Eliminar del array base de categorías
+            const personajesArray = this.categories["Personajes"];
+            const indexToRemove = personajesArray.findIndex(item => item.name === objeto.name);
+            if (indexToRemove !== -1) {
+                personajesArray.splice(indexToRemove, 1);
+                console.log(`${objeto.name} eliminado permanentemente de la tienda.`);
+            }
+
         }else if(selectedGroup.name === 'Pociones curación'){
             this.inventory.insertItem(objeto.id);
         }
@@ -356,13 +384,16 @@ export default class ShopScene extends Phaser.Scene {
             for(let i = 0; i < items.length; i++)
                     itemsIndex.push(i);
 
-            while (itemsIndex.length < 4) {
-                const randomIndex = Math.floor(Math.random() * items.length);
-                itemsIndex.push(randomIndex);
+            if(categoryName !== 'Personajes')
+            {
+                while (itemsIndex.length < 4) {
+                    const randomIndex = Math.floor(Math.random() * items.length);
+                    itemsIndex.push(randomIndex);
+                }
             }
 
-
-            for(let i = 0; i < 4; i++)
+            const max = categoryName !== 'Personajes' ? 4 : items.length > 4 ? 4 : items.length;
+            for(let i = 0; i < max; i++)
             {
                 const randomIndex = Math.floor(Math.random() * itemsIndex.length);
                 const actualItemIndex = itemsIndex[randomIndex];

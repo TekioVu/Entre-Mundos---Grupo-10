@@ -16,24 +16,22 @@ export default class UIScene extends Phaser.Scene {
         this.graphics = this.add.graphics();
         this.graphics.lineStyle(1, 0xffffff);
         this.graphics.fillStyle(0x031f4c, 1);
-        this.graphics.fillRect(0, 150, 130, 100);
-        this.graphics.strokeRect(105, 150, 90, 90);
-        this.graphics.fillRect(105, 150, 190, 90);
-        this.graphics.strokeRect(205, 150, 130, 100);
-        this.graphics.fillRect(205, 150, 130, 100);
+        this.graphics.fillRect(0, 170, 130, 100);
+        this.graphics.strokeRect(105, 170, 90, 90);
+        this.graphics.fillRect(105, 170, 190, 90);
+        this.graphics.strokeRect(205, 170, 130, 100);
+        this.graphics.fillRect(205, 170, 130, 100);
 
         this.menus = this.add.container();
-        this.heroesMenu = new HeroesMenu(220, 170, this, true);
-        this.actionsMenu = new ActionsMenu(145, 170, this, false);
-        this.enemiesMenu = new EnemiesMenu(10, 170, this, true);
-        this.itemsMenu = new ItemsMenu(10, 170, this, this.inventory);
+        this.heroesMenu = new HeroesMenu(220, 180, this, true);
+        this.actionsMenu = new ActionsMenu(145, 180, this, false);
+        this.enemiesMenu = new EnemiesMenu(10, 180, this, true);
+        this.itemsMenu = new ItemsMenu(10, 180, this, this.inventory);
 
         this.currentMenu = this.actionsMenu;
         this.menus.add([this.heroesMenu, this.actionsMenu, this.enemiesMenu, this.itemsMenu]);
 
         this.battleScene = this.scene.get("BattleScene");
-
-        
 
         this.markerEnemies = [
         //{ x: 110, y: 50, d: 1 }, 
@@ -56,7 +54,6 @@ export default class UIScene extends Phaser.Scene {
         this.heroesMenu.select(0);
         this.actionsMenu.select(0);
 
-        
         this.input.keyboard.on("keydown", this.onKeyInput, this);
 
         this.battleScene.events.on("PlayerSelect", this.onFirstPlayerSelect, this); // Para dejar el primer personaje de la lista al empezar cada turno

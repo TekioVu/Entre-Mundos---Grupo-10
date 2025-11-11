@@ -15,7 +15,7 @@ export default class Menu extends Phaser.GameObjects.Container {
     }
 
     addMenuItem(unit) {
-        const Height = 30;
+        const Height = 28;
         const index = this.menuItems.length;
         this.columnSpacing= 30;
         let displayData;
