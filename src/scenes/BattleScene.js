@@ -200,8 +200,9 @@ export default class BattleScene extends Phaser.Scene {
             def.positions.forEach(([xIdx, yIdx]) => {
                 const posX = this.enemyPosX[xIdx];
                 const posY = this.enemyPosY[yIdx];
+                let pos = (posX > 70) ? 'v' : 'r';
 
-                const enemy = new Enemy(this, posX, posY, def.key, def.anim[1], def.name, def.hp, def.atk);
+                const enemy = new Enemy(this, posX, posY, def.key, def.anim[1], def.name, def.hp, def.atk, pos);
                 enemy.setScale(def.scale);
                 this.add.existing(enemy).anims.play(`${def.key}-idle`);
                 this.enemies.push(enemy);
@@ -240,11 +241,15 @@ export default class BattleScene extends Phaser.Scene {
             this.heroes[positionKey].destroy();
             this.heroes[positionKey] = null;
         }
-        const hero = new PlayerCharacter(this, x, y, texture, 0, name, hp, atk);
+
+        let pos = (positionKey === 0 || positionKey === 2 || positionKey === 4) ? 'v' : 'r';
+
+        const hero = new PlayerCharacter(this, x, y, texture, 0, name, hp, atk, pos);
         this.add.existing(hero).anims.play(hero.texture.key + "-idle");
         if (positionKey=== 0 || positionKey === 1) { hero.setDepth(1); hero.hpText.setDepth(1);}
         if (positionKey=== 2 || positionKey === 3) { hero.setDepth(2); hero.hpText.setDepth(2);}
         if (positionKey=== 4 || positionKey === 5) { hero.setDepth(3); hero.hpText.setDepth(3);}
+        
 
         if (hero.texture.key === 'wizard') {
             hero.setScale(0.7);
@@ -262,6 +267,10 @@ export default class BattleScene extends Phaser.Scene {
 
         this.heroes[positionKey] = hero;
         this.units = this.heroes.filter(h => h !== null).concat(this.enemies);
+        this.setDamage(this.units);
+        
+
+
     }
 
     createMiniBoss() {
@@ -309,6 +318,15 @@ export default class BattleScene extends Phaser.Scene {
         this.placedHeroes = placedHeroes;
         this.heroes = this.heroes.filter(h => h !== null);
 
+    }
+
+    setDamage(character)
+    {
+        for (let i = 0; i<character.length; i++)
+        if (character[i].pos == 'r'){character[i].damage += 5;
+        console.log (character[i] );
+
+        }
     }
 
     cleanEvents() {

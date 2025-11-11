@@ -1,10 +1,11 @@
 export default class Unit extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, texture, frame, type, hp, damage) {
+    constructor(scene, x, y, texture, frame, type, hp, damage, pos) {
         super(scene, x, y, texture, frame);
         this.type = type;
         this.maxHp = this.hp = hp;
         this.damage = damage;
         this.textureKey = texture;
+        this.pos = pos;
 
         const offsets = {
             "Timmy": 40,
@@ -57,8 +58,16 @@ export default class Unit extends Phaser.GameObjects.Sprite {
     }
 
     attack(target) {
-        target.takeDamage(this.damage);
-        this.scene.events.emit("Message", `${this.type} attacks ${target.type} for ${this.damage} damage`);
+        let d;
+        if (target.pos == 'v') d = this.damage - 5;
+        else d = this.damage;
+
+        target.takeDamage(d);
+
+        this.scene.events.emit("Message", `${this.type} attacks ${target.type} for ${d} damage`);
+    
+
+
     }
 
     // Cura a la unidad en base a 'hp'
@@ -69,9 +78,11 @@ export default class Unit extends Phaser.GameObjects.Sprite {
     }
 
     takeDamage(damage) {
+
         this.hp -= damage;
 
-        if (this.hp <= 0) {
+        if (this.hp <= 0)
+             {
             this.hp = 0;
             this.alive = false;
 
