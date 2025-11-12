@@ -159,14 +159,9 @@ export default class BattleScene extends Phaser.Scene {
                 background: 'horror_background',
                 enemyDefs: [
                     { 
-                        key: 'mushroom', anim: [0, 3], scale: 1.2, name: 'Mushroom',
-                        hp: 45, atk: 7,
-                        positions: [[3, 1], [4, 0]],
-                    },
-                    { 
-                        key: 'flying_eye', anim: [0, 7], scale: 1.2, name: 'Flying Eye',
-                        hp: 32, atk: 12,
-                        positions: [[1, 1], [2, 0]],
+                        key: 'demon', anim: [16, 21], scale: 1, name: 'Demon',
+                        hp: 500, atk: 22,
+                        positions: [[2, 2]],
                     },
                 ],
             },
