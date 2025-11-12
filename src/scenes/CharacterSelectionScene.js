@@ -204,7 +204,6 @@ onSelectPlayer(){
                 }
             }
             
-            console.log("SELECCIONANDO PERSONAJE");
             this.scene.get("BattleScene").events.emit("heroesSelected", {
                 texture: hero.texture,
                 name: hero.name,
@@ -229,7 +228,6 @@ onSelectPlayer(){
         }
 
         cleanEvents() {
-            console.log("🧹 Limpiando eventos de CharacterSelectionScene...");
 
             // Eventos propios
             this.events.off("PositionSelect", this.onSelectPosition, this);

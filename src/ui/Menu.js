@@ -42,7 +42,6 @@ export default class Menu extends Phaser.GameObjects.Container {
             yOffset = row * Height + 10;
         }
 
-        console.log('Nombre imagen: ' + displayData.key);
         
 
         const menuItem = new MenuItem(xOffset, yOffset, displayData, this.scene);
@@ -94,7 +93,6 @@ export default class Menu extends Phaser.GameObjects.Container {
 
     remap(units) {
         this.clear();
-        console.log(units.length);
         units.forEach(unit => this.addMenuItem(unit));
         if(units.length <= 0){
             this.addMenuItem('VACIO');

@@ -60,7 +60,6 @@ export default class MenuScene extends Phaser.Scene {
 
         this.input.keyboard.on("keydown-SPACE", () => {
             const seleccion = this.opciones[this.selectedIndex];
-            console.log("Seleccionado:", seleccion);
 
             if (seleccion !== "TIENDA") this.scene.switch("BattleScene");
             else this.scene.switch("ShopScene");

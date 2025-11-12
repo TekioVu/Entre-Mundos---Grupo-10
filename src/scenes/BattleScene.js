@@ -43,10 +43,6 @@ export default class BattleScene extends Phaser.Scene {
             this.units = this.heroes.filter(h => h !== null).concat(this.enemies);
         });
 
-        this.events.on("enemyRemoved", (index) => {
-            console.log("Índice de enemigo eliminado:", index);
-        });
-
 
 
         this.events.on("heroesSelected", this.onHeroSelected, this);
@@ -324,7 +320,6 @@ export default class BattleScene extends Phaser.Scene {
     {
         for (let i = 0; i<character.length; i++)
         if (character[i].pos == 'r'){character[i].damage += 5;
-        console.log (character[i] );
 
         }
     }
@@ -333,7 +328,6 @@ export default class BattleScene extends Phaser.Scene {
         // 🔹 Limpia todos los eventos de la propia escena
         this.events.off("removeHero");
         this.events.off("heroesSelected");
-        this.events.off("enemyRemoved");        
 
         // 🔹 Si hay otros listeners o escenas conectadas, límpialos aquí también
         const uiScene = this.scene.get("UIScene");
@@ -341,7 +335,6 @@ export default class BattleScene extends Phaser.Scene {
             uiScene.events.off("PlayerSelect");
         }
         
-        console.log("🧹 Eventos de BattleScene limpiados correctamente");
     }
 
 }

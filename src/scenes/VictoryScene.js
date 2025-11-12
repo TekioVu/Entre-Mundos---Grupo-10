@@ -4,7 +4,6 @@ export default class VictoryScene extends Phaser.Scene {
     }
 
     create() {
-        console.log("GG");
         this.add.text(160, 120, "Victory", {
             font: "20px Arial",
             fill: "#ff0000"
