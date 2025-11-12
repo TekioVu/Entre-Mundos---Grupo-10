@@ -41,10 +41,15 @@ export default class MenuCharacterSelection extends Phaser.GameObjects.Container
     }
 
     select(index = 0) {
+    if (this.menuItems.length > 0 && this.menuItems[this.menuItemIndex]) {
         this.menuItems[this.menuItemIndex].deselect();
-        this.menuItemIndex = index;
+    }
+    this.menuItemIndex = index;
+    if (this.menuItems[this.menuItemIndex]) {
         this.menuItems[this.menuItemIndex].select();
     }
+    }
+  
 
     deselect() {
         this.menuItems[this.menuItemIndex].deselect();
