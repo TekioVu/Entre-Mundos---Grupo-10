@@ -38,9 +38,7 @@ export default class UIScene extends Phaser.Scene {
         this.enemiesMarker = this.add.graphics();
         this.enemiesMarker.lineStyle(4, 0xffffff, 0.8); 
         
-        this.scene.get("BattleScene").events.on("enemyRemoved", (index) => {
-            this.removeEnemyMarker(index);
-        });
+        
 
 
         this.remapHeroes();
@@ -169,21 +167,7 @@ export default class UIScene extends Phaser.Scene {
         this.enemiesMarker.strokePath();
         this.enemiesMarker.setVisible(true);
     }
-    removeEnemyMarker(index) {
-        if (index >= 0 && index < this.markerEnemies.length) {
-            this.markerEnemies.splice(index, 1);
-        }
-
-        this.enemiesMarker.clear();
-        this.enemiesMarker.setVisible(false);
-
-        if (this.enemiesMenu.menuItemIndex >= this.markerEnemies.length) {
-            this.enemiesMenu.select(0);
-        }
-    }
-
-
-
+    
     remapHeroes() { //Crea los botones de los aliados
         this.heroesMenu.remap(this.battleScene.heroes);
     }
