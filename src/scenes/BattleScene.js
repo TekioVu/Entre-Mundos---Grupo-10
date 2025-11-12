@@ -26,7 +26,7 @@ export default class BattleScene extends Phaser.Scene {
         this.units = [];
 
         this.availableHeroes = [
-        { texture: 'timmy', name: 'Timmy', hp: 1, atk: 20 }
+        { texture: 'timmy', name: 'Timmy', hp: 100, atk: 20 }
         ];
 
         const shopScene = this.scene.get("ShopScene");
