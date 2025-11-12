@@ -23,6 +23,8 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             "Dragon": 25,
             "Cacodaemon" : 25,
             "Medusa": 35,
+
+            "Demon": 35,
         };
 
         this.isEnemy = (
@@ -39,7 +41,9 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             this.type === "Medusa" ||
 
             this.type === "Clown" ||
-            this.type === "Jester" 
+            this.type === "Jester" ||
+            
+            this.type === "Demon" 
         );
 
         this.hpOffsetY = offsets[this.type] || 30;

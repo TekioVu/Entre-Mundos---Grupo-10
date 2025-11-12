@@ -30,6 +30,8 @@ export default class BootScene extends Phaser.Scene {
         this.load.spritesheet('medusa', './assets/Enemigos/Medusa/Medusa.png', { frameWidth: 128, frameHeight: 128 });
         this.load.spritesheet('cacodaemon', './assets/Enemigos/Cacodaemon/Cacodaemon.png', { frameWidth: 64, frameHeight: 64 });
 
+        this.load.spritesheet('demon', './assets/Enemigos/Bosses/Demon.png', { frameWidth: 288, frameHeight: 160 });
+
         //Backgrounds
         this.load.image('fantasy_background', './assets/Backgrounds/Fantasy.png');
         this.load.image('romance_background', './assets/Backgrounds/Romance.png');
