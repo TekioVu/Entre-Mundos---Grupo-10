@@ -144,7 +144,36 @@ export default class UIScene extends Phaser.Scene {
 
         this.enemiesMarker.clear();
         this.enemiesMarker.lineStyle(4, 0xffffff, 0.8); 
-        this.enemiesMarker.strokeRect(coords.x-25, coords.y-25, 50, 50);
+        // this.enemiesMarker.strokeRect(coords.x-25, coords.y-25, 50, 50);
+       
+const width = 50;
+const height = 50;
+const cornerLength = 10;
+
+
+//Cuadro que enmarca al enemigo seleccionado
+this.enemiesMarker.beginPath();
+this.enemiesMarker.moveTo(coords.x-25, coords.y-25);
+this.enemiesMarker.lineTo(coords.x + cornerLength-25, coords.y-25);
+this.enemiesMarker.moveTo(coords.x-25, coords.y-25);
+this.enemiesMarker.lineTo(coords.x-25, coords.y + cornerLength-25);
+
+this.enemiesMarker.moveTo(coords.x-25 + width, coords.y-25);
+this.enemiesMarker.lineTo(coords.x + width - cornerLength-25, coords.y-25);
+this.enemiesMarker.moveTo(coords.x + width-25, coords.y-25);
+this.enemiesMarker.lineTo(coords.x + width-25, coords.y + cornerLength-25);
+
+this.enemiesMarker.moveTo(coords.x-25, coords.y + height-25);
+this.enemiesMarker.lineTo(coords.x + cornerLength-25, coords.y + height-25);
+this.enemiesMarker.moveTo(coords.x-25, coords.y + height-25);
+this.enemiesMarker.lineTo(coords.x-25, coords.y + height - cornerLength-25);
+
+this.enemiesMarker.moveTo(coords.x + width-25, coords.y + height-25);
+this.enemiesMarker.lineTo(coords.x + width - cornerLength-25, coords.y + height-25);
+this.enemiesMarker.moveTo(coords.x + width-25, coords.y + height-25);
+this.enemiesMarker.lineTo(coords.x + width-25, coords.y + height - cornerLength-25);
+
+this.enemiesMarker.strokePath();
         this.enemiesMarker.setDepth(coords.d)
         this.enemiesMarker.setVisible(true);
     }
