@@ -148,7 +148,7 @@ export default class BattleScene extends Phaser.Scene {
                 background: 'comedy_background',
                 enemyDefs: [
                     { 
-                        key: 'jester', anim: [0, 6], scale: 1, name: 'Jester',
+                        key: 'jester', anim: [11, 17], scale: 1, name: 'Jester',
                         hp: 18, atk: 7,
                         positions: [[0, 1], [1, 0]],
                     },
