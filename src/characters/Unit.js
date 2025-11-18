@@ -6,6 +6,8 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         this.damage = damage;
         this.textureKey = texture;
         this.pos = pos;
+        this.stunned = 0;
+        this.specialAttackCounter = 0;
 
         const offsets = {
             "Timmy": 40,
@@ -62,16 +64,56 @@ export default class Unit extends Phaser.GameObjects.Sprite {
     }
 
     attack(target) {
-        let d;
-        if (target.pos == 'v') d = this.damage - 5;
-        else d = this.damage;
 
-        target.takeDamage(d);
+        const battleScene = this.scene.scene.get("BattleScene");
+        
+        if(this.stunned == 0)
+        {
+            if(this.type === "Dragon" && this.specialAttackCounter == 2)
+            {
+                this.specialAttackCounter = 0;
+                for (let h of battleScene.heroes) {
+                    h.takeDamage(this.damage);
+                }
 
-        this.scene.events.emit("Message", `${this.type} attacks ${target.type} for ${d} damage`);
-    
+                this.scene.events.emit("Message", `${this.type} is using flare: 40 DMG ALL UNITS`);
+            }
+            else if(this.type === "Cacodaemon" && this.specialAttackCounter == 2)
+            {
+                this.specialAttackCounter = 0;
+                for (let i = 0; i < 5; i++) {
+                
+                    const r = Math.floor(Math.random() * battleScene.heroes.length);
+                    battleScene.heroes[r].takeDamage(this.damage / 2);
 
+                }
 
+                this.scene.events.emit("Message", `${this.type} is using randomness`);
+            }
+            else if(this.type === "Medusa" && this.specialAttackCounter == 2)
+            {
+                this.specialAttackCounter = 0;
+                for (let h of battleScene.heroes) {
+                    h.stunned = 2;
+                }
+
+                this.scene.events.emit("Message", `${this.type} is using petrification: ALL UNITS STUNNED FOR 2 TURNS`);
+            }
+            else{
+                let d;
+                if (target.pos == 'v') d = this.damage - 5;
+                else d = this.damage;
+
+                target.takeDamage(d);
+
+                this.scene.events.emit("Message", `${this.type} attacks ${target.type} for ${d} damage`);
+            }
+        }else {
+            this.scene.events.emit("Message", `${this.type} is stunned`);
+            this.stunned--;
+        }
+
+        this.specialAttackCounter++;
     }
 
     // Cura a la unidad en base a 'hp'

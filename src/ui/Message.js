@@ -4,22 +4,17 @@ export default class Message extends Phaser.GameObjects.Container {
 
         this.events = events; 
 
-        const graphics = this.scene.add.graphics();
-        this.add(graphics);
-
-        graphics.lineStyle(1, 0xffffff, 0.8);
-        graphics.fillStyle(0x031f4c, 0.3);
-        graphics.strokeRect(-90, -15, 180, 30);
-        graphics.fillRect(-90, -15, 180, 30);
+        this.graphics = this.scene.add.graphics();
+        this.add(this.graphics);
 
         this.text = new Phaser.GameObjects.Text(scene, 0, 0, "", {
             color: "#ffffff",
             align: "center",
             fontSize: 13,
-            wordWrap: { width: 160, useAdvancedWrap: true }
+            wordWrap: { width: 200, useAdvancedWrap: true } // puedes ajustar el wrap
         });
-        this.add(this.text);
         this.text.setOrigin(0.5);
+        this.add(this.text);
 
         this.events.on("Message", this.showMessage, this);
 
@@ -30,7 +25,23 @@ export default class Message extends Phaser.GameObjects.Container {
 
     showMessage(text) {
         this.text.setText(text);
+
+        // 🔥 Medimos el texto ya colocado
+        const padding = 10;
+        const width = this.text.width + padding * 2;
+        const height = this.text.height + padding * 2;
+
+        // 🔥 Redibujar el gráfico ajustado al tamaño
+        this.graphics.clear();
+        this.graphics.lineStyle(1, 0xffffff, 0.8);
+        this.graphics.fillStyle(0x031f4c, 0.3);
+
+        this.graphics.strokeRect(-width/2, -height/2, width, height);
+        this.graphics.fillRect(-width/2, -height/2, width, height);
+
         this.visible = true;
+
+        // temporizador como ya tenías
         if (this.hideEvent) this.hideEvent.remove(false);
         this.hideEvent = this.scene.time.addEvent({
             delay: 1000,

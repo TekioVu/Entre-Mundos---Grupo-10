@@ -115,12 +115,12 @@ export default class BattleScene extends Phaser.Scene {
                 enemyDefs: [
                     { 
                         key: 'mushroom', anim: [0, 3], scale: 1.2, name: 'Mushroom',
-                        hp: 35, atk: 5,
+                        hp: 1, atk: 5,
                         positions: [[3, 1], [4, 0]],
                     },
                     { 
                         key: 'flying_eye', anim: [0, 7], scale: 1.2, name: 'Flying Eye',
-                        hp: 22, atk: 11,
+                        hp: 1, atk: 11,
                         positions: [[1, 1], [2, 0]],
                     },
                 ],
@@ -130,12 +130,12 @@ export default class BattleScene extends Phaser.Scene {
                 enemyDefs: [
                     { 
                         key: 'pharaoh', anim: [0, 2], scale: 0.6, name: 'Pharaoh',
-                        hp: 45, atk: 8,
+                        hp: 2, atk: 8,
                         positions: [[1, 1], [2, 0]],
                     },
                     { 
                         key: 'scarab', anim: [0, 1], scale: 0.6, name: 'Scarab',
-                        hp: 28, atk: 5,
+                        hp: 2, atk: 5,
                         positions: [[3, 1], [4, 0]],
                     },
                 ],
@@ -259,16 +259,13 @@ export default class BattleScene extends Phaser.Scene {
         this.heroes[positionKey] = hero;
         this.units = this.heroes.filter(h => h !== null).concat(this.enemies);
         this.setDamage(this.units);
-        
-
-
     }
 
     createMiniBoss() {
         const bossConfig = {
-            'FANTASÍA': { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [1, 1], scale: 1, hp: 1, atk: 30 },
-            'TERROR':   { key: 'cacodaemon', anim: [0, 5], name: 'Cacodaemon', pos: [50, 75], scale: 1, hp: 1, atk: 25 },
-            'HISTORIA': { key: 'medusa', anim: [14, 16], name: 'Medusa', pos: [50, 75], scale: 1, hp: 1, atk: 25 },
+            'FANTASÍA': { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [1, 1], scale: 1, hp: 150, atk: 30 },
+            'TERROR':   { key: 'cacodaemon', anim: [0, 5], name: 'Cacodaemon', pos: [50, 75], scale: 1, hp: 150, atk: 25 },
+            'HISTORIA': { key: 'medusa', anim: [14, 16], name: 'Medusa', pos: [50, 75], scale: 1, hp: 150, atk: 25 },
             'COMEDIA':  { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [50, 75], scale: 1, hp: 1, atk: 25 },
             'THE END':  { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [50, 75], scale: 1, hp: 1, atk: 25 },
         };
