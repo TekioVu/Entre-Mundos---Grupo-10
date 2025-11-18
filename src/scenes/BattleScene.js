@@ -15,7 +15,6 @@ export default class BattleScene extends Phaser.Scene {
         const selectedScene = menuScene.getSelectedScene();
 
         this.itemsArray = this.registry.get('inventory');
-        console.log('Quiero irme a dormir: ' +  this.itemsArray.getItem(1).getNum());
 
         this.cameras.main.setBackgroundColor("#1a1f2b");
         this.createEnemies(selectedScene);
@@ -26,7 +25,7 @@ export default class BattleScene extends Phaser.Scene {
         this.units = [];
 
         this.availableHeroes = [
-        { texture: 'timmy', name: 'Timmy', hp: 100, atk: 20 }
+        { texture: 'timmy', name: 'Timmy', hp: 100, atk: 20, def: 5 }
         ];
 
         const shopScene = this.scene.get("ShopScene");
@@ -61,6 +60,8 @@ export default class BattleScene extends Phaser.Scene {
         const unit = this.units[this.index];
 
         if (unit instanceof PlayerCharacter) {
+            unit.restoreDef();
+            unit.restoreDmg();
             this.events.emit("PlayerSelect", this.index);
         } else {
             const r = Math.floor(Math.random() * this.heroes.length);
@@ -77,8 +78,18 @@ export default class BattleScene extends Phaser.Scene {
 
         }
         else if (action === "heal"){
-            console.log("Curacion: " + this.itemsArray.getItem(itemIndex).getStat());
             this.units[this.index].heal(this.itemsArray.getItem(itemIndex).getStat());
+            this.itemsArray.useItem(itemIndex);
+            this.createInventory();
+        }
+        else if (action === "strPot"){
+            console.log("Aumento de ataque: " + this.itemsArray.getItem(itemIndex).getStat());
+            this.units[this.index].dmgUp(this.itemsArray.getItem(itemIndex).getStat());
+            this.itemsArray.useItem(itemIndex);
+            this.createInventory();
+        }
+        else if (action === "defPot"){
+            this.units[this.index].defUp(this.itemsArray.getItem(itemIndex).getStat());
             this.itemsArray.useItem(itemIndex);
             this.createInventory();
         }
@@ -261,8 +272,8 @@ export default class BattleScene extends Phaser.Scene {
 
     
     onHeroSelected(heroData) {
-        const { texture, x, y, name, hp, atk, positionKey } = heroData;
-
+        const { texture, x, y, name, hp, atk, def, positionKey } = heroData;
+        console.log("esta es la defensa: " + def);
         if (this.heroes[positionKey]) {
             this.heroes[positionKey].destroy();
             this.heroes[positionKey] = null;
@@ -270,7 +281,7 @@ export default class BattleScene extends Phaser.Scene {
 
         let pos = (positionKey === 0 || positionKey === 2 || positionKey === 4) ? 'v' : 'r';
 
-        const hero = new PlayerCharacter(this, x, y, texture, 0, name, hp, atk, pos);
+        const hero = new PlayerCharacter(this, x, y, texture, 0, name, hp, atk, def, pos);
         this.add.existing(hero).anims.play(hero.texture.key + "-idle");
         if (positionKey=== 0 || positionKey === 1) { hero.setDepth(1); hero.hpText.setDepth(1);}
         if (positionKey=== 2 || positionKey === 3) { hero.setDepth(2); hero.hpText.setDepth(2);}

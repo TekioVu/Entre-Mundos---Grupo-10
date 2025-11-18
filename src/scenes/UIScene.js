@@ -72,7 +72,13 @@ export default class UIScene extends Phaser.Scene {
     onItem(itemIndex){
         this.itemsMenu .clear();
         this.currentMenu = null;
-        this.battleScene.receivePlayerSelection("heal", undefined, itemIndex);
+        // Seleccion la accion en base al tipo de objeto usado
+        switch(this.inventory.getItem(itemIndex).getType()){
+            case('HealPot'): this.battleScene.receivePlayerSelection("heal", undefined, itemIndex); break;
+            case('DmgPot'): this.battleScene.receivePlayerSelection("dmgPot", undefined, itemIndex); break;
+            case('StrPot'): this.battleScene.receivePlayerSelection("strPot", undefined, itemIndex); break;
+            case('DefPot'): this.battleScene.receivePlayerSelection("defPot", undefined, itemIndex); break;
+        }
     }
 
     onFirstPlayerSelect() {

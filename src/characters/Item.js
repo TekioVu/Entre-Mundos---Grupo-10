@@ -10,7 +10,7 @@ export default class Item{
             case('Armor'): this.def = def; break;
             case('HealPot'): this.hp = hp; break;
             case('DmgPot'): this.hp = hp; break;
-            case('SrtPot'): this.str = str; break;
+            case('StrPot'): this.str = str; break;
             case('DefPot'): this.def = def; break;
         }
     }
@@ -35,7 +35,7 @@ export default class Item{
             case('Armor'): return this.def;
             case('HealPot'): return this.hp;
             case('DmgPot'): return this.hp;
-            case('SrtPot'): return this.str;
+            case('StrPot'): return this.str;
             case('DefPot'): return this.def;
         }
     }

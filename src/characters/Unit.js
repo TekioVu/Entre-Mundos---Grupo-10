@@ -4,6 +4,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         this.type = type;
         this.maxHp = this.hp = hp;
         this.damage = damage;
+        this.debuffDmg = damage;
         this.textureKey = texture;
         this.pos = pos;
         this.stunned = 0;
@@ -239,4 +240,6 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         }
         }
     }
+
+
 }

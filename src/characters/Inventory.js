@@ -37,7 +37,6 @@ export default class Inventory{
             i++;
         }
         if(this.itemsArray[i] === name){
-            console.log('insertado: ' + name);
             this.itemsArray[id].numUp();
         }
         else{
@@ -52,7 +51,6 @@ export default class Inventory{
             i++;
         }
         if(this.itemsArray[i].getTexture() === texture){
-            console.log('encontrado: ' + texture);
             return i;
         }else{
             console.log('no encontrado :( ' + texture);

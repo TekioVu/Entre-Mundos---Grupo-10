@@ -28,21 +28,21 @@ export default class ShopScene extends Phaser.Scene {
 
         this.currentCoins = 5000;
         this.availableCharacters =[
-        { texture: 'wizard', name: 'Wizard', hp: 100, atk: 20 },
+        { texture: 'wizard', name: 'Wizard', hp: 100, atk: 20, def: 3 },
 
-        { texture: 'goblin', name: 'Goblin', hp: 120, atk: 15 },
-        { texture: 'ghost', name: 'Ghost', hp: 120, atk: 15 },
-        { texture: 'dragon', name: 'Dragon', hp: 200, atk: 25 },
+        { texture: 'goblin', name: 'Goblin', hp: 120, atk: 15, def: 5 },
+        { texture: 'ghost', name: 'Ghost', hp: 120, atk: 15, def: 5 },
+        { texture: 'dragon', name: 'Dragon', hp: 200, atk: 25, def: 15 },
 
-        { texture: 'mushroom', name: 'Mushroom', hp: 120, atk: 15 },
-        { texture: 'flying_eye', name: 'Flying Eye', hp: 120, atk: 15 },
-        { texture: 'cacodaemon', name: 'Cacodaemon', hp: 150, atk: 35 },
+        { texture: 'mushroom', name: 'Mushroom', hp: 120, atk: 15, def: 10 },
+        { texture: 'flying_eye', name: 'Flying Eye', hp: 120, atk: 15, def: 5 },
+        { texture: 'cacodaemon', name: 'Cacodaemon', hp: 150, atk: 35, def: 25 },
 
-        { texture: 'pharaoh', name: 'Pharaoh', hp: 120, atk: 15 },
-        { texture: 'scarab', name: 'Scarab', hp: 120, atk: 15 },
-        { texture: 'medusa', name: 'Medusa', hp: 300, atk: 15 },
+        { texture: 'pharaoh', name: 'Pharaoh', hp: 120, atk: 15, def: 10 },
+        { texture: 'scarab', name: 'Scarab', hp: 120, atk: 15, def: 5 },
+        { texture: 'medusa', name: 'Medusa', hp: 300, atk: 15, def: 15 },
 
-        { texture: 'jester', name: 'Jester', hp: 120, atk: 15 },
+        { texture: 'jester', name: 'Jester', hp: 120, atk: 15, def: 10 },
         ];
 
         this.characterDict = Object.fromEntries(

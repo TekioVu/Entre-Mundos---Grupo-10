@@ -181,7 +181,6 @@ onSelectPlayer(){
         const positionKey = this.positionsMenu.menuItemIndex;
             const hero = this.selectedHero;
 
-
             const positionCoords = [
                 { x: 200, y: 50 } , 
                 { x: 250, y: 50 }, 
@@ -210,6 +209,7 @@ onSelectPlayer(){
                 id: hero.id,
                 hp: hero.hp,
                 atk: hero.atk,
+                def: hero.def,
                 x: coords.x,
                 y: coords.y,
                 positionKey: positionKey

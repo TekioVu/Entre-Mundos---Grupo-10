@@ -84,12 +84,13 @@ export default class MenuScene extends Phaser.Scene {
         this.inventory.createItem('pocion_cataclismo', 'Poción Cataclismo', 'DmgPot', undefined, undefined, -1000);
 
         this.inventory.createItem('pocion_ataque', 'Poción De Ataque', 'StrPot', 20, undefined, undefined);
-        this.inventory.createItem('pocion_defensa', 'Poción De Defensa', 'DefPot', undefined, 20, undefined);
+        this.inventory.createItem('pocion_defensa', 'Poción De Defensa', 'DefPot', undefined, 10, undefined);
         this.inventory.createItem('pocion_aturdidora','Poción aturdidora', 'MiscPot', undefined, undefined, undefined);
         
         // Inserta los items con los que empieza siempre el jugador
         this.inventory.insertItem(0);
         this.inventory.insertItem(1);
+        this.inventory.insertItem(8);
 
         this.registry.set('inventory', this.inventory);
     }
