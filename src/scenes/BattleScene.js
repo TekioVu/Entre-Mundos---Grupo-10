@@ -73,6 +73,8 @@ export default class BattleScene extends Phaser.Scene {
     receivePlayerSelection(action, targetIndex, itemIndex) {
         if (action === "attack") {
             this.units[this.index].attack(this.enemies[targetIndex]);
+            
+
         }
         else if (action === "heal"){
             console.log("Curacion: " + this.itemsArray.getItem(itemIndex).getStat());
@@ -100,7 +102,7 @@ export default class BattleScene extends Phaser.Scene {
                 enemyDefs: [
                     { 
                         key: 'goblin', anim: [0, 3], scale: 1.2, name: 'Goblin',
-                        hp: 1/*25*/, atk: 6,
+                        hp: 30/*25*/, atk: 6,
                         positions: [[4, 1], [5, 0]],
                     },
                     { 
@@ -181,6 +183,10 @@ export default class BattleScene extends Phaser.Scene {
         // Animaciones base de los héroes
         this._createIdleAnim('timmy', 0, 6);
         this._createIdleAnim('wizard', 0, 5);
+        this._createAttackAnim('goblin_attack', 0, 7, 'goblin-attack');
+        this._createDeathAnim('goblin_death', 0, 3, 'goblin-death');
+        this._createDeathAnim('goblin_damage', 0, 3, 'goblin-damage');
+
 
         // Crear enemigos
         config.enemyDefs.forEach(def => {
@@ -210,6 +216,35 @@ export default class BattleScene extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers(key, { start, end }),
             frameRate: 5,
             repeat: -1,
+        });
+    }
+
+    _createAttackAnim(key, start, end, animKey = `${key}-attack`) {
+        if (this.anims.exists(animKey)) return;
+        this.anims.create({
+            key: animKey,
+            frames: this.anims.generateFrameNumbers(key, { start, end }),
+            frameRate: 5,
+            repeat: 0,
+        });
+    }
+     _createDeathAnim(key, start, end, animKey = `${key}-death`) {
+        if (this.anims.exists(animKey)) return;
+        this.anims.create({
+            key: animKey,
+            frames: this.anims.generateFrameNumbers(key, { start, end }),
+            frameRate: 5,
+            repeat: 0,
+        });
+    }
+
+    _createDamageAnim(key, start, end, animKey = `${key}-damage`) {
+        if (this.anims.exists(animKey)) return;
+        this.anims.create({
+            key: animKey,
+            frames: this.anims.generateFrameNumbers(key, { start, end }),
+            frameRate: 5,
+            repeat: 0,
         });
     }
 

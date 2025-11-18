@@ -64,6 +64,19 @@ export default class Unit extends Phaser.GameObjects.Sprite {
     }
 
     attack(target) {
+        let d;
+        if (target.pos == 'v') d = this.damage - 5;
+        else d = this.damage;
+        if (this.type === "Goblin")
+        {
+             this.setTexture('goblin_attack');  
+        this.play('goblin-attack');
+
+        this.once('animationcomplete', () => {
+        this.setTexture('goblin');     
+        this.play('goblin-idle');
+    });
+        }
 
         const battleScene = this.scene.scene.get("BattleScene");
         
@@ -128,10 +141,17 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         this.hp -= damage;
 
         if (this.hp <= 0)
-             {
+        {
             this.hp = 0;
             this.alive = false;
 
+            if (this.type === "Goblin")
+                    {
+                        this.setTexture('goblin_death');  
+                        this.play('goblin-death');
+                    }
+            
+            this.once('animationcomplete', () => {
             this.scene.tweens.add({
                 targets: this,
                 alpha: 0,
@@ -141,6 +161,9 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                     this.setVisible(false)
                 }
             });
+            });
+
+            
 
             this.hpText.setVisible(false);
 
@@ -202,6 +225,18 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                     }
                 });
             }
+        }
+        else{
+            if (this.type === "Goblin")
+        {
+            this.setTexture('goblin_damage');  
+            this.play('goblin-damage');
+
+            this.once('animationcomplete', () => {
+            this.setTexture('goblin');     
+            this.play('goblin-idle');
+    });
+        }
         }
     }
 }

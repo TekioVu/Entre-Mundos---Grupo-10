@@ -15,6 +15,9 @@ export default class BootScene extends Phaser.Scene {
         this.load.spritesheet('wizard', './assets/Wizard/Idle.png', { frameWidth: 231, frameHeight: 190 });
 
         this.load.spritesheet('goblin', './assets/Enemigos/Goblin/Idle.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('goblin_attack', './assets/Enemigos/Goblin/Attack.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('goblin_death', './assets/Enemigos/Goblin/Death.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('goblin_damage', './assets/Enemigos/Goblin/Take Hit.png', { frameWidth: 150, frameHeight: 150 });
         this.load.spritesheet('ghost', './assets/Enemigos/Ghost/Idle.png', { frameWidth: 128, frameHeight: 128 });
 
         this.load.spritesheet('clown', './assets/Enemigos/Clown/Clown_Sprite.png', { frameWidth: 32, frameHeight: 32 });
