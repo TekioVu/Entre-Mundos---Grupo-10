@@ -96,21 +96,28 @@ export default class MenuScene extends Phaser.Scene {
     }
 
     updateSelection() {
-        this.optionObjects.forEach((obj, i) => {
-            if (i === this.selectedIndex) {
-                obj.rect.setFillStyle(0x6666ff); // azul al seleccionar
-                obj.text.setColor("#ffff00"); // texto amarillo
-                obj.text.setStyle({ fontSize: 24 });
-            } else {
-                obj.rect.setFillStyle(0x333333);
-                obj.text.setColor("#ffffff");
-                obj.text.setStyle({ fontSize: 20 });
-            }
-        });
-    }
+    this.optionObjects.forEach((obj, i) => {
+        if (i === this.selectedIndex) {
+            // Fondo más claro al seleccionar
+            obj.rect.setFillStyle(0x2a2a2a);
+            obj.rect.setStrokeStyle(2, 0x3a3a3a); // borde gris medio
 
-    updateText()
-    {
+            // Texto blanco
+            obj.text.setColor("#ffffff");
+            obj.text.setStyle({ fontSize: 24 });
+        } else {
+            // Fondo gris oscuro
+            obj.rect.setFillStyle(0x1a1a1a);
+            obj.rect.setStrokeStyle(2, 0x3a3a3a); // borde gris medio
+
+            // Texto gris claro
+            obj.text.setColor("#cccccc");
+            obj.text.setStyle({ fontSize: 20 });
+        }
+    });
+}
+
+    updateText() {
         // Limpiar los objetos anteriores
         this.optionObjects.forEach(obj => {
             obj.rect.destroy();
@@ -128,24 +135,27 @@ export default class MenuScene extends Phaser.Scene {
                 this.height / 2,
                 rectWidth * 0.9,
                 this.height * 0.8,
-                0x333333
+                0x1a1a1a
             ).setOrigin(0.5);
 
+            rect.setStrokeStyle(2, 0x3a3a3a); // borde gris medio
+
             let txt = "LOCKED";
-            if(i < this.unlockedbooks || i == this.opciones.length - 1){
+            if (i < this.unlockedbooks || i === this.opciones.length - 1) {
                 txt = this.opciones[i];
             }
 
             const text = this.add.text(x, this.height / 2, txt, {
                 fontFamily: "Arial",
                 fontSize: 20,
-                color: "#ffffff",
+                color: "#cccccc",
             }).setOrigin(0.5);
-            text.setRotation(- Math.PI / 2); 
+            text.setRotation(-Math.PI / 2); 
 
             this.optionObjects.push({ rect, text });
         }
     }
+
     getSelectedScene()
     {
         const seleccion = this.opciones[this.selectedIndex];
