@@ -57,7 +57,7 @@ export default class UIScene extends Phaser.Scene {
 
         this.battleScene = this.scene.get("BattleScene");
 
-        
+
 
         this.enemiesMarker = this.add.graphics();
         this.enemiesMarker.lineStyle(4, 0xffffff, 0.8); 
@@ -72,17 +72,22 @@ export default class UIScene extends Phaser.Scene {
         this.input.keyboard.on("keydown", this.onKeyInput, this);
 
         this.battleScene.events.on("PlayerSelect", this.onFirstPlayerSelect, this); // Para dejar el primer personaje de la lista al empezar cada turno
-        this.events.on("PlayerSelect", this.onPlayerSelect, this);                  // Cuando se selecciona el personaje con el que actuar
+        //this.events.on("PlayerSelect", this.onPlayerSelect, this);                  // Cuando se selecciona el personaje con el que actuar
         this.events.on("Select", this.onSelect, this);                              // Cuando se escoje la accion que se quiere realizar
         this.events.on("Enemy", this.onEnemy, this);                                // Al escojer a que enemigo atacar
         this.events.on("Item", this.onItem, this);                                  // Al escojer que item usar
-        this.events.on("Back", this.onBack, this);                                  // Cuando el jugador quiere retirar que ha seleccionado (a excepcion de "Enemy" e "Item")
+        this.events.on("Back", this.onBack, this);        
+        this.battleScene.events.on("PlayerSelect", (index) => {
+        this.heroesMenu.select(index);
+        }, this);                        
 
         this.message = new Message(this, this.battleScene.events);
         this.add.existing(this.message);
 
         this.battleScene.nextTurn();
     }
+
+    
 
     // Cuando se ha seleccionado un enemigo al que atacar
     onEnemy(enemyIndex) {
@@ -113,6 +118,7 @@ export default class UIScene extends Phaser.Scene {
     onPlayerSelect(){
         this.actionsMenu.select(0);
         this.currentMenu = this.actionsMenu;
+
     }
 
     onSelect() {
@@ -211,23 +217,63 @@ export default class UIScene extends Phaser.Scene {
     }
 
     // === Imput Manager ===
+    // onKeyInput(event) {
+    //     const keysToPrevent = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space"];
+    //     if (keysToPrevent.includes(event.code)) event.preventDefault();
+
+    //     if (this.currentMenu) {
+    //         if (event.code === "ArrowUp") this.currentMenu.moveSelectionUp();
+    //         else if (event.code === "ArrowDown") this.currentMenu.moveSelectionDown();
+    //         else if (event.code === "ArrowRight" || event.code === "Shift") { 
+    //             if (this.currentMenu === this.enemiesMenu) this.enemiesMarker.setVisible(false);
+
+    //             if(this.currentMenu !== this.heroesMenu) { this.currentMenu.back(); } 
+    //     }
+    //         else if (event.code === "Space" || (event.code === "ArrowLeft" && this.currentMenu !== this.enemiesMenu)) this.currentMenu.confirm();
+    //     }
+    //     this.updateEnemiesMarker();
+
+    // }
+
     onKeyInput(event) {
-        const keysToPrevent = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space"];
-        if (keysToPrevent.includes(event.code)) event.preventDefault();
+const keysToPrevent = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space", "KeyB"];
+if (keysToPrevent.includes(event.code)) event.preventDefault();
 
-        if (this.currentMenu) {
-            if (event.code === "ArrowUp") this.currentMenu.moveSelectionUp();
-            else if (event.code === "ArrowDown") this.currentMenu.moveSelectionDown();
-            else if (event.code === "ArrowRight" || event.code === "Shift") { 
-                if (this.currentMenu === this.enemiesMenu) this.enemiesMarker.setVisible(false);
+if (!this.currentMenu) return;
 
-                if(this.currentMenu !== this.heroesMenu) { this.currentMenu.back(); } 
-        }
-            else if (event.code === "Space" || (event.code === "ArrowLeft" && this.currentMenu !== this.enemiesMenu)) this.currentMenu.confirm();
-        }
-        this.updateEnemiesMarker();
+//Cambiar entre actions y enemies menus
+switch(event.code) { 
+    case "KeyB": 
+    if (this.currentMenu === this.enemiesMenu || this.currentMenu === this.itemsMenu)
+        {this.currentMenu?.deselect(); 
+        this.currentMenu.clear();
+        this.currentMenu = this.actionsMenu; 
+        this.currentMenu.select(0);} 
+        return; 
+}
 
-    }
+switch (event.code) {
+    case "ArrowUp":
+        this.currentMenu.moveSelectionUp();
+        break;
+    case "ArrowDown":
+        this.currentMenu.moveSelectionDown();
+        break;
+    case "ArrowLeft":
+        this.currentMenu.moveSelectionLeft();
+    break;
+    case "ArrowRight":
+        this.currentMenu.moveSelectionRight();
+        break;
+    case "Space":
+        this.currentMenu.confirm();
+        break;
+}
+
+this.updateEnemiesMarker();
+
+
+}
 
     cleanEvents() {
         this.events.off("PlayerSelect", this.onPlayerSelect, this);

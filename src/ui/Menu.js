@@ -61,16 +61,82 @@ export default class Menu extends Phaser.GameObjects.Container {
     moveSelectionUp() {
         if (!this.menuItems.length) return;
         this.menuItems[this.menuItemIndex].deselect();
-        this.menuItemIndex = (this.menuItemIndex - 1 + this.menuItems.length) % this.menuItems.length;
+
+        const col = this.menuItemIndex % this.itemsPerRow;
+        let row = Math.floor(this.menuItemIndex / this.itemsPerRow);
+        row = (row - 1 + Math.ceil(this.menuItems.length / this.itemsPerRow)) % Math.ceil(this.menuItems.length / this.itemsPerRow);
+
+        let newIndex = row * this.itemsPerRow + col;
+        if (newIndex >= this.menuItems.length) {
+            // Ajuste para filas incompletas
+            newIndex = this.menuItems.length - 1;
+        }
+
+        this.menuItemIndex = newIndex;
         this.menuItems[this.menuItemIndex].select();
+
     }
 
     moveSelectionDown() {
         if (!this.menuItems.length) return;
         this.menuItems[this.menuItemIndex].deselect();
-        this.menuItemIndex = (this.menuItemIndex + 1) % this.menuItems.length;
+
+        const col = this.menuItemIndex % this.itemsPerRow;
+        let row = Math.floor(this.menuItemIndex / this.itemsPerRow);
+        row = (row + 1) % Math.ceil(this.menuItems.length / this.itemsPerRow);
+
+        let newIndex = row * this.itemsPerRow + col;
+        if (newIndex >= this.menuItems.length) {
+            // Ajuste para filas incompletas
+            newIndex = row * this.itemsPerRow + (this.menuItems.length - 1) % this.itemsPerRow;
+        }
+
+        this.menuItemIndex = newIndex;
+        this.menuItems[this.menuItemIndex].select();
+
+    }
+
+    moveSelectionLeft() {
+        if (!this.menuItems.length) return;
+
+        const row = Math.floor(this.menuItemIndex / this.itemsPerRow);
+        let col = this.menuItemIndex % this.itemsPerRow;
+
+        if (col === 0) {
+            if (this.onLeftEdge) this.onLeftEdge(); 
+            return;
+        }
+
+        this.menuItems[this.menuItemIndex].deselect();
+
+        col = col - 1;
+        let newIndex = row * this.itemsPerRow + col;
+        this.menuItemIndex = newIndex;
         this.menuItems[this.menuItemIndex].select();
     }
+
+
+    moveSelectionRight() {
+        if (!this.menuItems.length) return;
+        this.menuItems[this.menuItemIndex].deselect();
+
+
+        const row = Math.floor(this.menuItemIndex / this.itemsPerRow);
+        let col = this.menuItemIndex % this.itemsPerRow;
+        col = (col + 1) % this.itemsPerRow;
+
+        let newIndex = row * this.itemsPerRow + col;
+        if (newIndex >= this.menuItems.length) {
+            // Ajuste si la última fila no está completa
+            newIndex = row * this.itemsPerRow + (this.menuItems.length - 1) % this.itemsPerRow;
+        }
+
+        this.menuItemIndex = newIndex;
+        this.menuItems[this.menuItemIndex].select();
+
+
+    }
+
 
     select(index = 0) {
         if (!this.menuItems.length) return;
