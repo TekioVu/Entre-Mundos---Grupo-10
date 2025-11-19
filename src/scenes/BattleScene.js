@@ -174,9 +174,19 @@ export default class BattleScene extends Phaser.Scene {
                 background: 'horror_background',
                 enemyDefs: [
                     { 
-                        key: 'demon', anim: [16, 21], scale: 1, name: 'Demon',
+                        key: 'boss2', anim: [0, 7], scale: 1, name: 'Scared Wizard',
                         hp: 500, atk: 22,
-                        positions: [[2, 2]],
+                        positions: [[0, 2]],
+                    },
+                    { 
+                        key: 'boss3', anim: [0, 9], scale: 1, name: 'Sad Wizard',
+                        hp: 500, atk: 22,
+                        positions: [[4, 1]],
+                    },
+                    { 
+                        key: 'boss1', anim: [0, 7], scale: 1, name: 'Angry Wizard',
+                        hp: 500, atk: 22,
+                        positions: [[2, 0]],
                     },
                 ],
             },
@@ -325,7 +335,7 @@ export default class BattleScene extends Phaser.Scene {
             'FANTASÍA': { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [1, 1], scale: 1, hp: 1, atk: 5 },
             'TERROR':   { key: 'cacodaemon', anim: [0, 5], name: 'Cacodaemon', pos: [50, 75], scale: 1, hp: 150, atk: 25 },
             'HISTORIA': { key: 'medusa', anim: [14, 16], name: 'Medusa', pos: [50, 75], scale: 1, hp: 150, atk: 25 },
-            'COMEDIA':  { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [50, 75], scale: 1, hp: 1, atk: 25 },
+            'COMEDIA':  { key: 'king', anim: [0, 7], name: 'King', pos: [50, 75], scale: 1, hp: 1, atk: 25 },
             'THE END':  { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [50, 75], scale: 1, hp: 1, atk: 25 },
         };
 

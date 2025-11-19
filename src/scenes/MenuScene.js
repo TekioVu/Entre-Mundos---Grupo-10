@@ -16,7 +16,7 @@ export default class MenuScene extends Phaser.Scene {
         ];
 
         this.selectedIndex = 0;
-        this.unlockedbooks = 1;
+        this.unlockedbooks = 5;
         this.optionObjects = [];
 
         const { width, height } = this.scale;

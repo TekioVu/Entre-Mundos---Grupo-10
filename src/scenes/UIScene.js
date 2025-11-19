@@ -13,14 +13,26 @@ export default class UIScene extends Phaser.Scene {
         this.id = 0;
         this.inventory = this.registry.get('inventory');
 
+        // Añadir imagen base
+        this.panel = this.add.image(0, 170, 'attack_panel')
+            .setOrigin(0, 0)       // anclar arriba-izquierda
+
+              // --- DIBUJAR LÍNEAS VERTICALES ---
         this.graphics = this.add.graphics();
-        this.graphics.lineStyle(1, 0xffffff);
-        this.graphics.fillStyle(0x031f4c, 1);
-        this.graphics.fillRect(0, 170, 130, 100);
-        this.graphics.strokeRect(105, 170, 90, 90);
-        this.graphics.fillRect(105, 170, 190, 90);
-        this.graphics.strokeRect(205, 170, 130, 100);
-        this.graphics.fillRect(205, 170, 130, 100);
+
+        // Beige suave
+        this.graphics.lineStyle(2, 0xFFF8E7, 1);
+
+        // Línea 1
+        this.graphics.moveTo(105, 175);
+        this.graphics.lineTo(105, 235);
+
+        // Línea 2
+        this.graphics.moveTo(205, 173);
+        this.graphics.lineTo(205, 238);
+
+        this.graphics.strokePath();
+
 
         this.menus = this.add.container();
         this.heroesMenu = new HeroesMenu(220, 180, this, true);

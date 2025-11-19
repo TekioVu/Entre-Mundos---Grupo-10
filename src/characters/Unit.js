@@ -22,12 +22,16 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             "Scarab": 1,
             "Clown": 25,
             "Jester": 25,
+            "King": 25,
 
             "Dragon": 25,
             "Cacodaemon" : 25,
             "Medusa": 35,
 
             "Demon": 35,
+            "Scared Wizard" : 25,
+            "Sad Wizard" : 25,
+            "Angry Wizard" : 25,
         };
 
         this.isEnemy = (
@@ -45,8 +49,11 @@ export default class Unit extends Phaser.GameObjects.Sprite {
 
             this.type === "Clown" ||
             this.type === "Jester" ||
+            this.type === "King" ||
             
-            this.type === "Demon" 
+            this.type === "Scared Wizard" ||
+            this.type === "Sad Wizard" ||
+            this.type === "Angry Wizard" 
         );
 
         this.hpOffsetY = offsets[this.type] || 30;

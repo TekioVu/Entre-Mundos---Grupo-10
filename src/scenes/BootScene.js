@@ -31,6 +31,7 @@ export default class BootScene extends Phaser.Scene {
 
         this.load.spritesheet('clown', './assets/Enemigos/Clown/Clown_Sprite.png', { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('jester', './assets/Enemigos/Jester/Jester.png', { frameWidth: 64, frameHeight: 64 });
+        this.load.spritesheet('king', './assets/Enemigos/MedievalKing/Idle.png', { frameWidth: 160, frameHeight: 111 });
 
         this.load.spritesheet('pharaoh', './assets/Enemigos/Egypt/Pharaoh_Stand.png', { frameWidth: 128, frameHeight: 128 });
         this.load.spritesheet('scarab', './assets/Enemigos/Egypt/Scarab_Stand.png', { frameWidth: 128, frameHeight: 128 });
@@ -43,6 +44,9 @@ export default class BootScene extends Phaser.Scene {
         this.load.spritesheet('cacodaemon', './assets/Enemigos/Cacodaemon/Cacodaemon.png', { frameWidth: 64, frameHeight: 64 });
 
         this.load.spritesheet('demon', './assets/Enemigos/Bosses/Demon.png', { frameWidth: 288, frameHeight: 160 });
+        this.load.spritesheet('boss1', './assets/Enemigos/FinalBosses/Evil Wizard/Idle.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('boss2', './assets/Enemigos/FinalBosses/Evil Wizard 2/Idle.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('boss3', './assets/Enemigos/FinalBosses/Evil Wizard 3/Idle.png', { frameWidth: 140, frameHeight: 140 });
 
         //Backgrounds
         this.load.image('fantasy_background', './assets/Backgrounds/Fantasy.png');
@@ -50,6 +54,9 @@ export default class BootScene extends Phaser.Scene {
         this.load.image('history_background', './assets/Backgrounds/Egypt3.png');
         this.load.image('comedy_background', './assets/Backgrounds/Comedy3.png');
         this.load.image('horror_background', './assets/Backgrounds/Horror2.png');
+
+        //UI
+        this.load.image('attack_panel', './assets/UI/Panel.png');
 
         //Objetos tienda
         this.load.image('pocion_roja', './assets/Pociones/Icon1.png');
