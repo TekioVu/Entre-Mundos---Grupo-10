@@ -129,12 +129,12 @@ export default class BattleScene extends Phaser.Scene {
                 background: 'horror_background',
                 enemyDefs: [
                     { 
-                        key: 'mushroom', anim: [0, 3], scale: 1.2, name: 'Mushroom',
+                        key: 'mushroom', idleKey: 'mushroom_idle', idle: [0, 3], scale: 1.2, name: 'Mushroom',
                         hp: 1, atk: 5,
                         positions: [[3, 1], [4, 0]],
                     },
                     { 
-                        key: 'flying_eye', anim: [0, 7], scale: 1.2, name: 'Flying Eye',
+                        key: 'flying_eye', idleKey: 'flying_eye_idle', idle: [0, 7], scale: 1.2, name: 'Flying Eye',
                         hp: 1, atk: 11,
                         positions: [[1, 1], [2, 0]],
                     },
@@ -144,12 +144,12 @@ export default class BattleScene extends Phaser.Scene {
                 background: 'history_background',
                 enemyDefs: [
                     { 
-                        key: 'pharaoh', anim: [0, 2], scale: 0.6, name: 'Pharaoh',
+                        key: 'pharaoh', idleKey: 'pharaoh_idle', idle: [0, 2], scale: 0.6, name: 'Pharaoh',
                         hp: 2, atk: 8,
                         positions: [[1, 1], [2, 0]],
                     },
                     { 
-                        key: 'scarab', anim: [0, 1], scale: 0.6, name: 'Scarab',
+                        key: 'scarab', idleKey: 'scarab_idle', idle: [0, 1], scale: 0.6, name: 'Scarab',
                         hp: 2, atk: 5,
                         positions: [[3, 1], [4, 0]],
                     },
@@ -159,7 +159,7 @@ export default class BattleScene extends Phaser.Scene {
                 background: 'comedy_background',
                 enemyDefs: [
                     { 
-                        key: 'jester', anim: [11, 17], scale: 1, name: 'Jester',
+                        key: 'jester', idleKey: 'jester_idle', idle: [11, 17], scale: 1, name: 'Jester',
                         hp: 18, atk: 7,
                         positions: [[0, 1], [1, 0]],
                     },
@@ -174,7 +174,7 @@ export default class BattleScene extends Phaser.Scene {
                 background: 'horror_background',
                 enemyDefs: [
                     { 
-                        key: 'demon', anim: [16, 21], scale: 1, name: 'Demon',
+                        key: 'demon', idleKey: 'demon_idle', idle: [16, 21], scale: 1, name: 'Demon',
                         hp: 500, atk: 22,
                         positions: [[2, 2]],
                     },
@@ -210,6 +210,8 @@ export default class BattleScene extends Phaser.Scene {
             if (!this.anims.exists(`${def.key}-idle`)) {
                 this._createIdleAnim(def.idleKey, def.idle[0], def.idle[1], `${def.key}-idle`);
             }
+            if (this.type === "Goblin" || this.type === "Ghost"|| this.type === "Timmy" || this.type === "Wizard")
+            {
             if (!this.anims.exists(`${def.key}-attack`)) {
                 this._createAttackAnim(def.attackKey, def.attack[0], def.attack[1], `${def.key}-attack`);
             }
@@ -218,6 +220,7 @@ export default class BattleScene extends Phaser.Scene {
             }
             if (!this.anims.exists(`${def.key}-damage`)) {
                 this._createDamageAnim(def.damageKey, def.damage[0], def.damage[1], `${def.key}-damage`);
+            }
             }
 
             def.positions.forEach(([xIdx, yIdx]) => {

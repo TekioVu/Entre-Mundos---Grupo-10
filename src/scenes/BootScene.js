@@ -23,6 +23,7 @@ export default class BootScene extends Phaser.Scene {
         this.load.spritesheet('goblin_attack', './assets/Enemigos/Goblin/Attack.png', { frameWidth: 150, frameHeight: 150 });
         this.load.spritesheet('goblin_death', './assets/Enemigos/Goblin/Death.png', { frameWidth: 150, frameHeight: 150 });
         this.load.spritesheet('goblin_damage', './assets/Enemigos/Goblin/Take Hit.png', { frameWidth: 150, frameHeight: 150 });
+
         this.load.spritesheet('ghost', './assets/Enemigos/Ghost/Idle.png', { frameWidth: 128, frameHeight: 128 });
         this.load.spritesheet('ghost_idle', './assets/Enemigos/Ghost/Idle.png', { frameWidth: 128, frameHeight: 128 });
         this.load.spritesheet('ghost_attack', './assets/Enemigos/Ghost/Sprite-fantasma2.png', { frameWidth: 128, frameHeight: 128 });
@@ -30,19 +31,29 @@ export default class BootScene extends Phaser.Scene {
         this.load.spritesheet('ghost_damage', './assets/Enemigos/Ghost/Sprite-fantasma4.png', { frameWidth: 128, frameHeight: 128 });
 
         this.load.spritesheet('clown', './assets/Enemigos/Clown/Clown_Sprite.png', { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('clown_idle', './assets/Enemigos/Clown/Clown_Sprite.png', { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('jester', './assets/Enemigos/Jester/Jester.png', { frameWidth: 64, frameHeight: 64 });
+        this.load.spritesheet('jester_idle', './assets/Enemigos/Jester/Jester.png', { frameWidth: 64, frameHeight: 64 });
 
         this.load.spritesheet('pharaoh', './assets/Enemigos/Egypt/Pharaoh_Stand.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('pharaoh_idle', './assets/Enemigos/Egypt/Pharaoh_Stand.png', { frameWidth: 128, frameHeight: 128 });
         this.load.spritesheet('scarab', './assets/Enemigos/Egypt/Scarab_Stand.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('scarab_idle', './assets/Enemigos/Egypt/Scarab_Stand.png', { frameWidth: 128, frameHeight: 128 });
 
         this.load.spritesheet('flying_eye', './assets/Enemigos/Flying_eye/Flight.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('flying_eye_idle', './assets/Enemigos/Flying_eye/Flight.png', { frameWidth: 150, frameHeight: 150 });
         this.load.spritesheet('mushroom', './assets/Enemigos/Mushroom/Idle.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('mushroom_idle', './assets/Enemigos/Mushroom/Idle.png', { frameWidth: 150, frameHeight: 150 });
 
         this.load.spritesheet('dragon', './assets/Enemigos/Dragon/Dragon.png', { frameWidth: 256, frameHeight: 256 });
+        this.load.spritesheet('dragon_idle', './assets/Enemigos/Dragon/Dragon.png', { frameWidth: 256, frameHeight: 256 });
         this.load.spritesheet('medusa', './assets/Enemigos/Medusa/Medusa.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('medusa_idle', './assets/Enemigos/Medusa/Medusa.png', { frameWidth: 128, frameHeight: 128 });
         this.load.spritesheet('cacodaemon', './assets/Enemigos/Cacodaemon/Cacodaemon.png', { frameWidth: 64, frameHeight: 64 });
+        this.load.spritesheet('cacodaemon_idle', './assets/Enemigos/Cacodaemon/Cacodaemon.png', { frameWidth: 64, frameHeight: 64 });
 
         this.load.spritesheet('demon', './assets/Enemigos/Bosses/Demon.png', { frameWidth: 288, frameHeight: 160 });
+        this.load.spritesheet('demon_idle', './assets/Enemigos/Bosses/Demon.png', { frameWidth: 288, frameHeight: 160 });
 
         //Backgrounds
         this.load.image('fantasy_background', './assets/Backgrounds/Fantasy.png');
