@@ -4,9 +4,10 @@ export default class MenuItemCharacterSelection extends Phaser.GameObjects.Conta
 
         let boxWidth;
         let boxHeight;
-        const bgColor = 0x000000;
-        const bgAlpha = 0.6;
-        const goldColor = 0xFFD700; // dorado para borde y texto
+        const bgColor = 0x1a1a1a;      // gris muy oscuro
+        const bgAlpha = 1;              // opacidad completa
+        const borderColor = 0x3a3a3a;   // gris medio para borde
+        const textColor = "#cccccc";    // gris claro para texto
 
         this.bg = scene.add.graphics();
 
@@ -14,19 +15,19 @@ export default class MenuItemCharacterSelection extends Phaser.GameObjects.Conta
             boxHeight = 20;
             boxWidth = 50;
 
-            // Fondo oscuro
+            // Fondo gris oscuro
             this.bg.fillStyle(bgColor, bgAlpha);
             this.bg.fillRoundedRect(-boxWidth / 2, -boxHeight / 2, boxWidth, boxHeight, 4);
 
-            // Borde dorado
-            this.bg.lineStyle(2, goldColor, 1);
+            // Borde gris medio
+            this.bg.lineStyle(2, borderColor, 1);
             this.bg.strokeRoundedRect(-boxWidth / 2, -boxHeight / 2, boxWidth, boxHeight, 4);
 
             this.add(this.bg);
 
-            // Texto dorado
+            // Texto gris claro
             this.text = scene.add.text(0, 0, item, {
-                color: "#FFD700",
+                color: textColor,
                 align: "center",
                 fontSize: "14px"
             }).setOrigin(0.5);
@@ -35,12 +36,12 @@ export default class MenuItemCharacterSelection extends Phaser.GameObjects.Conta
             boxHeight = 20;
             boxWidth = 20;
 
-            // Fondo oscuro
+            // Fondo gris oscuro
             this.bg.fillStyle(bgColor, bgAlpha);
             this.bg.fillRoundedRect(-boxWidth / 2, -boxHeight / 2, boxWidth, boxHeight, 4);
 
-            // Borde dorado
-            this.bg.lineStyle(2, goldColor, 1);
+            // Borde gris medio
+            this.bg.lineStyle(2, borderColor, 1);
             this.bg.strokeRoundedRect(-boxWidth / 2, -boxHeight / 2, boxWidth, boxHeight, 4);
 
             this.add(this.bg);
@@ -58,36 +59,38 @@ export default class MenuItemCharacterSelection extends Phaser.GameObjects.Conta
     }
 
     select() {
-        const goldColor = 0xFFD700;
+        const hoverBg = 0x2a2a2a;      // gris más claro para hover
+        const borderColor = 0x3a3a3a;
 
         this.bg.clear();
 
-        // Fondo dorado translúcido para el hover
-        this.bg.fillStyle(0xFFD700, 0.4);  // dorado con transparencia
+        // Fondo hover
+        this.bg.fillStyle(hoverBg, 1);
         this.bg.fillRoundedRect(-this.boxWidth / 2, -this.boxHeight / 2, this.boxWidth, this.boxHeight, 4);
 
-        // Borde dorado
-        this.bg.lineStyle(2, goldColor, 1);
+        // Borde
+        this.bg.lineStyle(2, borderColor, 1);
         this.bg.strokeRoundedRect(-this.boxWidth / 2, -this.boxHeight / 2, this.boxWidth, this.boxHeight, 4);
 
-        // Texto dorado
-        if (this.text) this.text.setColor("#FFD700");
+        // Texto
+        if (this.text) this.text.setColor("#ffffff"); // más contraste al seleccionar
     }
 
     deselect() {
-        const goldColor = 0xFFD700;
+        const bgColor = 0x1a1a1a;
+        const borderColor = 0x3a3a3a;
 
         this.bg.clear();
 
-        // Fondo gris oscuro normal
-        this.bg.fillStyle(0x000000, 0.6);
+        // Fondo normal
+        this.bg.fillStyle(bgColor, 1);
         this.bg.fillRoundedRect(-this.boxWidth / 2, -this.boxHeight / 2, this.boxWidth, this.boxHeight, 4);
 
-        // Borde dorado
-        this.bg.lineStyle(2, goldColor, 1);
+        // Borde normal
+        this.bg.lineStyle(2, borderColor, 1);
         this.bg.strokeRoundedRect(-this.boxWidth / 2, -this.boxHeight / 2, this.boxWidth, this.boxHeight, 4);
 
-        // Texto dorado
-        if (this.text) this.text.setColor("#FFD700");
+        // Texto
+        if (this.text) this.text.setColor("#cccccc");
     }
 }
