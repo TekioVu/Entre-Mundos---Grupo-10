@@ -9,6 +9,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         this.pos = pos;
         this.stunned = 0;
         this.specialAttackCounter = 0;
+        this.alreadySpecialAttacked = false; //Variable para los mini bosses que solo usen su habilidad 1 vez
 
         const offsets = {
             "Timmy": 40,
@@ -124,6 +125,12 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                 }
 
                 this.scene.events.emit("Message", `${this.type} is using petrification: ALL UNITS STUNNED FOR 2 TURNS`);
+            }
+            else if(this.type === "King" && this.specialAttackCounter == 1 && !this.alreadySpecialAttacked)
+            {
+                this.alreadySpecialAttacked = true;
+                battleScene.invokeJester();
+                this.scene.events.emit("Message", `${this.type} is invoking Jesters`);
             }
             else{
                 let d;

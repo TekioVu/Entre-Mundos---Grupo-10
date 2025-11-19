@@ -336,10 +336,10 @@ export default class BattleScene extends Phaser.Scene {
     createMiniBoss() {
         const bossConfig = {
             'FANTASÍA': { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [1, 1], scale: 1, hp: 1, atk: 5 },
-            'TERROR':   { key: 'cacodaemon', anim: [0, 5], name: 'Cacodaemon', pos: [50, 75], scale: 1, hp: 150, atk: 25 },
-            'HISTORIA': { key: 'medusa', anim: [14, 16], name: 'Medusa', pos: [50, 75], scale: 1, hp: 150, atk: 25 },
-            'COMEDIA':  { key: 'king', anim: [0, 7], name: 'King', pos: [50, 75], scale: 1, hp: 1, atk: 25 },
-            'THE END':  { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [50, 75], scale: 1, hp: 1, atk: 25 },
+            'TERROR':   { key: 'cacodaemon', anim: [0, 5], name: 'Cacodaemon', pos: [1, 1], scale: 1, hp: 150, atk: 25 },
+            'HISTORIA': { key: 'medusa', anim: [14, 16], name: 'Medusa', pos: [1, 1], scale: 1, hp: 150, atk: 25 },
+            'COMEDIA':  { key: 'king', anim: [0, 7], name: 'King', pos: [1, 1], scale: 1, hp: 350, atk: 10 },
+            'THE END':  { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [1, 1], scale: 1, hp: 1, atk: 25 },
         };
 
         const config = bossConfig[this.currentbook];
@@ -400,6 +400,51 @@ export default class BattleScene extends Phaser.Scene {
         }
         
     }
+
+    
+   invokeJester() {
+        // Posiciones donde quieres que aparezca el Jester (por ejemplo)
+        const positions = [
+            [3, 2],
+            [4, 1],
+            [5, 0],
+        ];
+
+        // Datos específicos de Jester
+        const def = {
+            key: 'jester',
+            idleKey: 'jester_idle',
+            idle: [11, 17],
+            scale: 1,
+            name: 'Jester',
+            hp: 25,
+            atk: 15,
+        };
+
+        // Iteramos solo sobre las posiciones de Jester
+        positions.forEach(([xIdx, yIdx]) => {
+            const posX = this.enemyPosX[xIdx];
+            const posY = this.enemyPosY[yIdx];
+            let pos = (posX > 70) ? 'v' : 'r'; // lógica de orientación
+
+            const enemy = new Enemy(
+                this,
+                posX,
+                posY,
+                def.key,
+                def.idle[1],
+                def.name,
+                def.hp,
+                def.atk,
+                pos
+            );
+
+            enemy.setScale(def.scale);
+            this.add.existing(enemy).anims.play(`${def.key}-idle`);
+            this.enemies.push(enemy);
+        });
+    }
+
 
 }
 
