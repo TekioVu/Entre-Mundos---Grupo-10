@@ -64,19 +64,24 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         this.hpText.setText(this.hp);
     }
 
+    playAnim(action, onComplete = null) {
+        const animKey = `${this.textureKey}-${action}`;
+        if (this.scene.anims.exists(animKey)) {
+            this.play(animKey);
+        }
+
+        if (onComplete) {
+            this.once('animationcomplete', onComplete);
+        }
+    }
+
     attack(target) {
         let d;
         if (target.pos == 'v') d = this.damage - 5;
         else d = this.damage;
-        if (this.type === "Goblin")
+        if (this.type === "Goblin" || this.type === "Ghost" || this.type === "Timmy" || this.type === "Wizard")
         {
-             this.setTexture('goblin_attack');  
-        this.play('goblin-attack');
-
-        this.once('animationcomplete', () => {
-        this.setTexture('goblin');     
-        this.play('goblin-idle');
-    });
+             this.playAnim('attack', () => this.playAnim('idle'));
         }
 
         const battleScene = this.scene.scene.get("BattleScene");
@@ -139,6 +144,8 @@ export default class Unit extends Phaser.GameObjects.Sprite {
 
     takeDamage(damage) {
 
+        const bs = this.scene.scene.get("BattleScene");
+        if (!bs) return;
         this.hp -= damage;
 
         if (this.hp <= 0)
@@ -146,26 +153,30 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             this.hp = 0;
             this.alive = false;
 
-            if (this.type === "Goblin")
-                    {
-                        this.setTexture('goblin_death');  
-                        this.play('goblin-death');
-                    }
-            
-            this.once('animationcomplete', () => {
-            this.scene.tweens.add({
-                targets: this,
-                alpha: 0,
-                duration: 600,
-                onComplete: () => 
-                {
-                    this.setVisible(false)
-                }
+            if (this.type === "Goblin" || this.type === "Ghost" || this.type === "Timmy" || this.type === "Wizard")
+            {
+             this.playAnim('death', () => {
+                
+                bs.tweens.add({
+                    targets: this,
+                    alpha: 0,
+                    duration: 600,
+                    onComplete: () => this.setVisible(false)
+                });
             });
-            });
-
+          }
+            else {
+                bs.tweens.add({
+                            targets: this,
+                            alpha: 0,
+                            duration: 600,
+                            onComplete: () => 
+                            {
+                                this.setVisible(false)
+                            }
+                        });
+            }
             
-
             this.hpText.setVisible(false);
 
             // Eliminar de las listas correspondientes
@@ -228,16 +239,10 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             }
         }
         else{
-            if (this.type === "Goblin")
-        {
-            this.setTexture('goblin_damage');  
-            this.play('goblin-damage');
-
-            this.once('animationcomplete', () => {
-            this.setTexture('goblin');     
-            this.play('goblin-idle');
-    });
-        }
+            if (this.type === "Goblin" || this.type === "Ghost"|| this.type === "Timmy" || this.type === "Wizard")
+            {
+             this.playAnim('damage', () => this.playAnim('idle'));
+            }
         }
     }
 

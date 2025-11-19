@@ -112,13 +112,15 @@ export default class BattleScene extends Phaser.Scene {
                 background: 'fantasy_background',
                 enemyDefs: [
                     { 
-                        key: 'goblin', anim: [0, 3], scale: 1.2, name: 'Goblin',
+                        key: 'goblin', idleKey: 'goblin_idle', attackKey: 'goblin_attack', damageKey: 'goblin_damage', deathKey: 'goblin_death', 
+                        idle: [0, 3], attack: [0, 7], damage: [0, 3], death: [0, 3],  scale: 1.2, name: 'Goblin',
                         hp: 30/*25*/, atk: 6,
                         positions: [[4, 1], [5, 0]],
                     },
                     { 
-                        key: 'ghost', anim: [0, 11], scale: 0.3, name: 'Ghost',
-                        hp: 1/*18*/, atk: 9,
+                        key: 'ghost', idleKey: 'ghost_idle', attackKey: 'ghost_attack', damageKey: 'ghost_damage', deathKey: 'ghost_death',
+                        idle: [0, 11], attack: [0, 7], damage: [0, 9], death: [0, 9], scale: 0.3, name: 'Ghost',
+                        hp: 28/*18*/, atk: 9,
                         positions: [[1, 1], [2, 0]],
                     },
                 ],
@@ -192,17 +194,30 @@ export default class BattleScene extends Phaser.Scene {
             .setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
         // Animaciones base de los héroes
-        this._createIdleAnim('timmy', 0, 6);
-        this._createIdleAnim('wizard', 0, 5);
-        this._createAttackAnim('goblin_attack', 0, 7, 'goblin-attack');
-        this._createDeathAnim('goblin_death', 0, 3, 'goblin-death');
-        this._createDeathAnim('goblin_damage', 0, 3, 'goblin-damage');
+        this._createIdleAnim('timmy_idle', 0, 6, 'timmy-idle');
+        this._createAttackAnim('timmy_attack', 0, 4, 'timmy-attack');
+        this._createDamageAnim('timmy_damage', 0, 3, 'timmy-damage');
+        this._createDeathAnim('timmy_death', 0, 11, 'timmy-death');
+
+        this._createIdleAnim('wizard_idle', 0, 5, 'wizard-idle');
+        this._createAttackAnim('wizard_attack', 0, 7, 'wizard-attack');
+        this._createDamageAnim('wizard_damage', 0, 3, 'wizard-damage');
+        this._createDeathAnim('wizard_death', 0, 6, 'wizard-death');
 
 
         // Crear enemigos
         config.enemyDefs.forEach(def => {
             if (!this.anims.exists(`${def.key}-idle`)) {
-                this._createIdleAnim(def.key, def.anim[0], def.anim[1], `${def.key}-idle`);
+                this._createIdleAnim(def.idleKey, def.idle[0], def.idle[1], `${def.key}-idle`);
+            }
+            if (!this.anims.exists(`${def.key}-attack`)) {
+                this._createAttackAnim(def.attackKey, def.attack[0], def.attack[1], `${def.key}-attack`);
+            }
+            if (!this.anims.exists(`${def.key}-death`)) {
+                this._createDeathAnim(def.deathKey, def.death[0], def.death[1], `${def.key}-death`);
+            }
+            if (!this.anims.exists(`${def.key}-damage`)) {
+                this._createDamageAnim(def.damageKey, def.damage[0], def.damage[1], `${def.key}-damage`);
             }
 
             def.positions.forEach(([xIdx, yIdx]) => {
@@ -210,7 +225,7 @@ export default class BattleScene extends Phaser.Scene {
                 const posY = this.enemyPosY[yIdx];
                 let pos = (posX > 70) ? 'v' : 'r';
 
-                const enemy = new Enemy(this, posX, posY, def.key, def.anim[1], def.name, def.hp, def.atk, pos);
+                const enemy = new Enemy(this, posX, posY, def.key, def.idle[1], def.name, def.hp, def.atk, pos);
                 enemy.setScale(def.scale);
                 this.add.existing(enemy).anims.play(`${def.key}-idle`);
                 this.enemies.push(enemy);
@@ -288,12 +303,10 @@ export default class BattleScene extends Phaser.Scene {
         if (positionKey=== 4 || positionKey === 5) { hero.setDepth(3); hero.hpText.setDepth(3);}
         
 
-        if (hero.texture.key === 'wizard') {
-            hero.setScale(0.7);
-        } else if (hero.texture.key === 'timmy') {
+        if (hero.name === 'Wizard') {
+            hero.setScale(0.2);
+        } else if (hero.name === 'Timmy') {
             hero.setScale(1.2);
-        }else if (hero.texture.key === 'ghost') {
-            hero.setScale(0.3);
         }else if (hero.texture.key === 'ghost') {
             hero.setScale(0.3);
         }else if (hero.texture.key === 'scarab') {
@@ -309,7 +322,7 @@ export default class BattleScene extends Phaser.Scene {
 
     createMiniBoss() {
         const bossConfig = {
-            'FANTASÍA': { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [1, 1], scale: 1, hp: 150, atk: 30 },
+            'FANTASÍA': { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [1, 1], scale: 1, hp: 1, atk: 5 },
             'TERROR':   { key: 'cacodaemon', anim: [0, 5], name: 'Cacodaemon', pos: [50, 75], scale: 1, hp: 150, atk: 25 },
             'HISTORIA': { key: 'medusa', anim: [14, 16], name: 'Medusa', pos: [50, 75], scale: 1, hp: 150, atk: 25 },
             'COMEDIA':  { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [50, 75], scale: 1, hp: 1, atk: 25 },

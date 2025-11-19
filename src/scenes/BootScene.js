@@ -7,18 +7,27 @@ export default class BootScene extends Phaser.Scene {
         
         //Enemigos
         this.load.spritesheet('timmy', './assets/Timmy/IDLE.png', { frameWidth: 96, frameHeight: 84 });
-        this.load.spritesheet('player_attack1', './assets/Timmy/ATTACK_1.png', { frameWidth: 96, frameHeight: 84 });
-        this.load.spritesheet('player_attack2', './assets/Timmy/ATTACK_3.png', { frameWidth: 96, frameHeight: 84 });
-        this.load.spritesheet('player_hurt', './assets/Timmy/HURT.png', { frameWidth: 96, frameHeight: 84 });
-        this.load.spritesheet('player_death', './assets/Timmy/DEATH.png', { frameWidth: 96, frameHeight: 84 });
+        this.load.spritesheet('timmy_idle', './assets/Timmy/IDLE.png', { frameWidth: 96, frameHeight: 84 });
+        this.load.spritesheet('timmy_attack', './assets/Timmy/ATTACK 2.png', { frameWidth: 96, frameHeight: 84 });
+        this.load.spritesheet('timmy_damage', './assets/Timmy/HURT.png', { frameWidth: 96, frameHeight: 84 });
+        this.load.spritesheet('timmy_death', './assets/Timmy/DEATH.png', { frameWidth: 96, frameHeight: 84 });
 
         this.load.spritesheet('wizard', './assets/Wizard/Idle.png', { frameWidth: 231, frameHeight: 190 });
+        this.load.spritesheet('wizard_idle', './assets/Wizard/Idle.png', { frameWidth: 231, frameHeight: 190 });
+        this.load.spritesheet('wizard_attack', './assets/Wizard/Attack1.png', { frameWidth: 231, frameHeight: 190 });
+        this.load.spritesheet('wizard_damage', './assets/Wizard/Hit.png', { frameWidth: 231, frameHeight: 190 });
+        this.load.spritesheet('wizard_death', './assets/Wizard/Death.png', { frameWidth: 231, frameHeight: 190 });
 
         this.load.spritesheet('goblin', './assets/Enemigos/Goblin/Idle.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('goblin_idle', './assets/Enemigos/Goblin/Idle.png', { frameWidth: 150, frameHeight: 150 });
         this.load.spritesheet('goblin_attack', './assets/Enemigos/Goblin/Attack.png', { frameWidth: 150, frameHeight: 150 });
         this.load.spritesheet('goblin_death', './assets/Enemigos/Goblin/Death.png', { frameWidth: 150, frameHeight: 150 });
         this.load.spritesheet('goblin_damage', './assets/Enemigos/Goblin/Take Hit.png', { frameWidth: 150, frameHeight: 150 });
         this.load.spritesheet('ghost', './assets/Enemigos/Ghost/Idle.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('ghost_idle', './assets/Enemigos/Ghost/Idle.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('ghost_attack', './assets/Enemigos/Ghost/Sprite-fantasma2.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('ghost_death', './assets/Enemigos/Ghost/Sprite-fantasma4.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('ghost_damage', './assets/Enemigos/Ghost/Sprite-fantasma4.png', { frameWidth: 128, frameHeight: 128 });
 
         this.load.spritesheet('clown', './assets/Enemigos/Clown/Clown_Sprite.png', { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('jester', './assets/Enemigos/Jester/Jester.png', { frameWidth: 64, frameHeight: 64 });
