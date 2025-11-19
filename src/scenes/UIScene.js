@@ -13,25 +13,37 @@ export default class UIScene extends Phaser.Scene {
         this.id = 0;
         this.inventory = this.registry.get('inventory');
 
-        // Añadir imagen base
-        this.panel = this.add.image(0, 170, 'attack_panel')
-            .setOrigin(0, 0)       // anclar arriba-izquierda
+        const g = this.add.graphics();
 
-              // --- DIBUJAR LÍNEAS VERTICALES ---
-        this.graphics = this.add.graphics();
+        const background = 0x1a1a1a;      // gris muy oscuro
+        const border = 0xffffff;          // blanco para borde
+        const innerHighlight = 0x2a2a2a;  // ligero contraste
 
-        // Beige suave
-        this.graphics.lineStyle(2, 0xFFF8E7, 1);
+        // --- PANEL PRINCIPAL (fondo grande) ---
+        g.lineStyle(1, border, 1);  // borde más fino y blanco
+        g.fillStyle(background, 1);
+        g.fillRect(0, 170, 335, 100);
+        g.strokeRect(0, 170, 335, 100);
+
+        // --- SUTIL CAPA SUPERIOR (efecto elegante sin imágenes) ---
+        g.fillStyle(innerHighlight, 0.25);
+        g.fillRect(0, 170, 335, 40); // franja superior para relieve
+
+        // --- LÍNEAS VERTICALES ---
+        g.lineStyle(1, border, 0.7); // líneas verticales más finas y blancas
 
         // Línea 1
-        this.graphics.moveTo(105, 175);
-        this.graphics.lineTo(105, 235);
+        g.beginPath();
+        g.moveTo(105, 170);
+        g.lineTo(105, 270);
+        g.strokePath();
 
         // Línea 2
-        this.graphics.moveTo(205, 173);
-        this.graphics.lineTo(205, 238);
+        g.beginPath();
+        g.moveTo(205, 170);
+        g.lineTo(205, 270);
+        g.strokePath();
 
-        this.graphics.strokePath();
 
 
         this.menus = this.add.container();

@@ -17,15 +17,29 @@ export default class CharacterSelectionScene extends Phaser.Scene {
         this.id = 0;
         
                 this.graphics = this.add.graphics();
-                this.graphics.lineStyle(1, 0xffffff);
+                // --- COLORES ELEGANTES ---
+                const background = 0x1a1a1a;      // gris muy oscuro
+                const border = 0xffffff;          // blanco para borde
+                const innerHighlight = 0x2a2a2a;  // ligero contraste
 
-                this.graphics.fillStyle(0x031f4c, 1);
-                this.graphics.fillRect(1, 150, 159.25, 100);
-
-                this.graphics.fillStyle(0x052b70, 1);
-                this.graphics.fillRect(159.25, 150, 159.25, 100);
-
+                // --- PANEL PRINCIPAL (dos mitades) ---
+                this.graphics.lineStyle(1, border, 1); // borde más fino
+                this.graphics.fillStyle(background, 1);
+                this.graphics.fillRect(1, 150, 318.5, 100); // fondo general
                 this.graphics.strokeRect(1, 150, 318.5, 100);
+
+                // --- SUTIL CAPA SUPERIOR (relieve elegante) ---
+                this.graphics.fillStyle(innerHighlight, 0.25);
+                this.graphics.fillRect(1, 150, 318.5, 25); // franja superior
+
+                // --- LÍNEA DIVISORIA ENTRE MITADES ---
+                this.graphics.lineStyle(1, border, 0.7); // línea más fina
+                this.graphics.beginPath();
+                this.graphics.moveTo(159.25, 150);
+                this.graphics.lineTo(159.25, 250);
+                this.graphics.strokePath();
+
+
 
                 this.menus = this.add.container();
                 this.positionsMenu = new PositionsMenu(40, 160, this);
