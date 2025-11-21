@@ -108,21 +108,21 @@ export default class BootScene extends Phaser.Scene {
 
         this.load.spritesheet('boss1', './assets/Enemigos/FinalBosses/Evil Wizard/Idle.png', { frameWidth: 150, frameHeight: 150 });
         this.load.spritesheet('boss1_idle', './assets/Enemigos/FinalBosses/Evil Wizard/Idle.png', { frameWidth: 150, frameHeight: 150 });
-        this.load.spritesheet('boss1_attack', './assets/Enemigos/FinalBosses/Evil Wizard/Idle.png', { frameWidth: 150, frameHeight: 150 });
-        this.load.spritesheet('boss1_damage', './assets/Enemigos/FinalBosses/Evil Wizard/Idle.png', { frameWidth: 150, frameHeight: 150 });
-        this.load.spritesheet('boss1_death', './assets/Enemigos/FinalBosses/Evil Wizard/Idle.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('boss1_attack', './assets/Enemigos/FinalBosses/Evil Wizard/Attack.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('boss1_damage', './assets/Enemigos/FinalBosses/Evil Wizard/Take Hit.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('boss1_death', './assets/Enemigos/FinalBosses/Evil Wizard/Death.png', { frameWidth: 150, frameHeight: 150 });
 
         this.load.spritesheet('boss2', './assets/Enemigos/FinalBosses/Evil Wizard 2/Idle.png', { frameWidth: 250, frameHeight: 250 });
         this.load.spritesheet('boss2_idle', './assets/Enemigos/FinalBosses/Evil Wizard 2/Idle.png', { frameWidth: 250, frameHeight: 250 });
-        this.load.spritesheet('boss2_attack', './assets/Enemigos/FinalBosses/Evil Wizard 2/Idle.png', { frameWidth: 250, frameHeight: 250 });
-        this.load.spritesheet('boss2_damage', './assets/Enemigos/FinalBosses/Evil Wizard 2/Idle.png', { frameWidth: 250, frameHeight: 250 });
-        this.load.spritesheet('boss2_death', './assets/Enemigos/FinalBosses/Evil Wizard 2/Idle.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('boss2_attack', './assets/Enemigos/FinalBosses/Evil Wizard 2/Attack1.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('boss2_damage', './assets/Enemigos/FinalBosses/Evil Wizard 2/Take hit.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('boss2_death', './assets/Enemigos/FinalBosses/Evil Wizard 2/Death.png', { frameWidth: 250, frameHeight: 250 });
 
         this.load.spritesheet('boss3', './assets/Enemigos/FinalBosses/Evil Wizard 3/Idle.png', { frameWidth: 140, frameHeight: 140 });
         this.load.spritesheet('boss3_idle', './assets/Enemigos/FinalBosses/Evil Wizard 3/Idle.png', { frameWidth: 140, frameHeight: 140 });
-        this.load.spritesheet('boss3_attack', './assets/Enemigos/FinalBosses/Evil Wizard 3/Idle.png', { frameWidth: 140, frameHeight: 140 });
-        this.load.spritesheet('boss3_damage', './assets/Enemigos/FinalBosses/Evil Wizard 3/Idle.png', { frameWidth: 140, frameHeight: 140 });
-        this.load.spritesheet('boss3_death', './assets/Enemigos/FinalBosses/Evil Wizard 3/Idle.png', { frameWidth: 140, frameHeight: 140 });
+        this.load.spritesheet('boss3_attack', './assets/Enemigos/FinalBosses/Evil Wizard 3/Attack.png', { frameWidth: 140, frameHeight: 140 });
+        this.load.spritesheet('boss3_damage', './assets/Enemigos/FinalBosses/Evil Wizard 3/Get hit.png', { frameWidth: 140, frameHeight: 140 });
+        this.load.spritesheet('boss3_death', './assets/Enemigos/FinalBosses/Evil Wizard 3/Death.png', { frameWidth: 140, frameHeight: 140 });
 
         //Backgrounds
         this.load.image('fantasy_background', './assets/Backgrounds/Fantasy.png');

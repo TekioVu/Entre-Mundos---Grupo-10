@@ -180,20 +180,20 @@ export default class BattleScene extends Phaser.Scene {
                 enemyDefs: [
                     { 
                         key: 'boss2', idleKey: 'boss2_idle', attackKey: 'boss2_attack', damageKey: 'boss2_damage', deathKey: 'boss2_death',
-                        idle: [0, 7], attack: [0, 2], damage: [0, 2], death: [0, 2], scale: 1, name: 'Scared Wizard',
-                        hp: 500, atk: 22,
+                        idle: [0, 7], attack: [0, 7], damage: [0, 2], death: [0, 6], scale: 1, name: 'Scared Wizard',
+                        hp: 40, atk: 22,
                         positions: [[0, 2]],
                     },
                     { 
                         key: 'boss3', idleKey: 'boss3_idle', attackKey: 'boss3_attack', damageKey: 'boss3_damage', deathKey: 'boss3_death',
-                        idle: [0, 9], attack: [0, 2], damage: [0, 2], death: [0, 2], scale: 1, name: 'Sad Wizard',
-                        hp: 500, atk: 22,
+                        idle: [0, 9], attack: [0, 12], damage: [0, 2], death: [0, 17], scale: 1, name: 'Sad Wizard',
+                        hp: 40, atk: 22,
                         positions: [[4, 1]],
                     },
                     { 
                         key: 'boss1', idleKey: 'boss1_idle', attackKey: 'boss1_attack', damageKey: 'boss1_damage', deathKey: 'boss1_death',
-                        idle: [0, 7], attack: [0, 2], damage: [0, 2], death: [0, 2], scale: 1, name: 'Angry Wizard',
-                        hp: 500, atk: 22,
+                        idle: [0, 7], attack: [0, 7], damage: [0, 3], death: [0, 4], scale: 1, name: 'Angry Wizard',
+                        hp: 40, atk: 22,
                         positions: [[2, 0]],
                     },
                 ],
