@@ -59,8 +59,8 @@ export default class MenuItemCharacterSelection extends Phaser.GameObjects.Conta
     }
 
     select() {
-        const hoverBg = 0x2a2a2a;      // gris más claro para hover
-        const borderColor = 0x3a3a3a;
+        const hoverBg = 0x3a3a3a;      // gris más claro para hover
+        const borderColor = 0xffffff;  // borde blanco elegante
 
         this.bg.clear();
 
@@ -68,17 +68,20 @@ export default class MenuItemCharacterSelection extends Phaser.GameObjects.Conta
         this.bg.fillStyle(hoverBg, 1);
         this.bg.fillRoundedRect(-this.boxWidth / 2, -this.boxHeight / 2, this.boxWidth, this.boxHeight, 4);
 
-        // Borde
-        this.bg.lineStyle(2, borderColor, 1);
+        // Borde más definido
+        this.bg.lineStyle(3, borderColor, 1);
         this.bg.strokeRoundedRect(-this.boxWidth / 2, -this.boxHeight / 2, this.boxWidth, this.boxHeight, 4);
 
-        // Texto
-        if (this.text) this.text.setColor("#ffffff"); // más contraste al seleccionar
+        // Texto elegante
+        if (this.text) {
+            this.text.setColor("#ffffff"); // blanco puro
+            this.text.setFontStyle("bold");
+        }
     }
 
     deselect() {
-        const bgColor = 0x1a1a1a;
-        const borderColor = 0x3a3a3a;
+        const bgColor = 0x1a1a1a;     // gris muy oscuro
+        const borderColor = 0x3a3a3a; // gris medio
 
         this.bg.clear();
 
@@ -90,7 +93,10 @@ export default class MenuItemCharacterSelection extends Phaser.GameObjects.Conta
         this.bg.lineStyle(2, borderColor, 1);
         this.bg.strokeRoundedRect(-this.boxWidth / 2, -this.boxHeight / 2, this.boxWidth, this.boxHeight, 4);
 
-        // Texto
-        if (this.text) this.text.setColor("#cccccc");
+        // Texto normal
+        if (this.text) {
+            this.text.setColor("#cccccc"); // gris claro
+            this.text.setFontStyle("normal");
+        }
     }
 }

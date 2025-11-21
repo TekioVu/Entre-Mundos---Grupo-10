@@ -120,48 +120,65 @@ export default class ShopScene extends Phaser.Scene {
     }
 
 
-   updateSelection(itemIndex, categoryIndex) {
-        // Quitar resaltado anterior
-        const prevGroup = this.categoryGroups[this.selectedCategoryIndex];
-        if (prevGroup && prevGroup.itemSlots[this.selectedItemIndex]) {
-            prevGroup.itemSlots[this.selectedItemIndex].rect.setFillStyle(0x333333);
-        }
+  updateSelection(itemIndex, categoryIndex) {
+    const prevGroup = this.categoryGroups[this.selectedCategoryIndex];
+    if (prevGroup && prevGroup.itemSlots[this.selectedItemIndex]) {
+        const prev = prevGroup.itemSlots[this.selectedItemIndex];
 
-        // Actualizar índices
-        this.selectedCategoryIndex = categoryIndex;
-        this.selectedItemIndex = itemIndex;
+        prev.rect.setFillStyle(0x333333);
+        prev.rect.setStrokeStyle(2, 0x3a3a3a);
 
-        // Resaltar nuevo
-        const newGroup = this.categoryGroups[this.selectedCategoryIndex];
-        const selected = newGroup.itemSlots[this.selectedItemIndex];
-        selected.rect.setFillStyle(0xffff00);
+        if (prev.rect.tween) { prev.rect.tween.stop(); prev.rect.tween = null; }
+        if (prev.icon.tween) { prev.icon.tween.stop(); prev.icon.tween = null; }
 
-        const item = selected.item;
-
-        // === Actualizar imagen de vista previa ===
-        this.preview.setTexture(item.texture).setDisplaySize(100, 100);
-
-        // === Nombre ===
-        this.previewName.setText(item.name);
-        this.previewPrice.setText(`Price: ${item.coins}`);
-
-        // === Crear texto de descripción si no existe ===
-        if (!this.previewDescription) {
-            this.previewDescription = this.add.text(this.previewName.x, this.previewName.y, "", {
-                fontSize: "14px",
-                color: "#ffffff",
-                align: "center",
-                wordWrap: { width: 180 }
-            }).setOrigin(0.5);
-        }
-
-        // Actualizar texto de descripción
-        this.previewDescription.setText(item.description);
-
-        const nameBounds = this.previewName.getBounds();
-        const priceY = nameBounds.bottom + 20;
-        this.previewDescription.setPosition(this.previewName.x, priceY);
+        prev.rect.setScale(prev.rect.originalScale || 1);
+        prev.icon.setScale(prev.icon.originalScaleX || 1, prev.icon.originalScaleY || 1);
+        prev.icon.setY(prev.icon.originalY || prev.icon.y);
     }
+
+    this.selectedCategoryIndex = categoryIndex;
+    this.selectedItemIndex = itemIndex;
+
+    const newGroup = this.categoryGroups[this.selectedCategoryIndex];
+    const selected = newGroup.itemSlots[this.selectedItemIndex];
+
+    selected.rect.setFillStyle(0xffffaa);
+    selected.rect.setStrokeStyle(2, 0xffaa00);
+
+    if (selected.rect.originalScale === undefined) selected.rect.originalScale = selected.rect.scale;
+    if (selected.icon.originalScaleX === undefined) selected.icon.originalScaleX = selected.icon.scaleX;
+    if (selected.icon.originalScaleY === undefined) selected.icon.originalScaleY = selected.icon.scaleY;
+    if (selected.icon.originalY === undefined) selected.icon.originalY = selected.icon.y;
+
+    // 🌟 Flotación mejorada
+    selected.icon.tween = this.tweens.add({
+        targets: selected.icon,
+        y: selected.icon.originalY - 3,     // menos desplazamiento → nunca se sale del cuadrado
+        scaleX: selected.icon.originalScaleX * 1.04,
+        scaleY: selected.icon.originalScaleY * 1.04,
+        duration: 350,                       // más rápido y más suave
+        yoyo: true,
+        repeat: -1,
+        ease: "Sine.easeInOut"               // hace que no frene de golpe abajo
+    });
+
+    selected.rect.tween = this.tweens.add({
+        targets: selected.rect,
+        scale: selected.rect.originalScale * 1.015,
+        duration: 350,
+        yoyo: true,
+        repeat: -1,
+        ease: "Sine.easeInOut"
+    });
+
+    const item = selected.item;
+    this.preview.setTexture(item.texture).setDisplaySize(100, 100);
+    this.previewName.setText(item.name);
+    this.previewPrice.setText(`Price: ${item.coins}`);
+    if (this.previewDescription) this.previewDescription.setText(item.description);
+}
+
+
 
 
     addNewItems(unlockedBooks)
@@ -327,15 +344,11 @@ export default class ShopScene extends Phaser.Scene {
 
 
 
-    resetShop()
-    {
+    resetShop() {
         // 🔹 1. Si ya existen elementos anteriores, destruirlos
         if (this.categoryGroups) {
             this.categoryGroups.forEach(group => {
-                // Eliminar el texto de la categoría
                 group.categoryText.destroy();
-
-                // Eliminar los ítems (rectángulos e iconos)
                 group.itemSlots.forEach(slot => {
                     slot.rect.destroy();
                     slot.icon.destroy();
@@ -357,22 +370,21 @@ export default class ShopScene extends Phaser.Scene {
         this.categoryGroups = [];
 
         const { width, height } = this.scale;
-
-        const categorySpacingY = 50; // separación vertical entre categorías
+        const categorySpacingY = 50;
         const startY = 15;
 
         this.categoryNames.forEach((categoryName, categoryIndex) => {
             const items = this.categories[categoryName];
             const categoryY = startY + categoryIndex * categorySpacingY;
 
-            // Texto del nombre de la categoría
+            // Texto de la categoría
             const categoryText = this.add.text(width * 0.25, categoryY + 15, categoryName, {
                 fontSize: "11px",
                 color: "#ffffff",
                 fontFamily: "Arial",
             }).setOrigin(0.5);
 
-            // Crear los ítems en una fila
+            // Crear ítems
             const itemSlots = [];
             const spacingX = 30;
             const totalWidth = 3 * spacingX;
@@ -380,21 +392,17 @@ export default class ShopScene extends Phaser.Scene {
             const y = categoryY + 40;
 
             let itemsIndex = [];
+            for (let i = 0; i < items.length; i++) itemsIndex.push(i);
 
-            for(let i = 0; i < items.length; i++)
-                    itemsIndex.push(i);
-
-            if(categoryName !== 'Personajes')
-            {
+            if (categoryName !== 'Personajes') {
                 while (itemsIndex.length < 4) {
                     const randomIndex = Math.floor(Math.random() * items.length);
                     itemsIndex.push(randomIndex);
                 }
             }
 
-            const max = categoryName !== 'Personajes' ? 4 : items.length > 4 ? 4 : items.length;
-            for(let i = 0; i < max; i++)
-            {
+            const max = categoryName !== 'Personajes' ? 4 : Math.min(items.length, 4);
+            for (let i = 0; i < max; i++) {
                 const randomIndex = Math.floor(Math.random() * itemsIndex.length);
                 const actualItemIndex = itemsIndex[randomIndex];
                 itemsIndex.splice(randomIndex, 1);
@@ -408,12 +416,19 @@ export default class ShopScene extends Phaser.Scene {
                     .setOrigin(0.5)
                     .setDisplaySize(size * 0.8, size * 0.8);
 
-                itemSlots.push({ rect, icon, item});
+                // Guardar escala y posición original
+                rect.originalScale = rect.scale;
+                icon.originalScaleX = icon.scaleX;
+                icon.originalScaleY = icon.scaleY;
+                icon.originalY = icon.y;
+
+                itemSlots.push({ rect, icon, item });
             }
 
             this.categoryGroups.push({ name: categoryName, itemSlots, categoryText });
         });
 
+        // Monedas
         this.coinsText = this.add.text(80, 15, "Coins: " + this.currentCoins, {
             fontSize: "16px",
             color: "#ffff00",
@@ -421,10 +436,9 @@ export default class ShopScene extends Phaser.Scene {
             align: "center"
         }).setOrigin(0.5);
 
-        // === Vista previa (lado derecho) ===
+        // Vista previa
         const firstItem = this.categories[this.categoryNames[0]][0];
-
-        const previewSize = 100; 
+        const previewSize = 100;
         this.preview = this.add.image(width * 0.75, height * 0.4, firstItem.texture)
             .setOrigin(0.5)
             .setDisplaySize(previewSize, previewSize);
@@ -450,14 +464,15 @@ export default class ShopScene extends Phaser.Scene {
             align: "center"
         }).setOrigin(0.5);
 
-        // === Teclas ===
+        // Teclas
         this.cursors = this.input.keyboard.createCursorKeys();
         this.keyEsc = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 
-        // === Selección inicial ===
+        // Selección inicial
         this.updateSelection(0, 0);
         this.updateCoins(0);
     }
+
 
     updateCoins(amount)
     {
