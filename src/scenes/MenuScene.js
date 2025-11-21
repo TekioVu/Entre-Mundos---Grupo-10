@@ -98,13 +98,13 @@ export default class MenuScene extends Phaser.Scene {
     updateSelection() {
     this.optionObjects.forEach((obj, i) => {
         if (i === this.selectedIndex) {
-            // Fondo más claro al seleccionar
-            obj.rect.setFillStyle(0x2a2a2a);
-            obj.rect.setStrokeStyle(2, 0x3a3a3a); // borde gris medio
+            // Fondo más claro y elegante
+            obj.rect.setFillStyle(0x3a3a3a);      // gris más claro
+            obj.rect.setStrokeStyle(3, 0xffffff); // borde blanco elegante
 
-            // Texto blanco
+            // Texto blanco y negrita
             obj.text.setColor("#ffffff");
-            obj.text.setStyle({ fontSize: 24 });
+            obj.text.setStyle({ fontSize: 24, fontStyle: 'bold' });
         } else {
             // Fondo gris oscuro
             obj.rect.setFillStyle(0x1a1a1a);
@@ -112,49 +112,51 @@ export default class MenuScene extends Phaser.Scene {
 
             // Texto gris claro
             obj.text.setColor("#cccccc");
-            obj.text.setStyle({ fontSize: 20 });
+            obj.text.setStyle({ fontSize: 20, fontStyle: 'normal' });
         }
     });
 }
 
-    updateText() {
-        // Limpiar los objetos anteriores
-        this.optionObjects.forEach(obj => {
-            obj.rect.destroy();
-            obj.text.destroy();
-        });
-        this.optionObjects = [];
+updateText() {
+    // Limpiar los objetos anteriores
+    this.optionObjects.forEach(obj => {
+        obj.rect.destroy();
+        obj.text.destroy();
+    });
+    this.optionObjects = [];
 
-        const rectWidth = this.width / this.opciones.length;
-        // Crear rectángulos y textos (en horizontal)
-        for (let i = 0; i < this.opciones.length; i++) {
-            const x = i * rectWidth + rectWidth / 2;
+    const rectWidth = this.width / this.opciones.length;
+    for (let i = 0; i < this.opciones.length; i++) {
+        const x = i * rectWidth + rectWidth / 2;
 
-            const rect = this.add.rectangle(
-                x,
-                this.height / 2,
-                rectWidth * 0.9,
-                this.height * 0.8,
-                0x1a1a1a
-            ).setOrigin(0.5);
+        const rect = this.add.rectangle(
+            x,
+            this.height / 2,
+            rectWidth * 0.9,
+            this.height * 0.8,
+            0x1a1a1a
+        ).setOrigin(0.5);
 
-            rect.setStrokeStyle(2, 0x3a3a3a); // borde gris medio
+        rect.setStrokeStyle(2, 0x3a3a3a); // borde gris medio por defecto
 
-            let txt = "LOCKED";
-            if (i < this.unlockedbooks || i === this.opciones.length - 1) {
-                txt = this.opciones[i];
-            }
-
-            const text = this.add.text(x, this.height / 2, txt, {
-                fontFamily: "Arial",
-                fontSize: 20,
-                color: "#cccccc",
-            }).setOrigin(0.5);
-            text.setRotation(-Math.PI / 2); 
-
-            this.optionObjects.push({ rect, text });
+        let txt = "LOCKED";
+        if (i < this.unlockedbooks || i === this.opciones.length - 1) {
+            txt = this.opciones[i];
         }
+
+        const text = this.add.text(x, this.height / 2, txt, {
+            fontFamily: "Arial",
+            fontSize: 20,
+            color: "#cccccc",
+        }).setOrigin(0.5);
+        text.setRotation(-Math.PI / 2);
+
+        this.optionObjects.push({ rect, text });
     }
+
+    // Resaltar la selección inicial
+    this.updateSelection();
+}
 
     getSelectedScene()
     {
