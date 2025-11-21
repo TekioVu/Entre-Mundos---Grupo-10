@@ -216,25 +216,6 @@ export default class UIScene extends Phaser.Scene {
         this.itemsMenu.remap(this.battleScene.inventory);
     }
 
-    // === Imput Manager ===
-    // onKeyInput(event) {
-    //     const keysToPrevent = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space"];
-    //     if (keysToPrevent.includes(event.code)) event.preventDefault();
-
-    //     if (this.currentMenu) {
-    //         if (event.code === "ArrowUp") this.currentMenu.moveSelectionUp();
-    //         else if (event.code === "ArrowDown") this.currentMenu.moveSelectionDown();
-    //         else if (event.code === "ArrowRight" || event.code === "Shift") { 
-    //             if (this.currentMenu === this.enemiesMenu) this.enemiesMarker.setVisible(false);
-
-    //             if(this.currentMenu !== this.heroesMenu) { this.currentMenu.back(); } 
-    //     }
-    //         else if (event.code === "Space" || (event.code === "ArrowLeft" && this.currentMenu !== this.enemiesMenu)) this.currentMenu.confirm();
-    //     }
-    //     this.updateEnemiesMarker();
-
-    // }
-
     onKeyInput(event) {
 const keysToPrevent = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space", "KeyB"];
 if (keysToPrevent.includes(event.code)) event.preventDefault();

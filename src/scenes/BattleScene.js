@@ -114,13 +114,13 @@ export default class BattleScene extends Phaser.Scene {
                     { 
                         key: 'goblin', idleKey: 'goblin_idle', attackKey: 'goblin_attack', damageKey: 'goblin_damage', deathKey: 'goblin_death', 
                         idle: [0, 3], attack: [0, 7], damage: [0, 3], death: [0, 3],  scale: 1.2, name: 'Goblin',
-                        hp: 30/*25*/, atk: 6,
+                        hp: 1/*25*/, atk: 6,
                         positions: [[4, 1], [5, 0]],
                     },
                     { 
                         key: 'ghost', idleKey: 'ghost_idle', attackKey: 'ghost_attack', damageKey: 'ghost_damage', deathKey: 'ghost_death',
                         idle: [0, 11], attack: [0, 7], damage: [0, 9], death: [0, 9], scale: 0.3, name: 'Ghost',
-                        hp: 28/*18*/, atk: 9,
+                        hp: 1/*18*/, atk: 9,
                         positions: [[1, 1], [2, 0]],
                     },
                 ],
@@ -129,13 +129,15 @@ export default class BattleScene extends Phaser.Scene {
                 background: 'horror_background',
                 enemyDefs: [
                     { 
-                        key: 'mushroom', idleKey: 'mushroom_idle', idle: [0, 3], scale: 1.2, name: 'Mushroom',
-                        hp: 1, atk: 5,
+                        key: 'mushroom', idleKey: 'mushroom_idle', attackKey: 'mushroom_attack', damageKey: 'mushroom_damage', deathKey: 'mushroom_death', 
+                        idle: [0, 3], attack: [0,7], damage: [0, 3], death: [0,3], scale: 1.2, name: 'Mushroom',
+                        hp: 25, atk: 5,
                         positions: [[3, 1], [4, 0]],
                     },
                     { 
-                        key: 'flying_eye', idleKey: 'flying_eye_idle', idle: [0, 7], scale: 1.2, name: 'Flying Eye',
-                        hp: 1, atk: 11,
+                        key: 'flying_eye', idleKey: 'flying_eye_idle', attackKey: 'flying_eye_attack', damageKey: 'flying_eye_damage', deathKey: 'flying_eye_death',
+                        idle: [0, 7], attack: [0, 7], damage: [0, 3], death: [0,3], scale: 1.2, name: 'Flying Eye',
+                        hp: 25, atk: 11,
                         positions: [[1, 1], [2, 0]],
                     },
                 ],
@@ -144,12 +146,14 @@ export default class BattleScene extends Phaser.Scene {
                 background: 'history_background',
                 enemyDefs: [
                     { 
-                        key: 'pharaoh', idleKey: 'pharaoh_idle', idle: [0, 2], scale: 0.6, name: 'Pharaoh',
+                        key: 'pharaoh', idleKey: 'pharaoh_idle', attackKey: 'pharaoh_attack', damageKey: 'pharaoh_damage', deathKey: 'pharaoh_death',
+                        idle: [0, 2], attack: [0, 2], damage: [0, 2], death: [0, 2], scale: 0.6, name: 'Pharaoh',
                         hp: 2, atk: 8,
                         positions: [[1, 1], [2, 0]],
                     },
                     { 
-                        key: 'scarab', idleKey: 'scarab_idle', idle: [0, 1], scale: 0.6, name: 'Scarab',
+                        key: 'scarab', idleKey: 'scarab_idle', attackKey: 'scarab_attack', damageKey: 'scarab_damage', deathKey: 'scarab_death',
+                        idle: [0, 1], attack: [0, 2], damage: [0, 2], death: [0, 2], scale: 0.6, name: 'Scarab',
                         hp: 2, atk: 5,
                         positions: [[3, 1], [4, 0]],
                     },
@@ -159,8 +163,9 @@ export default class BattleScene extends Phaser.Scene {
                 background: 'comedy_background',
                 enemyDefs: [
                     { 
-                        key: 'jester', idleKey: 'jester_idle', idle: [11, 17], scale: 1, name: 'Jester',
-                        hp: 18, atk: 7,
+                        key: 'jester', idleKey: 'jester_idle', attackKey: 'jester_attack', damageKey: 'jester_damage', deathKey: 'jester_death',
+                        idle: [11, 17], attack: [89, 72], damage: [107, 104], death: [125, 117], scale: 1, name: 'Jester',
+                        hp: 40, atk: 7,
                         positions: [[0, 1], [1, 0]],
                     },
                     // { 
@@ -174,17 +179,20 @@ export default class BattleScene extends Phaser.Scene {
                 background: 'horror_background',
                 enemyDefs: [
                     { 
-                        key: 'boss2', anim: [0, 7], scale: 1, name: 'Scared Wizard',
+                        key: 'boss2', idleKey: 'boss2_idle', attackKey: 'boss2_attack', damageKey: 'boss2_damage', deathKey: 'boss2_death',
+                        idle: [0, 7], attack: [0, 2], damage: [0, 2], death: [0, 2], scale: 1, name: 'Scared Wizard',
                         hp: 500, atk: 22,
                         positions: [[0, 2]],
                     },
                     { 
-                        key: 'boss3', anim: [0, 9], scale: 1, name: 'Sad Wizard',
+                        key: 'boss3', idleKey: 'boss3_idle', attackKey: 'boss3_attack', damageKey: 'boss3_damage', deathKey: 'boss3_death',
+                        idle: [0, 9], attack: [0, 2], damage: [0, 2], death: [0, 2], scale: 1, name: 'Sad Wizard',
                         hp: 500, atk: 22,
                         positions: [[4, 1]],
                     },
                     { 
-                        key: 'boss1', anim: [0, 7], scale: 1, name: 'Angry Wizard',
+                        key: 'boss1', idleKey: 'boss1_idle', attackKey: 'boss1_attack', damageKey: 'boss1_damage', deathKey: 'boss1_death',
+                        idle: [0, 7], attack: [0, 2], damage: [0, 2], death: [0, 2], scale: 1, name: 'Angry Wizard',
                         hp: 500, atk: 22,
                         positions: [[2, 0]],
                     },
@@ -220,8 +228,7 @@ export default class BattleScene extends Phaser.Scene {
             if (!this.anims.exists(`${def.key}-idle`)) {
                 this._createIdleAnim(def.idleKey, def.idle[0], def.idle[1], `${def.key}-idle`);
             }
-            if (this.type === "Goblin" || this.type === "Ghost"|| this.type === "Timmy" || this.type === "Wizard")
-            {
+            
             if (!this.anims.exists(`${def.key}-attack`)) {
                 this._createAttackAnim(def.attackKey, def.attack[0], def.attack[1], `${def.key}-attack`);
             }
@@ -230,7 +237,6 @@ export default class BattleScene extends Phaser.Scene {
             }
             if (!this.anims.exists(`${def.key}-damage`)) {
                 this._createDamageAnim(def.damageKey, def.damage[0], def.damage[1], `${def.key}-damage`);
-            }
             }
 
             def.positions.forEach(([xIdx, yIdx]) => {
@@ -316,8 +322,8 @@ export default class BattleScene extends Phaser.Scene {
         if (positionKey=== 4 || positionKey === 5) { hero.setDepth(3); hero.hpText.setDepth(3);}
         
 
-        if (hero.name === 'Wizard') {
-            hero.setScale(0.2);
+        if (hero.type === 'Wizard') {
+            hero.setScale(0.7);
         } else if (hero.name === 'Timmy') {
             hero.setScale(1.2);
         }else if (hero.texture.key === 'ghost') {
@@ -335,7 +341,9 @@ export default class BattleScene extends Phaser.Scene {
 
     createMiniBoss() {
         const bossConfig = {
-            'FANTASÍA': { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [1, 1], scale: 1, hp: 1, atk: 5 },
+            'FANTASÍA': { key: 'dragon', idleKey: 'dragon_idle', attackKey: 'dragon_attack', damageKey: 'dragon_damage', deathKey: 'dragon_death',
+            idle: [11, 13], attack: [0, 3], damage: [9, 10], death: [4, 8], name: 'Dragon', pos: [1, 1], scale: 1, hp: 40, atk: 5 },
+
             'TERROR':   { key: 'cacodaemon', anim: [0, 5], name: 'Cacodaemon', pos: [1, 1], scale: 1, hp: 150, atk: 25 },
             'HISTORIA': { key: 'medusa', anim: [14, 16], name: 'Medusa', pos: [1, 1], scale: 1, hp: 150, atk: 25 },
             'COMEDIA':  { key: 'king', anim: [0, 7], name: 'King', pos: [1, 1], scale: 1, hp: 350, atk: 10 },
@@ -351,21 +359,25 @@ export default class BattleScene extends Phaser.Scene {
         const animKey = `${config.key}-idle`;
 
         // Crear animación si no existe
-        if (!this.anims.exists(animKey)) {
-            this.anims.create({
-                key: animKey,
-                frames: this.anims.generateFrameNumbers(config.key, { start: config.anim[0], end: config.anim[1] }),
-                frameRate: 5,
-                repeat: -1,
-            });
-        }
+        if (!this.anims.exists(`${config.key}-idle`)) {
+                this._createIdleAnim(config.idleKey, config.idle[0], config.idle[1], `${config.key}-idle`);
+            }
+        if (!this.anims.exists(`${config.key}-attack`)) {
+                this._createAttackAnim(config.attackKey, config.attack[0], config.attack[1], `${config.key}-attack`);
+            }
+            if (!this.anims.exists(`${config.key}-death`)) {
+                this._createDeathAnim(config.deathKey, config.death[0], config.death[1], `${config.key}-death`);
+            }
+            if (!this.anims.exists(`${config.key}-damage`)) {
+                this._createDamageAnim(config.damageKey, config.damage[0], config.damage[1], `${config.key}-damage`);
+            }
 
         // Posición (si usa índices del array o coordenadas absolutas)
         const [x, y] = typeof config.pos[0] === "number" && config.pos[0] < 10
             ? [this.enemyPosX[config.pos[0]], this.enemyPosY[config.pos[1]]]
             : config.pos;
 
-        const boss = new Enemy(this, x, y, config.key, config.anim[1], config.name, config.hp, config.atk);
+        const boss = new Enemy(this, x, y, config.key, config.idle[1], config.name, config.hp, config.atk);
         boss.setScale(config.scale);
         this.add.existing(boss).anims.play(animKey);
 

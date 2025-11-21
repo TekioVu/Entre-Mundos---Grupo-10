@@ -87,7 +87,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         let d;
         if (target.pos == 'v') d = this.damage - 5;
         else d = this.damage;
-        if (this.type === "Goblin" || this.type === "Ghost" || this.type === "Timmy" || this.type === "Wizard")
+        if (this.type === "Goblin" || this.type === "Ghost" || this.type === "Timmy" || this.type === "Wizard"|| this.type === "Mushroom" || this.type === "Flying Eye" || this.type === "Dragon"|| this.type === "Jester")
         {
              this.playAnim('attack', () => this.playAnim('idle'));
         }
@@ -167,7 +167,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             this.hp = 0;
             this.alive = false;
 
-            if (this.type === "Goblin" || this.type === "Ghost" || this.type === "Timmy" || this.type === "Wizard")
+            if (this.type === "Goblin" || this.type === "Ghost" || this.type === "Timmy" || this.type === "Wizard"|| this.type === "Mushroom" || this.type === "Flying Eye"|| this.type === "Dragon"|| this.type === "Jester")
             {
              this.playAnim('death', () => {
                 
@@ -180,6 +180,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             });
           }
             else {
+
                 bs.tweens.add({
                             targets: this,
                             alpha: 0,
@@ -253,7 +254,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             }
         }
         else{
-            if (this.type === "Goblin" || this.type === "Ghost"|| this.type === "Timmy" || this.type === "Wizard")
+            if (this.type === "Goblin" || this.type === "Ghost"|| this.type === "Timmy" || this.type === "Wizard"|| this.type === "Mushroom" || this.type === "Flying Eye"|| this.type === "Dragon"|| this.type === "Jester")
             {
              this.playAnim('damage', () => this.playAnim('idle'));
             }

@@ -32,43 +32,97 @@ export default class BootScene extends Phaser.Scene {
         this.load.spritesheet('ghost_death', './assets/Enemigos/Ghost/Sprite-fantasma4.png', { frameWidth: 128, frameHeight: 128 });
         this.load.spritesheet('ghost_damage', './assets/Enemigos/Ghost/Sprite-fantasma4.png', { frameWidth: 128, frameHeight: 128 });
 
-
         //Terror
+        this.load.spritesheet('flying_eye', './assets/Enemigos/Flying_eye/Flight.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('flying_eye_idle', './assets/Enemigos/Flying_eye/Flight.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('flying_eye_attack', './assets/Enemigos/Flying_eye/Attack.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('flying_eye_death', './assets/Enemigos/Flying_eye/Death.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('flying_eye_damage', './assets/Enemigos/Flying_eye/Take Hit.png', { frameWidth: 150, frameHeight: 150 });
+
+        this.load.spritesheet('mushroom', './assets/Enemigos/Mushroom/Idle.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('mushroom_idle', './assets/Enemigos/Mushroom/Idle.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('mushroom_attack', './assets/Enemigos/Mushroom/Attack.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('mushroom_death', './assets/Enemigos/Mushroom/Death.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('mushroom_damage', './assets/Enemigos/Mushroom/Take Hit.png', { frameWidth: 150, frameHeight: 150 });
+
+        //Comedia
         this.load.spritesheet('clown', './assets/Enemigos/Clown/Clown_Sprite.png', { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('clown_idle', './assets/Enemigos/Clown/Clown_Sprite.png', { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('clown_attack', './assets/Enemigos/Clown/Clown_Sprite.png', { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('clown_death', './assets/Enemigos/Clown/Clown_Sprite.png', { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('clown_damage', './assets/Enemigos/Clown/Clown_Sprite.png', { frameWidth: 32, frameHeight: 32 });
+
         this.load.spritesheet('jester', './assets/Enemigos/Jester/Jester.png', { frameWidth: 64, frameHeight: 64 });
         this.load.spritesheet('jester_idle', './assets/Enemigos/Jester/Jester.png', { frameWidth: 64, frameHeight: 64 });
+        this.load.spritesheet('jester_attack', './assets/Enemigos/Jester/Jester.png', { frameWidth: 64, frameHeight: 64 });
+        this.load.spritesheet('jester_death', './assets/Enemigos/Jester/Jester.png', { frameWidth: 64, frameHeight: 64 });
+        this.load.spritesheet('jester_damage', './assets/Enemigos/Jester/Jester.png', { frameWidth: 64, frameHeight: 64 });
 
         this.load.spritesheet('king', './assets/Enemigos/MedievalKing/Idle.png', { frameWidth: 160, frameHeight: 111 });
+        this.load.spritesheet('king_idle', './assets/Enemigos/MedievalKing/Idle.png', { frameWidth: 160, frameHeight: 111 });
+        this.load.spritesheet('king_attack', './assets/Enemigos/MedievalKing/Idle.png', { frameWidth: 160, frameHeight: 111 });
+        this.load.spritesheet('king_damage', './assets/Enemigos/MedievalKing/Idle.png', { frameWidth: 160, frameHeight: 111 });
+        this.load.spritesheet('king_death', './assets/Enemigos/MedievalKing/Idle.png', { frameWidth: 160, frameHeight: 111 });
 
 
         //Historia
         this.load.spritesheet('pharaoh', './assets/Enemigos/Egypt/Pharaoh_Stand.png', { frameWidth: 128, frameHeight: 128 });
         this.load.spritesheet('pharaoh_idle', './assets/Enemigos/Egypt/Pharaoh_Stand.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('pharaoh_attack', './assets/Enemigos/Egypt/Pharaoh_RAttack.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('pharaoh_damage', './assets/Enemigos/Egypt/Pharaoh_Stand.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('pharaoh_death', './assets/Enemigos/Egypt/Pharaoh_Stand.png', { frameWidth: 128, frameHeight: 128 });
+
         this.load.spritesheet('scarab', './assets/Enemigos/Egypt/Scarab_Stand.png', { frameWidth: 128, frameHeight: 128 });
         this.load.spritesheet('scarab_idle', './assets/Enemigos/Egypt/Scarab_Stand.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('scarab_attack', './assets/Enemigos/Egypt/Scarab_Fly.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('scarab_damage', './assets/Enemigos/Egypt/Scarab_Fly.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('scarab_death', './assets/Enemigos/Egypt/Scarab_Fly.png', { frameWidth: 128, frameHeight: 128 });
 
-        //Terror
-        this.load.spritesheet('flying_eye', './assets/Enemigos/Flying_eye/Flight.png', { frameWidth: 150, frameHeight: 150 });
-        this.load.spritesheet('flying_eye_idle', './assets/Enemigos/Flying_eye/Flight.png', { frameWidth: 150, frameHeight: 150 });
-        this.load.spritesheet('mushroom', './assets/Enemigos/Mushroom/Idle.png', { frameWidth: 150, frameHeight: 150 });
-        this.load.spritesheet('mushroom_idle', './assets/Enemigos/Mushroom/Idle.png', { frameWidth: 150, frameHeight: 150 });
+        
 
 
         //Bosses
         this.load.spritesheet('dragon', './assets/Enemigos/Dragon/Dragon.png', { frameWidth: 256, frameHeight: 256 });
         this.load.spritesheet('dragon_idle', './assets/Enemigos/Dragon/Dragon.png', { frameWidth: 256, frameHeight: 256 });
+        this.load.spritesheet('dragon_attack', './assets/Enemigos/Dragon/Dragon.png', { frameWidth: 256, frameHeight: 256 });
+        this.load.spritesheet('dragon_death', './assets/Enemigos/Dragon/Dragon.png', { frameWidth: 256, frameHeight: 256 });
+        this.load.spritesheet('dragon_damage', './assets/Enemigos/Dragon/Dragon.png', { frameWidth: 256, frameHeight: 256 });
+
         this.load.spritesheet('medusa', './assets/Enemigos/Medusa/Medusa.png', { frameWidth: 128, frameHeight: 128 });
         this.load.spritesheet('medusa_idle', './assets/Enemigos/Medusa/Medusa.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('medusa_attack', './assets/Enemigos/Medusa/Medusa.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('medusa_damage', './assets/Enemigos/Medusa/Medusa.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('medusa_death', './assets/Enemigos/Medusa/Medusa.png', { frameWidth: 128, frameHeight: 128 });
+
         this.load.spritesheet('cacodaemon', './assets/Enemigos/Cacodaemon/Cacodaemon.png', { frameWidth: 64, frameHeight: 64 });
         this.load.spritesheet('cacodaemon_idle', './assets/Enemigos/Cacodaemon/Cacodaemon.png', { frameWidth: 64, frameHeight: 64 });
+        this.load.spritesheet('cacodaemon_attack', './assets/Enemigos/Cacodaemon/Cacodaemon.png', { frameWidth: 64, frameHeight: 64 });
+        this.load.spritesheet('cacodaemon_damage', './assets/Enemigos/Cacodaemon/Cacodaemon.png', { frameWidth: 64, frameHeight: 64 });
+        this.load.spritesheet('cacodaemon_death', './assets/Enemigos/Cacodaemon/Cacodaemon.png', { frameWidth: 64, frameHeight: 64 });
 
         this.load.spritesheet('demon', './assets/Enemigos/Bosses/Demon.png', { frameWidth: 288, frameHeight: 160 });
         this.load.spritesheet('demon_idle', './assets/Enemigos/Bosses/Demon.png', { frameWidth: 288, frameHeight: 160 });
+        this.load.spritesheet('demon_attack', './assets/Enemigos/Bosses/Demon.png', { frameWidth: 288, frameHeight: 160 });
+        this.load.spritesheet('demon_damage', './assets/Enemigos/Bosses/Demon.png', { frameWidth: 288, frameHeight: 160 });
+        this.load.spritesheet('demon_death', './assets/Enemigos/Bosses/Demon.png', { frameWidth: 288, frameHeight: 160 });
 
         this.load.spritesheet('boss1', './assets/Enemigos/FinalBosses/Evil Wizard/Idle.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('boss1_idle', './assets/Enemigos/FinalBosses/Evil Wizard/Idle.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('boss1_attack', './assets/Enemigos/FinalBosses/Evil Wizard/Idle.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('boss1_damage', './assets/Enemigos/FinalBosses/Evil Wizard/Idle.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('boss1_death', './assets/Enemigos/FinalBosses/Evil Wizard/Idle.png', { frameWidth: 150, frameHeight: 150 });
+
         this.load.spritesheet('boss2', './assets/Enemigos/FinalBosses/Evil Wizard 2/Idle.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('boss2_idle', './assets/Enemigos/FinalBosses/Evil Wizard 2/Idle.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('boss2_attack', './assets/Enemigos/FinalBosses/Evil Wizard 2/Idle.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('boss2_damage', './assets/Enemigos/FinalBosses/Evil Wizard 2/Idle.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('boss2_death', './assets/Enemigos/FinalBosses/Evil Wizard 2/Idle.png', { frameWidth: 250, frameHeight: 250 });
+
         this.load.spritesheet('boss3', './assets/Enemigos/FinalBosses/Evil Wizard 3/Idle.png', { frameWidth: 140, frameHeight: 140 });
+        this.load.spritesheet('boss3_idle', './assets/Enemigos/FinalBosses/Evil Wizard 3/Idle.png', { frameWidth: 140, frameHeight: 140 });
+        this.load.spritesheet('boss3_attack', './assets/Enemigos/FinalBosses/Evil Wizard 3/Idle.png', { frameWidth: 140, frameHeight: 140 });
+        this.load.spritesheet('boss3_damage', './assets/Enemigos/FinalBosses/Evil Wizard 3/Idle.png', { frameWidth: 140, frameHeight: 140 });
+        this.load.spritesheet('boss3_death', './assets/Enemigos/FinalBosses/Evil Wizard 3/Idle.png', { frameWidth: 140, frameHeight: 140 });
 
         //Backgrounds
         this.load.image('fantasy_background', './assets/Backgrounds/Fantasy.png');
