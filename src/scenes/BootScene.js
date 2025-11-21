@@ -52,7 +52,7 @@ export default class BootScene extends Phaser.Scene {
         this.load.spritesheet('clown_death', './assets/Enemigos/Clown/Clown_Sprite.png', { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('clown_damage', './assets/Enemigos/Clown/Clown_Sprite.png', { frameWidth: 32, frameHeight: 32 });
 
-        this.load.spritesheet('jester', './assets/Enemigos/Jester/Jester.png', { frameWidth: 64, frameHeight: 64 });
+        this.load.spritesheet('jester', './assets/Enemigos/Jester/Jester_Icon.png', { frameWidth: 64, frameHeight: 64 });
         this.load.spritesheet('jester_idle', './assets/Enemigos/Jester/Jester.png', { frameWidth: 64, frameHeight: 64 });
         this.load.spritesheet('jester_attack', './assets/Enemigos/Jester/Jester.png', { frameWidth: 64, frameHeight: 64 });
         this.load.spritesheet('jester_death', './assets/Enemigos/Jester/Jester.png', { frameWidth: 64, frameHeight: 64 });
@@ -127,6 +127,7 @@ export default class BootScene extends Phaser.Scene {
         this.load.image('history_background', './assets/Backgrounds/Egypt3.png');
         this.load.image('comedy_background', './assets/Backgrounds/Comedy3.png');
         this.load.image('horror_background', './assets/Backgrounds/Horror2.png');
+        this.load.image('finalboss_background', './assets/Backgrounds/FinalBoss2.png');
 
         //UI
         this.load.image('attack_panel', './assets/UI/Panel.png');

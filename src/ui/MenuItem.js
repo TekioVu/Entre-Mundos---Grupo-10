@@ -29,6 +29,7 @@ export default class MenuItem extends Phaser.GameObjects.Container {
             else if (dato.key === 'goblin') this.sprite.setScale(0.5);
             else if (dato.key === 'wizard') this.sprite.setScale(0.2);
             else if (dato.key === 'timmy') this.sprite.setScale(0.45);
+            else if (dato.key === 'jester') this.sprite.setScale(0.45);
 
             this.add(this.sprite);
         } else {
