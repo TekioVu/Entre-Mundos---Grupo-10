@@ -120,57 +120,59 @@ export default class ShopScene extends Phaser.Scene {
     }
 
 
-  updateSelection(itemIndex, categoryIndex) {
+updateSelection(itemIndex, categoryIndex) {
+
+    // 🟠 Restaurar anterior
     const prevGroup = this.categoryGroups[this.selectedCategoryIndex];
     if (prevGroup && prevGroup.itemSlots[this.selectedItemIndex]) {
         const prev = prevGroup.itemSlots[this.selectedItemIndex];
 
+        // Fondo normal
         prev.rect.setFillStyle(0x333333);
         prev.rect.setStrokeStyle(2, 0x3a3a3a);
 
-        if (prev.rect.tween) { prev.rect.tween.stop(); prev.rect.tween = null; }
-        if (prev.icon.tween) { prev.icon.tween.stop(); prev.icon.tween = null; }
+        // Reset flotación
+        if (prev.icon.floatTween) {
+            prev.icon.floatTween.stop();
+            prev.icon.floatTween = null;
+        }
 
-        prev.rect.setScale(prev.rect.originalScale || 1);
-        prev.icon.setScale(prev.icon.originalScaleX || 1, prev.icon.originalScaleY || 1);
+        // Desactivar brillo
+        if (prev.rect.glowTween) {
+            prev.rect.glowTween.stop();
+            prev.rect.glowTween = null;
+        }
+
         prev.icon.setY(prev.icon.originalY || prev.icon.y);
+        prev.rect.isGlowing = false;
     }
 
+    // Actualizar índices
     this.selectedCategoryIndex = categoryIndex;
     this.selectedItemIndex = itemIndex;
 
     const newGroup = this.categoryGroups[this.selectedCategoryIndex];
     const selected = newGroup.itemSlots[this.selectedItemIndex];
 
+    // 🟡 Fondo seleccionado
     selected.rect.setFillStyle(0xffffaa);
     selected.rect.setStrokeStyle(2, 0xffaa00);
 
-    if (selected.rect.originalScale === undefined) selected.rect.originalScale = selected.rect.scale;
-    if (selected.icon.originalScaleX === undefined) selected.icon.originalScaleX = selected.icon.scaleX;
-    if (selected.icon.originalScaleY === undefined) selected.icon.originalScaleY = selected.icon.scaleY;
-    if (selected.icon.originalY === undefined) selected.icon.originalY = selected.icon.y;
+    // Guardar posición original solo una vez
+    if (selected.icon.originalY === undefined)
+        selected.icon.originalY = selected.icon.y;
 
-    // 🌟 Flotación mejorada
-    selected.icon.tween = this.tweens.add({
+    // ⭐ FLOTACIÓN SUPER SUAVE SIN CAMBIAR ESCALA
+    selected.icon.floatTween = this.tweens.add({
         targets: selected.icon,
-        y: selected.icon.originalY - 3,     // menos desplazamiento → nunca se sale del cuadrado
-        scaleX: selected.icon.originalScaleX * 1.04,
-        scaleY: selected.icon.originalScaleY * 1.04,
-        duration: 350,                       // más rápido y más suave
-        yoyo: true,
-        repeat: -1,
-        ease: "Sine.easeInOut"               // hace que no frene de golpe abajo
-    });
-
-    selected.rect.tween = this.tweens.add({
-        targets: selected.rect,
-        scale: selected.rect.originalScale * 1.015,
-        duration: 350,
+        y: selected.icon.originalY - 3,
+        duration: 650,
         yoyo: true,
         repeat: -1,
         ease: "Sine.easeInOut"
     });
 
+    // 🟢 PREVIEW
     const item = selected.item;
     this.preview.setTexture(item.texture).setDisplaySize(100, 100);
     this.previewName.setText(item.name);
