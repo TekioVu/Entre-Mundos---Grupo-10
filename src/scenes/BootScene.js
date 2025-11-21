@@ -60,9 +60,9 @@ export default class BootScene extends Phaser.Scene {
 
         this.load.spritesheet('king', './assets/Enemigos/MedievalKing/Idle.png', { frameWidth: 160, frameHeight: 111 });
         this.load.spritesheet('king_idle', './assets/Enemigos/MedievalKing/Idle.png', { frameWidth: 160, frameHeight: 111 });
-        this.load.spritesheet('king_attack', './assets/Enemigos/MedievalKing/Idle.png', { frameWidth: 160, frameHeight: 111 });
-        this.load.spritesheet('king_damage', './assets/Enemigos/MedievalKing/Idle.png', { frameWidth: 160, frameHeight: 111 });
-        this.load.spritesheet('king_death', './assets/Enemigos/MedievalKing/Idle.png', { frameWidth: 160, frameHeight: 111 });
+        this.load.spritesheet('king_attack', './assets/Enemigos/MedievalKing/Attack1.png', { frameWidth: 160, frameHeight: 111 });
+        this.load.spritesheet('king_damage', './assets/Enemigos/MedievalKing/Take Hit - white silhouette.png', { frameWidth: 160, frameHeight: 111 });
+        this.load.spritesheet('king_death', './assets/Enemigos/MedievalKing/Death.png', { frameWidth: 160, frameHeight: 111 });
 
 
         //Historia
@@ -77,9 +77,6 @@ export default class BootScene extends Phaser.Scene {
         this.load.spritesheet('scarab_attack', './assets/Enemigos/Egypt/Scarab_Fly.png', { frameWidth: 128, frameHeight: 128 });
         this.load.spritesheet('scarab_damage', './assets/Enemigos/Egypt/Scarab_Fly.png', { frameWidth: 128, frameHeight: 128 });
         this.load.spritesheet('scarab_death', './assets/Enemigos/Egypt/Scarab_Fly.png', { frameWidth: 128, frameHeight: 128 });
-
-        
-
 
         //Bosses
         this.load.spritesheet('dragon', './assets/Enemigos/Dragon/Dragon.png', { frameWidth: 256, frameHeight: 256 });
