@@ -1,3 +1,4 @@
+import Item from "../characters/Item.js";
 import MenuItem from "./MenuItem.js";
 
 export default class Menu extends Phaser.GameObjects.Container {
@@ -19,6 +20,7 @@ export default class Menu extends Phaser.GameObjects.Container {
         const index = this.menuItems.length;
         this.columnSpacing= 30;
         let displayData;
+
 
         if (this.icons && unit && unit.textureKey) {
             displayData = { type: "icon", key: unit.textureKey };
@@ -45,6 +47,9 @@ export default class Menu extends Phaser.GameObjects.Container {
         
 
         const menuItem = new MenuItem(xOffset, yOffset, displayData, this.scene);
+        if(unit.name){
+            menuItem.setScale(0.725);
+        }
         menuItem.unit = unit;
         this.menuItems.push(menuItem);
         this.add(menuItem);

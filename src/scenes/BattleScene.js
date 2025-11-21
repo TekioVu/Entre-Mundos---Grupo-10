@@ -75,7 +75,7 @@ export default class BattleScene extends Phaser.Scene {
         if (action === "attack") {
             this.units[this.index].attack(this.enemies[targetIndex]);
             
-
+            this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
         }
         else if (action === "heal"){
             this.units[this.index].heal(this.itemsArray.getItem(itemIndex).getStat());
@@ -93,8 +93,6 @@ export default class BattleScene extends Phaser.Scene {
             this.itemsArray.useItem(itemIndex);
             this.createInventory();
         }
-
-        this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
     }
 
     update() {

@@ -55,6 +55,10 @@ export default class MenuItem extends Phaser.GameObjects.Container {
         }
     }
 
+    getDataKey() {
+        return this.dato.key;
+    }
+
     select() {
         const hoverBg = 0x3a3a3a;      // gris más claro que el fondo normal
         const borderColor = 0xffffff;  // borde blanco elegante

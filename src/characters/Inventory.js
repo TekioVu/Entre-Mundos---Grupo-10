@@ -3,6 +3,7 @@ import Item from "./Item.js";
 export default class Inventory{
     constructor(){
         this.itemsArray = [];
+        this.itemLimit = 6;
     }
 
     // Crea, lo que no añade, items al inventario
@@ -13,6 +14,10 @@ export default class Inventory{
     // Devuelve el tamaño del inventario
     size(){
         return this.itemsArray.length;
+    }
+
+    getLimit(){
+        return this.itemLimit;
     }
 
     // Devuelve un item

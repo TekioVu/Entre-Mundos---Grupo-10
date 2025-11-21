@@ -160,7 +160,13 @@ export default class Unit extends Phaser.GameObjects.Sprite {
 
         const bs = this.scene.scene.get("BattleScene");
         if (!bs) return;
+
+        if(this.defense){ // Sirve para diferenciar entre aliados ,que cuentan con estadistica de defensa, y enemigos
+            this.hp -= damage - this.defense;
+        }
+        else{
         this.hp -= damage;
+        }
 
         if (this.hp <= 0)
         {

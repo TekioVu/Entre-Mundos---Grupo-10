@@ -52,6 +52,7 @@ export default class ShopScene extends Phaser.Scene {
         this.boughtCharacters = [];
         
         this.resetShop();
+        this.createInventory();
     }
 
     update() {
@@ -271,7 +272,11 @@ updateSelection(itemIndex, categoryIndex) {
                 console.log(`${objeto.name} eliminado permanentemente de la tienda.`);
             }
 
-        }else if(selectedGroup.name === 'Pociones curación'){
+        }else if(this.inv.getLimit() <= this.inventoryLocal.length){
+            console.log("Numero maximo de objetos");
+            return;
+        }
+        else if(selectedGroup.name === 'Pociones curación'){
             this.inventory.insertItem(objeto.id);
         }
 
@@ -480,5 +485,16 @@ updateSelection(itemIndex, categoryIndex) {
     {
         this.currentCoins += amount;
         this.coinsText.setText("Coins: " + this.currentCoins);
+    }
+
+    createInventory(){
+        this.inv = this.registry.get('inventory');
+        this.inventoryLocal = [];
+        for(let i = 0; i < this.inv.size(); i++){
+            if(this.inv.getNum(i) > 0){
+                this.inventoryLocal.push(this.inv.getItem(i));
+            }
+        }
+        console.log('tamaño inventario: ' + this.inventoryLocal.length);
     }
 }

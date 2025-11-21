@@ -1,3 +1,4 @@
+import Inventory from "../characters/Inventory.js";
 export default class BootScene extends Phaser.Scene {
     constructor() {
         super({ key: "BootScene" });
@@ -153,7 +154,7 @@ export default class BootScene extends Phaser.Scene {
         this.load.image('wizard_image', './assets/Enemigos/Enemigos_Tienda/Wizard_Image.png')
 
         // Aqui se cargaran los objetos que se podran utilizar:
-        ;
+
 
     }
 
