@@ -134,6 +134,7 @@ export default class BootScene extends Phaser.Scene {
 
         //UI
         this.load.image('attack_panel', './assets/UI/Panel.png');
+        this.load.image('coins_won', './assets/UI/Coins.jpg');
 
         //Objetos tienda
         this.load.image('pocion_roja', './assets/Pociones/Icon1.png');
