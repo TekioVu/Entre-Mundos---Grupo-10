@@ -4,6 +4,7 @@ export default class ShopScene extends Phaser.Scene {
     }
 
     create() {
+        
         // === Datos base ===
         this.categories = {
             "Pociones curación": [
