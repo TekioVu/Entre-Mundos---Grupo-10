@@ -37,7 +37,7 @@ this.tweens.add({
         const boxWidth = 100;
         const boxHeight = 30;
         this.coinsWon = Phaser.Math.Between(180,300);
-        // --- BOTÓN ---
+
         this.button = this.add.container(160, 170);
 
         const bg = this.add.graphics();
@@ -54,7 +54,6 @@ this.tweens.add({
         this.button.setSize(boxWidth, boxHeight);
         this.button.setInteractive({ useHandCursor: true });
 
-        // === ANIMACIONES COMO MenuItem ===
         this.button.on("pointerover", () => {
             this.drawHover(bg, boxWidth, boxHeight);
             btnText.setColor("#ffffff");
@@ -67,7 +66,6 @@ this.tweens.add({
             btnText.setFontStyle("normal");
         });
 
-        // === ACTIVAR CLIC ===
         const activate = () => {
             this.drawPressed(bg, boxWidth, boxHeight);
             this.unlockNewBook();
@@ -77,13 +75,13 @@ this.tweens.add({
         this.input.keyboard.once("keydown-SPACE", activate);
         this.button.on("pointerdown", activate);
 
-     this.add.image(160, 100, "coins_won").setDisplaySize(50, 50);
+     this.add.image(160, 120, "coins_won").setDisplaySize(50, 50);
 
     const coinsText = this.add.text(160, 140, `+ ${this.coinsWon} coins`, {
         fontFamily: "Arial",
         fontSize: "8px",
-        color: "#ffd45c",         // dorado suave
-        stroke: "#543d10",        // borde dorado oscuro
+        color: "#ffd45c",         
+        stroke: "#543d10",       
         strokeThickness: 2,
         shadow: {
             offsetX: 1,
@@ -96,7 +94,7 @@ this.tweens.add({
 
     }   
     
-    // --- ESTILOS COMO MenuItem ---
+
 
     drawNormal(bg, w, h, bgColor, borderColor) {
         bg.clear();

@@ -12,19 +12,19 @@ const victoryText = this.add.text(160, 60, "GAME OVER", {
     fontFamily: "Arial",
     fontSize: "36px",
     fontStyle: "bold",
-    color: "#e84a4a",         // rojo elegante, no demasiado saturado
-    stroke: "#5a1a1a",        // borde rojo oscuro muy sutil
+    color: "#e84a4a",         
+    stroke: "#5a1a1a",        
     strokeThickness: 2,
     shadow: {
         offsetX: 1,
         offsetY: 1,
-        color: "#00000040",   // sombra suave
+        color: "#00000040",   
         blur: 2,
         fill: true
     }
 }).setOrigin(0.5);
 
-// Animación suave de aparición
+
 victoryText.setAlpha(0);
 this.tweens.add({
     targets: victoryText,
@@ -37,7 +37,7 @@ this.tweens.add({
         const boxWidth = 100;
         const boxHeight = 30;
 
-        // --- BOTÓN ---
+        
         this.button = this.add.container(160, 170);
 
         const bg = this.add.graphics();
@@ -54,7 +54,7 @@ this.tweens.add({
         this.button.setSize(boxWidth, boxHeight);
         this.button.setInteractive({ useHandCursor: true });
 
-        // === ANIMACIONES COMO MenuItem ===
+      
         this.button.on("pointerover", () => {
             this.drawHover(bg, boxWidth, boxHeight);
             btnText.setColor("#ffffff");
@@ -67,7 +67,7 @@ this.tweens.add({
             btnText.setFontStyle("normal");
         });
 
-        // === ACTIVAR CLIC ===
+   
         const activate = () => {
             this.drawPressed(bg, boxWidth, boxHeight);
 
@@ -78,7 +78,7 @@ this.tweens.add({
         this.button.on("pointerdown", activate);
     }
 
-    // --- ESTILOS COMO MenuItem ---
+  
 
     drawNormal(bg, w, h, bgColor, borderColor) {
         bg.clear();
