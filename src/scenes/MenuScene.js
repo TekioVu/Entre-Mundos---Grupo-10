@@ -16,7 +16,7 @@ export default class MenuScene extends Phaser.Scene {
         ];
 
         this.selectedIndex = 0;
-        this.unlockedbooks = 5;
+        this.unlockedbooks = 4;
         this.optionObjects = [];
 
         const { width, height } = this.scale;
@@ -142,9 +142,6 @@ createDecorativeShelf(yPosition) {
         // Sombra del libro
         const shadow = this.add.rectangle(x + 3, yPosition - bookHeight / 2 + 3, bookWidth, bookHeight, 0x000000, 0.3).setOrigin(0.5);
         shadow.setAngle(Phaser.Math.Between(-8, 8));
-
-        // Lomo del libro
-        const spine = this.add.rectangle(x - bookWidth * 0.45, yPosition - bookHeight / 2, bookWidth * 0.1, bookHeight, 0x2a2a2a).setOrigin(0.5);
 
         // Libro principal
         const book = this.add.rectangle(x, yPosition - bookHeight / 2, bookWidth, bookHeight, colorHex).setOrigin(0.5);

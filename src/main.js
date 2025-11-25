@@ -6,6 +6,11 @@ import GameOverScene from "./scenes/GameOverScene.js";
 import VictoryScene from "./scenes/VictoryScene.js";
 import ShopScene from "./scenes/ShopScene.js";
 import CharacterSelectionScene from "./scenes/CharacterSelectionScene.js";
+import MiniGame_Fantasy from "./scenes/Minigames/MiniGame_Fantasy.js";
+import MiniGame_Comedy from "./scenes/Minigames/MiniGame_Comedy.js";
+import MiniGame_FinalBoss from "./scenes/Minigames/MiniGame_FinalBoss.js";
+import MiniGame_History from "./scenes/Minigames/MiniGame_History.js";
+import MiniGame_Terror from "./scenes/Minigames/MiniGame_Terror.js";
 
 const config = {
     type: Phaser.AUTO,
@@ -18,7 +23,8 @@ const config = {
         default: "arcade",
         arcade: { gravity: { y: 0 } }
     },
-    scene: [BootScene, BattleScene, UIScene, MenuScene, GameOverScene, VictoryScene, CharacterSelectionScene, ShopScene]
+    scene: [BootScene, BattleScene, UIScene, MenuScene, GameOverScene, VictoryScene, CharacterSelectionScene, ShopScene, 
+        MiniGame_Fantasy, MiniGame_Comedy, MiniGame_FinalBoss, MiniGame_History, MiniGame_Terror]
 };
 
 new Phaser.Game(config);

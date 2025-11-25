@@ -178,13 +178,13 @@ export default class BattleScene extends Phaser.Scene {
                 enemyDefs: [
                     { 
                         key: 'boss2', idleKey: 'boss2_idle', attackKey: 'boss2_attack', damageKey: 'boss2_damage', deathKey: 'boss2_death',
-                        idle: [0, 7], attack: [0, 7], damage: [0, 2], death: [0, 6], scale: 1, name: 'Scared Wizard',
+                        idle: [0, 7], attack: [0, 7], damage: [0, 2], death: [0, 6], scale: 1, name: 'Sad Wizard',
                         hp: 40, atk: 22,
                         positions: [[0, 2]],
                     },
                     { 
                         key: 'boss3', idleKey: 'boss3_idle', attackKey: 'boss3_attack', damageKey: 'boss3_damage', deathKey: 'boss3_death',
-                        idle: [0, 9], attack: [0, 12], damage: [0, 2], death: [0, 17], scale: 1, name: 'Sad Wizard',
+                        idle: [0, 9], attack: [0, 12], damage: [0, 2], death: [0, 17], scale: 1, name: 'Scared Wizard',
                         hp: 40, atk: 22,
                         positions: [[4, 1]],
                     },
@@ -338,6 +338,8 @@ export default class BattleScene extends Phaser.Scene {
     }
 
     createMiniBoss() {
+        this.normalCombatCompleted = true;
+
         const bossConfig = {
             'FANTASÍA': { key: 'dragon', idleKey: 'dragon_idle', attackKey: 'dragon_attack', damageKey: 'dragon_damage', deathKey: 'dragon_death',
             idle: [11, 13], attack: [0, 3], damage: [9, 10], death: [4, 8], name: 'Dragon', pos: [0, 1], scale: 1, hp: 40, atk: 5 },
@@ -458,6 +460,47 @@ export default class BattleScene extends Phaser.Scene {
             this.units = this.heroes.concat(this.enemies);
         });
     }
+
+    launchMagicMinigame(attacker, target) {
+        this.currentAttacker = attacker;  // guardamos referencias
+        this.currentTarget = target;
+
+        // Lanza el minijuego y lo lleva al frente
+        this.scene.launch("MiniGame_Fantasy", {
+            attacker: attacker,
+            target: target,
+            parent: this
+        });
+        this.scene.bringToTop("MiniGame_Fantasy");
+
+        this.scene.pause("BattleScene");
+    }
+
+
+    minigameResult(result) {
+
+        this.scene.resume("BattleScene");
+
+        let attacker = this.currentAttacker;
+        let target = this.currentTarget;
+        let damage = attacker.damage;
+
+        if (result === "perfect") damage += 10;
+        else if (result === "fail") damage -= 5;
+
+        target.takeDamage(damage);
+        this.events.emit("Message", `${attacker.type} attacks ${target.type} for ${damage} damage (${result})`);
+
+        // Limpieza
+        this.currentAttacker = null;
+        this.currentTarget = null;
+
+        //this.nextTurn?.();
+    }
+
+
+
+
 
 
 }

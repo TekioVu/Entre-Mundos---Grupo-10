@@ -84,6 +84,10 @@ export default class Unit extends Phaser.GameObjects.Sprite {
     }
 
     attack(target) {
+
+        if(!this.isEnemy)
+        this.startMinigame(target);
+
         let d;
         if (target.pos == 'v') d = this.damage - 5;
         else d = this.damage;
@@ -92,61 +96,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
              this.playAnim('attack', () => this.playAnim('idle'));
         }
 
-        const battleScene = this.scene.scene.get("BattleScene");
-        
-        if(this.stunned == 0)
-        {
-            if(this.type === "Dragon" && this.specialAttackCounter == 2)
-            {
-                this.specialAttackCounter = 0;
-                for (let h of battleScene.heroes) {
-                    h.takeDamage(this.damage);
-                }
-
-                this.scene.events.emit("Message", `${this.type} is using flare: 40 DMG ALL UNITS`);
-            }
-            else if(this.type === "Cacodaemon" && this.specialAttackCounter == 2)
-            {
-                this.specialAttackCounter = 0;
-                for (let i = 0; i < 5; i++) {
-                
-                    const r = Math.floor(Math.random() * battleScene.heroes.length);
-                    battleScene.heroes[r].takeDamage(this.damage / 2);
-
-                }
-
-                this.scene.events.emit("Message", `${this.type} is using randomness`);
-            }
-            else if(this.type === "Medusa" && this.specialAttackCounter == 2)
-            {
-                this.specialAttackCounter = 0;
-                for (let h of battleScene.heroes) {
-                    h.stunned = 2;
-                }
-
-                this.scene.events.emit("Message", `${this.type} is using petrification: ALL UNITS STUNNED FOR 2 TURNS`);
-            }
-            else if(this.type === "King" && this.specialAttackCounter == 1 && !this.alreadySpecialAttacked)
-            {
-                this.alreadySpecialAttacked = true;
-                battleScene.invokeJester();
-                this.scene.events.emit("Message", `${this.type} is invoking Jesters`);
-            }
-            else{
-                let d;
-                if (target.pos == 'v') d = this.damage - 5;
-                else d = this.damage;
-
-                target.takeDamage(d);
-
-                this.scene.events.emit("Message", `${this.type} attacks ${target.type} for ${d} damage`);
-            }
-        }else {
-            this.scene.events.emit("Message", `${this.type} is stunned`);
-            this.stunned--;
-        }
-
-        this.specialAttackCounter++;
+        this.checkSpecialAttack(target);
     }
 
     // Cura a la unidad en base a 'hp'
@@ -242,7 +192,6 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                 } else {
                     this.scene.time.delayedCall(3000, () => {
                         battleScene.createMiniBoss();
-                        battleScene.normalCombatCompleted = true;
                         uiScene.remapEnemies();
                     });
                 }
@@ -265,6 +214,87 @@ export default class Unit extends Phaser.GameObjects.Sprite {
              this.playAnim('damage', () => this.playAnim('idle'));
             }
         }
+    }
+
+    startMinigame(target)
+    {
+        const battleScene = this.scene.scene.get("BattleScene");
+
+        if (battleScene.currentbook === "FANTASÍA") {
+            battleScene.launchMagicMinigame(this, target);
+
+        }else if(battleScene.currentbook === "TERROR")
+        {
+
+        }else if(battleScene.currentbook === "HISTORIA")
+        {
+            
+        }else if(battleScene.currentbook === "COMEDIA")
+        {
+            
+        }else if(battleScene.currentbook === "THE END")
+        {
+            
+        }
+    }
+
+    checkSpecialAttack(target)
+    {
+        const battleScene = this.scene.scene.get("BattleScene");
+
+         if(this.stunned == 0)
+        {
+            if(this.type === "Dragon" && this.specialAttackCounter == 2)
+            {
+                this.specialAttackCounter = 0;
+                for (let h of battleScene.heroes) {
+                    h.takeDamage(this.damage);
+                }
+
+                this.scene.events.emit("Message", `${this.type} is using flare: 40 DMG ALL UNITS`);
+            }
+            else if(this.type === "Cacodaemon" && this.specialAttackCounter == 2)
+            {
+                this.specialAttackCounter = 0;
+                for (let i = 0; i < 5; i++) {
+                
+                    const r = Math.floor(Math.random() * battleScene.heroes.length);
+                    battleScene.heroes[r].takeDamage(this.damage / 2);
+
+                }
+
+                this.scene.events.emit("Message", `${this.type} is using randomness`);
+            }
+            else if(this.type === "Medusa" && this.specialAttackCounter == 3)
+            {
+                this.specialAttackCounter = 0;
+                for (let h of battleScene.heroes) {
+                    h.stunned = 2;
+                }
+
+                this.scene.events.emit("Message", `${this.type} is using petrification: ALL UNITS STUNNED FOR 2 TURNS`);
+            }
+            else if(this.type === "King" && this.specialAttackCounter == 1 && !this.alreadySpecialAttacked)
+            {
+                this.alreadySpecialAttacked = true;
+                battleScene.invokeJester();
+                this.scene.events.emit("Message", `${this.type} is invoking Jesters`);
+            }
+            else if(this.isEnemy || battleScene.currentbook !== "FANTASÍA"){
+                let d;
+                if (target.pos == 'v') d = this.damage - 5;
+                else d = this.damage;
+
+                target.takeDamage(d);
+
+                this.scene.events.emit("Message", `${this.type} attacks ${target.type} for ${d} damage`);
+            }
+        }else {
+            this.scene.events.emit("Message", `${this.type} is stunned`);
+            this.stunned--;
+        }
+
+        this.specialAttackCounter++;
     }
 
 

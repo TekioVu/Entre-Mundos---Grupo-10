@@ -44,6 +44,7 @@ export default class ShopScene extends Phaser.Scene {
         { texture: 'medusa', name: 'Medusa', hp: 300, atk: 15, def: 15 },
 
         { texture: 'jester', name: 'Jester', hp: 120, atk: 15, def: 10 },
+        { texture: 'king', name: 'King', hp: 350, atk: 10, def: 10 },
         ];
 
         this.characterDict = Object.fromEntries(
@@ -249,8 +250,12 @@ updateSelection(itemIndex, categoryIndex) {
         }else if(unlockedBooks == 5)
         {
             const jester = {
-            name: "Jester", texture: "jester", description: "JIJIJIJIJIJIJIJI", coins: 300 };
+            name: "Jester", texture: "jester", description: "JIJIJIJIJIJIJIJI", coins: 250 };
             this.categories["Personajes"].push(jester);
+
+            const king = {
+            name: "King", texture: "king", description: "HAHAHAHAHAHAHA", coins: 500 };
+            this.categories["Personajes"].push(king);
 
         }
     }
