@@ -129,13 +129,13 @@ export default class BattleScene extends Phaser.Scene {
                     { 
                         key: 'mushroom', idleKey: 'mushroom_idle', attackKey: 'mushroom_attack', damageKey: 'mushroom_damage', deathKey: 'mushroom_death', 
                         idle: [0, 3], attack: [0,7], damage: [0, 3], death: [0,3], scale: 1.2, name: 'Mushroom',
-                        hp: 25, atk: 5,
+                        hp: 2, atk: 5,
                         positions: [[3, 1], [4, 0]],
                     },
                     { 
                         key: 'flying_eye', idleKey: 'flying_eye_idle', attackKey: 'flying_eye_attack', damageKey: 'flying_eye_damage', deathKey: 'flying_eye_death',
                         idle: [0, 7], attack: [0, 7], damage: [0, 3], death: [0,3], scale: 1.2, name: 'Flying Eye',
-                        hp: 25, atk: 11,
+                        hp: 2, atk: 11,
                         positions: [[1, 1], [2, 0]],
                     },
                 ],
@@ -145,13 +145,13 @@ export default class BattleScene extends Phaser.Scene {
                 enemyDefs: [
                     { 
                         key: 'pharaoh', idleKey: 'pharaoh_idle', attackKey: 'pharaoh_attack', damageKey: 'pharaoh_damage', deathKey: 'pharaoh_death',
-                        idle: [0, 2], attack: [0, 2], damage: [0, 2], death: [0, 2], scale: 0.6, name: 'Pharaoh',
+                        idle: [0, 2], attack: [0, 4], damage: [0, 2], death: [0, 2], scale: 0.6, name: 'Pharaoh',
                         hp: 2, atk: 8,
                         positions: [[1, 1], [2, 0]],
                     },
                     { 
                         key: 'scarab', idleKey: 'scarab_idle', attackKey: 'scarab_attack', damageKey: 'scarab_damage', deathKey: 'scarab_death',
-                        idle: [0, 1], attack: [0, 2], damage: [0, 2], death: [0, 2], scale: 0.6, name: 'Scarab',
+                        idle: [0, 1], attack: [0, 1], damage: [0, 2], death: [0, 2], scale: 0.6, name: 'Scarab',
                         hp: 2, atk: 5,
                         positions: [[3, 1], [4, 0]],
                     },
@@ -342,7 +342,8 @@ export default class BattleScene extends Phaser.Scene {
             'FANTASÍA': { key: 'dragon', idleKey: 'dragon_idle', attackKey: 'dragon_attack', damageKey: 'dragon_damage', deathKey: 'dragon_death',
             idle: [11, 13], attack: [0, 3], damage: [9, 10], death: [4, 8], name: 'Dragon', pos: [0, 1], scale: 1, hp: 40, atk: 5 },
 
-            'TERROR':   { key: 'cacodaemon', anim: [0, 5], name: 'Cacodaemon', pos: [1, 1], scale: 1, hp: 150, atk: 25 },
+            'TERROR':   { key: 'cacodaemon', idleKey: 'cacodaemon_idle', attackKey: 'cacodaemon_attack', damageKey: 'cacodaemon_damage', deathKey: 'cacodaemon_death',
+                idle: [0, 5], attack: [8, 13], damage: [16, 19], death: [24, 31], name: 'Cacodaemon', pos: [1, 1], scale: 1, hp: 150, atk: 25 },
             'HISTORIA': { key: 'medusa', idleKey: 'medusa_idle', attackKey: 'medusa_attack', damageKey: 'medusa_damage', deathKey: 'medusa_death',
                 idle: [14, 16],  attack: [0, 5], damage: [12, 13], death: [6, 11],name: 'Medusa', pos: [1, 1], scale: 1, hp: 10, atk: 25 },
             'COMEDIA':  { key: 'king', idleKey: 'king_idle', attackKey: 'king_attack', damageKey: 'king_damage',  deathKey: 'king_death',
