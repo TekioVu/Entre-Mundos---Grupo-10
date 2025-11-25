@@ -1,3 +1,4 @@
+import Inventory from "../characters/Inventory.js";
 export default class BootScene extends Phaser.Scene {
     constructor() {
         super({ key: "BootScene" });
@@ -131,6 +132,7 @@ export default class BootScene extends Phaser.Scene {
 
         //UI
         this.load.image('attack_panel', './assets/UI/Panel.png');
+        this.load.image('coins_won', './assets/UI/Coins.jpg');
 
         //Objetos tienda
         this.load.image('pocion_roja', './assets/Pociones/Icon1.png');
@@ -152,7 +154,7 @@ export default class BootScene extends Phaser.Scene {
         this.load.image('wizard_image', './assets/Enemigos/Enemigos_Tienda/Wizard_Image.png')
 
         // Aqui se cargaran los objetos que se podran utilizar:
-        ;
+
 
     }
 

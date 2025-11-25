@@ -48,7 +48,10 @@ export default class MenuItemCharacterSelection extends Phaser.GameObjects.Conta
 
             if (item.texture === 'ghost') {
                 this.sprite = scene.add.sprite(0, 0, item.texture).setDisplaySize(20, 20);
-            } else {
+            }else if (item.texture === 'jester') {
+                this.sprite = scene.add.sprite(0, 0, item.texture).setDisplaySize(18, 18);
+            }
+            else {
                 this.sprite = scene.add.sprite(0, 0, item.texture).setDisplaySize(40, 40);
             }
             this.add(this.sprite);

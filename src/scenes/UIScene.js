@@ -11,6 +11,7 @@ export default class UIScene extends Phaser.Scene {
 
     create() {
         this.id = 0;
+        this.itemUsed = false;
         this.inventory = this.registry.get('inventory');
 
         const g = this.add.graphics();
@@ -76,7 +77,7 @@ export default class UIScene extends Phaser.Scene {
         this.events.on("Select", this.onSelect, this);                              // Cuando se escoje la accion que se quiere realizar
         this.events.on("Enemy", this.onEnemy, this);                                // Al escojer a que enemigo atacar
         this.events.on("Item", this.onItem, this);                                  // Al escojer que item usar
-        this.events.on("Back", this.onBack, this);        
+        this.events.on("Back", this.onBack, this);      
         this.battleScene.events.on("PlayerSelect", (index) => {
         this.heroesMenu.select(index);
         }, this);                        
@@ -87,7 +88,18 @@ export default class UIScene extends Phaser.Scene {
         this.battleScene.nextTurn();
     }
 
-    
+    onSelect() {
+    if(this.currentMenu.getMenuItemIndex() === 0){ // En caso de que se escoja "Attack"
+        this.remapEnemies();
+        this.currentMenu = this.enemiesMenu;
+        this.enemiesMenu.select(0);
+    }
+    else if (this.currentMenu.getMenuItemIndex() === 1){ // en caso de que se escoja "Item"
+        this.remapItems();
+        this.currentMenu = this.itemsMenu;
+        this.itemsMenu.select(0);
+    }
+    }
 
     // Cuando se ha seleccionado un enemigo al que atacar
     onEnemy(enemyIndex) {
@@ -99,38 +111,15 @@ export default class UIScene extends Phaser.Scene {
 
     // Cuando se ha seleccionado un item para usar (Sin terminar)
     onItem(itemIndex){
-        this.itemsMenu .clear();
-        this.currentMenu = null;
+        this.itemsMenu.clear();
+        this.currentMenu = this.actionsMenu;
+        this.actionsMenu.select(0);
         // Seleccion la accion en base al tipo de objeto usado
         switch(this.inventory.getItem(itemIndex).getType()){
             case('HealPot'): this.battleScene.receivePlayerSelection("heal", undefined, itemIndex); break;
             case('DmgPot'): this.battleScene.receivePlayerSelection("dmgPot", undefined, itemIndex); break;
             case('StrPot'): this.battleScene.receivePlayerSelection("strPot", undefined, itemIndex); break;
             case('DefPot'): this.battleScene.receivePlayerSelection("defPot", undefined, itemIndex); break;
-        }
-    }
-
-    onFirstPlayerSelect() {
-        this.currentMenu = this.actionsMenu;
-        this.heroesMenu.select(0);
-    }
-
-    onPlayerSelect(){
-        this.actionsMenu.select(0);
-        this.currentMenu = this.actionsMenu;
-
-    }
-
-    onSelect() {
-        if(this.currentMenu.getMenuItemIndex() === 0){ // En caso de que se escoja "Attack"
-            this.remapEnemies();
-            this.currentMenu = this.enemiesMenu;
-            this.enemiesMenu.select(0);
-        }
-        else if (this.currentMenu.getMenuItemIndex() === 1){ // en caso de que se escoja "Item"
-            this.remapItems();
-            this.currentMenu = this.itemsMenu;
-            this.itemsMenu.select(0);
         }
     }
 
@@ -152,6 +141,17 @@ export default class UIScene extends Phaser.Scene {
             this.heroesMenu.select(this.id);
         }
         
+    }
+
+    onFirstPlayerSelect() {
+        this.currentMenu = this.actionsMenu;
+        this.heroesMenu.select(0);
+    }
+
+    onPlayerSelect(){
+        this.actionsMenu.select(0);
+        this.currentMenu = this.actionsMenu;
+
     }
 
     updateEnemiesMarker() {
