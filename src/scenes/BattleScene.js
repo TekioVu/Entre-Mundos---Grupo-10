@@ -345,7 +345,8 @@ export default class BattleScene extends Phaser.Scene {
             idle: [11, 13], attack: [0, 3], damage: [9, 10], death: [4, 8], name: 'Dragon', pos: [1, 1], scale: 1, hp: 40, atk: 5 },
 
             'TERROR':   { key: 'cacodaemon', anim: [0, 5], name: 'Cacodaemon', pos: [1, 1], scale: 1, hp: 150, atk: 25 },
-            'HISTORIA': { key: 'medusa', anim: [14, 16], name: 'Medusa', pos: [1, 1], scale: 1, hp: 150, atk: 25 },
+            'HISTORIA': { key: 'medusa', idleKey: 'medusa_idle', attackKey: 'medusa_attack', damageKey: 'medusa_damage', deathKey: 'medusa_death',
+                idle: [14, 16],  attack: [0, 5], damage: [12, 13], death: [6, 11],name: 'Medusa', pos: [1, 1], scale: 1, hp: 10, atk: 25 },
             'COMEDIA':  { key: 'king', idleKey: 'king_idle', attackKey: 'king_attack', damageKey: 'king_damage',  deathKey: 'king_death',
             idle: [0, 3], attack: [0, 3], damage: [0, 3], death: [0, 5], name: 'King', pos: [1, 1], scale: 1, hp: 350, atk: 10 },
             'THE END':  { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [1, 1], scale: 1, hp: 1, atk: 25 },

@@ -87,7 +87,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         let d;
         if (target.pos == 'v') d = this.damage - 5;
         else d = this.damage;
-        if (this.type === "Goblin" || this.type === "Ghost" || this.type === "Timmy" || this.type === "Wizard"|| this.type === "Mushroom" || this.type === "Flying Eye" || this.type === "Dragon"|| this.type === "Jester" || this.type === "Scared Wizard"|| this.type === "Angry Wizard" || this.type === "Sad Wizard" || this.type === "King")
+        if (this.type === "Goblin" || this.type === "Ghost" || this.type === "Timmy" || this.type === "Wizard"|| this.type === "Mushroom" || this.type === "Flying Eye" || this.type === "Dragon"|| this.type === "Jester" || this.type === "Scared Wizard"|| this.type === "Angry Wizard" || this.type === "Sad Wizard" || this.type === "King" || this.type === "Medusa")
         {
              this.playAnim('attack', () => this.playAnim('idle'));
         }
@@ -167,7 +167,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             this.hp = 0;
             this.alive = false;
 
-            if (this.type === "Goblin" || this.type === "Ghost" || this.type === "Timmy" || this.type === "Wizard"|| this.type === "Mushroom" || this.type === "Flying Eye"|| this.type === "Dragon"|| this.type === "Jester"|| this.type === "Scared Wizard"|| this.type === "Angry Wizard" || this.type === "Sad Wizard" || this.type === "King")
+            if (this.type === "Goblin" || this.type === "Ghost" || this.type === "Timmy" || this.type === "Wizard"|| this.type === "Mushroom" || this.type === "Flying Eye"|| this.type === "Dragon"|| this.type === "Jester"|| this.type === "Scared Wizard"|| this.type === "Angry Wizard" || this.type === "Sad Wizard" || this.type === "King" || this.type === "Medusa")
             {
              this.playAnim('death', () => {
                 
@@ -254,7 +254,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             }
         }
         else{
-            if (this.type === "Goblin" || this.type === "Ghost"|| this.type === "Timmy" || this.type === "Wizard"|| this.type === "Mushroom" || this.type === "Flying Eye"|| this.type === "Dragon"|| this.type === "Jester"|| this.type === "Scared Wizard"|| this.type === "Angry Wizard" || this.type === "King")
+            if (this.type === "Goblin" || this.type === "Ghost"|| this.type === "Timmy" || this.type === "Wizard"|| this.type === "Mushroom" || this.type === "Flying Eye"|| this.type === "Dragon"|| this.type === "Jester"|| this.type === "Scared Wizard"|| this.type === "Angry Wizard" || this.type === "King" || this.type === "Medusa")
             {
              this.playAnim('damage', () => this.playAnim('idle'));
             }
