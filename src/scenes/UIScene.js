@@ -173,32 +173,79 @@ export default class UIScene extends Phaser.Scene {
         this.enemiesMarker.clear();
         this.enemiesMarker.lineStyle(4, 0xffffff, 0.8); 
        
-        const width = 50;
-        const height = 50;
+        let width = 50;
+        let height = 50;
+        let mitadx = 25;
+        let mitady = 25;
         const cornerLength = 10;
+
+        //Ajustes de cuadro
+        if (this.battleScene.enemies[index].type === 'Goblin' || this.battleScene.enemies[index].type === 'Mushroom') {
+            mitady = mitady-10;
+        }
+        else if (this.battleScene.enemies[index].type === 'Dragon') {
+            width = 120;
+            height = 80;
+            mitady = mitady-15;
+            mitadx = mitadx+25;
+        }
+        else if (this.battleScene.enemies[index].type === 'Flying Eye'){
+            mitadx = mitadx - 5;
+        }
+        else if (this.battleScene.enemies[index].type === 'Pharaoh'){
+            height = 80;
+            mitady = mitady +15;
+        }
+        else if (this.battleScene.enemies[index].type === 'Scarab'){
+            height = 30;
+            mitady = mitady -35;
+        }
+        else if (this.battleScene.enemies[index].type === 'Medusa'){
+            height = 70;
+            mitady = mitady+5;
+            mitadx = mitadx+20;
+            width = 70;
+        }
+        else if (this.battleScene.enemies[index].type === 'Jester'){
+            mitady = mitady - 3;
+        }
+        else if (this.battleScene.enemies[index].type === 'King'){
+            height = 60;
+            width = 40;
+            mitadx = mitadx-7;
+            mitady = mitady-20;
+        }
+        else if (this.battleScene.enemies[index].type === 'Scared Wizard'){
+            height = 60;
+            mitady = mitady -10;
+        }
+        else if (this.battleScene.enemies[index].type === 'Sad Wizard' || this.battleScene.enemies[index].type === 'Angry Wizard'){
+            height = 60;
+            mitady = mitady +5;
+        }
 
 
         //Cuadro que enmarca al enemigo seleccionado
         this.enemiesMarker.beginPath();
-        this.enemiesMarker.moveTo(coords.x-25, coords.y-25);
-        this.enemiesMarker.lineTo(coords.x + cornerLength-25, coords.y-25);
-        this.enemiesMarker.moveTo(coords.x-25, coords.y-25);
-        this.enemiesMarker.lineTo(coords.x-25, coords.y + cornerLength-25);
+        this.enemiesMarker.moveTo(coords.x-mitadx, coords.y-mitady);
+        this.enemiesMarker.lineTo(coords.x + cornerLength-mitadx, coords.y-mitady);
+        this.enemiesMarker.moveTo(coords.x-mitadx, coords.y-mitady);
+        this.enemiesMarker.lineTo(coords.x-mitadx, coords.y + cornerLength-mitady);
 
-        this.enemiesMarker.moveTo(coords.x-25 + width, coords.y-25);
-        this.enemiesMarker.lineTo(coords.x + width - cornerLength-25, coords.y-25);
-        this.enemiesMarker.moveTo(coords.x + width-25, coords.y-25);
-        this.enemiesMarker.lineTo(coords.x + width-25, coords.y + cornerLength-25);
+        this.enemiesMarker.moveTo(coords.x-mitadx + width, coords.y-mitady);
+        this.enemiesMarker.lineTo(coords.x + width - cornerLength-mitadx, coords.y-mitady);
+        this.enemiesMarker.moveTo(coords.x + width-mitadx, coords.y-mitady);
+        this.enemiesMarker.lineTo(coords.x + width-mitadx, coords.y + cornerLength-mitady);
 
-        this.enemiesMarker.moveTo(coords.x-25, coords.y + height-25);
-        this.enemiesMarker.lineTo(coords.x + cornerLength-25, coords.y + height-25);
-        this.enemiesMarker.moveTo(coords.x-25, coords.y + height-25);
-        this.enemiesMarker.lineTo(coords.x-25, coords.y + height - cornerLength-25);
+        this.enemiesMarker.moveTo(coords.x-mitadx, coords.y + height-mitady);
+        this.enemiesMarker.lineTo(coords.x + cornerLength-mitadx, coords.y + height-mitady);
+        this.enemiesMarker.moveTo(coords.x-mitadx, coords.y + height-mitady);
+        this.enemiesMarker.lineTo(coords.x-mitadx, coords.y + height - cornerLength-mitady);
 
-        this.enemiesMarker.moveTo(coords.x + width-25, coords.y + height-25);
-        this.enemiesMarker.lineTo(coords.x + width - cornerLength-25, coords.y + height-25);
-        this.enemiesMarker.moveTo(coords.x + width-25, coords.y + height-25);
-        this.enemiesMarker.lineTo(coords.x + width-25, coords.y + height - cornerLength-25);
+        this.enemiesMarker.moveTo(coords.x + width-mitadx, coords.y + height-mitady);
+        this.enemiesMarker.lineTo(coords.x + width - cornerLength-mitadx, coords.y + height-mitady);
+        this.enemiesMarker.moveTo(coords.x + width-mitadx, coords.y + height-mitady);
+        this.enemiesMarker.lineTo(coords.x + width-mitadx, coords.y + height - cornerLength-mitady);
 
         this.enemiesMarker.strokePath();
         this.enemiesMarker.setVisible(true);

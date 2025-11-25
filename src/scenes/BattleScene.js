@@ -163,7 +163,7 @@ export default class BattleScene extends Phaser.Scene {
                     { 
                         key: 'jester', idleKey: 'jester_idle', attackKey: 'jester_attack', damageKey: 'jester_damage', deathKey: 'jester_death',
                         idle: [11, 17], attack: [89, 72], damage: [107, 104], death: [125, 117], scale: 1, name: 'Jester',
-                        hp: 40, atk: 7,
+                        hp: 4, atk: 7,
                         positions: [[0, 1], [1, 0]],
                     },
                     // { 
