@@ -342,7 +342,7 @@ export default class BattleScene extends Phaser.Scene {
 
         const bossConfig = {
             'FANTASÍA': { key: 'dragon', idleKey: 'dragon_idle', attackKey: 'dragon_attack', damageKey: 'dragon_damage', deathKey: 'dragon_death',
-            idle: [11, 13], attack: [0, 3], damage: [9, 10], death: [4, 8], name: 'Dragon', pos: [0, 1], scale: 1, hp: 40, atk: 5 },
+            idle: [11, 13], attack: [0, 3], damage: [9, 10], death: [4, 8], name: 'Dragon', pos: [0, 1], scale: 1, hp: 120, atk: 15 },
 
             'TERROR':   { key: 'cacodaemon', idleKey: 'cacodaemon_idle', attackKey: 'cacodaemon_attack', damageKey: 'cacodaemon_damage', deathKey: 'cacodaemon_death',
                 idle: [0, 5], attack: [8, 13], damage: [16, 19], death: [24, 31], name: 'Cacodaemon', pos: [1, 1], scale: 1, hp: 150, atk: 25 },
