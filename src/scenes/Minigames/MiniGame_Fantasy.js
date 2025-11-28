@@ -22,8 +22,16 @@ export default class MiniGame_Fantasy extends Phaser.Scene {
         // Fondo
         this.add.rectangle(0, 0, width, height, 0x2d1b55).setOrigin(0);
 
-        // --- CONFIG BORDES SEGUROS ---
         const margin = 50;
+
+        // IMER VISUAL
+        this.timeLeft = 1.09; // segundos
+        this.timerText = this.add.text(centerX, 40, this.timeLeft.toFixed(2), {
+            fontSize: "42px",
+            fontFamily: "Arial",
+            color: "#ffffff"
+        }).setOrigin(0.5);
+        // ----------------------------
 
         // RANDOM TARGET
         const targetSize = Phaser.Math.Between(30, 50);
@@ -37,20 +45,19 @@ export default class MiniGame_Fantasy extends Phaser.Scene {
             margin, height - margin
         );
 
-        // DISPLAY
         this.targetZone = this.add.circle(
             targetX, targetY, targetSize,
             0x00ff88, 0.25
         ).setStrokeStyle(3, 0x00ffcc);
 
-        // --- FÍSICAS DEL TARGET ---
+        // Físicas target
         this.physics.add.existing(this.targetZone);
         this.targetZone.body.setCircle(targetSize);
         this.targetZone.body.setAllowGravity(false);
         this.targetZone.body.setImmovable(true);
         this.targetZone.body.isSensor = true;
 
-        // Movimiento suave del target
+        // Movimiento suave
         this.tweens.add({
             targets: this.targetZone,
             x: Phaser.Math.Clamp(
@@ -70,42 +77,24 @@ export default class MiniGame_Fantasy extends Phaser.Scene {
             }
         });
 
-        // RANDOM ORB START
+        // RANDOM ORB
         const orbX = Phaser.Math.Clamp(
             centerX + Phaser.Math.Between(-60, 60),
             margin, width - margin
         );
         const orbY = Phaser.Math.Clamp(centerY + 130, margin, height - margin);
 
-        // DISPLAY
         this.orb = this.add.circle(orbX, orbY, 25, 0x88aaff)
             .setStrokeStyle(3, 0xffffff)
             .setInteractive();
 
-        // --- FÍSICAS DEL ORBE ---
         this.physics.add.existing(this.orb);
         this.orb.body.setCircle(25);
         this.orb.body.setAllowGravity(false);
         this.orb.body.setImmovable(true);
         this.orb.body.moves = false;
-        this.orb.body.reset(orbX, orbY);
 
-        this.input.on("dragend", () => {
-            if (this.finished) return;
-
-            this.released = true;
-            this.dragTimer.remove(false);
-
-            // Verificar overlap SOLO al soltar
-            if (Phaser.Geom.Intersects.CircleToCircle(this.orb, this.targetZone)) {
-                this.handleOverlap();
-            } else {
-                this.finish("fail");
-            }
-        });
-
-
-        // Arrastre
+        // Draggable
         this.input.setDraggable(this.orb);
 
         this.input.on("drag", (pointer, obj, dragX, dragY) => {
@@ -118,15 +107,27 @@ export default class MiniGame_Fantasy extends Phaser.Scene {
             obj.body.reset(obj.x, obj.y);
         });
 
-        // Timer de seguridad
+        this.input.on("dragend", () => {
+            if (this.finished) return;
+
+            this.released = true;
+            this.dragTimer.remove(false);
+
+            if (Phaser.Geom.Intersects.CircleToCircle(this.orb, this.targetZone)) {
+                this.handleOverlap();
+            } else {
+                this.finish("fail");
+            }
+        });
+
+        // Timer real del minijuego
         this.released = false;
         this.finished = false;
 
         this.dragTimer = this.time.delayedCall(1100, () => {
             if (!this.released && !this.finished) {
                 this.released = true;
-                
-                // Igual que al soltar: comprobar si está dentro
+
                 if (Phaser.Geom.Intersects.CircleToCircle(this.orb, this.targetZone)) {
                     this.handleOverlap();
                 } else {
@@ -134,23 +135,23 @@ export default class MiniGame_Fantasy extends Phaser.Scene {
                 }
             }
         });
+    }
 
-        // Suelta el orbe
-        this.input.on("dragend", () => {
-            if (this.finished) return;
-            this.released = true;
-            this.dragTimer.remove(false);
+    //TIMER
+    update(time, delta) {
+        if (this.finished) return;
 
-            // Si no hubo overlap → fail
-            if (!this.hasOverlapped) this.finish("fail");
-        });
+        this.timeLeft -= delta / 1000;
+
+        if (this.timeLeft < 0) this.timeLeft = 0;
+
+        this.timerText.setText(this.timeLeft.toFixed(2));
     }
 
     handleOverlap() {
         if (this.finished) return;
         this.hasOverlapped = true;
 
-        // Determinar precisión según distancia al centro
         const dist = Phaser.Math.Distance.Between(
             this.orb.x, this.orb.y,
             this.targetZone.x, this.targetZone.y
@@ -184,10 +185,11 @@ export default class MiniGame_Fantasy extends Phaser.Scene {
     }
 
     flashColor(color) {
-        const width = this.cameras.main.width;
-        const height = this.cameras.main.height;
-
-        const rect = this.add.rectangle(0, 0, width, height, color, 0.5).setOrigin(0);
+        const rect = this.add.rectangle(0, 0, 
+            this.cameras.main.width, 
+            this.cameras.main.height,
+            color, 0.5
+        ).setOrigin(0);
 
         this.tweens.add({
             targets: rect,
