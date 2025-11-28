@@ -176,7 +176,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             
 
             if (this.scene.enemies.length === 0) {
-                if (battleScene.normalCombatCompleted) {
+                if (battleScene.normalCombatCompleted || battleScene.currentbook === "THE END") {
                     this.scene.time.addEvent({
                         delay: 1000,
                         callback: () => {
@@ -260,7 +260,6 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                 
                     const r = Math.floor(Math.random() * battleScene.heroes.length);
                     battleScene.heroes[r].takeDamage(this.damage / 2);
-
                 }
 
                 this.scene.events.emit("Message", `${this.type} is using randomness`);
@@ -279,6 +278,29 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                 this.alreadySpecialAttacked = true;
                 battleScene.invokeJester();
                 this.scene.events.emit("Message", `${this.type} is invoking Jesters`);
+            }
+            else if(this.type === "Scared Wizard" && this.specialAttackCounter == 2)
+            {
+                target.stunned = 3;
+                this.scene.events.emit("Message", `${target.type} is feared for 3 turns`);
+            }
+            else if(this.type === "Sad Wizard" && this.specialAttackCounter == 2)
+            {
+                for (let i = 0; i < 3; i++) {
+                
+                    const r = Math.floor(Math.random() * battleScene.heroes.length);
+                    battleScene.heroes[r].attack *= 0.8;
+                }
+
+                this.scene.events.emit("Message", `${this.type} is reducing attack`);
+            }
+            else if(this.type === "Angry Wizard" && this.specialAttackCounter == 2)
+            {
+                for (let h of battleScene.heroes) {
+                    h.takeDamage(this.damage);
+                }
+
+                this.scene.events.emit("Message", `${this.type} is using meteor: ${this.damage} in AREA`);
             }
             else if(this.isEnemy || battleScene.currentbook !== "FANTASÍA"){
                 let d;

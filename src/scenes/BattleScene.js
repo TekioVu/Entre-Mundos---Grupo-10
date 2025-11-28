@@ -41,13 +41,10 @@ export default class BattleScene extends Phaser.Scene {
             }
             this.units = this.heroes.filter(h => h !== null).concat(this.enemies);
         });
-
-
-
-        this.events.on("heroesSelected", this.onHeroSelected, this);
-        this.scene.get("CharacterSelectionScene").events.on('selectionComplete', (placedHeroes) => {
-        this.setSelectedHeroes(placedHeroes);
-        this.units = this.heroes.concat(this.enemies);
+            this.events.on("heroesSelected", this.onHeroSelected, this);
+            this.scene.get("CharacterSelectionScene").events.on('selectionComplete', (placedHeroes) => {
+            this.setSelectedHeroes(placedHeroes);
+            this.units = this.heroes.concat(this.enemies);
         });
             this.index = -1;  
 
@@ -350,7 +347,6 @@ export default class BattleScene extends Phaser.Scene {
                 idle: [14, 16],  attack: [0, 5], damage: [12, 13], death: [6, 11],name: 'Medusa', pos: [1, 1], scale: 1, hp: 10, atk: 25 },
             'COMEDIA':  { key: 'king', idleKey: 'king_idle', attackKey: 'king_attack', damageKey: 'king_damage',  deathKey: 'king_death',
             idle: [0, 3], attack: [0, 3], damage: [0, 3], death: [0, 5], name: 'King', pos: [1, 1], scale: 1, hp: 350, atk: 10 },
-            'THE END':  { key: 'dragon', anim: [11, 13], name: 'Dragon', pos: [1, 1], scale: 1, hp: 1, atk: 25 },
         };
 
         const config = bossConfig[this.currentbook];
