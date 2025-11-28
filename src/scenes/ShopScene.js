@@ -1,3 +1,5 @@
+import Message from "../ui/Message.js";
+
 export default class ShopScene extends Phaser.Scene {
     constructor() {
         super("ShopScene");
@@ -52,6 +54,8 @@ export default class ShopScene extends Phaser.Scene {
         );
 
         this.boughtCharacters = [];
+
+        this.message = new Message(this, this.events);
         
         this.resetShop();
         this.createInventory();
@@ -280,6 +284,7 @@ updateSelection(itemIndex, categoryIndex) {
 
         }else if(this.inv.getLimit() <= this.inventoryLocal.length){
             console.log("Numero maximo de objetos");
+            this.events.emit("Message", "Inventory full.\nYou can't hold more than 6 types of potions.");
             return;
         }
         else if(selectedGroup.name === 'Pociones curación'){

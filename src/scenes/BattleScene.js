@@ -74,21 +74,40 @@ export default class BattleScene extends Phaser.Scene {
             
             this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
         }
-        else if (action === "heal"){
+        else if (action === "heal"){ // Curar ♥️
             this.units[this.index].heal(this.itemsArray.getItem(itemIndex).getStat());
             this.itemsArray.useItem(itemIndex);
             this.createInventory();
         }
-        else if (action === "strPot"){
+        else if (action === "strPot"){ // Aumentar Daño ⚔️
             console.log("Aumento de ataque: " + this.itemsArray.getItem(itemIndex).getStat());
             this.units[this.index].dmgUp(this.itemsArray.getItem(itemIndex).getStat());
             this.itemsArray.useItem(itemIndex);
             this.createInventory();
         }
-        else if (action === "defPot"){
+        else if (action === "defPot"){ // Aumentar Defensa 🛡️
             this.units[this.index].defUp(this.itemsArray.getItem(itemIndex).getStat());
             this.itemsArray.useItem(itemIndex);
             this.createInventory();
+        }
+        else if (action === "areaPot"){ // Daño en Area (vanguardia o retaguardia)
+            // Comprueba si el daño se hace a la vanguardia o retaguardia
+            if(this.units[this.index].pos === "v"){
+                for(let i = 0; i < this.enemies.length; i++){
+                    if(this.enemies[i].pos === "v"){
+                        this.enemies[i].areaPot(this.itemsArray.getItem(itemIndex).getStat());
+                    }
+                }
+            }
+            else{
+                for(let i = 0; i < this.enemies.length; i++){
+                    if(this.enemies[i].pos === "r"){
+                        this.enemies[i].areaPot(this.itemsArray.getItem(itemIndex).getStat());
+                    }
+                }
+            }
+            this.events.emit("Message", `Area Potion deals ${this.itemsArray.getItem(itemIndex).getStat()} damage to the ${this.units[this.index].pos === "v" ? "vanguard" : "rearguard"}`);
+            this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
         }
     }
 

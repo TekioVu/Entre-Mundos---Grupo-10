@@ -86,10 +86,10 @@ export default class MenuScene extends Phaser.Scene {
         this.inventory.createItem('pocion_verde', 'Poción Verde', 'HealPot', undefined, undefined, 25);
         this.inventory.createItem('pocion_azul', 'Poción Azul', 'HealPot', undefined, undefined, 50);
         this.inventory.createItem('pocion_dorada', 'Poción Dorada', 'HealPot', undefined, undefined, 90);
-        this.inventory.createItem('pocion_daño_area', 'Poción Daño Área', 'DmgPot', undefined, undefined, -10);
-        this.inventory.createItem('pocion_daño_pequeña', 'Poción Daño Pequeña', 'DmgPot', undefined, undefined, -20);
-        this.inventory.createItem('pocion_daño_grande', 'Poción Daño Grande', 'DmgPot', undefined, undefined, -35);
-        this.inventory.createItem('pocion_cataclismo', 'Poción Cataclismo', 'DmgPot', undefined, undefined, -1000);
+        this.inventory.createItem('pocion_daño_area', 'Poción Daño Área', 'AreaPot', undefined, undefined, 10);
+        this.inventory.createItem('pocion_daño_pequeña', 'Poción Daño Pequeña', 'DmgPot', undefined, undefined, 20);
+        this.inventory.createItem('pocion_daño_grande', 'Poción Daño Grande', 'DmgPot', undefined, undefined, 35);
+        this.inventory.createItem('pocion_cataclismo', 'Poción Cataclismo', 'CatPot', undefined, undefined, 1000);
 
         this.inventory.createItem('pocion_ataque', 'Poción De Ataque', 'StrPot', 15, undefined, undefined);
         this.inventory.createItem('pocion_defensa', 'Poción De Defensa', 'DefPot', undefined, 10, undefined);

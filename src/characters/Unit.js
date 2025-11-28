@@ -83,6 +83,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         }
     }
 
+
     attack(target) {
 
         if(!this.isEnemy)
@@ -106,6 +107,13 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         this.scene.events.emit("Message", `${this.type} heals ${hp}HP`);
     }
 
+    areaPot(damage){
+        const bs = this.scene.scene.get("BattleScene");
+        this.hp -= damage;
+        this.updateHpText();
+        this.isDead(bs);
+    }
+
     takeDamage(damage) {
 
         const bs = this.scene.scene.get("BattleScene");
@@ -118,6 +126,10 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         this.hp -= damage;
         }
 
+        this.isDead(bs);
+    }
+
+    isDead(bs){
         if (this.hp <= 0)
         {
             this.hp = 0;
@@ -125,27 +137,27 @@ export default class Unit extends Phaser.GameObjects.Sprite {
 
             if (this.type === "Goblin" || this.type === "Ghost" || this.type === "Timmy" || this.type === "Wizard"|| this.type === "Mushroom" || this.type === "Flying Eye"|| this.type === "Dragon"|| this.type === "Jester"|| this.type === "Scared Wizard"|| this.type === "Angry Wizard" || this.type === "Sad Wizard" || this.type === "King" || this.type === "Medusa"|| this.type === "Cacodaemon")
             {
-             this.playAnim('death', () => {
+                this.playAnim('death', () => {
                 
+                    bs.tweens.add({
+                        targets: this,
+                        alpha: 0,
+                        duration: 600,
+                        onComplete: () => this.setVisible(false)
+                    });
+                });
+            }
+            else {
+
                 bs.tweens.add({
                     targets: this,
                     alpha: 0,
                     duration: 600,
-                    onComplete: () => this.setVisible(false)
+                    onComplete: () => 
+                    {
+                        this.setVisible(false)
+                    }
                 });
-            });
-          }
-            else {
-
-                bs.tweens.add({
-                            targets: this,
-                            alpha: 0,
-                            duration: 600,
-                            onComplete: () => 
-                            {
-                                this.setVisible(false)
-                            }
-                        });
             }
             
             this.hpText.setVisible(false);

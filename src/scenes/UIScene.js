@@ -11,6 +11,7 @@ export default class UIScene extends Phaser.Scene {
 
     create() {
         this.id = 0;
+        this.itemId = undefined;
         this.itemUsed = false;
         this.inventory = this.registry.get('inventory');
 
@@ -106,7 +107,13 @@ export default class UIScene extends Phaser.Scene {
         this.enemiesMenu.clear();   
         this.actionsMenu.deselect();
         this.currentMenu = null;
-        this.battleScene.receivePlayerSelection("attack", enemyIndex, undefined);
+        if(this.itemId){ // Comprueba si lo que quiere es usar un objeto en un enemigo
+            this.battleScene.receivePlayerSelection("areaPot", undefined, this.itemId);
+            this.itemId = undefined;
+        }
+        else{
+            this.battleScene.receivePlayerSelection("attack", enemyIndex, undefined);
+        }
     }
 
     // Cuando se ha seleccionado un item para usar (Sin terminar)
@@ -117,7 +124,13 @@ export default class UIScene extends Phaser.Scene {
         // Seleccion la accion en base al tipo de objeto usado
         switch(this.inventory.getItem(itemIndex).getType()){
             case('HealPot'): this.battleScene.receivePlayerSelection("heal", undefined, itemIndex); break;
-            case('DmgPot'): this.battleScene.receivePlayerSelection("dmgPot", undefined, itemIndex); break;
+            case('DmgPot'): { // Tiene que seleccionar el enemigo en el que usarla
+                    this.currentMenu = this.enemiesMenu; 
+                    this.enemiesMenu.select(0); 
+                    this.itemId = itemIndex; 
+                    break;
+                }
+            case('AreaPot'): this.battleScene.receivePlayerSelection("areaPot", undefined, itemIndex); break;
             case('StrPot'): this.battleScene.receivePlayerSelection("strPot", undefined, itemIndex); break;
             case('DefPot'): this.battleScene.receivePlayerSelection("defPot", undefined, itemIndex); break;
         }
@@ -130,6 +143,7 @@ export default class UIScene extends Phaser.Scene {
             this.enemiesMenu.deselect();
             this.currentMenu = this.actionsMenu;
             this.actionsMenu.select(0);
+            this.itemId = undefined;
         }else if(this.currentMenu === this.itemsMenu){ // En caso de estar en el menu de items
             this.itemsMenu.clear();
             this.itemsMenu.deselect();
