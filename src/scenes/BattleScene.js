@@ -67,9 +67,6 @@ export default class BattleScene extends Phaser.Scene {
             unit.attack(this.heroes[r]);
             this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
         }
-        //  for (let h of this.heroes) {
-        //             if (h.type === 'Dragon') this.h.specialAttackCounter++;
-        // }
     }
     
     // === Manager de acciones ===
@@ -242,10 +239,22 @@ export default class BattleScene extends Phaser.Scene {
         this._createDamageAnim('wizard_damage', 0, 3, 'wizard-damage');
         this._createDeathAnim('wizard_death', 0, 6, 'wizard-death');
 
-        this._createIdleAnim('dragon_idle', 0, 5, 'dragon-idle');
-        this._createAttackAnim('dragon_attack', 0, 7, 'dragon-attack');
-        this._createDamageAnim('dragon_damage', 0, 3, 'dragon-damage');
-        this._createDeathAnim('dragon_death', 0, 6, 'dragon-death');
+        this._createIdleAnim('dragon_idle', 11, 13, 'dragon-idle');
+        this._createAttackAnim('dragon_attack', 0, 3, 'dragon-attack');
+        this._createDamageAnim('dragon_damage', 9, 10, 'dragon-damage');
+        this._createDeathAnim('dragon_death', 4, 8, 'dragon-death');
+
+        this._createIdleAnim('cacodaemon_idle', 0, 5, 'cacodaemon-idle');
+        this._createAttackAnim('cacodaemon_attack', 8, 13, 'cacodaemon-attack');
+        this._createDamageAnim('cacodaemon_damage', 16, 19, 'cacodaemon-damage');
+        this._createDeathAnim('cacodaemon_death', 24, 31, 'cacodaemon-death');
+
+        this._createIdleAnim('king_idle', 0, 3, 'king-idle');
+        this._createAttackAnim('king_attack', 0, 3, 'king-attack');
+        this._createDamageAnim('king_damage', 0, 3, 'king-damage');
+        this._createDeathAnim('king_death', 0, 5, 'king-death');
+
+         
 
 
         // Crear enemigos
@@ -382,7 +391,7 @@ export default class BattleScene extends Phaser.Scene {
 
         const bossConfig = {
             'FANTASÍA': { key: 'dragon', idleKey: 'dragon_idle', attackKey: 'dragon_attack', damageKey: 'dragon_damage', deathKey: 'dragon_death',
-            idle: [11, 13], attack: [0, 3], damage: [9, 10], death: [4, 8], name: 'Dragon', pos: [0, 1], scale: 1, hp: 10, atk: 15 },
+            idle: [0, 3], attack: [11, 13], damage: [9, 10], death: [4, 8], name: 'Dragon', pos: [0, 1], scale: 1, hp: 10, atk: 15 },
 
             'TERROR':   { key: 'cacodaemon', idleKey: 'cacodaemon_idle', attackKey: 'cacodaemon_attack', damageKey: 'cacodaemon_damage', deathKey: 'cacodaemon_death',
                 idle: [0, 5], attack: [8, 13], damage: [16, 19], death: [24, 31], name: 'Cacodaemon', pos: [1, 1], scale: 1, hp: 150, atk: 25 },

@@ -51,6 +51,8 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             stroke: "#000000",
             strokeThickness: 2
         }).setOrigin(0.5);
+
+        
     }
 
     updateHpText() {
@@ -377,6 +379,8 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         }
 
         this.specialAttackCounter++;
+        battleScene.time.addEvent({ delay: 3000, callback: battleScene.nextTurn, callbackScope: battleScene });
+
     }
 
 

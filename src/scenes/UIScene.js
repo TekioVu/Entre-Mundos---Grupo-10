@@ -85,6 +85,7 @@ export default class UIScene extends Phaser.Scene {
         const hero = this.battleScene.heroes[this.heroesMenu.menuItemIndex];
         this.actionsMenu.setHero(hero);
         this.actionsMenu.select(0);
+        this.actionsMenu.refreshMenu();
 
         }, this); 
                                
