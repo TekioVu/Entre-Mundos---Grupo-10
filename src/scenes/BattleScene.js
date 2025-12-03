@@ -67,6 +67,9 @@ export default class BattleScene extends Phaser.Scene {
             unit.attack(this.heroes[r]);
             this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
         }
+        //  for (let h of this.heroes) {
+        //             if (h.type === 'Dragon') this.h.specialAttackCounter++;
+        // }
     }
     
     // === Manager de acciones ===
@@ -239,6 +242,11 @@ export default class BattleScene extends Phaser.Scene {
         this._createDamageAnim('wizard_damage', 0, 3, 'wizard-damage');
         this._createDeathAnim('wizard_death', 0, 6, 'wizard-death');
 
+        this._createIdleAnim('dragon_idle', 0, 5, 'dragon-idle');
+        this._createAttackAnim('dragon_attack', 0, 7, 'dragon-attack');
+        this._createDamageAnim('dragon_damage', 0, 3, 'dragon-damage');
+        this._createDeathAnim('dragon_death', 0, 6, 'dragon-death');
+
 
         // Crear enemigos
         config.enemyDefs.forEach(def => {
@@ -339,6 +347,14 @@ export default class BattleScene extends Phaser.Scene {
         if (positionKey=== 4 || positionKey === 5) { hero.setDepth(3); hero.hpText.setDepth(3);}
         
 
+        if(hero.type === 'Dragon' || hero.type === 'Cacodaemon' || hero.type === 'Medusa' || hero.type === 'King'){
+            hero.hasAbility = true;
+            hero.specialAttackCounter = 2;
+        }
+        else {
+            hero.hasAbility = false;
+        }
+
         if (hero.type === 'Wizard') {
             hero.setScale(0.7);
         } else if (hero.name === 'Timmy') {
@@ -349,11 +365,16 @@ export default class BattleScene extends Phaser.Scene {
             hero.setScale(0.4);
         }else if (hero.texture.key === 'pharaoh') {
             hero.setScale(0.4);
+        }else if (hero.type === 'Dragon') {
+            hero.setScale(0.7);
         }
 
         this.heroes[positionKey] = hero;
         this.units = this.heroes.filter(h => h !== null).concat(this.enemies);
         this.setDamage(this.units);
+
+        hero.isEnemy = false;
+        
     }
 
     createMiniBoss() {
@@ -361,7 +382,7 @@ export default class BattleScene extends Phaser.Scene {
 
         const bossConfig = {
             'FANTASÍA': { key: 'dragon', idleKey: 'dragon_idle', attackKey: 'dragon_attack', damageKey: 'dragon_damage', deathKey: 'dragon_death',
-            idle: [11, 13], attack: [0, 3], damage: [9, 10], death: [4, 8], name: 'Dragon', pos: [0, 1], scale: 1, hp: 120, atk: 15 },
+            idle: [11, 13], attack: [0, 3], damage: [9, 10], death: [4, 8], name: 'Dragon', pos: [0, 1], scale: 1, hp: 10, atk: 15 },
 
             'TERROR':   { key: 'cacodaemon', idleKey: 'cacodaemon_idle', attackKey: 'cacodaemon_attack', damageKey: 'cacodaemon_damage', deathKey: 'cacodaemon_death',
                 idle: [0, 5], attack: [8, 13], damage: [16, 19], death: [24, 31], name: 'Cacodaemon', pos: [1, 1], scale: 1, hp: 150, atk: 25 },

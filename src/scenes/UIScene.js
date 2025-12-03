@@ -47,10 +47,11 @@ export default class UIScene extends Phaser.Scene {
         g.strokePath();
 
 
+        this.battleScene = this.scene.get("BattleScene");
 
         this.menus = this.add.container();
         this.heroesMenu = new HeroesMenu(220, 180, this, true);
-        this.actionsMenu = new ActionsMenu(145, 180, this, false);
+        this.actionsMenu = new ActionsMenu(145, 180, this, this.battleScene.heroes[0]);
         this.enemiesMenu = new EnemiesMenu(10, 180, this, true);
         this.itemsMenu = new ItemsMenu(10, 180, this, this.inventory);
 
@@ -74,14 +75,19 @@ export default class UIScene extends Phaser.Scene {
         this.input.keyboard.on("keydown", this.onKeyInput, this);
 
         this.battleScene.events.on("PlayerSelect", this.onFirstPlayerSelect, this); // Para dejar el primer personaje de la lista al empezar cada turno
-        //this.events.on("PlayerSelect", this.onPlayerSelect, this);                  // Cuando se selecciona el personaje con el que actuar
+        this.events.on("PlayerSelect", this.onPlayerSelect, this);                  // Cuando se selecciona el personaje con el que actuar
         this.events.on("Select", this.onSelect, this);                              // Cuando se escoje la accion que se quiere realizar
         this.events.on("Enemy", this.onEnemy, this);                                // Al escojer a que enemigo atacar
         this.events.on("Item", this.onItem, this);                                  // Al escojer que item usar
         this.events.on("Back", this.onBack, this);      
         this.battleScene.events.on("PlayerSelect", (index) => {
         this.heroesMenu.select(index);
-        }, this);                        
+        const hero = this.battleScene.heroes[this.heroesMenu.menuItemIndex];
+        this.actionsMenu.setHero(hero);
+        this.actionsMenu.select(0);
+
+        }, this); 
+                               
 
         this.message = new Message(this, this.battleScene.events);
         this.add.existing(this.message);
@@ -99,6 +105,15 @@ export default class UIScene extends Phaser.Scene {
         this.remapItems();
         this.currentMenu = this.itemsMenu;
         this.itemsMenu.select(0);
+    }
+    else if (this.currentMenu.getMenuItemIndex() === 2){// en caso de que se escoja "Hability"
+        const hero = this.battleScene.heroes[this.heroesMenu.menuItemIndex];
+        if (!hero) return;
+
+        const target = this.battleScene.enemies[0];
+        hero.checkSpecialAttackHeroes(target);
+
+        this.actionsMenu.deselect();
     }
     }
 
@@ -158,11 +173,20 @@ export default class UIScene extends Phaser.Scene {
     }
 
     onFirstPlayerSelect() {
+        const firstHero = this.battleScene.heroes[0];
+    if (firstHero) {
+        this.actionsMenu.setHero(firstHero);
+        this.actionsMenu.select(0);
         this.currentMenu = this.actionsMenu;
+    }
         this.heroesMenu.select(0);
     }
 
     onPlayerSelect(){
+        const hero = this.battleScene.heroes[this.heroesMenu.menuItemIndex];
+        this.actionsMenu.setHero(hero);
+        this.actionsMenu.refreshMenu();
+
         this.actionsMenu.select(0);
         this.currentMenu = this.actionsMenu;
 

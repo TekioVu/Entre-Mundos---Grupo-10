@@ -1,5 +1,5 @@
 export default class Unit extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, texture, frame, type, hp, damage, pos) {
+    constructor(scene, x, y, texture, frame, type, hp, damage, pos, hasHability) {
         super(scene, x, y, texture, frame);
         this.type = type;
         this.maxHp = this.hp = hp;
@@ -10,6 +10,12 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         this.stunned = 0;
         this.specialAttackCounter = 0;
         this.alreadySpecialAttacked = false; //Variable para los mini bosses que solo usen su habilidad 1 vez
+        if(this.type === "Dragon" || this.type === "Cacodaemon" || this.type === "Medusa" || this.type === "King"){
+            this.hasAbility = true;
+        }
+        else {
+            this.hasAbility = false;
+        }
 
         const offsets = {
             "Timmy": 40,
@@ -35,27 +41,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             "Angry Wizard" : 25,
         };
 
-        this.isEnemy = (
-            this.type === "Goblin" ||
-            this.type === "Ghost" ||
-            this.type === "Dragon" ||
-
-            this.type === "Mushroom" ||
-            this.type === "Flying Eye" ||
-            this.type === "Cacodaemon" ||
-
-            this.type === "Pharaoh" ||
-            this.type === "Scarab" ||
-            this.type === "Medusa" ||
-
-            this.type === "Clown" ||
-            this.type === "Jester" ||
-            this.type === "King" ||
-            
-            this.type === "Scared Wizard" ||
-            this.type === "Sad Wizard" ||
-            this.type === "Angry Wizard" 
-        );
+        this.isEnemy = true;
 
         this.hpOffsetY = offsets[this.type] || 30;
 
@@ -108,7 +94,8 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         {
              this.playAnim('attack', () => this.playAnim('idle'));
         }
-
+        if (this.specialAttackCounter < 2 && this.type === "Dragon") this.specialAttackCounter++;
+        if(this.isEnemy)
         this.checkSpecialAttack(target);
     }
 
@@ -334,6 +321,55 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                 target.takeDamage(d);
 
                 this.scene.events.emit("Message", `${this.type} attacks ${target.type} for ${d} damage`);
+            }
+        }else {
+            this.scene.events.emit("Message", `${this.type} is stunned`);
+            this.stunned--;
+        }
+
+        this.specialAttackCounter++;
+    }
+
+    checkSpecialAttackHeroes(target)
+    {
+        const battleScene = this.scene.scene.get("BattleScene");
+
+         if(this.stunned == 0)
+        {
+            if(this.type === "Dragon" && this.specialAttackCounter == 2)
+            {
+                this.specialAttackCounter = 0;
+                for (let h of battleScene.enemies) {
+                    h.takeDamage(this.damage);
+                }
+
+                this.scene.events.emit("Message", `${this.type} is using flare: 40 DMG ALL UNITS`);
+            }
+            else if(this.type === "Cacodaemon" && this.specialAttackCounter == 2)
+            {
+                this.specialAttackCounter = 0;
+                for (let i = 0; i < 5; i++) {
+                
+                    const r = Math.floor(Math.random() * battleScene.enemies.length);
+                    battleScene.enemies[r].takeDamage(this.damage / 2);
+                }
+
+                this.scene.events.emit("Message", `${this.type} is using randomness`);
+            }
+            else if(this.type === "Medusa" && this.specialAttackCounter == 3)
+            {
+                this.specialAttackCounter = 0;
+                for (let h of battleScene.enemies) {
+                    h.stunned = 2;
+                }
+
+                this.scene.events.emit("Message", `${this.type} is using petrification: ALL UNITS STUNNED FOR 2 TURNS`);
+            }
+            else if(this.type === "King" && this.specialAttackCounter == 1 && !this.alreadySpecialAttacked)
+            {
+                this.alreadySpecialAttacked = true;
+                battleScene.invokeJester();
+                this.scene.events.emit("Message", `${this.type} is invoking Jesters`);
             }
         }else {
             this.scene.events.emit("Message", `${this.type} is stunned`);

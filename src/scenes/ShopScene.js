@@ -24,6 +24,7 @@ export default class ShopScene extends Phaser.Scene {
             ],
             "Personajes": [
                 { name: "Wizard", texture: "wizard_image", description: "Magic", coins: 100 },
+                {name: "Dragon", texture: "dragon", description: "Grrrrraaaaaahhhhhh", coins: 250 },
             ],
         };
 
