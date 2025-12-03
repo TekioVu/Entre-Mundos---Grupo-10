@@ -14,7 +14,9 @@ export default class MiniGame_Terror extends Phaser.Scene {
         const height = this.cameras.main.height;
         const cx = width / 2;
         const cy = height / 2;
-
+        //Bucle
+        this.finished = false;
+        this.timeLeft = 1.5;
         //----------------------------------------
         // Fondo 
         //----------------------------------------
@@ -22,42 +24,79 @@ export default class MiniGame_Terror extends Phaser.Scene {
 
         const barWidth = 300;
         const barHeight = 30;
+        const strokeWidth = 3;
 
         this.mainBar = this.add.rectangle(cx, cy, barWidth, barHeight, 0x333333)
             .setOrigin(0.5)
-            .setStrokeStyle(3, 0xffffff);
+            .setStrokeStyle(strokeWidth, 0xffffff);
 
         //----------------------------------------
         // Zona Perfecta
         //----------------------------------------
-        this.perfectWidth = this.barWidth * 0.15;
-        this.perfectHeight = this.barHeight;
+        this.perfectWidth = barWidth * 0.05;
 
         this.perfectZone = this.add.rectangle(
             cx,
             cy,
             this.perfectWidth,
-            this.perfectHeight,
-            0xff0000,
-            0.6).setOrigin(0.5);
+            barHeight - strokeWidth,
+            0xff0000
+            ).setOrigin(0.5);
+
+        //Zonas normales
+        this.normalWidth = barWidth * 0.05;
+
+        this.rightnormalZone = this.add.rectangle(
+            cx + this.perfectWidth,
+            cy,
+            this.normalWidth,
+            barHeight - strokeWidth,
+            0xffff00
+            ).setOrigin(0.5);
+
+        this.leftnormalZone= this.add.rectangle(
+            cx - this.perfectWidth,
+            cy,
+            this.normalWidth,
+            barHeight - strokeWidth,
+            0xffff00
+            ).setOrigin(0.5);
 
         // ----- CURSOR -----
         this.cursorWidth = 10;
         this.cursor = this.add.rectangle(
-            cx - barWidth / 2,  
+            cx - barWidth / 2 + this.cursorWidth/2,  
             cy,
             this.cursorWidth,       
-            barHeight,
-            0xffffff  
+            barHeight - strokeWidth,
+            0xffffff
         ).setOrigin(0.5);
         
         //Movimiento del cursor
-        this.cursorSpeed = 200;
+        this.cursorSpeed = 400;
         this.cursorDir = 1
 
-        const leftLimit = cx - barWidth/2;
-        const rightLimit = cx + barWidth/2;
+        this.leftLimit = cx - barWidth/2 + this.cursorWidth/2;
+        this.rightLimit = cx + barWidth/2 - this.cursorWidth/2;
 
+    }
+    
+    
+    cursorMovement(){
+        if(this.finished)return; 
+        this.cursor.x +=  this.cursorDir * this.cursorSpeed * this.game.loop.delta / 1000;
+        if(this.cursor.x < this.leftLimit)this.cursorDir = 1;
+        if(this.cursor.x > this.rightLimit)this.cursorDir = -1;
+            
+        }
 
+    update(time,delta){
+        if(this.finished)return;
+        this.timeLeft -= delta / 1000;
+        if(this.timeLeft <= 0){
+            this.finished = true;
+            return
+        }
+        this.cursorMovement();
     }
 }

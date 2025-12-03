@@ -75,6 +75,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
     attack(target) {
 
         const r = Math.floor(Math.random() * 4);
+        //const r = 0;
         console.log("CRIT: " + r);
 
         let d;
@@ -82,7 +83,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         else d = this.damage;
 
         const battleScene = this.scene.scene.get("BattleScene");
-        if(r === 0 && !this.isEnemy && battleScene.currentbook === "FANTASÍA") 
+        if(r === 0 && !this.isEnemy && (battleScene.currentbook === "FANTASÍA" || battleScene.currentbook == "TERROR")) 
         {
             this.damage *= 1.25;
             this.startMinigame(target);
