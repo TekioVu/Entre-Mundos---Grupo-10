@@ -50,6 +50,8 @@ export default class BattleScene extends Phaser.Scene {
 
             this.normalCombatCompleted = false; 
             this.currentbook;
+
+            this.firstTimeFantasyMinigame = true;
         }
 
     nextTurn() {
@@ -219,6 +221,7 @@ export default class BattleScene extends Phaser.Scene {
             console.error(`No se encontró configuración para ${combatScene}`);
             return;
         }
+
 
         // Fondo
         this.add.image(0, 0, config.background)
@@ -484,10 +487,13 @@ export default class BattleScene extends Phaser.Scene {
         this.scene.launch("MiniGame_Fantasy", {
             attacker: attacker,
             target: target,
-            parent: this
+            parent: this,
+            firstTime: this.firstTimeFantasyMinigame
         });
-        this.scene.bringToTop("MiniGame_Fantasy");
 
+        this.firstTimeFantasyMinigame = false;
+
+        this.scene.bringToTop("MiniGame_Fantasy");
         this.scene.pause("BattleScene");
     }
 

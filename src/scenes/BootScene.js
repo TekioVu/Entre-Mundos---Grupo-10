@@ -130,6 +130,11 @@ export default class BootScene extends Phaser.Scene {
         this.load.image('horror_background', './assets/Backgrounds/Horror2.png');
         this.load.image('finalboss_background', './assets/Backgrounds/FinalBoss2.png');
 
+        //Minijuegos
+        this.load.spritesheet('fireball_idle', './assets/Minijuegos/Fireball/Idle.png', { frameWidth: 64, frameHeight: 64 });
+        this.load.spritesheet('fireball_creation', './assets/Minijuegos/Fireball/Creation.png', { frameWidth: 64, frameHeight: 64 });
+        this.load.spritesheet('fireball_explode', './assets/Minijuegos/Fireball/Explode.png', { frameWidth: 64, frameHeight: 64 });
+
         //UI
         this.load.image('attack_panel', './assets/UI/Panel.png');
         this.load.image('coins_won', './assets/UI/Coins.png');
