@@ -527,6 +527,20 @@ export default class BattleScene extends Phaser.Scene {
         this.scene.pause("BattleScene");
     }
 
+    launchTerrorMinigame(attacker, target) {
+        this.currentAttacker = attacker;  // guardamos referencias
+        this.currentTarget = target;
+
+        // Lanza el minijuego y lo lleva al frente
+        this.scene.launch("MiniGame_Terror", {
+            attacker: attacker,
+            target: target,
+            parent: this,
+        });
+        this.scene.bringToTop("MiniGame_Terror");
+        this.scene.pause("BattleScene");
+    }
+
 
     minigameResult(result) {
 

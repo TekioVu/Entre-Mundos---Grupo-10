@@ -238,7 +238,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
 
         }else if(battleScene.currentbook === "TERROR")
         {
-
+            battleScene.launchTerrorMinigame(this, target);
         }else if(battleScene.currentbook === "HISTORIA")
         {
             
