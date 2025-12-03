@@ -86,12 +86,24 @@ export default class Unit extends Phaser.GameObjects.Sprite {
 
     attack(target) {
 
-        if(!this.isEnemy)
-        this.startMinigame(target);
+        const r = Math.floor(Math.random() * 4);
+        console.log("CRIT: " + r);
 
         let d;
         if (target.pos == 'v') d = this.damage - 5;
         else d = this.damage;
+
+        const battleScene = this.scene.scene.get("BattleScene");
+        if(r === 0 && !this.isEnemy && battleScene.currentbook === "FANTASÍA") 
+        {
+            this.damage *= 1.25;
+            this.startMinigame(target);
+        }
+        else{
+            target.takeDamage(d);
+            this.scene.events.emit("Message", `${this.type} attacks ${target.type} for ${d} damage`);
+        }
+
         if (this.type === "Goblin" || this.type === "Ghost" || this.type === "Timmy" || this.type === "Wizard"|| this.type === "Mushroom" || this.type === "Flying Eye" || this.type === "Dragon"|| this.type === "Jester" || this.type === "Scared Wizard"|| this.type === "Angry Wizard" || this.type === "Sad Wizard" || this.type === "King" || this.type === "Medusa"|| this.type === "Cacodaemon" || this.type === "Pharaoh" || this.type === "Scarab")
         {
              this.playAnim('attack', () => this.playAnim('idle'));
