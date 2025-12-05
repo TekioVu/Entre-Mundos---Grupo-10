@@ -8,7 +8,7 @@ export default class GameOverScene extends Phaser.Scene {
         const borderColor = 0x888888;
         const textColor = "#ffffffab";
 
-const victoryText = this.add.text(160, 60, "GAME OVER", {
+const gameOverText = this.add.text(160, 60, "GAME OVER", {
     fontFamily: "Arial",
     fontSize: "36px",
     fontStyle: "bold",
@@ -25,19 +25,17 @@ const victoryText = this.add.text(160, 60, "GAME OVER", {
 }).setOrigin(0.5);
 
 
-victoryText.setAlpha(0);
+gameOverText.setAlpha(0);
 this.tweens.add({
-    targets: victoryText,
+    targets: gameOverText,
     alpha: 1,
     duration: 600,
     ease: "Quad.Out"
 });
 
-
         const boxWidth = 100;
         const boxHeight = 30;
-
-        
+      
         this.button = this.add.container(160, 170);
 
         const bg = this.add.graphics();
@@ -70,8 +68,8 @@ this.tweens.add({
    
         const activate = () => {
             this.drawPressed(bg, boxWidth, boxHeight);
-
-            this.scene.switch("MenuScene");
+            this.scene.stop("MenuScene");
+            this.scene.start("MenuScene");
         };
 
         this.input.keyboard.once("keydown-SPACE", activate);

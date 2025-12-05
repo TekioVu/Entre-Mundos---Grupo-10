@@ -7,6 +7,7 @@ export default class MiniGame_Terror extends Phaser.Scene {
         this.attacker = data.attacker;
         this.target = data.target;
         this.parent = data.parent;
+        this.firstTime = data.firstTime;
     }
 
     create() {
@@ -16,7 +17,7 @@ export default class MiniGame_Terror extends Phaser.Scene {
         const cy = height / 2;
         //Bucle
         this.finished = false;
-        this.timeLeft = 1.1;
+
         //----------------------------------------
         // Fondo 
         //----------------------------------------
@@ -25,11 +26,19 @@ export default class MiniGame_Terror extends Phaser.Scene {
         const barWidth = 300;
         const barHeight = 30;
         const strokeWidth = 3;
-
+        
         this.mainBar = this.add.rectangle(cx, cy, barWidth, barHeight, 0x333333)
             .setOrigin(0.5)
             .setStrokeStyle(strokeWidth, 0xffffff);
 
+        if (!this.firstTime) {
+            this.timeLeft = 1.09;
+            this.timerText = this.add.text(cx, 40, this.timeLeft.toFixed(2), {
+                fontSize: "42px",
+                fontFamily: "Arial",
+                color: "#ffffff"
+            }).setOrigin(0.5);
+        }
         
         this.perfectWidth = barWidth * 0.05;
         this.normalWidth = barWidth * 0.1;
@@ -50,6 +59,8 @@ export default class MiniGame_Terror extends Phaser.Scene {
             0xff0000
             ).setOrigin(0.5);
 
+
+        this.physics.add.existing(this.perfectZone);   
         //Zonas normales
     
         this.rightnormalZone = this.add.rectangle(
@@ -60,6 +71,8 @@ export default class MiniGame_Terror extends Phaser.Scene {
             0xffff00
             ).setOrigin(0.5);
 
+        this.physics.add.existing(this.rightnormalZone);    
+
         this.leftnormalZone= this.add.rectangle(
             this.random - this.perfectWidth * 1.5,
             cy,
@@ -67,6 +80,8 @@ export default class MiniGame_Terror extends Phaser.Scene {
             barHeight - strokeWidth,
              0xffff00
             ).setOrigin(0.5);
+
+        this.physics.add.existing(this.leftnormalZone);
 
         // ----- CURSOR -----
         this.cursorWidth = 5;
@@ -77,6 +92,8 @@ export default class MiniGame_Terror extends Phaser.Scene {
             barHeight - strokeWidth,
             0xffffff
         ).setOrigin(0.5);
+
+        this.physics.add.existing(this.cursor);
         
         //Movimiento del cursor
         this.cursorSpeed = 600;
@@ -99,14 +116,19 @@ export default class MiniGame_Terror extends Phaser.Scene {
 
 
     update(time,delta){
+
         if (Phaser.Input.Keyboard.JustDown(this.spaceKey)){
             this.checkResult();
             return;
         }
 
-
         if(this.finished)return;
+        if (!this.firstTime) {
         this.timeLeft -= delta / 1000;
+        if (this.timeLeft < 0) this.timeLeft = 0;
+
+        this.timerText.setText(this.timeLeft.toFixed(2));
+        }
 
         if(this.timeLeft <= 0){
             this.finish("fail");
@@ -117,23 +139,16 @@ export default class MiniGame_Terror extends Phaser.Scene {
     }
 
     checkResult(){
-        const x = this.cursor.x;
+        let cursor   = this.cursor.getBounds();
+        let perfect  = this.perfectZone.getBounds();
+        let rightN    = this.rightnormalZone.getBounds();
+        let leftN     = this.leftnormalZone.getBounds();
+
         let result;
-        // Perfecta
-        const rightPerfect = this.perfectZone.x + this.perfectWidth/2;
-        const leftPerfect = this.perfectZone.x - this.perfectWidth/2;
 
-        // normal Derecha
-        const normalRightRight = this.rightnormalZone.x + this.normalWidth/2;
-        const normalRightLeft = this.rightnormalZone.x - this.normalWidth/2;
-        
-        // normal Izquierda
-        const normalLeftRight = this.leftnormalZone.x + this.normalWidth/2;
-        const normalLeftLeft = this.leftnormalZone.x - this.normalWidth/2;
-
-        if (x>=leftPerfect && x<= rightPerfect) result = "perfect";
-        else if ((x>=normalLeftLeft && x<= normalLeftRight) 
-                ||(x>= normalRightLeft && x<= normalRightRight)) result = "normal";
+        if (Phaser.Geom.Intersects.RectangleToRectangle(cursor,perfect)) result = "perfect";
+        else if (Phaser.Geom.Intersects.RectangleToRectangle(cursor,leftN)
+                ||Phaser.Geom.Intersects.RectangleToRectangle(cursor,rightN)) result = "normal";
         else result = "fail";
 
         this.finish(result);
