@@ -94,22 +94,33 @@ export default class BattleScene extends Phaser.Scene {
         }
         else if (action === "areaPot"){ // Daño en Area (vanguardia o retaguardia)
             // Comprueba si el daño se hace a la vanguardia o retaguardia
-            if(this.units[this.index].pos === "v"){
+            console.log("llega");
+
+            this.events.emit("Message", `Area Potion deals ${this.itemsArray.getItem(itemIndex).getStat()} damage to the ${this.enemies[targetIndex].pos === "v" ? "vanguard" : "rearguard"}`);
+            if(this.enemies[targetIndex].pos === "v"){
                 for(let i = 0; i < this.enemies.length; i++){
                     if(this.enemies[i].pos === "v"){
-                        this.enemies[i].areaPot(this.itemsArray.getItem(itemIndex).getStat());
+                        this.enemies[i].areaPot(this.itemsArray.getItem(itemIndex).getStat(), this.enemies[targetIndex].pos);
                     }
                 }
             }
             else{
                 for(let i = 0; i < this.enemies.length; i++){
                     if(this.enemies[i].pos === "r"){
-                        this.enemies[i].areaPot(this.itemsArray.getItem(itemIndex).getStat());
+                        this.enemies[i].areaPot(this.itemsArray.getItem(itemIndex).getStat(), this.enemies[targetIndex].pos);
                     }
                 }
             }
-            this.events.emit("Message", `Area Potion deals ${this.itemsArray.getItem(itemIndex).getStat()} damage to the ${this.units[this.index].pos === "v" ? "vanguard" : "rearguard"}`);
+
             this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
+        }
+        else if (action === "dmgPot"){
+            this.enemies[targetIndex].takeDamage(this.itemsArray.getItem(itemIndex).getStat());
+            
+            this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
+        }
+        else if (action === "catPot"){
+            this.enemies[0].catPot();
         }
     }
 

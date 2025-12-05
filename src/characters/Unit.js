@@ -108,11 +108,20 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         this.scene.events.emit("Message", `${this.type} heals ${hp}HP`);
     }
 
-    areaPot(damage){
-        const bs = this.scene.scene.get("BattleScene");
-        this.hp -= damage;
-        this.updateHpText();
-        this.isDead(bs);
+    areaPot(damage, p){
+        const battleScene = this.scene.scene.get("BattleScene");
+        for (let h of battleScene.enemies) {
+            if(h.pos === p){
+                h.takeDamage(damage);
+            }
+        }
+    }
+
+    catPot(damage){
+        const battleScene = this.scene.scene.get("BattleScene");
+        for (let h of battleScene.enemies) {
+            h.takeDamage(damage);          
+        }
     }
 
     takeDamage(damage) {

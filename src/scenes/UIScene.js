@@ -14,6 +14,7 @@ export default class UIScene extends Phaser.Scene {
         this.itemId = undefined;
         this.itemUsed = false;
         this.inventory = this.registry.get('inventory');
+        this.createInventory();
 
         const g = this.add.graphics();
 
@@ -122,9 +123,14 @@ export default class UIScene extends Phaser.Scene {
     onEnemy(enemyIndex) {
         this.enemiesMenu.clear();   
         this.actionsMenu.deselect();
+        console.log("a quien ataca: " + enemyIndex);
         this.currentMenu = null;
-        if(this.itemId){ // Comprueba si lo que quiere es usar un objeto en un enemigo
-            this.battleScene.receivePlayerSelection("areaPot", undefined, this.itemId);
+        if(this.itemId && this.localInventory[this.itemId].type === "AreaPot"){ // Comprueba si lo que quiere es usar un objeto en un enemigo
+            this.battleScene.receivePlayerSelection("areaPot", enemyIndex, this.itemId);
+            this.itemId = undefined;
+        }
+        else if(this.itemId && this.localInventory[this.itemId].type === "DmgPot"){
+            this.battleScene.receivePlayerSelection("dmgPot", enemyIndex, this.itemId);
             this.itemId = undefined;
         }
         else{
@@ -141,12 +147,20 @@ export default class UIScene extends Phaser.Scene {
         switch(this.inventory.getItem(itemIndex).getType()){
             case('HealPot'): this.battleScene.receivePlayerSelection("heal", undefined, itemIndex); break;
             case('DmgPot'): { // Tiene que seleccionar el enemigo en el que usarla
-                    this.currentMenu = this.enemiesMenu; 
-                    this.enemiesMenu.select(0); 
-                    this.itemId = itemIndex; 
-                    break;
-                }
-            case('AreaPot'): this.battleScene.receivePlayerSelection("areaPot", undefined, itemIndex); break;
+                this.currentMenu = this.enemiesMenu; 
+                this.remapEnemies();
+                this.enemiesMenu.select(0); 
+                this.itemId = itemIndex; 
+                break;
+            }
+            case('AreaPot'):{
+                this.currentMenu = this.enemiesMenu; 
+                this.remapEnemies();
+                this.enemiesMenu.select(0); 
+                this.itemId = itemIndex; 
+                break;
+            }
+            case('CatPot'): this.battleScene.receivePlayerSelection("catPot", undefined, itemIndex); break;
             case('StrPot'): this.battleScene.receivePlayerSelection("strPot", undefined, itemIndex); break;
             case('DefPot'): this.battleScene.receivePlayerSelection("defPot", undefined, itemIndex); break;
         }
@@ -350,4 +364,15 @@ this.updateEnemiesMarker();
         this.events.off("Back", this.onBack, this);
 
     }
+
+    createInventory(){
+        this.localInventory = [];
+        for(let i = 0; i < this.inventory.size(); i++){
+            if(this.inventory.getNum(i) > 0){
+                this.localInventory.push(this.inventory.getItem(i));
+            }
+        }
+        console.log('tamaño inventario: ' + this.localInventory.length);
+    }
 }
+
