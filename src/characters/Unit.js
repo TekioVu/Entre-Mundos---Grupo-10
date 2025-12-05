@@ -26,7 +26,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             "Mushroom": 25,
             "Flying Eye": 25,
             "Pharaoh": 50,
-            "Scarab": 1,
+            "Scarab": 20,
             "Clown": 25,
             "Jester": 25,
             "King": 25,
@@ -93,10 +93,9 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             this.scene.events.emit("Message", `${this.type} attacks ${target.type} for ${d} damage`);
         }
 
-        if (this.type === "Goblin" || this.type === "Ghost" || this.type === "Timmy" || this.type === "Wizard"|| this.type === "Mushroom" || this.type === "Flying Eye" || this.type === "Dragon"|| this.type === "Jester" || this.type === "Scared Wizard"|| this.type === "Angry Wizard" || this.type === "Sad Wizard" || this.type === "King" || this.type === "Medusa"|| this.type === "Cacodaemon" || this.type === "Pharaoh" || this.type === "Scarab")
-        {
-             this.playAnim('attack', () => this.playAnim('idle'));
-        }
+       
+        this.playAnim('attack', () => this.playAnim('idle'));
+        
         if (this.specialAttackCounter < 2 && this.type === "Dragon") this.specialAttackCounter++;
         if(this.isEnemy)
         this.checkSpecialAttack(target);
@@ -223,10 +222,9 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             }
         }
         else{
-            if (this.type === "Goblin" || this.type === "Ghost"|| this.type === "Timmy" || this.type === "Wizard"|| this.type === "Mushroom" || this.type === "Flying Eye"|| this.type === "Dragon"|| this.type === "Jester"|| this.type === "Scared Wizard"|| this.type === "Angry Wizard" || this.type === "King" || this.type === "Medusa" || this.type === "Cacodaemon")
-            {
+            
              this.playAnim('damage', () => this.playAnim('idle'));
-            }
+            
         }
     }
 

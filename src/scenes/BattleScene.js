@@ -164,14 +164,14 @@ export default class BattleScene extends Phaser.Scene {
                     { 
                         key: 'pharaoh', idleKey: 'pharaoh_idle', attackKey: 'pharaoh_attack', damageKey: 'pharaoh_damage', deathKey: 'pharaoh_death',
                         idle: [0, 2], attack: [0, 4], damage: [0, 2], death: [0, 2], scale: 0.6, name: 'Pharaoh',
-                        hp: 2, atk: 8,
+                        hp: 200, atk: 8,
                         positions: [[1, 1], [2, 0]],
                     },
                     { 
                         key: 'scarab', idleKey: 'scarab_idle', attackKey: 'scarab_attack', damageKey: 'scarab_damage', deathKey: 'scarab_death',
                         idle: [0, 1], attack: [0, 1], damage: [0, 2], death: [0, 2], scale: 0.6, name: 'Scarab',
-                        hp: 2, atk: 5,
-                        positions: [[3, 1], [4, 0]],
+                        hp: 200, atk: 5,
+                        positions: [[4, 1], [5, 0]],
                     },
                 ],
             },
