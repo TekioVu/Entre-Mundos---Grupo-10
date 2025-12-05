@@ -11,6 +11,9 @@ import MiniGame_Comedy from "./scenes/Minigames/MiniGame_Comedy.js";
 import MiniGame_FinalBoss from "./scenes/Minigames/MiniGame_FinalBoss.js";
 import MiniGame_History from "./scenes/Minigames/MiniGame_History.js";
 import MiniGame_Terror from "./scenes/Minigames/MiniGame_Terror.js";
+import IntroScene from "./scenes/IntroScene.js";
+import KidnapScene from "./scenes/KidnapScene.js";
+
 
 const config = {
     type: Phaser.AUTO,
@@ -23,7 +26,7 @@ const config = {
         default: "arcade",
         arcade: { gravity: { y: 0 } }
     },
-    scene: [BootScene, BattleScene, UIScene, MenuScene, GameOverScene, VictoryScene, CharacterSelectionScene, ShopScene, 
+    scene: [BootScene, KidnapScene, IntroScene,BattleScene, UIScene, MenuScene, GameOverScene, VictoryScene, CharacterSelectionScene, ShopScene, 
         MiniGame_Fantasy, MiniGame_Comedy, MiniGame_FinalBoss, MiniGame_History, MiniGame_Terror]
 };
 

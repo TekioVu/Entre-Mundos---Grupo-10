@@ -122,6 +122,9 @@ export default class BootScene extends Phaser.Scene {
         this.load.spritesheet('boss3_damage', './assets/Enemigos/FinalBosses/Evil Wizard 3/Get hit.png', { frameWidth: 140, frameHeight: 140 });
         this.load.spritesheet('boss3_death', './assets/Enemigos/FinalBosses/Evil Wizard 3/Death.png', { frameWidth: 140, frameHeight: 140 });
 
+        this.load.spritesheet('cat_idle', './assets/Cat/IDLE.png', { frameWidth: 80, frameHeight: 64 });
+        this.load.spritesheet('cat_walk', './assets/Cat/WALK.png', { frameWidth: 80, frameHeight: 64 });
+
         //Backgrounds
         this.load.image('fantasy_background', './assets/Backgrounds/Fantasy.png');
         this.load.image('romance_background', './assets/Backgrounds/Romance.png');
@@ -164,6 +167,6 @@ export default class BootScene extends Phaser.Scene {
     }
 
     create() {
-        this.scene.start("MenuScene");
+        this.scene.start("KidnapScene");
     }
 }
