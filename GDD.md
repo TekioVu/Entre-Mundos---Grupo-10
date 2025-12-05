@@ -52,8 +52,7 @@ Sergio Valiente Urueña
 [4.3.2.2 Bomba grande](#4322-bomba-grande)
 
 [4.3.3 Objetos de utilidad para usar en combate](#433-objetos-de-utilidad-para-usar-en-combate)  
-[4.3.3.1 Hierba revitalizante](#4331-hierba-revitalizante)  
-[4.3.3.2 Reloj de arena](#4332-reloj-de-arena)
+[4.3.3.1 Reloj de arena](#4331-reloj-de-arena)
 
 [4.3.4 Mejoras de los personajes](#434-mejoras-de-los-personajes)
 
@@ -131,7 +130,7 @@ Estas son las cartas que hemos decidido usar:
 
 ## 2.1 Descripción
 
-En Entre Mundos los jugadores acompañan a Timmy a través de cinco libros, cada uno con un género (Fantasía, Romance, Historia, Comedia y Terror). En cada uno de ellos encontrará combates por turnos al estilo clásico enfrentando diferentes mecánicas y personajes (incluyendo un mini-jefe) que posteriormente podrán unirse a su equipo y utilizando un sistema de formación de equipo separado en vanguardia y retaguardia. La historia culmina con un jefe final triple que encarna a la Ira, la Tristeza y el Miedo, donde ponen a prueba todo lo aprendido por el camino.
+En Entre Mundos los jugadores acompañan a Timmy a través de cinco libros, cada uno con un género (Fantasía, Historia, Comedia, Terror) y un último libro THE END. En cada uno de ellos encontrará combates por turnos al estilo clásico enfrentando diferentes mecánicas y personajes (incluyendo un mini-jefe) que posteriormente podrán unirse a su equipo y utilizando un sistema de formación de equipo separado en vanguardia y retaguardia. La historia culmina con un jefe final triple que encarna a la Ira, la Tristeza y el Miedo, donde ponen a prueba todo lo aprendido por el camino.
 
 ## 2.2 Género
 
@@ -143,11 +142,9 @@ Timmy, un niño apasionado por la lectura, se ve arrastrado a una peligrosa aven
 
 ## 2.4 Características principales
 
-- **Jugabilidad**: El jugador irá entrando por los libros en orden y pasando por combates hasta llegar al jefe del libro y pasar al siguiente libro hasta terminar los 5 y recuperar a su hermano, entre combates el jugador dispondrá de un menú de formacion de equipo donde cambiar el equipaje (armadura y armas) y habilidades. Tras terminar cada libro el jugador podrá acceder a una tienda cuyos objetos cambian tras cada partida aportando ese elemento de roguelike y rejugabilidad.  
+- **Jugabilidad**: El jugador irá entrando por los libros en orden y pasando por combates hasta llegar al jefe del libro y pasar al siguiente libro hasta terminar los 5 y recuperar a su hermano. Al principio de cada combate, el jugador podrá seleccionar los personajes desea usar y dónde ubicarlos. Tras terminar cada libro el jugador podrá acceder a una tienda cuyos objetos cambian tras cada partida aportando ese elemento de roguelike y rejugabilidad.  
     
-- **Combate**: El área de combate se divide entre la zona enemiga y la zona aliada, ambas con 3 huecos de vanguardia y 3 de retaguardia. Los equipos se turnaran para atacar, dentro de cada equipo empezará atacando la retaguardia y posteriormente la vanguardia. Cada personaje contará con un ataque básico y un ataque especial, el cual consume “ST” (estamina), escogidos previamente; no todos los personajes son aptos para todas las habilidades.  
-    
--  Personajes: Cada personaje cuenta con un slot de armadura y un slot de arma, a su vez cuentan con un ataque básico permanente y un slot de habilidad cambiable.
+- **Combate**: El área de combate se divide entre la zona enemiga y la zona aliada, ambas con 3 huecos de vanguardia y 3 de retaguardia. Los equipos se turnaran para atacar, dentro de cada equipo empezará atacando la retaguardia y posteriormente la vanguardia. Cada personaje contará con un ataque básico, y en el caso de los mini-bosses un ataque especial disponible cada cierto números de turnos.
 
 # 3 Gameplay
 
@@ -187,7 +184,6 @@ Descripción:
 
   \- Continúa sucesivamente de la misma forma hasta completar sus seis personajes siguiendo el orden que muestra la imagen.
 
-
                     \-     **Turno enemigo:** Funciona de la misma manera que el del jugador.
 
                     \-     Se alternan hasta que uno de los dos equipos quede sin personajes con vida.
@@ -196,13 +192,13 @@ Descripción:
 
 ### 4.1.2 Recompensas
 
-Después de cada combate victorioso el jugador será recompensado con una cantidad de oro   aleatoria que puede gastar en la tienda y un consumible elegido aleatoriamente.
+Después de cada combate victorioso el jugador será recompensado con una cantidad de oro aleatoria que puede gastar en la tienda y un consumible elegido aleatoriamente.
 
 ## 4.2 Equipo
 
 ### 4.2.1 Adquisición de personajes
 
-El jugador puede comprar personajes pertenecientes a los libros que ya ha completado en la sección de personajes de la tienda, que van cambiando de forma aleatoria a lo largo del juego según los personajes que ya se hayan desbloqueado. Los personajes adquiridos se mantienen durante toda la partida. Si son derrotados en combate no se podrán volver a utilizar hasta el siguiente combate salvo que se use el objeto de utilidad *hierba revitalizante*.
+El jugador puede comprar personajes pertenecientes a los libros que ya ha completado en la sección de personajes de la tienda, que van cambiando de forma aleatoria a lo largo del juego según los personajes que ya se hayan desbloqueado. Los personajes adquiridos se mantienen durante toda la partida. Si son derrotados en combate no se podrán volver a utilizar hasta el siguiente combate.
 
 ### 4.2.2 Formación de equipo
 
@@ -212,7 +208,7 @@ Antes de comenzar un combate, el jugador tiene un tiempo para organizar a su equ
 
 ## 4.3 Tienda
 
-El jugador podrá acceder a la tienda desde el menú. No es accesible mientras esté dentro de un libro. En ella podrá comprar diferentes objetos,  habilidades o mejoras  y personajes con las monedas que haya obtenido a lo largo de la partida.
+El jugador podrá acceder a la tienda desde el menú. No es accesible mientras esté dentro de un libro. En ella podrá comprar diferentes objetos, y personajes con las monedas que haya obtenido a lo largo de la partida.
 
 ### 4.2.1 Objetos de curación para usar en combate
 
@@ -240,25 +236,17 @@ El jugador podrá acceder a la tienda desde el menú. No es accesible mientras e
 
 ### 4.2.3 Objetos de utilidad para usar en combate
 
-#### 4.2.3.1 Hierba revitalizante
-
-**Precio:** 300 monedas  
-**Efecto:** Revive a un aliado con el 30% de la vida
-
-#### 4.2.3.2 Reloj de arena
+#### 4.2.3.1 Reloj de arena
 
 **Precio:** 150 monedas  
 **Efecto:** Retrasa la acción de un enemigo 2 turnos
 
-### 4.2.4 Mejoras de los personajes
-
-En la tienda el jugador podrá comprar mejoras de stats para sus personajes y distintas habilidades .
 
 # 5 Interfaz
 
 ## 5.1 Controles
 
-El juego se controlará por menús y botones, por lo que principalmente se usará el ratón o alternativamente las flechas del teclado para navegar por ellos.
+El juego se controlará por menús y botones, por lo que principalmente las flechas del teclado para navegar por ellos.
 
 ## 5.2 Cámara
 
