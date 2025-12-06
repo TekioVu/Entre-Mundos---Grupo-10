@@ -62,7 +62,7 @@ export default class BootScene extends Phaser.Scene {
         this.load.spritesheet('king', './assets/Enemigos/MedievalKing/Idle.png', { frameWidth: 160, frameHeight: 76 });
         this.load.spritesheet('king_idle', './assets/Enemigos/MedievalKing/Idle.png', { frameWidth: 160, frameHeight: 76 });
         this.load.spritesheet('king_attack', './assets/Enemigos/MedievalKing/Attack1.png', { frameWidth: 160, frameHeight: 76 });
-        this.load.spritesheet('king_damage', './assets/Enemigos/MedievalKing/Take Hit - white silhouette.png', { frameWidth: 160, frameHeight: 111 });
+        this.load.spritesheet('king_damage', './assets/Enemigos/MedievalKing/Take Hit - white silhouette.png', { frameWidth: 160, frameHeight: 76 });
         this.load.spritesheet('king_death', './assets/Enemigos/MedievalKing/Death.png', { frameWidth: 160, frameHeight: 76 });
 
 

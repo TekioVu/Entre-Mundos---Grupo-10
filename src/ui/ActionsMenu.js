@@ -17,6 +17,7 @@ export default class ActionsMenu extends Menu {
 if (this.hero) {
     console.log(this.hero.type + " hasAbility: " + this.hero.hasAbility);
     console.log(this.hero.type + " specialAttackcouter: " + this.hero.specialAttackCounter);
+    console.log(this.hero.type + " alreadyAttack: " + this.hero.alreadySpecialAttacked);
 } else {
 }
         if (this.hero && this.hero.hasAbility) {
@@ -24,7 +25,7 @@ if (this.hero) {
             this.addMenuItem("Hability");
         else if (this.hero.type === "Medusa" && this.hero.specialAttackCounter == 3) 
             this.addMenuItem("Hability");
-        else if (this.hero.type === "King" && this.hero.specialAttackCounter == 1 && this.alreadySpecialAttacked == false) 
+        else if (this.hero.type === "King" && this.hero.specialAttackCounter == 1 && !this.hero.alreadySpecialAttacked) 
             this.addMenuItem("Hability");
         }
         
