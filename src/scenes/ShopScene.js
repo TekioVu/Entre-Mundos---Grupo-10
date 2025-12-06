@@ -23,9 +23,11 @@ export default class ShopScene extends Phaser.Scene {
                 { name: "Poción De Defensa", texture: "pocion_defensa", description: "Aumenta la defensa del equipo aliado", coins: 15, id: 9},
             ],
             "Personajes": [
-                { name: "Wizard", texture: "wizard_image", description: "Magic", coins: 100 },
+                //{ name: "Wizard", texture: "wizard_image", description: "Magic", coins: 100 },
                 {name: "Dragon", texture: "dragon", description: "Grrrrraaaaaahhhhhh", coins: 250 },
                 {name: "Cacodaemon", texture: "cacodaemon", description: "SEEEEE YOUUU", coins: 350 },
+                {name: "Medusa", texture: "medusa", description: "SSSSSSSSSSSSSSSS", coins: 450 },
+
            {name: "King", texture: "king", description: "HAHAHAHAHAHAHA", coins: 500 },
 
 

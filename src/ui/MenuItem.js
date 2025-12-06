@@ -34,7 +34,7 @@ export default class MenuItem extends Phaser.GameObjects.Container {
             this.add(this.sprite);
         } else {
             this.boxWidth = 70;
-            this.boxHeight = 20;
+            this.boxHeight = 15;
 
             // Fondo gris oscuro
             this.bg.fillStyle(bgColor, 1);

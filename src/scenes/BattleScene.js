@@ -76,18 +76,18 @@ export default class BattleScene extends Phaser.Scene {
             
             this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
         }
-        else if (action === "heal"){ // Curar ♥️
+        else if (action === "heal"){ // Curar
             this.units[this.index].heal(this.itemsArray.getItem(itemIndex).getStat());
             this.itemsArray.useItem(itemIndex);
             this.createInventory();
         }
-        else if (action === "strPot"){ // Aumentar Daño ⚔️
+        else if (action === "strPot"){ // Aumentar Daño
             console.log("Aumento de ataque: " + this.itemsArray.getItem(itemIndex).getStat());
             this.units[this.index].dmgUp(this.itemsArray.getItem(itemIndex).getStat());
             this.itemsArray.useItem(itemIndex);
             this.createInventory();
         }
-        else if (action === "defPot"){ // Aumentar Defensa 🛡️
+        else if (action === "defPot"){ // Aumentar Defensa
             this.units[this.index].defUp(this.itemsArray.getItem(itemIndex).getStat());
             this.itemsArray.useItem(itemIndex);
             this.createInventory();
@@ -141,13 +141,13 @@ export default class BattleScene extends Phaser.Scene {
                     { 
                         key: 'goblin', idleKey: 'goblin_idle', attackKey: 'goblin_attack', damageKey: 'goblin_damage', deathKey: 'goblin_death', 
                         idle: [0, 3], attack: [0, 7], damage: [0, 3], death: [0, 3],  scale: 1.2, name: 'Goblin',
-                        hp: 1/*25*/, atk: 6,
+                        hp: 50/*25*/, atk: 6,
                         positions: [[4, 1], [5, 0]],
                     },
                     { 
                         key: 'ghost', idleKey: 'ghost_idle', attackKey: 'ghost_attack', damageKey: 'ghost_damage', deathKey: 'ghost_death',
                         idle: [0, 11], attack: [0, 7], damage: [0, 9], death: [0, 9], scale: 0.3, name: 'Ghost',
-                        hp: 1/*18*/, atk: 9,
+                        hp: 50/*18*/, atk: 9,
                         positions: [[1, 1], [2, 0]],
                     },
                 ],
@@ -265,6 +265,11 @@ export default class BattleScene extends Phaser.Scene {
         this._createDamageAnim('king_damage', 0, 3, 'king-damage');
         this._createDeathAnim('king_death', 0, 5, 'king-death');
 
+        this._createIdleAnim('medusa_idle', 14, 16, 'medusa-idle');
+        this._createAttackAnim('medusa_attack', 0, 5, 'medusa-attack');
+        this._createDamageAnim('medusa_damage', 12, 13, 'medusa-damage');
+        this._createDeathAnim('medusa_death', 6, 11, 'medusa-death');
+
          
 
 
@@ -365,15 +370,6 @@ export default class BattleScene extends Phaser.Scene {
         if (positionKey=== 0 || positionKey === 1) { hero.setDepth(1); hero.hpText.setDepth(1);}
         if (positionKey=== 2 || positionKey === 3) { hero.setDepth(2); hero.hpText.setDepth(2);}
         if (positionKey=== 4 || positionKey === 5) { hero.setDepth(3); hero.hpText.setDepth(3);}
-        
-
-        if(hero.type === 'Dragon' || hero.type === 'Cacodaemon' || hero.type === 'Medusa' || hero.type === 'King'){
-            hero.hasAbility = true;
-            hero.specialAttackCounter = 2;
-        }
-        else {
-            hero.hasAbility = false;
-        }
 
         if (hero.type === 'Wizard') {
             hero.setScale(0.7);
@@ -407,7 +403,7 @@ export default class BattleScene extends Phaser.Scene {
             'TERROR':   { key: 'cacodaemon', idleKey: 'cacodaemon_idle', attackKey: 'cacodaemon_attack', damageKey: 'cacodaemon_damage', deathKey: 'cacodaemon_death',
                 idle: [0, 5], attack: [8, 13], damage: [16, 19], death: [24, 31], name: 'Cacodaemon', pos: [1, 1], scale: 1, hp: 150, atk: 25 },
             'HISTORIA': { key: 'medusa', idleKey: 'medusa_idle', attackKey: 'medusa_attack', damageKey: 'medusa_damage', deathKey: 'medusa_death',
-                idle: [14, 16],  attack: [0, 5], damage: [12, 13], death: [6, 11],name: 'Medusa', pos: [1, 1], scale: 1, hp: 10, atk: 25 },
+                idle: [0, 2],  attack: [11, 16], damage: [12, 13], death: [6, 11],name: 'Medusa', pos: [1, 1], scale: 1, hp: 10, atk: 25 },
             'COMEDIA':  { key: 'king', idleKey: 'king_idle', attackKey: 'king_attack', damageKey: 'king_damage',  deathKey: 'king_death',
             idle: [0, 3], attack: [0, 3], damage: [0, 3], death: [0, 5], name: 'King', pos: [1, 1], scale: 1, hp: 350, atk: 10 },
         };
@@ -476,7 +472,7 @@ export default class BattleScene extends Phaser.Scene {
     }
 
     
-   invokeJester() {
+   invokeJehster() {
         // Posiciones donde quieres que aparezca el Jester (por ejemplo)
         const positions = [
             [3, 2],
@@ -519,6 +515,109 @@ export default class BattleScene extends Phaser.Scene {
             this.units = this.heroes.concat(this.enemies);
         });
     }
+
+    invokeJesterHero() {
+    const def = {
+        key: 'jester',
+        idleKey: 'jester_idle',
+        attackKey: 'jester_attack',
+        damageKey: 'jester_damage',
+        deathKey: 'jester_death',
+        idle: [11, 17],
+        attack: [89, 72],
+        damage: [107, 104],
+        death: [125, 117],
+        scale: 1,
+        name: 'Jester',
+        hp: 100,
+        atk: 15,
+    };
+
+    // Crear animaciones si no existen
+    if (!this.anims.exists('jester-idle')) this._createIdleAnim(def.idleKey, def.idle[0], def.idle[1], 'jester-idle');
+    if (!this.anims.exists('jester-attack')) this._createAttackAnim(def.attackKey, def.attack[0], def.attack[1], 'jester-attack');
+    if (!this.anims.exists('jester-damage')) this._createDamageAnim(def.damageKey, def.damage[0], def.damage[1], 'jester-damage');
+    if (!this.anims.exists('jester-death')) this._createDeathAnim(def.deathKey, def.death[0], def.death[1], 'jester-death');
+
+    // Coordenadas de todas las posiciones posibles para héroes
+    const positionCoords = [
+        { x: 200, y: 50, pos: 'v' },
+        { x: 250, y: 50, pos: 'r' },
+        { x: 220, y: 75, pos: 'v' },
+        { x: 270, y: 75, pos: 'r' },
+        { x: 240, y: 100, pos: 'v' },
+        { x: 290, y: 100, pos: 'r' },
+    ];
+
+    // Filtramos las posiciones libres (basadas en x,y)
+    const usedPositions = this.heroes.map(h => `${h.x},${h.y}`);
+    const freePositions = positionCoords.filter(pos => !usedPositions.includes(`${pos.x},${pos.y}`));
+
+    // Creamos un Jester en cada posición libre que queramos
+    freePositions.forEach(pos => {
+        const hero = new PlayerCharacter(this, pos.x, pos.y, def.key, 0, def.name, def.hp, def.atk, pos.pos);
+        hero.setScale(def.scale);
+        this.add.existing(hero).anims.play('jester-idle');
+
+        this.heroes.push(hero); // simplemente añadimos al array dinámico
+    });
+
+    // Actualizamos unidades
+    this.units = this.heroes.concat(this.enemies);
+    this.uiscene = this.scene.get("UIScene");
+    this.uiscene.remapHeroes();
+
+}
+
+// invokeJesterHero() {
+//     const def = { 
+//         key: 'jester', 
+//         idleKey: 'jester_idle', 
+//         attackKey: 'jester_attack', 
+//         damageKey: 'jester_damage', 
+//         deathKey: 'jester_death',
+//         idle: [11, 17], attack: [89, 72], damage: [107, 104], death: [125, 117], 
+//         scale: 1, 
+//         name: 'Jester',
+//         hp: 100, 
+//         atk: 15,
+//     };
+
+//     // Crear animaciones
+//     if (!this.anims.exists('jester-idle')) this._createIdleAnim(def.idleKey, def.idle[0], def.idle[1], 'jester-idle');
+//     if (!this.anims.exists('jester-attack')) this._createAttackAnim(def.attackKey, def.attack[0], def.attack[1], 'jester-attack');
+//     if (!this.anims.exists('jester-damage')) this._createDamageAnim(def.damageKey, def.damage[0], def.damage[1], 'jester-damage');
+//     if (!this.anims.exists('jester-death')) this._createDeathAnim(def.deathKey, def.death[0], def.death[1], 'jester-death');
+
+//     // Coordenadas de héroes
+//     const positionCoords = [
+//         { x: 200, y: 50 }, 
+//         { x: 250, y: 50 }, 
+//         { x: 220, y: 75 }, 
+//         { x: 270, y: 75 }, 
+//         { x: 240, y: 100 }, 
+//         { x: 290, y: 100 },
+//     ];
+
+//     // Índices exactos en this.heroes donde queremos Jesters
+//     const heroPositions = [0, 1, 2]; // por ejemplo, los 3 primeros espacios
+
+//     heroPositions.forEach((posKey, idx) => {
+//         const coords = positionCoords[posKey];
+//         const pos = (posKey === 0 || posKey === 2 || posKey === 4) ? 'v' : 'r';
+
+//         const hero = new PlayerCharacter(this, coords.x, coords.y, def.key, 0, def.name, def.hp, def.atk, pos);
+//         hero.setScale(def.scale);
+//         this.add.existing(hero).anims.play('jester-idle');
+
+//         this.heroes[posKey] = hero;
+//     });
+
+//     this.units = this.heroes.filter(h => h !== null).concat(this.enemies);
+// }
+
+
+
 
     launchMagicMinigame(attacker, target) {
         this.currentAttacker = attacker;  // guardamos referencias

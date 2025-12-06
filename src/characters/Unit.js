@@ -9,13 +9,23 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         this.pos = pos;
         this.stunned = 0;
         this.specialAttackCounter = 0;
+        this.hasAbility = false;
         this.alreadySpecialAttacked = false; //Variable para los mini bosses que solo usen su habilidad 1 vez
-        if(this.type === "Dragon" || this.type === "Cacodaemon" || this.type === "Medusa" || this.type === "King"){
+    if (!this.isEnemy){
+        if(this.type === "Dragon" || this.type === "Cacodaemon"){
             this.hasAbility = true;
+            this.specialAttackCounter = 2;
         }
-        else {
-            this.hasAbility = false;
+        else if (this.type === "Medusa"){
+            this.hasAbility = true;
+            this.specialAttackCounter = 3;
         }
+        else if ( this.type === "King"){
+            this.hasAbility = true;
+            this.specialAttackCounter = 1;
+            this.alreadySpecialAttacked = false;
+        }
+    }
 
         const offsets = {
             "Timmy": 40,
@@ -89,12 +99,12 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             this.startMinigame(target);
         }
         else{
-            target.takeDamage(d);
+            target.takeDamage(d, this);
             this.scene.events.emit("Message", `${this.type} attacks ${target.type} for ${d} damage`);
         }
 
-       
-        this.playAnim('attack', () => this.playAnim('idle'));
+       if (!this.stunned)
+        {this.playAnim('attack', () => this.playAnim('idle'));}
         
         if (this.specialAttackCounter < 2 && this.type === "Dragon") this.specialAttackCounter++;
         if(this.isEnemy)
@@ -112,7 +122,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         const battleScene = this.scene.scene.get("BattleScene");
         for (let h of battleScene.enemies) {
             if(h.pos === p){
-                h.takeDamage(damage);
+                h.takeDamage(damage, this);
             }
         }
     }
@@ -120,11 +130,11 @@ export default class Unit extends Phaser.GameObjects.Sprite {
     catPot(damage){
         const battleScene = this.scene.scene.get("BattleScene");
         for (let h of battleScene.enemies) {
-            h.takeDamage(damage);          
+            h.takeDamage(damage, this);          
         }
     }
 
-    takeDamage(damage) {
+    takeDamage(damage, attacker) {
 
         const bs = this.scene.scene.get("BattleScene");
         if (!bs) return;
@@ -136,10 +146,10 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         this.hp -= damage;
         }
 
-        this.isDead(bs);
+        this.isDead(bs, attacker);
     }
 
-    isDead(bs){
+    isDead(bs, attacker){
         if (this.hp <= 0)
         {
             this.hp = 0;
@@ -231,8 +241,8 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             }
         }
         else{
-            
-             this.playAnim('damage', () => this.playAnim('idle'));
+            if (!attacker.stunned)
+             {this.playAnim('damage', () => this.playAnim('idle'));}
             
         }
     }
@@ -269,7 +279,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             {
                 this.specialAttackCounter = 0;
                 for (let h of battleScene.heroes) {
-                    h.takeDamage(this.damage);
+                    h.takeDamage(this.damage, this);
                 }
 
                 this.scene.events.emit("Message", `${this.type} is using flare: 40 DMG ALL UNITS`);
@@ -280,7 +290,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                 for (let i = 0; i < 5; i++) {
                 
                     const r = Math.floor(Math.random() * battleScene.heroes.length);
-                    battleScene.heroes[r].takeDamage(this.damage / 2);
+                    battleScene.heroes[r].takeDamage(this.damage / 2, this);
                 }
 
                 this.scene.events.emit("Message", `${this.type} is using randomness`);
@@ -318,7 +328,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             else if(this.type === "Angry Wizard" && this.specialAttackCounter == 2)
             {
                 for (let h of battleScene.heroes) {
-                    h.takeDamage(this.damage);
+                    h.takeDamage(this.damage, this);
                 }
 
                 this.scene.events.emit("Message", `${this.type} is using meteor: ${this.damage} in AREA`);
@@ -328,7 +338,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                 if (target.pos == 'v') d = this.damage - 5;
                 else d = this.damage;
 
-                target.takeDamage(d);
+                target.takeDamage(d, this);
 
                 this.scene.events.emit("Message", `${this.type} attacks ${target.type} for ${d} damage`);
             }
@@ -350,7 +360,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             {
                 this.specialAttackCounter = 0;
                 for (let h of battleScene.enemies) {
-                    h.takeDamage(this.damage);
+                    h.takeDamage(this.damage, this);
                 }
 
                 this.scene.events.emit("Message", `${this.type} is using flare: 40 DMG ALL UNITS`);
@@ -361,7 +371,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                 for (let i = 0; i < 5; i++) {
                 
                     const r = Math.floor(Math.random() * battleScene.enemies.length);
-                    battleScene.enemies[r].takeDamage(this.damage / 2);
+                    battleScene.enemies[r].takeDamage(this.damage / 2, this);
                 }
 
                 this.scene.events.emit("Message", `${this.type} is using randomness`);
@@ -378,7 +388,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             else if(this.type === "King" && this.specialAttackCounter == 1 && !this.alreadySpecialAttacked)
             {
                 this.alreadySpecialAttacked = true;
-                battleScene.invokeJester();
+                battleScene.invokeJesterHero();
                 this.scene.events.emit("Message", `${this.type} is invoking Jesters`);
             }
         }else {

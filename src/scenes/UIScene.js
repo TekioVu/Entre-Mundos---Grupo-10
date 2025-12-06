@@ -349,7 +349,45 @@ switch (event.code) {
     case "Space":
         this.currentMenu.confirm();
         break;
+
+        
 }
+
+if (this.currentMenu === this.actionsMenu) {
+    if (this.actionsMenu.getMenuItemIndex() === 2) {
+        const hero = this.battleScene.heroes[this.heroesMenu.menuItemIndex];
+
+        if (hero) {
+            let msg = "";
+
+            switch (hero.type) {
+                case "Dragon":
+                    msg = "Dragon deals area damage to all enemies.";
+                    break;
+
+                case "Cacodaemon":
+                    msg = "Cacodaemon deals damage to five random enemies";
+                    break;
+
+                case "Medusa":
+                    msg = "Medusa petrifies all enemies during the next two turns.";
+                    break;
+
+                case "King":
+                    msg = "King invokes one Jester in each empty position.";
+                    break;
+
+                default:
+                    msg = "Wrong character";
+                    break;
+            }
+            this.message.showPermanentMessage(msg);
+        }
+    }
+    else this.message.hideMessage();
+}
+
+
 
 this.updateEnemiesMarker();
 

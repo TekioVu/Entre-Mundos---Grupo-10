@@ -16,12 +16,18 @@ export default class ActionsMenu extends Menu {
 
 if (this.hero) {
     console.log(this.hero.type + " hasAbility: " + this.hero.hasAbility);
+    console.log(this.hero.type + " specialAttackcouter: " + this.hero.specialAttackCounter);
 } else {
-    console.log("No hero assigned yet");
 }
-        if (this.hero && this.hero.hasAbility && this.hero.specialAttackCounter == 2) { 
+        if (this.hero && this.hero.hasAbility) {
+            if ((this.hero.type === "Dragon" || this.hero.type === "Cacodaemon") && this.hero.specialAttackCounter == 2) 
+            this.addMenuItem("Hability");
+        else if (this.hero.type === "Medusa" && this.hero.specialAttackCounter == 3) 
+            this.addMenuItem("Hability");
+        else if (this.hero.type === "King" && this.hero.specialAttackCounter == 1 && this.alreadySpecialAttacked == false) 
             this.addMenuItem("Hability");
         }
+        
     }
 
     setHero(hero) {

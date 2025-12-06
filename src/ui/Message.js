@@ -26,12 +26,10 @@ export default class Message extends Phaser.GameObjects.Container {
     showMessage(text) {
         this.text.setText(text);
 
-        // 🔥 Medimos el texto ya colocado
         const padding = 10;
         const width = this.text.width + padding * 2;
         const height = this.text.height + padding * 2;
 
-        // 🔥 Redibujar el gráfico ajustado al tamaño
         this.graphics.clear();
         this.graphics.lineStyle(1, 0xffffff, 0.8);
         this.graphics.fillStyle(0x031f4c, 0.3);
@@ -48,6 +46,23 @@ export default class Message extends Phaser.GameObjects.Container {
             callback: this.hideMessage,
             callbackScope: this
         });
+    }
+
+    showPermanentMessage(text) {
+        this.text.setText(text);
+
+        const padding = 10;
+        const width = this.text.width + padding * 2;
+        const height = this.text.height + padding * 2;
+
+        this.graphics.clear();
+        this.graphics.lineStyle(1, 0xffffff, 0.8);
+        this.graphics.fillStyle(0x031f4c, 0.3);
+
+        this.graphics.strokeRect(-width/2, -height/2, width, height);
+        this.graphics.fillRect(-width/2, -height/2, width, height);
+
+        this.visible = true;
     }
 
     hideMessage() {

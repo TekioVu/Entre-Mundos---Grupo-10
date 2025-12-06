@@ -16,7 +16,7 @@ export default class Menu extends Phaser.GameObjects.Container {
     }
 
     addMenuItem(unit) {
-        const Height = 28;
+        let Height = 28;
         const index = this.menuItems.length;
         this.columnSpacing= 30;
         let displayData;
@@ -29,6 +29,8 @@ export default class Menu extends Phaser.GameObjects.Container {
         } else if (typeof unit === "string") {
             displayData = { type: "text", key: unit };
             this.itemsPerRow = 1;
+            Height = 20;
+
         }
         const row = Math.floor(index / this.itemsPerRow);
         const col = index % this.itemsPerRow;
