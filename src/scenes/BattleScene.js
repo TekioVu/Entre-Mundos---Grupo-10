@@ -21,18 +21,22 @@ export default class BattleScene extends Phaser.Scene {
         this.createInventory();
         this.scene.launch("CharacterSelectionScene");
 
+        //Inicialización de los arrays de personajes
         this.heroes = new Array(6).fill(null);
         this.units = [];
 
+        //Héroes disponibles al inicio de la partida
         this.availableHeroes = [
         { texture: 'timmy', name: 'Timmy', hp: 100, atk: 20, def: 5 }
         ];
 
+        //Añadir los personajes comprados en la tienda los héroes disponibles
         const shopScene = this.scene.get("ShopScene");
         shopScene.boughtCharacters.forEach(c =>{
             this.availableHeroes.push(c);
         });
 
+        //Eventos de la escena
         this.events.on("removeHero", (positionIndex) => {
             if (this.heroes && this.heroes[positionIndex]) {
                 this.heroes[positionIndex].hpText.destroy();
@@ -46,6 +50,7 @@ export default class BattleScene extends Phaser.Scene {
             this.setSelectedHeroes(placedHeroes);
             this.units = this.heroes.concat(this.enemies);
         });
+
             this.index = -1;  
 
             this.normalCombatCompleted = false; 
@@ -54,6 +59,7 @@ export default class BattleScene extends Phaser.Scene {
             this.firstTimeFantasyMinigame = true;
         }
 
+    //Gestión de los turnos
     nextTurn() {
         this.index = (this.index + 1) % this.units.length;
         const unit = this.units[this.index];
@@ -71,7 +77,7 @@ export default class BattleScene extends Phaser.Scene {
     
     // === Manager de acciones ===
     receivePlayerSelection(action, targetIndex, itemIndex) {
-        if (action === "attack") {
+        if (action === "attack") { //Ataque
             this.units[this.index].attack(this.enemies[targetIndex]);
             
             this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
@@ -125,11 +131,13 @@ export default class BattleScene extends Phaser.Scene {
     }
 
     update() {
+        //Actualización de las barras de vida
         this.units.forEach(unit => {
             if (unit.hpText && unit.alive !== false) unit.updateHpText();
         });
     }
 
+    //Creación de los enemigos de cada libro
    createEnemies(combatScene) {
         this.currentbook = combatScene;
         this.enemies = [];
@@ -304,6 +312,7 @@ export default class BattleScene extends Phaser.Scene {
         this.units = this.enemies;
     }
 
+    //Creaación de las animaciones idle de los personajes
     _createIdleAnim(key, start, end, animKey = `${key}-idle`) {
         if (this.anims.exists(animKey)) return;
         this.anims.create({
@@ -314,6 +323,7 @@ export default class BattleScene extends Phaser.Scene {
         });
     }
 
+    //Creaación de las animaciones attack de los personajes
     _createAttackAnim(key, start, end, animKey = `${key}-attack`) {
         if (this.anims.exists(animKey)) return;
         this.anims.create({
@@ -323,6 +333,9 @@ export default class BattleScene extends Phaser.Scene {
             repeat: 0,
         });
     }
+
+    
+    //Creaación de las animaciones death de los personajes
      _createDeathAnim(key, start, end, animKey = `${key}-death`) {
         if (this.anims.exists(animKey)) return;
         this.anims.create({
@@ -333,6 +346,7 @@ export default class BattleScene extends Phaser.Scene {
         });
     }
 
+    //Creaación de las animaciones damage de los personajes
     _createDamageAnim(key, start, end, animKey = `${key}-damage`) {
         if (this.anims.exists(animKey)) return;
         this.anims.create({
@@ -354,7 +368,7 @@ export default class BattleScene extends Phaser.Scene {
         console.log('tamaño inventario: ' + this.inventory.length);
     }
 
-    
+    //Guarda los héroes que han sido seleccionados en CharacterSelectionScene
     onHeroSelected(heroData) {
         const { texture, x, y, name, hp, atk, def, positionKey } = heroData;
         console.log("esta es la defensa: " + def);
@@ -393,6 +407,7 @@ export default class BattleScene extends Phaser.Scene {
         
     }
 
+    //Creación de los bosses de cada libro
     createMiniBoss() {
         this.normalCombatCompleted = true;
 
@@ -443,7 +458,7 @@ export default class BattleScene extends Phaser.Scene {
         this.units = this.heroes.concat(this.enemies);
     }
 
-
+    //Limpia las posiciones vacías del array de héroes cuando ha terminado la selección
     setSelectedHeroes(placedHeroes) {
         this.placedHeroes = placedHeroes;
         this.heroes = this.heroes.filter(h => h !== null);
@@ -457,13 +472,11 @@ export default class BattleScene extends Phaser.Scene {
 
         }
     }
-
+    //Limpia todos los eventos de la escena
     cleanEvents() {
-        // 🔹 Limpia todos los eventos de la propia escena
         this.events.off("removeHero");
         this.events.off("heroesSelected");
 
-        // 🔹 Si hay otros listeners o escenas conectadas, límpialos aquí también
         const uiScene = this.scene.get("UIScene");
         if (uiScene && uiScene.events) {
             uiScene.events.off("PlayerSelect");
@@ -471,8 +484,8 @@ export default class BattleScene extends Phaser.Scene {
         
     }
 
-    
-   invokeJehster() {
+    //El rey enemigo usa su habilidad para invocar tres Jesters
+   invokeJester() {
         // Posiciones donde quieres que aparezca el Jester (por ejemplo)
         const positions = [
             [3, 2],
@@ -516,6 +529,7 @@ export default class BattleScene extends Phaser.Scene {
         });
     }
 
+    //El rey aliado usa su habilidad para invocar Jesters en todas las posiciones vacías
     invokeJesterHero() {
     const def = {
         key: 'jester',
@@ -533,13 +547,11 @@ export default class BattleScene extends Phaser.Scene {
         atk: 15,
     };
 
-    // Crear animaciones si no existen
     if (!this.anims.exists('jester-idle')) this._createIdleAnim(def.idleKey, def.idle[0], def.idle[1], 'jester-idle');
     if (!this.anims.exists('jester-attack')) this._createAttackAnim(def.attackKey, def.attack[0], def.attack[1], 'jester-attack');
     if (!this.anims.exists('jester-damage')) this._createDamageAnim(def.damageKey, def.damage[0], def.damage[1], 'jester-damage');
     if (!this.anims.exists('jester-death')) this._createDeathAnim(def.deathKey, def.death[0], def.death[1], 'jester-death');
 
-    // Coordenadas de todas las posiciones posibles para héroes
     const positionCoords = [
         { x: 200, y: 50, pos: 'v' },
         { x: 250, y: 50, pos: 'r' },
@@ -549,76 +561,24 @@ export default class BattleScene extends Phaser.Scene {
         { x: 290, y: 100, pos: 'r' },
     ];
 
-    // Filtramos las posiciones libres (basadas en x,y)
     const usedPositions = this.heroes.map(h => `${h.x},${h.y}`);
     const freePositions = positionCoords.filter(pos => !usedPositions.includes(`${pos.x},${pos.y}`));
 
-    // Creamos un Jester en cada posición libre que queramos
     freePositions.forEach(pos => {
         const hero = new PlayerCharacter(this, pos.x, pos.y, def.key, 0, def.name, def.hp, def.atk, pos.pos);
         hero.setScale(def.scale);
         this.add.existing(hero).anims.play('jester-idle');
 
-        this.heroes.push(hero); // simplemente añadimos al array dinámico
+        this.heroes.push(hero); 
     });
 
-    // Actualizamos unidades
     this.units = this.heroes.concat(this.enemies);
     this.uiscene = this.scene.get("UIScene");
     this.uiscene.remapHeroes();
 
 }
 
-// invokeJesterHero() {
-//     const def = { 
-//         key: 'jester', 
-//         idleKey: 'jester_idle', 
-//         attackKey: 'jester_attack', 
-//         damageKey: 'jester_damage', 
-//         deathKey: 'jester_death',
-//         idle: [11, 17], attack: [89, 72], damage: [107, 104], death: [125, 117], 
-//         scale: 1, 
-//         name: 'Jester',
-//         hp: 100, 
-//         atk: 15,
-//     };
-
-//     // Crear animaciones
-//     if (!this.anims.exists('jester-idle')) this._createIdleAnim(def.idleKey, def.idle[0], def.idle[1], 'jester-idle');
-//     if (!this.anims.exists('jester-attack')) this._createAttackAnim(def.attackKey, def.attack[0], def.attack[1], 'jester-attack');
-//     if (!this.anims.exists('jester-damage')) this._createDamageAnim(def.damageKey, def.damage[0], def.damage[1], 'jester-damage');
-//     if (!this.anims.exists('jester-death')) this._createDeathAnim(def.deathKey, def.death[0], def.death[1], 'jester-death');
-
-//     // Coordenadas de héroes
-//     const positionCoords = [
-//         { x: 200, y: 50 }, 
-//         { x: 250, y: 50 }, 
-//         { x: 220, y: 75 }, 
-//         { x: 270, y: 75 }, 
-//         { x: 240, y: 100 }, 
-//         { x: 290, y: 100 },
-//     ];
-
-//     // Índices exactos en this.heroes donde queremos Jesters
-//     const heroPositions = [0, 1, 2]; // por ejemplo, los 3 primeros espacios
-
-//     heroPositions.forEach((posKey, idx) => {
-//         const coords = positionCoords[posKey];
-//         const pos = (posKey === 0 || posKey === 2 || posKey === 4) ? 'v' : 'r';
-
-//         const hero = new PlayerCharacter(this, coords.x, coords.y, def.key, 0, def.name, def.hp, def.atk, pos);
-//         hero.setScale(def.scale);
-//         this.add.existing(hero).anims.play('jester-idle');
-
-//         this.heroes[posKey] = hero;
-//     });
-
-//     this.units = this.heroes.filter(h => h !== null).concat(this.enemies);
-// }
-
-
-
-
+//Lanzamiento del minijuego de Fantasía
     launchMagicMinigame(attacker, target) {
         this.currentAttacker = attacker;  // guardamos referencias
         this.currentTarget = target;
@@ -637,6 +597,7 @@ export default class BattleScene extends Phaser.Scene {
         this.scene.pause("BattleScene");
     }
 
+//Lanzamiento del minijuego de Terror
     launchTerrorMinigame(attacker, target) {
         this.currentAttacker = attacker;  // guardamos referencias
         this.currentTarget = target;
@@ -651,7 +612,7 @@ export default class BattleScene extends Phaser.Scene {
         this.scene.pause("BattleScene");
     }
 
-
+    //Consecuencias del resultado del minijuego en la partida
     minigameResult(result) {
 
         this.scene.resume("BattleScene");
@@ -672,12 +633,6 @@ export default class BattleScene extends Phaser.Scene {
 
         //this.nextTurn?.();
     }
-
-
-
-
-
-
 }
 
 

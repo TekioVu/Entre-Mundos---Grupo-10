@@ -11,6 +11,8 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         this.specialAttackCounter = 0;
         this.hasAbility = false;
         this.alreadySpecialAttacked = false; //Variable para los mini bosses que solo usen su habilidad 1 vez
+
+        //Variables que determinan cuando se puede utilizar la habilidad de los basses aliados
     if (!this.isEnemy){
         if(this.type === "Dragon" || this.type === "Cacodaemon"){
             this.hasAbility = true;
@@ -70,6 +72,8 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         this.hpText.setText(this.hp);
     }
 
+
+    //Reproduce las animaciones de ataque, daño y muerte y vuelve a idle
     playAnim(action, onComplete = null) {
         const animKey = `${this.textureKey}-${action}`;
         if (this.scene.anims.exists(animKey)) {
@@ -85,7 +89,6 @@ export default class Unit extends Phaser.GameObjects.Sprite {
     attack(target) {
 
         const r = Math.floor(Math.random() * 4);
-        //const r = 0;
         console.log("CRIT: " + r);
 
         let d;
@@ -103,6 +106,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             this.scene.events.emit("Message", `${this.type} attacks ${target.type} for ${d} damage`);
         }
 
+        
        if (!this.stunned)
         {this.playAnim('attack', () => this.playAnim('idle'));}
         
@@ -135,6 +139,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         }
     }
 
+    //El personaje recibe daño
     takeDamage(damage, attacker) {
 
         const bs = this.scene.scene.get("BattleScene");
@@ -150,6 +155,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         this.isDead(bs, attacker);
     }
 
+    //Gestiona si el personaje muere o solo reciba daño
     isDead(bs, attacker){
         if (this.hp <= 0)
         {
@@ -248,6 +254,8 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         }
     }
 
+
+    //Minijuegos
     startMinigame(target)
     {
         const battleScene = this.scene.scene.get("BattleScene");
@@ -270,6 +278,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         }
     }
 
+    //Habilidades de los bosses enemigos
     checkSpecialAttack(target)
     {
         const battleScene = this.scene.scene.get("BattleScene");
@@ -351,6 +360,8 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         this.specialAttackCounter++;
     }
 
+
+    //Habilidades de los bosses aliados
     checkSpecialAttackHeroes(target)
     {
         const battleScene = this.scene.scene.get("BattleScene");
@@ -401,6 +412,4 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         battleScene.time.addEvent({ delay: 3000, callback: battleScene.nextTurn, callbackScope: battleScene });
 
     }
-
-
 }
