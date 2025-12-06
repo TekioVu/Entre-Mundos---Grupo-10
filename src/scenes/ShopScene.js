@@ -7,6 +7,10 @@ export default class ShopScene extends Phaser.Scene {
 
     create() {
         
+        this.add.image(this.scale.width / 2, this.scale.height / 2, "shop_background")
+        .setOrigin(0.5, 0.58)
+        .setDisplaySize(this.scale.width+150, this.scale.height+300); 
+
         // === Datos base ===
         this.categories = {
             "Pociones curación": [
@@ -23,14 +27,7 @@ export default class ShopScene extends Phaser.Scene {
                 { name: "Poción De Defensa", texture: "pocion_defensa", description: "Aumenta la defensa del equipo aliado", coins: 15, id: 9},
             ],
             "Personajes": [
-                //{ name: "Wizard", texture: "wizard_image", description: "Magic", coins: 100 },
-                {name: "Dragon", texture: "dragon", description: "Grrrrraaaaaahhhhhh", coins: 250 },
-                {name: "Cacodaemon", texture: "cacodaemon", description: "SEEEEE YOUUU", coins: 350 },
-                {name: "Medusa", texture: "medusa", description: "SSSSSSSSSSSSSSSS", coins: 450 },
-
-           {name: "King", texture: "king", description: "HAHAHAHAHAHAHA", coins: 500 },
-
-
+                { name: "Wizard", texture: "wizard_image", description: "Magic", coins: 100 },
             ],
         };
 
@@ -395,17 +392,17 @@ updateSelection(itemIndex, categoryIndex) {
         this.categoryGroups = [];
 
         const { width, height } = this.scale;
-        const categorySpacingY = 50;
-        const startY = 15;
+        const categorySpacingY = 40;
+        const startY = 30;
 
         this.categoryNames.forEach((categoryName, categoryIndex) => {
             const items = this.categories[categoryName];
             const categoryY = startY + categoryIndex * categorySpacingY;
 
             // Texto de la categoría
-            const categoryText = this.add.text(width * 0.25, categoryY + 15, categoryName, {
+            const categoryText = this.add.text(width * 0.25 + 10, categoryY + 10, categoryName, {
                 fontSize: "11px",
-                color: "#ffffff",
+                color: "#000000ff",
                 fontFamily: "Arial",
             }).setOrigin(0.5);
 
@@ -414,7 +411,7 @@ updateSelection(itemIndex, categoryIndex) {
             const spacingX = 30;
             const totalWidth = 3 * spacingX;
             const startX = width * 0.25 - totalWidth / 2;
-            const y = categoryY + 40;
+            const y = categoryY + 30;
 
             let itemsIndex = [];
             for (let i = 0; i < items.length; i++) itemsIndex.push(i);
@@ -433,8 +430,8 @@ updateSelection(itemIndex, categoryIndex) {
                 itemsIndex.splice(randomIndex, 1);
                 const item = items[actualItemIndex];
 
-                const x = startX + i * spacingX;
-                const size = 25;
+                const x = startX + i * spacingX+10;
+                const size = 20;
 
                 const rect = this.add.rectangle(x, y, size, size, 0x333333).setOrigin(0.5);
                 const icon = this.add.image(x, y, item.texture)
@@ -454,9 +451,9 @@ updateSelection(itemIndex, categoryIndex) {
         });
 
         // Monedas
-        this.coinsText = this.add.text(80, 15, "Coins: " + this.currentCoins, {
+        this.coinsText = this.add.text(90, 25, "Coins: " + this.currentCoins, {
             fontSize: "16px",
-            color: "#ffff00",
+            color: "#000000ff",
             wordWrap: { width: 150, useAdvancedWrap: true },
             align: "center"
         }).setOrigin(0.5);
@@ -464,27 +461,27 @@ updateSelection(itemIndex, categoryIndex) {
         // Vista previa
         const firstItem = this.categories[this.categoryNames[0]][0];
         const previewSize = 100;
-        this.preview = this.add.image(width * 0.75, height * 0.4, firstItem.texture)
+        this.preview = this.add.image(width * 0.75-5, height * 0.35, firstItem.texture)
             .setOrigin(0.5)
             .setDisplaySize(previewSize, previewSize);
 
-        this.previewName = this.add.text(width * 0.75, height * 0.7, firstItem.name, {
+        this.previewName = this.add.text(width * 0.75-5, height * 0.63, firstItem.name, {
             fontSize: "20px",
-            color: "#ffff00",
+            color: "#000000ff",
             wordWrap: { width: 150, useAdvancedWrap: true },
             align: "center"
         }).setOrigin(0.5);
 
-        this.previewPrice = this.add.text(width * 0.75, height * 0.1, "Price: " + firstItem.coins, {
+        this.previewPrice = this.add.text(width * 0.75-5, height * 0.1, "Price: " + firstItem.coins, {
             fontSize: "20px",
-            color: "#ffff00",
+            color: "#000000ff",
             wordWrap: { width: 150, useAdvancedWrap: true },
             align: "center"
         }).setOrigin(0.5);
 
-        this.previewDescription = this.add.text(width * 0.75, height * 0.85, firstItem.description, {
+        this.previewDescription = this.add.text(width * 0.75-5, height * 0.77, firstItem.description, {
             fontSize: "10px",
-            color: "#ffffff",
+            color: "#000000ff",
             wordWrap: { width: 150, useAdvancedWrap: true },
             align: "center"
         }).setOrigin(0.5);

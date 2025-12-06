@@ -71,7 +71,6 @@ export default class UIScene extends Phaser.Scene {
 
         this.remapHeroes();
         this.heroesMenu.select(0);
-        this.actionsMenu.select(0);
 
         this.input.keyboard.on("keydown", this.onKeyInput, this);
 
@@ -85,8 +84,9 @@ export default class UIScene extends Phaser.Scene {
         this.heroesMenu.select(index);
         const hero = this.battleScene.heroes[this.heroesMenu.menuItemIndex];
         this.actionsMenu.setHero(hero);
-        this.actionsMenu.select(0);
         this.actionsMenu.refreshMenu();
+        this.actionsMenu.select(0);
+
 
         }, this); 
                                
@@ -179,10 +179,6 @@ export default class UIScene extends Phaser.Scene {
             this.itemsMenu.deselect();
             this.currentMenu = this.actionsMenu;
             this.actionsMenu.select(1);
-        }else if(this.currentMenu === this.actionsMenu){ // En caso de estar en el menu de acciones
-            this.actionsMenu.deselect();
-            this.currentMenu = this.heroesMenu;
-            this.heroesMenu.select(this.id);
         }
         
     }
@@ -191,8 +187,8 @@ export default class UIScene extends Phaser.Scene {
         const firstHero = this.battleScene.heroes[0];
     if (firstHero) {
         this.actionsMenu.setHero(firstHero);
-        this.actionsMenu.select(0);
         this.currentMenu = this.actionsMenu;
+        this.actionsMenu.select(0);
     }
         this.heroesMenu.select(0);
     }
@@ -202,8 +198,8 @@ export default class UIScene extends Phaser.Scene {
         this.actionsMenu.setHero(hero);
         this.actionsMenu.refreshMenu();
 
-        this.actionsMenu.select(0);
         this.currentMenu = this.actionsMenu;
+        this.actionsMenu.select(0);
 
     }
 

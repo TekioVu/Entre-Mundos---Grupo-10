@@ -48,7 +48,7 @@ export default class MenuItem extends Phaser.GameObjects.Container {
             this.text = scene.add.text(0, 0, dato.key, {
                 color: textColor,
                 align: "center",
-                fontSize: "14px"
+                fontSize: "13px"
             }).setOrigin(0.5);
 
             this.add(this.text);

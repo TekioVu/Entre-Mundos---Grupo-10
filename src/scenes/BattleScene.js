@@ -141,13 +141,13 @@ export default class BattleScene extends Phaser.Scene {
                     { 
                         key: 'goblin', idleKey: 'goblin_idle', attackKey: 'goblin_attack', damageKey: 'goblin_damage', deathKey: 'goblin_death', 
                         idle: [0, 3], attack: [0, 7], damage: [0, 3], death: [0, 3],  scale: 1.2, name: 'Goblin',
-                        hp: 50/*25*/, atk: 6,
+                        hp: 1/*25*/, atk: 6,
                         positions: [[4, 1], [5, 0]],
                     },
                     { 
                         key: 'ghost', idleKey: 'ghost_idle', attackKey: 'ghost_attack', damageKey: 'ghost_damage', deathKey: 'ghost_death',
                         idle: [0, 11], attack: [0, 7], damage: [0, 9], death: [0, 9], scale: 0.3, name: 'Ghost',
-                        hp: 50/*18*/, atk: 9,
+                        hp: 1/*18*/, atk: 9,
                         positions: [[1, 1], [2, 0]],
                     },
                 ],
@@ -375,7 +375,7 @@ export default class BattleScene extends Phaser.Scene {
             hero.setScale(0.7);
         } else if (hero.name === 'Timmy') {
             hero.setScale(1.2);
-        }else if (hero.texture.key === 'ghost') {
+        }else if (hero.type === 'Ghost') {
             hero.setScale(0.3);
         }else if (hero.texture.key === 'scarab') {
             hero.setScale(0.4);

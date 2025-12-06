@@ -106,7 +106,8 @@ export default class Unit extends Phaser.GameObjects.Sprite {
        if (!this.stunned)
         {this.playAnim('attack', () => this.playAnim('idle'));}
         
-        if (this.specialAttackCounter < 2 && this.type === "Dragon") this.specialAttackCounter++;
+        if (this.specialAttackCounter < 2 && this.type === "Dragon" || this.type === "Cacodaemon") this.specialAttackCounter++;
+        else if (this.specialAttackCounter < 3 && this.type === "Medusa") this.specialAttackCounter++;
         if(this.isEnemy)
         this.checkSpecialAttack(target);
     }
