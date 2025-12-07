@@ -77,6 +77,7 @@ export default class BattleScene extends Phaser.Scene {
     
     // === Manager de acciones ===
     receivePlayerSelection(action, targetIndex, itemIndex) {
+        this.createInventory();
         if (action === "attack") { //Ataque
             this.units[this.index].attack(this.enemies[targetIndex]);
             
@@ -117,16 +118,21 @@ export default class BattleScene extends Phaser.Scene {
                     }
                 }
             }
+            this.itemsArray.useItem(itemIndex);
 
             this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
         }
         else if (action === "dmgPot"){
             this.enemies[targetIndex].takeDamage(this.itemsArray.getItem(itemIndex).getStat());
-            
+            this.itemsArray.useItem(itemIndex);
+
             this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
         }
         else if (action === "catPot"){
-            this.enemies[0].catPot();
+            for(let e of this.enemies){
+                e.takeDamage(this.itemsArray.getItem(itemIndex).getStat(), this.units[this.index])
+            }
+            this.itemsArray.useItem(itemIndex);
         }
     }
 

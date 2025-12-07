@@ -11,6 +11,7 @@ export default class Item{
             case('HealPot'): this.hp = hp; break;
             case('DmgPot'): this.hp = hp; break;
             case('AreaPot'): this.hp = hp; break;
+            case('CatPot'): this.hp = hp; break;
             case('StrPot'): this.str = str; break;
             case('DefPot'): this.def = def; break;
         }
@@ -37,6 +38,7 @@ export default class Item{
             case('HealPot'): return this.hp;
             case('DmgPot'): return this.hp;
             case('AreaPot'): return this.hp;
+            case('CatPot'): return this.hp;
             case('StrPot'): return this.str;
             case('DefPot'): return this.def;
         }
