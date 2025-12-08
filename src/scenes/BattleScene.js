@@ -613,7 +613,11 @@ export default class BattleScene extends Phaser.Scene {
             attacker: attacker,
             target: target,
             parent: this,
+            firstTime: this.firstTimeFantasyMinigame
         });
+
+        this.firstTimeFantasyMinigame = false;
+
         this.scene.bringToTop("MiniGame_Terror");
         this.scene.pause("BattleScene");
     }

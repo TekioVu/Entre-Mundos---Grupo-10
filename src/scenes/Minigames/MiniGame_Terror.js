@@ -32,7 +32,7 @@ export default class MiniGame_Terror extends Phaser.Scene {
             .setStrokeStyle(strokeWidth, 0xffffff);
 
         if (!this.firstTime) {
-            this.timeLeft = 1.09;
+            this.timeLeft = 1.1;
             this.timerText = this.add.text(cx, 40, this.timeLeft.toFixed(2), {
                 fontSize: "42px",
                 fontFamily: "Arial",
@@ -43,7 +43,7 @@ export default class MiniGame_Terror extends Phaser.Scene {
         this.perfectWidth = barWidth * 0.05;
         this.normalWidth = barWidth * 0.1;
                 
-        this.totalWidth = this.normalWidth/2 + this.perfectWidth/2 + 10;
+        this.totalWidth = this.normalWidth/2 + this.perfectWidth/2 + 20;
 
         this.randomL = cx - barWidth/2  + this.totalWidth;
         this.randomR = cx + barWidth/2  - this.totalWidth;
@@ -59,8 +59,8 @@ export default class MiniGame_Terror extends Phaser.Scene {
             0xff0000
             ).setOrigin(0.5);
 
+        this.physics.add.existing(this.perfectZone,true);
 
-        this.physics.add.existing(this.perfectZone);   
         //Zonas normales
     
         this.rightnormalZone = this.add.rectangle(
@@ -70,8 +70,7 @@ export default class MiniGame_Terror extends Phaser.Scene {
             barHeight - strokeWidth,
             0xffff00
             ).setOrigin(0.5);
-
-        this.physics.add.existing(this.rightnormalZone);    
+        this.physics.add.existing(this.rightnormalZone,true);
 
         this.leftnormalZone= this.add.rectangle(
             this.random - this.perfectWidth * 1.5,
@@ -80,8 +79,7 @@ export default class MiniGame_Terror extends Phaser.Scene {
             barHeight - strokeWidth,
              0xffff00
             ).setOrigin(0.5);
-
-        this.physics.add.existing(this.leftnormalZone);
+        this.physics.add.existing(this.leftnormalZone,true);
 
         // ----- CURSOR -----
         this.cursorWidth = 5;
@@ -93,63 +91,70 @@ export default class MiniGame_Terror extends Phaser.Scene {
             0xffffff
         ).setOrigin(0.5);
 
+        
+        //Fisicas
         this.physics.add.existing(this.cursor);
-        
-        //Movimiento del cursor
-        this.cursorSpeed = 600;
-        this.cursorDir = 1
+        this.cursor.body.setCollideWorldBounds(true);
+        this.cursor.body.setAllowGravity(false);
+        this.cursor.body.setBounce(1, 0);
+        //Si es la primera vez va mas despacio
+        if(!this.firstTime) this.cursor.body.setVelocityX(600);  
+        else this.cursor.body.setVelocityX(300);
+          
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
+
+        // TEXTO Tutorial
+         if (this.firstTime) {
+            const tutorialBg = this.add.rectangle(cx, 30, 300, 50, 0x000000, 0.7)
+                .setStrokeStyle(3, 0xffffff);
+
+            const tutorialText = this.add.text(cx, 30,
+                "Presiona ESPACIO en la zona roja.",
+                {
+                    fontSize: "14px",
+                    fontFamily: "Arial",
+                    color: "#ffffff",
+                    align: "center"
+                }
+            ).setOrigin(0.5);
+
+            this.tutorialBg = tutorialBg;
+            this.tutorialText = tutorialText;
+        }
         
-
-        this.leftLimit = cx - barWidth/2 + this.cursorWidth/2;
-        this.rightLimit = cx + barWidth/2 - this.cursorWidth/2;
-
     }
     
-    
-    cursorMovement(){
-        if(this.finished)return; 
-        this.cursor.x +=  this.cursorDir * this.cursorSpeed * this.game.loop.delta / 1000;
-        if(this.cursor.x < this.leftLimit)this.cursorDir = 1;
-        if(this.cursor.x > this.rightLimit)this.cursorDir = -1;          
-        }
+
 
 
     update(time,delta){
 
         if (Phaser.Input.Keyboard.JustDown(this.spaceKey)){
-            this.checkResult();
+            this.handleOverlap();
             return;
         }
 
         if(this.finished)return;
-        if (!this.firstTime) {
-        this.timeLeft -= delta / 1000;
-        if (this.timeLeft < 0) this.timeLeft = 0;
-
-        this.timerText.setText(this.timeLeft.toFixed(2));
-        }
-
-        if(this.timeLeft <= 0){
-            this.finish("fail");
-            return
+         if (!this.firstTime) {
+            this.timeLeft -= delta / 1000;
+            if (this.timeLeft <= 0) {
+                this.timeLeft = 0;
+                this.cursor.body.setVelocityX(0);
+                this.finish("fail");
+                return;
+            }
+            this.timerText.setText(this.timeLeft.toFixed(2));
         }
     
-        this.cursorMovement();
     }
 
-    checkResult(){
-        let cursor   = this.cursor.getBounds();
-        let perfect  = this.perfectZone.getBounds();
-        let rightN    = this.rightnormalZone.getBounds();
-        let leftN     = this.leftnormalZone.getBounds();
+    handleOverlap(){
+        if (this.finished) return;
 
-        let result;
-
-        if (Phaser.Geom.Intersects.RectangleToRectangle(cursor,perfect)) result = "perfect";
-        else if (Phaser.Geom.Intersects.RectangleToRectangle(cursor,leftN)
-                ||Phaser.Geom.Intersects.RectangleToRectangle(cursor,rightN)) result = "normal";
-        else result = "fail";
+        let result = "fail";
+         if (this.physics.overlap(this.cursor, this.perfectZone)) result = "perfect";
+         else if (this.physics.overlap(this.cursor, this.leftnormalZone) ||
+                  this.physics.overlap(this.cursor, this.rightnormalZone)) result = "normal";
 
         this.finish(result);
 
@@ -161,7 +166,8 @@ export default class MiniGame_Terror extends Phaser.Scene {
         if (this.finished) return;
         this.finished = true;
 
-        this.time.delayedCall(350, () => {
+        this.cursor.body.setVelocityX(0);
+        this.time.delayedCall(300, () => {
             this.parent.minigameResult(result);
             this.scene.stop();
         });
