@@ -57,6 +57,8 @@ export default class BattleScene extends Phaser.Scene {
             this.currentbook;
 
             this.firstTimeFantasyMinigame = true;
+            this.firstTimeTerrorMinigame = true;
+            this.firstTimeComedyMinigame = true;
         }
 
     //Gestión de los turnos
@@ -613,7 +615,7 @@ export default class BattleScene extends Phaser.Scene {
             attacker: attacker,
             target: target,
             parent: this,
-            firstTime: this.firstTimeFantasyMinigame
+            firstTime: this.firstTimeTerrorMinigame
         });
 
         this.firstTimeFantasyMinigame = false;
@@ -621,7 +623,24 @@ export default class BattleScene extends Phaser.Scene {
         this.scene.bringToTop("MiniGame_Terror");
         this.scene.pause("BattleScene");
     }
+    //Lanzamiento del minijuego de Terror
+    launchComedyMinigame(attacker, target) {
+        this.currentAttacker = attacker;  // guardamos referencias
+        this.currentTarget = target;
 
+        // Lanza el minijuego y lo lleva al frente
+        this.scene.launch("MiniGame_Comedy", {
+            attacker: attacker,
+            target: target,
+            parent: this,
+            firstTime: this.firstTimeComedyMinigame
+        });
+
+        this.firstTimeComedyMinigame = false;
+
+        this.scene.bringToTop("MiniGame_Comedy");
+        this.scene.pause("BattleScene");
+    }
     //Consecuencias del resultado del minijuego en la partida
     minigameResult(result) {
 
