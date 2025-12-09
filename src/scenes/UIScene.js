@@ -383,6 +383,44 @@ if (this.currentMenu === this.actionsMenu) {
     else this.message.hideMessage();
 }
 
+if (this.currentMenu === this.itemsMenu) {
+    const index = this.itemsMenu.getMenuItemIndex();
+    const item = this.localInventory[index];
+
+    if (item) {
+        let msg = "";
+
+        switch (item.getType()) {
+            case "HealPot":
+                msg = "Heals a hero " + item.hp + "hp.";
+                break;
+            case "DmgPot":
+                msg = "Deals " + item.hp + " damage to one enemy.";
+                break;
+            case "AreaPot":
+                msg = "Deals " + item.hp + " damage to a line of enemies.";
+                break;
+            case "CatPot":
+                msg = "Deals " + item.hp + " damage to all enemies.";
+                break;
+            case "StrPot":
+                msg = "Increases attack temporarily (+" + item.str + ").";
+                break;
+            case "DefPot":
+                msg = "Increases defense temporarily (+" + item.def + ").";
+                break;
+            default:
+                msg = "Unknown item.";
+                break;
+        }
+
+        this.message.showPermanentMessage(msg);
+    }
+} else {
+    this.message.hideMessage();
+}
+
+
 
 
 this.updateEnemiesMarker();

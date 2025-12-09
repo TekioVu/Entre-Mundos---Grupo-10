@@ -22,11 +22,11 @@ if (this.hero) {
 }
         if (this.hero && this.hero.hasAbility) {
             if ((this.hero.type === "Dragon" || this.hero.type === "Cacodaemon") && this.hero.specialAttackCounter == 2) 
-            this.addMenuItem("Hability");
+            this.addMenuItem("Ability");
         else if (this.hero.type === "Medusa" && this.hero.specialAttackCounter == 3) 
-            this.addMenuItem("Hability");
+            this.addMenuItem("Ability");
         else if (this.hero.type === "King" && this.hero.specialAttackCounter == 1 && !this.hero.alreadySpecialAttacked) 
-            this.addMenuItem("Hability");
+            this.addMenuItem("Ability");
         }
         
     }
