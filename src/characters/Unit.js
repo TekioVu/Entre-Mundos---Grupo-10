@@ -90,8 +90,6 @@ export default class Unit extends Phaser.GameObjects.Sprite {
 
         const r = Math.floor(Math.random() * 4);
         
-        console.log("CRIT: " + r);
-
         let d;
         if (target.pos == 'v') d = this.damage - 5;
         else d = this.damage;
@@ -227,7 +225,11 @@ export default class Unit extends Phaser.GameObjects.Sprite {
 
                             this.scene.scene.stop("UIScene");
                             this.scene.scene.stop("BattleScene");
+                            if (battleScene.currentbook !== "THE END")
                             this.scene.scene.start("VictoryScene");
+                            else 
+                            this.scene.scene.start("EndScene");
+
                         }
                     });
                 } else {

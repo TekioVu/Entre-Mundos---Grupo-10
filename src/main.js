@@ -13,6 +13,7 @@ import MiniGame_History from "./scenes/Minigames/MiniGame_History.js";
 import MiniGame_Terror from "./scenes/Minigames/MiniGame_Terror.js";
 import IntroScene from "./scenes/IntroScene.js";
 import KidnapScene from "./scenes/KidnapScene.js";
+import EndScene from "./scenes/EndScene.js";
 
 
 const config = {
@@ -27,7 +28,7 @@ const config = {
         arcade: { gravity: { y: 0 } }
     },
     scene: [BootScene, KidnapScene, IntroScene,BattleScene, UIScene, MenuScene, GameOverScene, VictoryScene, CharacterSelectionScene, ShopScene, 
-        MiniGame_Fantasy, MiniGame_Comedy, MiniGame_FinalBoss, MiniGame_History, MiniGame_Terror]
+        MiniGame_Fantasy, MiniGame_Comedy, MiniGame_FinalBoss, MiniGame_History, MiniGame_Terror, EndScene]
 };
 
 new Phaser.Game(config);
