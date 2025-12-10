@@ -59,6 +59,7 @@ export default class BattleScene extends Phaser.Scene {
             this.firstTimeFantasyMinigame = true;
             this.firstTimeTerrorMinigame = true;
             this.firstTimeComedyMinigame = true;
+            this.firstTimeHistoryMinigame = true;
         }
 
     //Gestión de los turnos
@@ -623,7 +624,25 @@ export default class BattleScene extends Phaser.Scene {
         this.scene.bringToTop("MiniGame_Terror");
         this.scene.pause("BattleScene");
     }
-    //Lanzamiento del minijuego de Terror
+    //Lanzamiento del minijuego de Historia
+    launchHistoryMinigame(attacker, target) {
+        this.currentAttacker = attacker;  // guardamos referencias
+        this.currentTarget = target;
+
+        // Lanza el minijuego y lo lleva al frente
+        this.scene.launch("MiniGame_History", {
+            attacker: attacker,
+            target: target,
+            parent: this,
+            firstTime: this.firstTimeHistoryMinigame
+        });
+
+        this.firstTimeHistoryMinigame = false;
+
+        this.scene.bringToTop("MiniGame_History");
+        this.scene.pause("BattleScene");
+    }
+    //Lanzamiento del minijuego de Comedia
     launchComedyMinigame(attacker, target) {
         this.currentAttacker = attacker;  // guardamos referencias
         this.currentTarget = target;

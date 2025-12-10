@@ -138,7 +138,16 @@ export default class BootScene extends Phaser.Scene {
         this.load.spritesheet('fireball_idle', './assets/Minijuegos/Fireball/Idle.png', { frameWidth: 64, frameHeight: 64 });
         this.load.spritesheet('fireball_creation', './assets/Minijuegos/Fireball/Creation.png', { frameWidth: 64, frameHeight: 64 });
         this.load.spritesheet('fireball_explode', './assets/Minijuegos/Fireball/Explode.png', { frameWidth: 64, frameHeight: 64 });
-
+        this.load.image('minigame', './assets/Minijuegos/Background_Comedy/Minigame.png');
+        this.load.image('caca', './assets/Minijuegos/History/Caca.png');
+        this.load.image('llave','./assets/Minijuegos/History/Llave.png');
+        this.load.image('libro', './assets/Minijuegos/History/Libro.png');
+        this.load.image('carta','./assets/Minijuegos/History/Carta.png');
+        this.load.image('corazon', './assets/Minijuegos/History/Corazon.png');
+        this.load.image('diente','./assets/Minijuegos/History/Diente.png');
+        this.load.image('pergamino', './assets/Minijuegos/History/Pergamino.png');
+        this.load.image('ladrillo','./assets/Minijuegos/History/Ladrillo.png');
+        this.load.image('calavera','./assets/Minijuegos/History/Calavera.png');
         //UI
         this.load.image('attack_panel', './assets/UI/Panel.png');
         this.load.image('coins_won', './assets/UI/Coins.png');

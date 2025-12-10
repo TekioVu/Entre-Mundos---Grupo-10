@@ -18,7 +18,9 @@ export default class MiniGame_Comedy extends Phaser.Scene {
         this.finished = false;
 
         // --------- FONDO ---------
-        this.add.rectangle(0, 0, width, height, 0x3333aa).setOrigin(0);
+         this.add.image(0, 0, 'minigame')
+        .setOrigin(0, 0)     
+        .setDisplaySize(width, height);
           // --------- AGUJEROS ---------
         this.holePositions = [
             {x: width*0.25, y: height*0.4},
@@ -36,18 +38,33 @@ export default class MiniGame_Comedy extends Phaser.Scene {
                 .setStrokeStyle(3, 0x555555);
             this.holes.push(hole);
         });
+        //ANIMACIONES(spawn y esconderse)
+        this.anims.create({
+            key: 'clown_pop',
+            frames: this.anims.generateFrameNumbers('clown', { start: 0, end: 5 }),
+            frameRate: 12,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'clown_hide',
+            frames: this.anims.generateFrameNumbers('clown', { start: 20, end: 22 }),
+            frameRate: 12,
+            repeat: 0
+        });
+        
+        
 
         //Creamos el payaso
-        this.payaso = this.add.circle(0, 0, 30, 0xff00ff) 
+        this.payaso = this.add.sprite(0, 0, 'clown')
+            .setScale(1.5)
             .setVisible(false);
-
+        
         this.physics.add.existing(this.payaso,true);
 
 
         this.spawnPayaso();
-
-
-
+        //si detecta un click va a handleclick
+        this.input.on('pointerdown', this.handleClick, this);
 
 
         if (!this.firstTime) {
@@ -78,6 +95,8 @@ export default class MiniGame_Comedy extends Phaser.Scene {
             this.tutorialBg = tutorialBg;
             this.tutorialText = tutorialText;
         }
+
+
     }
     update(time,delta){
         if(this.finished)return;
@@ -86,7 +105,6 @@ export default class MiniGame_Comedy extends Phaser.Scene {
             this.timeLeft -= delta / 1000;
             if (this.timeLeft <= 0) {
                 this.timeLeft = 0;
-                this.payaso.setVisible(false);
                 this.finish("fail");
                 return;
             }
@@ -100,20 +118,40 @@ export default class MiniGame_Comedy extends Phaser.Scene {
 
         this.payaso.setPosition(pos.x, pos.y);
         this.payaso.setVisible(true);
+        this.payaso.play('clown_pop');
         //Hacemos que sea interactivo para clicar
         this.payaso.setInteractive();
         this.payaso.once('pointerdown', () => {
             if (this.finished) return;
-            this.payaso.setVisible(false);
+            //Frame cuando le clicas
+            this.payaso.setFrame(16); 
             this.finish("perfect");
         });
+    }
+
+    handleClick(pointer) {
+    if (this.finished) return;
+
+    if (!this.payaso.visible) return;
+
+    const dx = pointer.x - this.payaso.x;
+    const dy = pointer.y - this.payaso.y;
+    //Comprobamos la distancia total
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    // Si es mayor devuelve fail
+    if (dist > this.payaso.radius) {
+        this.finish('fail');
+        }
     }
 
     finish(result){
         if (this.finished) return;
         this.finished = true;
+        //Si es fail se esconde
+        if(result == 'fail')this.payaso.play('clown_hide');
 
-        this.time.delayedCall(250, () => {
+        this.time.delayedCall(300, () => {
+            this.payaso.setVisible(false);
             this.parent.minigameResult(result);
             this.scene.stop();
         });
