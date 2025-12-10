@@ -76,7 +76,7 @@ export default class BootScene extends Phaser.Scene {
         this.load.spritesheet('scarab', './assets/Enemigos/Egypt/Scarab_Stand.png', { frameWidth: 128, frameHeight: 128 });
         this.load.spritesheet('scarab_idle', './assets/Enemigos/Egypt/Scarab_Stand.png', { frameWidth: 128, frameHeight: 128 });
         this.load.spritesheet('scarab_attack', './assets/Enemigos/Egypt/Scarab_Fly.png', { frameWidth: 128, frameHeight: 128 });
-        this.load.spritesheet('scarab_damage', './assets/Enemigos/Egypt/Scarab_Damage.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('scarab_damage', './assets/Enemigos/Egypt/Scarab_Fly.png', { frameWidth: 128, frameHeight: 128 });
         this.load.spritesheet('scarab_death', './assets/Enemigos/Egypt/Scarab_Fly.png', { frameWidth: 128, frameHeight: 128 });
 
         //Bosses

@@ -116,7 +116,7 @@ export default class CharacterSelectionScene extends Phaser.Scene {
         
 
         onKeyInput(event) {
-        const keysToPrevent = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Enter", "Space"];
+        const keysToPrevent = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Enter", "Space", "Esc"];
         if (keysToPrevent.includes(event.code)) event.preventDefault();
 
         if (!this.currentMenu) return;
@@ -162,6 +162,9 @@ export default class CharacterSelectionScene extends Phaser.Scene {
         else if (event.code === "Space") {
             menu.confirm();
         }
+        //else if (event.code === "Escape"){
+        //     this.scene.switch("MenuScene");
+        // }
 
         this.updatePositionMarker();
     }

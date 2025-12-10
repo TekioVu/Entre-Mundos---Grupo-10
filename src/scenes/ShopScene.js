@@ -221,13 +221,13 @@ updateSelection(itemIndex, categoryIndex) {
         }
         else if(unlockedBooks == 3)
         {
-            // const goldenPotion = {
-            // name: "Poción Dorada", texture: "pocion_dorada", description: "Cura una gran cantidad de vida", coins: 25 , id:4};
-            // this.categories["Pociones curación"].push(goldenPotion);
+            const goldenPotion = {
+            name: "Poción Dorada", texture: "pocion_dorada", description: "Cura una gran cantidad de vida", coins: 25 , id:4};
+            this.categories["Pociones curación"].push(goldenPotion);
 
-            // const cataclismPotion = {
-            // name: "Poción Cataclismo", texture: "pocion_cataclismo", description: "Inflinge una gran cantidad de daño a todos los personajes del campo de batalla", coins: 100, id:13 };
-            // this.categories["Pociones daño"].push(cataclismPotion);
+            const cataclismPotion = {
+            name: "Poción Cataclismo", texture: "pocion_cataclismo", description: "Inflinge una gran cantidad de daño a todos los personajes del campo de batalla", coins: 100, id:13 };
+            this.categories["Pociones daño"].push(cataclismPotion);
 
             const mushroom = {
             name: "Mushroom", texture: "mushroom", description: "Room Room", coins: 200};
@@ -291,7 +291,7 @@ updateSelection(itemIndex, categoryIndex) {
             this.events.emit("Message", "Inventory full.\nYou can't hold more than 6 types of potions.");
             return;
         }
-        else if(selectedGroup.name === 'Pociones curación'){
+        else if(selectedGroup.name === 'Pociones curación' || selectedGroup.name === 'Pociones utilidad' || selectedGroup.name === 'Pociones daño'){
             this.inventory.insertItem(objeto.id);
         }
 
