@@ -619,7 +619,7 @@ export default class BattleScene extends Phaser.Scene {
             firstTime: this.firstTimeTerrorMinigame
         });
 
-        this.firstTimeFantasyMinigame = false;
+        this.firstTimeTerrorMinigame = false;
 
         this.scene.bringToTop("MiniGame_Terror");
         this.scene.pause("BattleScene");
@@ -672,7 +672,7 @@ export default class BattleScene extends Phaser.Scene {
         if (result === "perfect") damage += 10;
         else if (result === "fail") damage -= 5;
 
-        target.takeDamage(damage);
+        target.takeDamage(damage,attacker);
         this.events.emit("Message", `${attacker.type} attacks ${target.type} for ${damage} damage (${result})`);
 
         // Limpieza

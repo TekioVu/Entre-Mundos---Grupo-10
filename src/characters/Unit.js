@@ -89,14 +89,13 @@ export default class Unit extends Phaser.GameObjects.Sprite {
     attack(target) {
 
         const r = Math.floor(Math.random() * 4);
-        
         let d;
         if (target.pos == 'v') d = this.damage - 5;
         else d = this.damage;
 
         const battleScene = this.scene.scene.get("BattleScene");
         if(r === 0 && !this.isEnemy && (battleScene.currentbook === "FANTASÍA" || battleScene.currentbook === "TERROR" 
-        || battleScene.currentbook === "COMEDIA")) 
+        || battleScene.currentbook === "COMEDIA") ||battleScene.currentbook === "HISTORIA" ) 
         {
             this.damage *= 1.25;
             this.startMinigame(target);
@@ -271,7 +270,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             battleScene.launchTerrorMinigame(this, target);
         }else if(battleScene.currentbook === "HISTORIA")
         {
-            
+            battleScene.launchHistoryMinigame(this, target);
         }else if(battleScene.currentbook === "COMEDIA")
         {
             battleScene.launchComedyMinigame(this, target);
