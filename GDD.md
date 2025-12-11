@@ -489,29 +489,46 @@ Cada uno de los cinco libros corresponde a un género literario —Fantasía, Ro
 Este es el último nivel. El jugador se enfrentará a un triple final boss: Tristeza, Ira y Miedo.
 
 # 7 Minijuegos
-    Cuando salta crítico (probabilidad de 20%) aparece un evento de minijuego, en el que en función de cómo lo hagas hace más o menos daño. Cada libro tiene su propio minijuego, menos el último libro "THE END".
-    En este último salta un minijuego aleatorio de los 4 anteriores.
-    Cada minijuego puede tener 3 resultados: perfecto, normal, y fallido.
 
-   ## 7.1 Fantasía
-    En este minijuego hay que arrastrar el orbe pequeño hasta el área de destino en el tiempo especificado.
-    Si el orbe entra perfecto, será resultado perfecto, si entra a medias normal, y si no entra fallido.
-   ![](images/Minigame1.png)
+Cuando salta crítico (probabilidad de 20%) aparece un evento de minijuego, en el que en función de cómo lo hagas hace más o menos daño. Cada libro tiene su propio minijuego, menos el último libro *"THE END"*.
 
-   ## 7.2 Terror
-    Hay un cursor que se mueve con movimiento de vaivén de izquierda a derecha sobre una barra con varias zonas de colores. El jugador deberá parar el cursor presionando el espacio. 
-    Si la barra acaba en el espacio rojo será resultado perfecto, si acaba en el amarillo normal, y si no se presiona a tiempo o acaba en el área negra, será resultado fallido.
-   ![](images/Minigame2.png)
+En este último salta un minijuego aleatorio de los 4 anteriores.  
+Cada minijuego puede tener 3 resultados: **perfecto**, **normal**, y **fallido**.
 
-   ## 7.3 Historia
-    En el centro de la pantalla aparecerá un objeto. A continuación caerán por efecto de gravedad 2 objetos diferentes y deberá seleccionar el del centro.
-    Si el jugador acierta será resultado perfecto, si falla fallido.
-   ![](images/Minijuego3.png)
+## 7.1 Fantasía
+En este minijuego hay que arrastrar el orbe pequeño hasta el área de destino en el tiempo especificado.  
+Si el orbe entra perfecto, será resultado perfecto; si entra a medias, normal; y si no entra, fallido.
 
-   ## 7.4 Comedia
-    En este minijuego aparecerá un payaso en uno de los 6 agujeros. El jugador deberá seleccionarlo a tiempo.
-    Si el jugador acierta será resultado perfecto, si falla fallido.
-    ![](images/Minijuego4.png)
+![](images/Minigame1.png)
+
+## 7.2 Terror
+Hay un cursor que se mueve con vaivén de izquierda a derecha sobre una barra con varias zonas de colores.  
+El jugador deberá parar el cursor presionando **espacio**.
+
+- Si acaba en rojo → **perfecto**  
+- Si acaba en amarillo → **normal**  
+- Si no se presiona a tiempo o acaba en negro → **fallido**
+
+![](images/Minigame2.png)
+
+## 7.3 Historia
+En el centro de la pantalla aparecerá un objeto.  
+A continuación caerán, por efecto de gravedad, 2 objetos diferentes, y el jugador deberá seleccionar el del centro.
+
+- Si acierta → **perfecto**  
+- Si falla → **fallido**
+
+![](images/Minijuego3.png)
+
+## 7.4 Comedia
+En este minijuego aparecerá un payaso en uno de los 6 agujeros.  
+El jugador deberá seleccionarlo a tiempo.
+
+- Si acierta → **perfecto**  
+- Si falla → **fallido**
+
+![](images/Minijuego4.png)
+
 
 # 8 Experiencia de juego
 
