@@ -199,7 +199,7 @@ updateSelection(itemIndex, categoryIndex) {
         if(unlockedBooks == 2){
 
             const greenPotion = {
-            name: "Poción Verde", texture: "pocion_verde", description: "Cura una cantidad mediana de vida", coins: 25, id:2 };
+            name: "Poción Verde", texture: "pocion_verde", description: "Cura una cantidad mediana de vida", coins: 25, id:1 };
             this.categories["Pociones curación"].push(greenPotion);
             
             // const stunPotion ={
@@ -222,11 +222,11 @@ updateSelection(itemIndex, categoryIndex) {
         else if(unlockedBooks == 3)
         {
             const goldenPotion = {
-            name: "Poción Dorada", texture: "pocion_dorada", description: "Cura una gran cantidad de vida", coins: 25 , id:4};
+            name: "Poción Dorada", texture: "pocion_dorada", description: "Cura una gran cantidad de vida", coins: 25 , id:3};
             this.categories["Pociones curación"].push(goldenPotion);
 
             const cataclismPotion = {
-            name: "Poción Cataclismo", texture: "pocion_cataclismo", description: "Inflinge una gran cantidad de daño a todos los personajes del campo de batalla", coins: 100, id:13 };
+            name: "Poción Cataclismo", texture: "pocion_cataclismo", description: "Inflinge una gran cantidad de daño a todos los personajes del campo de batalla", coins: 100, id:7 };
             this.categories["Pociones daño"].push(cataclismPotion);
 
             const mushroom = {
@@ -286,13 +286,14 @@ updateSelection(itemIndex, categoryIndex) {
                 console.log(`${objeto.name} eliminado permanentemente de la tienda.`);
             }
 
-        }else if(this.inv.getLimit() <= this.inventoryLocal.length){
+        }else if(this.inv.getLimit() <= this.inventory.currentItems){
             console.log("Numero maximo de objetos");
             this.events.emit("Message", "Inventory full.\nYou can't hold more than 6 types of potions.");
             return;
         }
         else if(selectedGroup.name === 'Pociones curación' || selectedGroup.name === 'Pociones utilidad' || selectedGroup.name === 'Pociones daño'){
             this.inventory.insertItem(objeto.id);
+            console.log("INVENTORY SIZE " + this.inventory.currentItems)
         }
 
 

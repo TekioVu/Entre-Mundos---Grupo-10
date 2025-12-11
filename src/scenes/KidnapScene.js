@@ -64,6 +64,8 @@ export default class KidnapScene extends Phaser.Scene {
             fontFamily: "Arial",
             color: "#ffffff"
         }).setOrigin(0.5);
+
+        this.input.keyboard.addCapture('SPACE');
     }
 
     kidnapTimmy() {

@@ -64,10 +64,15 @@ this.tweens.add({
             btnText.setColor(textColor);
             btnText.setFontStyle("normal");
         });
-
    
         const activate = () => {
             this.drawPressed(bg, boxWidth, boxHeight);
+            this.scene.get("UIScene").cleanEvents();
+            this.scene.get("CharacterSelectionScene").cleanEvents();
+            this.scene.get("BattleScene").cleanEvents;
+            this.scene.stop("UIScene");
+            this.scene.stop("BattleScene");
+            this.scene.stop("GameOverScene");
             this.scene.stop("MenuScene");
             this.scene.start("MenuScene");
         };

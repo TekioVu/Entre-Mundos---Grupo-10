@@ -4,6 +4,7 @@ export default class Inventory{
     constructor(){
         this.itemsArray = [];
         this.itemLimit = 6;
+        this.currentItems = 0;
     }
 
     // Crea, lo que no añade, items al inventario
@@ -33,6 +34,9 @@ export default class Inventory{
     // Añade items al inventario
     insertItem(id){
         this.itemsArray[id].numUp();
+
+        if(this.getNum(id) == 1)
+        this.currentItems++;
     }
 
     // Añade pero por busqueda de nombre
@@ -65,5 +69,10 @@ export default class Inventory{
     // Reduce la cantidad de un item en el inventario
     useItem(id){
         this.itemsArray[id].numDown();
+
+        console.log("INVENTORY SIZE: " + this.currentItems);
+
+        if(this.getNum(id) == 0)
+        this.currentItems--;
     }
 }

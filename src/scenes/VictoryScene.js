@@ -9,30 +9,30 @@ export default class VictoryScene extends Phaser.Scene {
         const borderColor = 0x888888;
         const textColor = "#ffffffab";
 
-      const victoryText = this.add.text(160, 60, "VICTORY", {
-    fontFamily: "Arial",
-    fontSize: "36px",
-    fontStyle: "bold",
-    color: "#f2d675",        // blanco suave elegante
-    stroke: "#7a6a32",        // gris oscuro muy sutil
-    strokeThickness: 2,
-    shadow: {
-        offsetX: 1,
-        offsetY: 1,
-        color: "#00000040",   // sombra discreta
-        blur: 2,
-        fill: true
-    }
-}).setOrigin(0.5);
+        const victoryText = this.add.text(160, 60, "VICTORY", {
+            fontFamily: "Arial",
+            fontSize: "36px",
+            fontStyle: "bold",
+            color: "#f2d675",        // blanco suave elegante
+            stroke: "#7a6a32",        // gris oscuro muy sutil
+            strokeThickness: 2,
+            shadow: {
+                offsetX: 1,
+                offsetY: 1,
+                color: "#00000040",   // sombra discreta
+                blur: 2,
+                fill: true
+            }
+        }).setOrigin(0.5);
 
-// Animación suave de aparición
-victoryText.setAlpha(0);
-this.tweens.add({
-    targets: victoryText,
-    alpha: 1,
-    duration: 600,
-    ease: "Quad.Out"
-});
+        // Animación suave de aparición
+        victoryText.setAlpha(0);
+        this.tweens.add({
+            targets: victoryText,
+            alpha: 1,
+            duration: 600,
+            ease: "Quad.Out"
+        });
 
         const boxWidth = 100;
         const boxHeight = 30;
@@ -75,22 +75,22 @@ this.tweens.add({
         this.input.keyboard.once("keydown-SPACE", activate);
         this.button.on("pointerdown", activate);
 
-     this.add.image(160, 120, "coins_won").setDisplaySize(50, 50);
+        this.add.image(160, 120, "coins_won").setDisplaySize(50, 50);
 
-    const coinsText = this.add.text(160, 140, `+ ${this.coinsWon} coins`, {
-        fontFamily: "Arial",
-        fontSize: "8px",
-        color: "#ffd45c",         
-        stroke: "#543d10",       
-        strokeThickness: 2,
-        shadow: {
-            offsetX: 1,
-            offsetY: 1,
-            color: "#00000050",
-            blur: 2,
-            fill: true
-        }
-    }).setOrigin(0.5);
+        const coinsText = this.add.text(160, 140, `+ ${this.coinsWon} coins`, {
+            fontFamily: "Arial",
+            fontSize: "8px",
+            color: "#ffd45c",         
+            stroke: "#543d10",       
+            strokeThickness: 2,
+            shadow: {
+                offsetX: 1,
+                offsetY: 1,
+                color: "#00000050",
+                blur: 2,
+                fill: true
+            }
+        }).setOrigin(0.5);
 
     }   
     

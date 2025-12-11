@@ -7,8 +7,6 @@ export default class MenuScene extends Phaser.Scene {
     }
 
     create() {
-        console.log("MENUUUUU");
-
         this.opciones = [
             "FANTASÍA",
             "TERROR",
@@ -19,7 +17,7 @@ export default class MenuScene extends Phaser.Scene {
         ];
 
         this.selectedIndex = 0;
-        this.unlockedbooks = 1;
+        this.unlockedbooks = 3;
         this.optionObjects = [];
 
         const { width, height } = this.scale;
@@ -96,10 +94,10 @@ export default class MenuScene extends Phaser.Scene {
         this.inventory.createItem('pocion_ataque', 'Poción De Ataque', 'StrPot', 15, undefined, undefined);
         this.inventory.createItem('pocion_defensa', 'Poción De Defensa', 'DefPot', undefined, 10, undefined);
 
-       // this.inventory.insertItem(0);
-        //this.inventory.insertItem(1);
-        //this.inventory.insertItem(2);
-        //this.inventory.insertItem(3);
+        // this.inventory.insertItem(0);
+        // this.inventory.insertItem(1);
+        // this.inventory.insertItem(2);
+        // this.inventory.insertItem(3);
         // this.inventory.insertItem(4);
         // this.inventory.insertItem(4);
         // this.inventory.insertItem(7);

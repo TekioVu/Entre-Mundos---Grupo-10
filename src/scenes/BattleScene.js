@@ -431,7 +431,7 @@ export default class BattleScene extends Phaser.Scene {
             'HISTORIA': { key: 'medusa', idleKey: 'medusa_idle', attackKey: 'medusa_attack', damageKey: 'medusa_damage', deathKey: 'medusa_death',
                 idle: [0, 2],  attack: [11, 16], damage: [12, 13], death: [6, 11],name: 'Medusa', pos: [1, 1], scale: 1, hp: 10, atk: 25 },
             'COMEDIA':  { key: 'king', idleKey: 'king_idle', attackKey: 'king_attack', damageKey: 'king_damage',  deathKey: 'king_death',
-            idle: [0, 3], attack: [0, 3], damage: [0, 3], death: [0, 5], name: 'King', pos: [1, 1], scale: 1, hp: 350, atk: 10 },
+            idle: [0, 3], attack: [0, 3], damage: [0, 3], death: [0, 5], name: 'King', pos: [1, 1], scale: 1, hp: 1, atk: 10 },
         };
 
         const config = bossConfig[this.currentbook];
@@ -516,28 +516,28 @@ export default class BattleScene extends Phaser.Scene {
         };
 
         // Iteramos solo sobre las posiciones de Jester
-        positions.forEach(([xIdx, yIdx]) => {
-            const posX = this.enemyPosX[xIdx];
-            const posY = this.enemyPosY[yIdx];
-            let pos = (posX > 70) ? 'v' : 'r'; // lógica de orientación
+        // positions.forEach(([xIdx, yIdx]) => {
+        //     const posX = this.enemyPosX[xIdx];
+        //     const posY = this.enemyPosY[yIdx];
+        //     let pos = (posX > 70) ? 'v' : 'r'; // lógica de orientación
 
-            const enemy = new Enemy(
-                this,
-                posX,
-                posY,
-                def.key,
-                def.idle[1],
-                def.name,
-                def.hp,
-                def.atk,
-                pos
-            );
+        //     const enemy = new Enemy(
+        //         this,
+        //         posX,
+        //         posY,
+        //         def.key,
+        //         def.idle[1],
+        //         def.name,
+        //         def.hp,
+        //         def.atk,
+        //         pos
+        //     );
 
-            enemy.setScale(def.scale);
-            this.add.existing(enemy).anims.play(`${def.key}-idle`);
-            this.enemies.push(enemy);
-            this.units = this.heroes.concat(this.enemies);
-        });
+        //     enemy.setScale(def.scale);
+        //     this.add.existing(enemy).anims.play(`${def.key}-idle`);
+        //     this.enemies.push(enemy);
+        //     this.units = this.heroes.concat(this.enemies);
+        // });
     }
 
     //El rey aliado usa su habilidad para invocar Jesters en todas las posiciones vacías

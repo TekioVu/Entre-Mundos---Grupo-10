@@ -15,6 +15,11 @@ export default class CharacterSelectionScene extends Phaser.Scene {
             fill: "#ffffffff"
         }).setOrigin(0.5);
 
+        this.add.text(10, 10, "[ESC] Return to Menu", {
+            font: "11px Arial",
+            fill: "#ffffffff"
+        }).setOrigin(0);
+
         this.id = 0;
         
                 this.graphics = this.add.graphics();

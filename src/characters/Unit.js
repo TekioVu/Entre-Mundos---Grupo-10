@@ -67,7 +67,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         
     }
 
-    updateHpText() {
+    updateHpText() {        
         this.hpText.setPosition(this.x, this.y - this.hpOffsetY);
         this.hpText.setText(this.hp);
     }
@@ -227,7 +227,6 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                             this.scene.scene.start("VictoryScene");
                             else 
                             this.scene.scene.start("EndScene");
-
                         }
                     });
                 } else {
