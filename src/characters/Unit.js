@@ -151,7 +151,6 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         else{
         this.hp -= damage;
         }
-
         this.isDead(bs, attacker);
     }
 

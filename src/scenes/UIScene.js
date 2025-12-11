@@ -262,7 +262,7 @@ export default class UIScene extends Phaser.Scene {
             height = 60;
             width = 40;
             mitadx = mitadx-7;
-            mitady = mitady-20;
+            mitady = mitady;
         }
         else if (this.battleScene.enemies[index].type === 'Scared Wizard'){
             height = 60;
