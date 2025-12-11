@@ -496,12 +496,12 @@ Este es el último nivel. El jugador se enfrentará a un triple final boss: Tris
    ## 7.1 Fantasía
     En este minijuego hay que arrastrar el orbe pequeño hasta el área de destino en el tiempo especificado.
     Si el orbe entra perfecto, será resultado perfecto, si entra a medias normal, y si no entra fallido.
-   ![](images/Minijuego1.png)
+   ![](images/Minigame1.png)
 
    ## 7.2 Terror
     Hay un cursor que se mueve con movimiento de vaivén de izquierda a derecha sobre una barra con varias zonas de colores. El jugador deberá parar el cursor presionando el espacio. 
     Si la barra acaba en el espacio rojo será resultado perfecto, si acaba en el amarillo normal, y si no se presiona a tiempo o acaba en el área negra, será resultado fallido.
-   ![](images/Minijuego2.png)
+   ![](images/Minigame2.png)
 
    ## 7.3 Historia
     En el centro de la pantalla aparecerá un objeto. A continuación caerán por efecto de gravedad 2 objetos diferentes y deberá seleccionar el del centro.
