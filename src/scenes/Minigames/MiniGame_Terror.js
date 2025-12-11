@@ -100,6 +100,28 @@ export default class MiniGame_Terror extends Phaser.Scene {
         //Si es la primera vez va mas despacio
         if(!this.firstTime) this.cursor.body.setVelocityX(600);  
         else this.cursor.body.setVelocityX(300);
+        // ----------------------------------------
+        // PAREDES INVISIBLES A LOS LADOS
+        // ----------------------------------------
+        this.leftWall = this.add.rectangle(
+            this.mainBar.x - this.mainBar.width / 2,
+            this.mainBar.y,
+            10, this.mainBar.height,
+            0x000000, 0
+        );
+
+        this.rightWall = this.add.rectangle(
+            this.mainBar.x + this.mainBar.width / 2,
+            this.mainBar.y,
+            10, this.mainBar.height,
+            0x000000, 0
+        );
+
+        this.physics.add.existing(this.leftWall, true);
+        this.physics.add.existing(this.rightWall, true);
+
+        this.physics.add.collider(this.cursor, this.leftWall);
+        this.physics.add.collider(this.cursor, this.rightWall);
           
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
 
@@ -152,6 +174,7 @@ export default class MiniGame_Terror extends Phaser.Scene {
         if (this.finished) return;
 
         let result = "fail";
+
          if (this.physics.overlap(this.cursor, this.perfectZone)) result = "perfect";
          else if (this.physics.overlap(this.cursor, this.leftnormalZone) ||
                   this.physics.overlap(this.cursor, this.rightnormalZone)) result = "normal";
@@ -167,8 +190,9 @@ export default class MiniGame_Terror extends Phaser.Scene {
         this.finished = true;
 
         this.cursor.body.setVelocityX(0);
-        this.time.delayedCall(300, () => {
+        this.time.delayedCall(350, () => {
             this.parent.minigameResult(result);
+            
             this.scene.stop();
         });
     }
