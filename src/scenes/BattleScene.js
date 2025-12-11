@@ -4,6 +4,8 @@ import Enemy from "../characters/Enemy.js";
 export default class BattleScene extends Phaser.Scene {
     constructor() {
         super({ key: "BattleScene" });
+        console.log("4");
+
     }
 
     create() {

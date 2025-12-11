@@ -6,6 +6,7 @@ import Message from "../ui/Message.js";
 export default class CharacterSelectionScene extends Phaser.Scene {
     constructor() {
         super("CharacterSelectionScene");
+        console.log("5");
     }
 
     create() {
@@ -102,6 +103,14 @@ export default class CharacterSelectionScene extends Phaser.Scene {
                     this.scene.launch("UIScene");}
                 });
 
+                this.input.keyboard.on("keydown-ESC", () => {
+                        this.cleanEvents();
+                        this.scene.get("BattleScene").cleanEvents();
+                        this.scene.stop("BattleScene");
+                        this.scene.stop("CharacterSelectionScene");
+                        this.scene.switch("MenuScene");
+                });
+
             }
                 
         update(){
@@ -116,58 +125,60 @@ export default class CharacterSelectionScene extends Phaser.Scene {
         
 
         onKeyInput(event) {
-        const keysToPrevent = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Enter", "Space", "Esc"];
-        if (keysToPrevent.includes(event.code)) event.preventDefault();
+            const keysToPrevent = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Enter", "Space", "Esc"];
+            if (keysToPrevent.includes(event.code)) event.preventDefault();
 
-        if (!this.currentMenu) return;
+            if (!this.currentMenu) return;
 
-        const menu = this.currentMenu;
-        const totalItems = menu.menuItems.length;
-        const perRow = menu.itemsPerRow || 1;
+            const menu = this.currentMenu;
+            const totalItems = menu.menuItems.length;
+            const perRow = menu.itemsPerRow || 1;
 
-        if (event.code === "ArrowLeft") {
-            if (menu === this.charactersMenu && menu.menuItemIndex % perRow === 0) {
-                if (!this.selectedHero) menu.confirm();
-                this.currentMenu = this.positionsMenu;
-                this.currentMenu.select(this.positionsMenu.menuItemIndex);
-            } else {
-                menu.moveSelectionUp();
-            }
-        } 
-        else if (event.code === "ArrowRight") {
-            if (menu === this.positionsMenu&& menu.menuItemIndex % perRow === 1) {
-                this.positionsMenu.deselect();
-                this.currentMenu = this.charactersMenu;
-                this.currentMenu.select(this.charactersMenu.menuItemIndex);
-            } else {
-                const isLastInRow = (menu.menuItemIndex % perRow) === perRow - 1 || menu.menuItemIndex === totalItems - 1;
-                if (!isLastInRow) {
-                    menu.moveSelectionDown();
+            if (event.code === "ArrowLeft") {
+                if (menu === this.charactersMenu && menu.menuItemIndex % perRow === 0) {
+                    if (!this.selectedHero) menu.confirm();
+                    this.currentMenu = this.positionsMenu;
+                    this.currentMenu.select(this.positionsMenu.menuItemIndex);
+                } else {
+                    menu.moveSelectionUp();
                 }
-            }
-        } 
+            } 
+            else if (event.code === "ArrowRight") {
+                if (menu === this.positionsMenu&& menu.menuItemIndex % perRow === 1) {
+                    this.positionsMenu.deselect();
+                    this.currentMenu = this.charactersMenu;
+                    this.currentMenu.select(this.charactersMenu.menuItemIndex);
+                } else {
+                    const isLastInRow = (menu.menuItemIndex % perRow) === perRow - 1 || menu.menuItemIndex === totalItems - 1;
+                    if (!isLastInRow) {
+                        menu.moveSelectionDown();
+                    }
+                }
+            } 
 
-        else if (event.code === "ArrowUp") {
-            menu.menuItems[menu.menuItemIndex].deselect();
-            let newIndex = menu.menuItemIndex - perRow;
-            if (newIndex < 0) newIndex = menu.menuItemIndex; 
-            menu.select(newIndex);
-        } 
-        else if (event.code === "ArrowDown") {
-            menu.menuItems[menu.menuItemIndex].deselect();
-            let newIndex = menu.menuItemIndex + perRow;
-            if (newIndex >= totalItems) newIndex = menu.menuItemIndex; 
-            menu.select(newIndex);
-        } 
-        else if (event.code === "Space") {
-            menu.confirm();
-        }
-        //else if (event.code === "Escape"){
-        //     this.scene.switch("MenuScene");
-        // }
+            else if (event.code === "ArrowUp") {
+                menu.menuItems[menu.menuItemIndex].deselect();
+                let newIndex = menu.menuItemIndex - perRow;
+                if (newIndex < 0) newIndex = menu.menuItemIndex; 
+                menu.select(newIndex);
+            } 
+            else if (event.code === "ArrowDown") {
+                menu.menuItems[menu.menuItemIndex].deselect();
+                let newIndex = menu.menuItemIndex + perRow;
+                if (newIndex >= totalItems) newIndex = menu.menuItemIndex; 
+                menu.select(newIndex);
+            } 
+            else if (event.code === "Space") {
+                menu.confirm();
+            }
+            //else if (event.code === "Escape"){
+            //     this.scene.switch("MenuScene");
+            // }
 
         this.updatePositionMarker();
     }
+
+
 
     updatePositionMarker() {
     if (this.currentMenu !== this.positionsMenu) return;
@@ -215,9 +226,7 @@ this.positionMarker.clear();
 }
 
 onSelectPlayer(){
-
         const hero = this.charactersMenu.menuItems[this.charactersMenu.menuItemIndex].unit;
-
 
         this.selectedHero = hero;
         this.positionsMenu.select(0);

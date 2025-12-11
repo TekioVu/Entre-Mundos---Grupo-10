@@ -27,7 +27,7 @@ const config = {
         default: "arcade",
         arcade: { gravity: { y: 0 } }
     },
-    scene: [BootScene, KidnapScene, IntroScene,BattleScene, UIScene, MenuScene, GameOverScene, VictoryScene, CharacterSelectionScene, ShopScene, 
+    scene: [BootScene, KidnapScene, IntroScene, MenuScene, BattleScene, CharacterSelectionScene, UIScene, GameOverScene, VictoryScene, ShopScene, 
         MiniGame_Fantasy, MiniGame_Comedy, MiniGame_FinalBoss, MiniGame_History, MiniGame_Terror, EndScene]
 };
 

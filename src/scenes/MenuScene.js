@@ -3,9 +3,12 @@ import Inventory from "../characters/Inventory.js";
 export default class MenuScene extends Phaser.Scene {
     constructor() {
         super("MenuScene");
+        console.log("3");
     }
 
     create() {
+        console.log("MENUUUUU");
+
         this.opciones = [
             "FANTASÍA",
             "TERROR",

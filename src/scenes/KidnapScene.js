@@ -1,6 +1,7 @@
 export default class KidnapScene extends Phaser.Scene {
     constructor() {
         super({ key: "KidnapScene" });
+        console.log("1");
     }
 
     create() {
