@@ -17,7 +17,7 @@ export default class MenuScene extends Phaser.Scene {
         ];
 
         this.selectedIndex = 0;
-        this.unlockedbooks = 3;
+        this.unlockedbooks = 1;
         this.optionObjects = [];
 
         const { width, height } = this.scale;
@@ -104,6 +104,11 @@ export default class MenuScene extends Phaser.Scene {
         //this.inventory.insertItem(7);
 
         this.registry.set('inventory', this.inventory);
+
+         this.input.keyboard.on("keydown-O", () => {
+            this.unlockedbooks = 5;
+            this.updateText();
+        });
     }
 
     // ------------------------------------------------------

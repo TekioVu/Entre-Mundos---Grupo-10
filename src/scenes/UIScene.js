@@ -94,7 +94,6 @@ export default class UIScene extends Phaser.Scene {
             this.actionsMenu.select(0);
         };
         this.battleScene.events.on("PlayerSelect", this._onPlayerSelectFromBattle);
-                               
 
         this.message = new Message(this, this.battleScene.events);
         this.add.existing(this.message);

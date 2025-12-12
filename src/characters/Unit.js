@@ -89,7 +89,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
 
     attack(target) {
         // r = 0 ataque crit, r = 1, 2, 3 ataque normal
-        const r = Math.floor(Math.random() * 4);
+        const r = Math.floor(Math.random() * 3);
         let d;
         if (target.pos == 'v') d = this.damage - 5;
         else d = this.damage;

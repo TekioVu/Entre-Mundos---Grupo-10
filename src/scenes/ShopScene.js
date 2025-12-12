@@ -33,24 +33,24 @@ export default class ShopScene extends Phaser.Scene {
 
         this.inventory = this.registry.get('inventory'); // Coge el objeto que maneja el inventario del registro de escenas
 
-        this.currentCoins = 5000;
+        this.currentCoins = 250;
         this.availableCharacters =[
-        { texture: 'wizard', name: 'Wizard', hp: 100, atk: 20, def: 3 },
+        { texture: 'wizard', name: 'Wizard', hp: 140, atk: 22, def: 10 },
 
-        { texture: 'goblin', name: 'Goblin', hp: 120, atk: 15, def: 5 },
-        { texture: 'ghost', name: 'Ghost', hp: 120, atk: 15, def: 5 },
-        { texture: 'dragon', name: 'Dragon', hp: 200, atk: 25, def: 15 },
+        { texture: 'goblin', name: 'Goblin', hp: 110, atk: 14, def: 4 },
+        { texture: 'ghost', name: 'Ghost', hp: 105, atk: 13, def: 6 },
+        { texture: 'dragon', name: 'Dragon', hp: 220, atk: 28, def: 14 },
 
-        { texture: 'mushroom', name: 'Mushroom', hp: 120, atk: 15, def: 10 },
-        { texture: 'flying_eye', name: 'Flying Eye', hp: 120, atk: 15, def: 5 },
-        { texture: 'cacodaemon', name: 'Cacodaemon', hp: 150, atk: 35, def: 25 },
+        { texture: 'mushroom', name: 'Mushroom', hp: 150, atk: 10, def: 18 },
+        { texture: 'flying_eye', name: 'Flying Eye', hp: 90, atk: 20, def: 3 },
+        { texture: 'cacodaemon', name: 'Cacodaemon', hp: 180, atk: 30, def: 20 },
 
-        { texture: 'pharaoh', name: 'Pharaoh', hp: 120, atk: 15, def: 10 },
-        { texture: 'scarab', name: 'Scarab', hp: 120, atk: 15, def: 5 },
-        { texture: 'medusa', name: 'Medusa', hp: 300, atk: 15, def: 15 },
+        { texture: 'pharaoh', name: 'Pharaoh', hp: 150, atk: 18, def: 12 },
+        { texture: 'scarab', name: 'Scarab', hp: 100, atk: 20, def: 6 },
+        { texture: 'medusa', name: 'Medusa', hp: 260, atk: 22, def: 16 },
 
-        { texture: 'jester', name: 'Jester', hp: 120, atk: 15, def: 10 },
-        { texture: 'king', name: 'King', hp: 350, atk: 10, def: 10 },
+        { texture: 'jester', name: 'Jester', hp: 90, atk: 25, def: 4 },
+        { texture: 'king', name: 'King', hp: 320, atk: 8, def: 20 },
         ];
 
         this.characterDict = Object.fromEntries(
@@ -63,6 +63,17 @@ export default class ShopScene extends Phaser.Scene {
         
         this.resetShop();
         this.createInventory();
+
+        this.input.keyboard.on("keydown-K", () => {
+            for(let i = 0; i < 14; i++)
+            this.inventory.insertItem(7);
+
+            console.log("INVENTORY SIZE " + this.inventory.currentItems)
+        });
+
+        this.input.keyboard.on("keydown-L", () => {
+            this.updateCoins(5000);
+        });
     }
 
     update() {
@@ -226,7 +237,7 @@ updateSelection(itemIndex, categoryIndex) {
             this.categories["Pociones curación"].push(goldenPotion);
 
             const cataclismPotion = {
-            name: "Poción Cataclismo", texture: "pocion_cataclismo", description: "Inflinge una gran cantidad de daño a todos los personajes del campo de batalla", coins: 100, id:7 };
+            name: "Poción Cataclismo", texture: "pocion_cataclismo", description: "Inflinge una gran cantidad de daño a todos los personajes del campo de batalla", coins: 350, id:7 };
             this.categories["Pociones daño"].push(cataclismPotion);
 
             const mushroom = {

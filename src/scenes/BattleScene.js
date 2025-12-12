@@ -160,13 +160,13 @@ export default class BattleScene extends Phaser.Scene {
                     { 
                         key: 'goblin', idleKey: 'goblin_idle', attackKey: 'goblin_attack', damageKey: 'goblin_damage', deathKey: 'goblin_death', 
                         idle: [0, 3], attack: [0, 7], damage: [0, 3], death: [0, 3],  scale: 1.2, name: 'Goblin',
-                        hp: 1/*25*/, atk: 6,
+                        hp: 35, atk: 10,
                         positions: [[4, 1], [5, 0]],
                     },
                     { 
                         key: 'ghost', idleKey: 'ghost_idle', attackKey: 'ghost_attack', damageKey: 'ghost_damage', deathKey: 'ghost_death',
                         idle: [0, 11], attack: [0, 7], damage: [0, 9], death: [0, 9], scale: 0.3, name: 'Ghost',
-                        hp: 1/*18*/, atk: 9,
+                        hp: 28, atk: 13,
                         positions: [[1, 1], [2, 0]],
                     },
                 ],
@@ -177,13 +177,13 @@ export default class BattleScene extends Phaser.Scene {
                     { 
                         key: 'mushroom', idleKey: 'mushroom_idle', attackKey: 'mushroom_attack', damageKey: 'mushroom_damage', deathKey: 'mushroom_death', 
                         idle: [0, 3], attack: [0,7], damage: [0, 3], death: [0,3], scale: 1.2, name: 'Mushroom',
-                        hp: 2, atk: 5,
+                        hp: 80, atk: 9,
                         positions: [[3, 1], [4, 0]],
                     },
                     { 
                         key: 'flying_eye', idleKey: 'flying_eye_idle', attackKey: 'flying_eye_attack', damageKey: 'flying_eye_damage', deathKey: 'flying_eye_death',
                         idle: [0, 7], attack: [0, 7], damage: [0, 3], death: [0,3], scale: 1.2, name: 'Flying Eye',
-                        hp: 2, atk: 11,
+                        hp: 70, atk: 14,
                         positions: [[1, 1], [2, 0]],
                     },
                 ],
@@ -194,13 +194,13 @@ export default class BattleScene extends Phaser.Scene {
                     { 
                         key: 'pharaoh', idleKey: 'pharaoh_idle', attackKey: 'pharaoh_attack', damageKey: 'pharaoh_damage', deathKey: 'pharaoh_death',
                         idle: [0, 2], attack: [0, 4], damage: [0, 2], death: [0, 2], scale: 0.6, name: 'Pharaoh',
-                        hp: 200, atk: 8,
+                        hp: 160, atk: 18,
                         positions: [[1, 1], [2, 0]],
                     },
                     { 
                         key: 'scarab', idleKey: 'scarab_idle', attackKey: 'scarab_attack', damageKey: 'scarab_damage', deathKey: 'scarab_death',
                         idle: [0, 1], attack: [0, 1], damage: [0, 2], death: [0, 2], scale: 0.6, name: 'Scarab',
-                        hp: 200, atk: 5,
+                        hp: 120, atk: 13,
                         positions: [[4, 1], [5, 0]],
                     },
                 ],
@@ -211,14 +211,10 @@ export default class BattleScene extends Phaser.Scene {
                     { 
                         key: 'jester', idleKey: 'jester_idle', attackKey: 'jester_attack', damageKey: 'jester_damage', deathKey: 'jester_death',
                         idle: [11, 17], attack: [89, 72], damage: [107, 104], death: [125, 117], scale: 1, name: 'Jester',
-                        hp: 4, atk: 7,
+                        hp: 95, atk: 25,
                         positions: [[0, 1], [1, 0]],
                     },
-                    // { 
-                    //     key: 'clown', anim: [0, 8], scale: 2, name: 'Clown',
-                    //     hp: 35, atk: 9,
-                    //     positions: [[1, 0]],
-                    // },
+
                 ],
             },
             'THE END': {
@@ -227,19 +223,19 @@ export default class BattleScene extends Phaser.Scene {
                     { 
                         key: 'boss2', idleKey: 'boss2_idle', attackKey: 'boss2_attack', damageKey: 'boss2_damage', deathKey: 'boss2_death',
                         idle: [0, 7], attack: [0, 7], damage: [0, 2], death: [0, 6], scale: 1, name: 'Sad Wizard',
-                        hp: 40, atk: 22,
+                        hp: 450, atk: 25,
                         positions: [[0, 2]],
                     },
                     { 
                         key: 'boss3', idleKey: 'boss3_idle', attackKey: 'boss3_attack', damageKey: 'boss3_damage', deathKey: 'boss3_death',
                         idle: [0, 9], attack: [0, 12], damage: [0, 2], death: [0, 17], scale: 1, name: 'Scared Wizard',
-                        hp: 40, atk: 22,
+                        hp: 450, atk: 25,
                         positions: [[4, 1]],
                     },
                     { 
                         key: 'boss1', idleKey: 'boss1_idle', attackKey: 'boss1_attack', damageKey: 'boss1_damage', deathKey: 'boss1_death',
                         idle: [0, 7], attack: [0, 7], damage: [0, 3], death: [0, 4], scale: 1, name: 'Angry Wizard',
-                        hp: 40, atk: 22,
+                        hp: 450, atk: 25,
                         positions: [[2, 0]],
                     },
                 ],
@@ -424,14 +420,14 @@ export default class BattleScene extends Phaser.Scene {
 
         const bossConfig = {
             'FANTASÍA': { key: 'dragon', idleKey: 'dragon_idle', attackKey: 'dragon_attack', damageKey: 'dragon_damage', deathKey: 'dragon_death',
-            idle: [0, 3], attack: [11, 13], damage: [9, 10], death: [4, 8], name: 'Dragon', pos: [0, 1], scale: 1, hp: 10, atk: 15 },
+            idle: [0, 3], attack: [11, 13], damage: [9, 10], death: [4, 8], name: 'Dragon', pos: [0, 1], scale: 1, hp: 220, atk: 18 },
 
             'TERROR':   { key: 'cacodaemon', idleKey: 'cacodaemon_idle', attackKey: 'cacodaemon_attack', damageKey: 'cacodaemon_damage', deathKey: 'cacodaemon_death',
-                idle: [0, 5], attack: [8, 13], damage: [16, 19], death: [24, 31], name: 'Cacodaemon', pos: [1, 1], scale: 1, hp: 150, atk: 25 },
+                idle: [0, 5], attack: [8, 13], damage: [16, 19], death: [24, 31], name: 'Cacodaemon', pos: [1, 1], scale: 1, hp: 300, atk: 25 },
             'HISTORIA': { key: 'medusa', idleKey: 'medusa_idle', attackKey: 'medusa_attack', damageKey: 'medusa_damage', deathKey: 'medusa_death',
-                idle: [0, 2],  attack: [11, 16], damage: [12, 13], death: [6, 11],name: 'Medusa', pos: [1, 1], scale: 1, hp: 10, atk: 25 },
+                idle: [0, 2],  attack: [11, 16], damage: [12, 13], death: [6, 11],name: 'Medusa', pos: [1, 1], scale: 1, hp: 240, atk: 22 },
             'COMEDIA':  { key: 'king', idleKey: 'king_idle', attackKey: 'king_attack', damageKey: 'king_damage',  deathKey: 'king_death',
-            idle: [0, 3], attack: [0, 3], damage: [0, 3], death: [0, 5], name: 'King', pos: [1, 1], scale: 1, hp: 1, atk: 10 },
+            idle: [0, 3], attack: [0, 3], damage: [0, 3], death: [0, 5], name: 'King', pos: [1, 1], scale: 1, hp: 210, atk: 16 },
         };
 
         const config = bossConfig[this.currentbook];
@@ -511,33 +507,32 @@ export default class BattleScene extends Phaser.Scene {
             idle: [11, 17],
             scale: 1,
             name: 'Jester',
-            hp: 25,
-            atk: 15,
+            hp: 95,
+            atk: 10,
         };
 
-        // Iteramos solo sobre las posiciones de Jester
-        // positions.forEach(([xIdx, yIdx]) => {
-        //     const posX = this.enemyPosX[xIdx];
-        //     const posY = this.enemyPosY[yIdx];
-        //     let pos = (posX > 70) ? 'v' : 'r'; // lógica de orientación
+        positions.forEach(([xIdx, yIdx]) => {
+            const posX = this.enemyPosX[xIdx];
+            const posY = this.enemyPosY[yIdx];
+            let pos = (posX > 70) ? 'v' : 'r'; // lógica de orientación
 
-        //     const enemy = new Enemy(
-        //         this,
-        //         posX,
-        //         posY,
-        //         def.key,
-        //         def.idle[1],
-        //         def.name,
-        //         def.hp,
-        //         def.atk,
-        //         pos
-        //     );
+            const enemy = new Enemy(
+                this,
+                posX,
+                posY,
+                def.key,
+                def.idle[1],
+                def.name,
+                def.hp,
+                def.atk,
+                pos
+            );
 
-        //     enemy.setScale(def.scale);
-        //     this.add.existing(enemy).anims.play(`${def.key}-idle`);
-        //     this.enemies.push(enemy);
-        //     this.units = this.heroes.concat(this.enemies);
-        // });
+            enemy.setScale(def.scale);
+            this.add.existing(enemy).anims.play(`${def.key}-idle`);
+            this.enemies.push(enemy);
+            this.units = this.heroes.concat(this.enemies);
+        });
     }
 
     //El rey aliado usa su habilidad para invocar Jesters en todas las posiciones vacías
@@ -554,8 +549,8 @@ export default class BattleScene extends Phaser.Scene {
         death: [125, 117],
         scale: 1,
         name: 'Jester',
-        hp: 100,
-        atk: 15,
+        hp: 90,
+        atk: 25,
     };
 
     if (!this.anims.exists('jester-idle')) this._createIdleAnim(def.idleKey, def.idle[0], def.idle[1], 'jester-idle');
