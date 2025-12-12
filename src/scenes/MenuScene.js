@@ -108,6 +108,11 @@ export default class MenuScene extends Phaser.Scene {
          this.input.keyboard.on("keydown-O", () => {
             this.unlockedbooks = 5;
             this.updateText();
+
+            for(let i = 2; i < 6; i++)
+            this.scene.get("ShopScene").addNewItems(i);
+
+            this.scene.get("ShopScene").resetShop();
         });
     }
 
