@@ -104,23 +104,23 @@ export default class BootScene extends Phaser.Scene {
         this.load.spritesheet('demon_damage', './assets/Enemigos/Bosses/Demon.png', { frameWidth: 288, frameHeight: 160 });
         this.load.spritesheet('demon_death', './assets/Enemigos/Bosses/Demon.png', { frameWidth: 288, frameHeight: 160 });
 
-        this.load.spritesheet('boss1', './assets/Enemigos/FinalBosses/EvilWizard/Idle.png', { frameWidth: 150, frameHeight: 150 });
-        this.load.spritesheet('boss1_idle', './assets/Enemigos/FinalBosses/EvilWizard/Idle.png', { frameWidth: 150, frameHeight: 150 });
-        this.load.spritesheet('boss1_attack', './assets/Enemigos/FinalBosses/EvilWizard/Attack.png', { frameWidth: 150, frameHeight: 150 });
-        this.load.spritesheet('boss1_damage', './assets/Enemigos/FinalBosses/EvilWizard/Take Hit.png', { frameWidth: 150, frameHeight: 150 });
-        this.load.spritesheet('boss1_death', './assets/Enemigos/FinalBosses/EvilWizard/Death.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('boss1', './assets/Enemigos/FinalBosses/Ira/Idle.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('boss1_idle', './assets/Enemigos/FinalBosses/Ira/Idle.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('boss1_attack', './assets/Enemigos/FinalBosses/Ira/Attack.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('boss1_damage', './assets/Enemigos/FinalBosses/Ira/Take Hit.png', { frameWidth: 150, frameHeight: 150 });
+        this.load.spritesheet('boss1_death', './assets/Enemigos/FinalBosses/Ira/Death.png', { frameWidth: 150, frameHeight: 150 });
 
-        this.load.spritesheet('boss2', './assets/Enemigos/FinalBosses/EvilWizard2/Idle.png', { frameWidth: 250, frameHeight: 250 });
-        this.load.spritesheet('boss2_idle', './assets/Enemigos/FinalBosses/EVilWizard2/Idle.png', { frameWidth: 250, frameHeight: 250 });
-        this.load.spritesheet('boss2_attack', './assets/Enemigos/FinalBosses/EVilWizard2/Attack1.png', { frameWidth: 250, frameHeight: 250 });
-        this.load.spritesheet('boss2_damage', './assets/Enemigos/FinalBosses/EVilWizard2/Take hit.png', { frameWidth: 250, frameHeight: 250 });
-        this.load.spritesheet('boss2_death', './assets/Enemigos/FinalBosses/EVilWizard2/Death.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('boss2', './assets/Enemigos/FinalBosses/Tristeza/Idle.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('boss2_idle', './assets/Enemigos/FinalBosses/Tristeza/Idle.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('boss2_attack', './assets/Enemigos/FinalBosses/Tristeza/Attack1.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('boss2_damage', './assets/Enemigos/FinalBosses/Tristeza/Take hit.png', { frameWidth: 250, frameHeight: 250 });
+        this.load.spritesheet('boss2_death', './assets/Enemigos/FinalBosses/Tristeza/Death.png', { frameWidth: 250, frameHeight: 250 });
 
-        this.load.spritesheet('boss3', './assets/Enemigos/FinalBosses/EvilWizard3/Idle.png', { frameWidth: 140, frameHeight: 140 });
-        this.load.spritesheet('boss3_idle', './assets/Enemigos/FinalBosses/EvilWizard3/Idle.png', { frameWidth: 140, frameHeight: 140 });
-        this.load.spritesheet('boss3_attack', './assets/Enemigos/FinalBosses/EvilWizard3/Attack.png', { frameWidth: 140, frameHeight: 140 });
-        this.load.spritesheet('boss3_damage', './assets/Enemigos/FinalBosses/EvilWizard3/Get hit.png', { frameWidth: 140, frameHeight: 140 });
-        this.load.spritesheet('boss3_death', './assets/Enemigos/FinalBosses/EvilWizard3/Death.png', { frameWidth: 140, frameHeight: 140 });
+        this.load.spritesheet('boss3', './assets/Enemigos/FinalBosses/Miedo/Idle.png', { frameWidth: 140, frameHeight: 140 });
+        this.load.spritesheet('boss3_idle', './assets/Enemigos/FinalBosses/Miedo/Idle.png', { frameWidth: 140, frameHeight: 140 });
+        this.load.spritesheet('boss3_attack', './assets/Enemigos/FinalBosses/Miedo/Attack.png', { frameWidth: 140, frameHeight: 140 });
+        this.load.spritesheet('boss3_damage', './assets/Enemigos/FinalBosses/Miedo/Get hit.png', { frameWidth: 140, frameHeight: 140 });
+        this.load.spritesheet('boss3_death', './assets/Enemigos/FinalBosses/Miedo/Death.png', { frameWidth: 140, frameHeight: 140 });
 
         this.load.spritesheet('cat_idle', './assets/Cat/IDLE.png', { frameWidth: 80, frameHeight: 64 });
         this.load.spritesheet('cat_walk', './assets/Cat/WALK.png', { frameWidth: 80, frameHeight: 64 });
@@ -170,6 +170,7 @@ export default class BootScene extends Phaser.Scene {
         this.load.image('goblin_image', './assets/Enemigos/Enemigos_Tienda/Goblin_Image.png')
         this.load.image('ghost_image', './assets/Enemigos/Enemigos_Tienda/Ghost_Image.png')
         this.load.image('wizard_image', './assets/Enemigos/Enemigos_Tienda/Wizard_Image.png')
+        this.load.image('king_image', './assets/Enemigos/Enemigos_Tienda/Kings_Image.png')
     }
 
     create() {

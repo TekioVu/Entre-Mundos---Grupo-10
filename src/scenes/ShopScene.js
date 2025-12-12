@@ -273,7 +273,7 @@ updateSelection(itemIndex, categoryIndex) {
             this.categories["Personajes"].push(jester);
 
             const king = {
-            name: "King", texture: "king", description: "HAHAHAHAHAHAHA", coins: 500 };
+            name: "King", texture: "king_image", description: "HAHAHAHAHAHAHA", coins: 500 };
             this.categories["Personajes"].push(king);
 
         }
