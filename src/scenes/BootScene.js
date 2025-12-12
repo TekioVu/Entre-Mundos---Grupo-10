@@ -170,7 +170,7 @@ export default class BootScene extends Phaser.Scene {
         this.load.image('goblin_image', './assets/Enemigos/Enemigos_Tienda/Goblin_Image.png')
         this.load.image('ghost_image', './assets/Enemigos/Enemigos_Tienda/Ghost_Image.png')
         this.load.image('wizard_image', './assets/Enemigos/Enemigos_Tienda/Wizard_Image.png')
-        this.load.image('king_image', './assets/Enemigos/Enemigos_Tienda/Kings_Image.png')
+        this.load.image('king_image', './assets/Enemigos/Enemigos_Tienda/King_Image.png')
     }
 
     create() {
