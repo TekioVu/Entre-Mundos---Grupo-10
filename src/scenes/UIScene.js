@@ -127,15 +127,18 @@ export default class UIScene extends Phaser.Scene {
     onEnemy(enemyIndex) {
         this.enemiesMenu.clear();   
         this.actionsMenu.deselect();
-        console.log("a quien ataca: " + enemyIndex);
         this.currentMenu = null;
-        if(this.itemId && this.localInventory[this.itemId].type === "AreaPot"){ // Comprueba si lo que quiere es usar un objeto en un enemigo
-            this.battleScene.receivePlayerSelection("areaPot", enemyIndex, this.itemId);
-            this.itemId = undefined;
-        }
-        else if(this.itemId && this.localInventory[this.itemId].type === "DmgPot"){
-            this.battleScene.receivePlayerSelection("dmgPot", enemyIndex, this.itemId);
-            this.itemId = undefined;
+        if(this.itemId){
+            let type = this.inventory.getItem(this.itemId).getType();
+        
+            if(type === "AreaPot"){ // Comprueba si lo que quiere es usar un objeto en un enemigo
+                this.battleScene.receivePlayerSelection("areaPot", enemyIndex, this.itemId);
+                this.itemId = undefined;
+            }
+            else if(type === "DmgPot"){
+                this.battleScene.receivePlayerSelection("dmgPot", enemyIndex, this.itemId);
+                this.itemId = undefined;
+            }
         }
         else{
             this.battleScene.receivePlayerSelection("attack", enemyIndex, undefined);
