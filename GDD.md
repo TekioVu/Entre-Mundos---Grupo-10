@@ -463,7 +463,49 @@ Cada uno de los cinco libros corresponde a un género literario —Fantasía, Ro
 
 Este es el último nivel. El jugador se enfrentará a un triple final boss: Tristeza, Ira y Miedo.
 
-# 7 Experiencia de juego
+# 7 Minijuegos
+
+Cuando salta crítico (probabilidad de 20%) aparece un evento de minijuego, en el que en función de cómo lo hagas hace más o menos daño. Cada libro tiene su propio minijuego, menos el último libro *"THE END"*.
+
+En este último salta un minijuego aleatorio de los 4 anteriores.  
+Cada minijuego puede tener 3 resultados: **perfecto**, **normal**, y **fallido**.
+
+## 7.1 Fantasía
+En este minijuego hay que arrastrar el orbe pequeño hasta el área de destino en el tiempo especificado.  
+Si el orbe entra perfecto, será resultado perfecto; si entra a medias, normal; y si no entra, fallido.
+
+![](images/Minigame1.png)
+
+## 7.2 Terror
+Hay un cursor que se mueve con vaivén de izquierda a derecha sobre una barra con varias zonas de colores.  
+El jugador deberá parar el cursor presionando **espacio**.
+
+- Si acaba en rojo → **perfecto**  
+- Si acaba en amarillo → **normal**  
+- Si no se presiona a tiempo o acaba en negro → **fallido**
+
+![](images/Minigame2.png)
+
+## 7.3 Historia
+En el centro de la pantalla aparecerá un objeto.  
+A continuación caerán, por efecto de gravedad, 2 objetos diferentes, y el jugador deberá seleccionar el del centro.
+
+- Si acierta → **perfecto**  
+- Si falla → **fallido**
+
+![](images/Minijuego3.png)
+
+## 7.4 Comedia
+En este minijuego aparecerá un payaso en uno de los 6 agujeros.  
+El jugador deberá seleccionarlo a tiempo.
+
+- Si acierta → **perfecto**  
+- Si falla → **fallido**
+
+![](images/Minijuego4.png)
+
+
+# 8 Experiencia de juego
 
 Una partida comienza cuando el jugador selecciona un libro. Al hacerlo, Timmy y su equipo entran directamente en un combate por turnos contra enemigos temáticos del género de ese libro.
 
@@ -483,16 +525,16 @@ Tras completar un libro Timmy accede a la **tienda** donde podrá gastar sus mon
 
 El progreso continúa libro tras libro, con cada uno introduciendo un **mini-jefe** que exige nuevas estrategias. Finalmente, el jugador se enfrentará a un combate decisivo contra un jefe triple que encarna a la **Ira, la Tristeza y el Miedo**, poniendo a prueba todo lo aprendido en los niveles anteriores.
 
-# 8 Estética y contenido
+# 9 Estética y contenido
 
 La estética del juego será **pixel art**. 
 
 ![](images/image8.png)
 
 
-# 9 Referencias
+# 10 Referencias
 
-   ## 9.1 Juegos de referencia
+   ## 10.1 Juegos de referencia
 
 Uno de los referentes principales es **Final Fantasy** en sus entregas clásicas, especialmente las que utilizaban la formación de vanguardia y retaguardia. De este título hemos tomado la idea de que la posición dentro del grupo no es meramente estética, sino un factor estratégico: los personajes en primera línea infligen más daño pero están más expuestos, mientras que los de la retaguardia sacrifican fuerza ofensiva a cambio de mayor protección. Esta dualidad añade una capa táctica a cada combate y obliga al jugador a pensar en cómo organizar a sus héroes antes de cada enfrentamiento.
 
