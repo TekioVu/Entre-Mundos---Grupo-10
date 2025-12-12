@@ -284,7 +284,7 @@ updateSelection(itemIndex, categoryIndex) {
         const selectedSlot = selectedGroup.itemSlots[this.selectedItemIndex];
         const objeto = selectedSlot.item;
 
-        if(selectedGroup.name === 'Personajes')
+        if(selectedGroup.name === 'Personajes' && this.currentCoins >= objeto.coins)
         {
             this.boughtCharacters.push(this.characterDict[objeto.name]);
             //console.log("Comprados:", this.boughtCharacters);
