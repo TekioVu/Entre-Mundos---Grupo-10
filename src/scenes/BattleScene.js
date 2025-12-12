@@ -128,7 +128,7 @@ export default class BattleScene extends Phaser.Scene {
             this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
         }
         else if (action === "dmgPot"){
-            this.enemies[targetIndex].takeDamage(this.itemsArray.getItem(itemIndex).getStat());
+            this.enemies[targetIndex].takeDamage(this.itemsArray.getItem(itemIndex).getStat(), this.enemies[targetIndex]);
             this.itemsArray.useItem(itemIndex);
 
             this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
