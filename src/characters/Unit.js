@@ -13,21 +13,21 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         this.alreadySpecialAttacked = false; //Variable para los mini bosses que solo usen su habilidad 1 vez
 
         //Variables que determinan cuando se puede utilizar la habilidad de los basses aliados
-    if (!this.isEnemy){
-        if(this.type === "Dragon" || this.type === "Cacodaemon"){
-            this.hasAbility = true;
-            this.specialAttackCounter = 2;
+        if (!this.isEnemy){
+            if(this.type === "Dragon" || this.type === "Cacodaemon"){
+                this.hasAbility = true;
+                this.specialAttackCounter = 2;
+            }
+            else if (this.type === "Medusa"){
+                this.hasAbility = true;
+                this.specialAttackCounter = 3;
+            }
+            else if ( this.type === "King"){
+                this.hasAbility = true;
+                this.specialAttackCounter = 1;
+                this.alreadySpecialAttacked = false;
+            }
         }
-        else if (this.type === "Medusa"){
-            this.hasAbility = true;
-            this.specialAttackCounter = 3;
-        }
-        else if ( this.type === "King"){
-            this.hasAbility = true;
-            this.specialAttackCounter = 1;
-            this.alreadySpecialAttacked = false;
-        }
-    }
 
         const offsets = {
             "Timmy": 40,
@@ -52,7 +52,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             "Sad Wizard" : 25,
             "Angry Wizard" : 25,
         };
-
+        
         this.isEnemy = true;
 
         this.hpOffsetY = offsets[this.type] || 30;
@@ -88,17 +88,17 @@ export default class Unit extends Phaser.GameObjects.Sprite {
 
 
     attack(target) {
-        // r = 0 ataque crit, r = 1, 2, 3 ataque normal
+        // r = 0 ataque crit, r = 1, 2 ataque normal
         const r = Math.floor(Math.random() * 3);
         let d;
         if (target.pos == 'v') d = this.damage - 5;
         else d = this.damage;
-
+        console.log("quien: " + this.type + " es enemigo? " + this.isEnemy);
         // En caso de ser un golpe critico empieza el minijuego correspondiente al mundo y aumenta el daño
         const battleScene = this.scene.scene.get("BattleScene");
-        if(r === 0 && !this.isEnemy && (battleScene.currentbook === "FANTASÍA" || battleScene.currentbook === "TERROR" 
-        || battleScene.currentbook === "COMEDIA") ||battleScene.currentbook === "HISTORIA" ||battleScene.currentbook === "THE END" ) 
+        if(r === 0 && !this.isEnemy) 
         {
+            console.log("quien hace crit: " + this.type)
             console.log("crit");
             this.damage *= 1.25;
             this.startMinigame(target);
