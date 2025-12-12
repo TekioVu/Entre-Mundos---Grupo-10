@@ -74,21 +74,26 @@ export default class UIScene extends Phaser.Scene {
 
         this.input.keyboard.on("keydown", this.onKeyInput, this);
 
-        this.battleScene.events.on("PlayerSelect", this.onFirstPlayerSelect, this); // Para dejar el primer personaje de la lista al empezar cada turno
-        this.events.on("PlayerSelect", this.onPlayerSelect, this);                  // Cuando se selecciona el personaje con el que actuar
+        // --- Handlers en BattleScene ---
+        this._onFirstPlayerSelect = this.onFirstPlayerSelect.bind(this);
+        this.battleScene.events.on("PlayerSelect", this._onFirstPlayerSelect);
+
+        // --- Handlers locales en esta escena ---
+        this._onPlayerSelect = this.onPlayerSelect.bind(this);
+        this.events.on("PlayerSelect", this._onPlayerSelect);        
+
         this.events.on("Select", this.onSelect, this);                              // Cuando se escoje la accion que se quiere realizar
         this.events.on("Enemy", this.onEnemy, this);                                // Al escojer a que enemigo atacar
         this.events.on("Item", this.onItem, this);                                  // Al escojer que item usar
         this.events.on("Back", this.onBack, this);      
-        this.battleScene.events.on("PlayerSelect", (index) => {
-        this.heroesMenu.select(index);
-        const hero = this.battleScene.heroes[this.heroesMenu.menuItemIndex];
-        this.actionsMenu.setHero(hero);
-        this.actionsMenu.refreshMenu();
-        this.actionsMenu.select(0);
-
-
-        }, this); 
+        this._onPlayerSelectFromBattle = (index) => {
+            this.heroesMenu.select(index);
+            const hero = this.battleScene.heroes[this.heroesMenu.menuItemIndex];
+            this.actionsMenu.setHero(hero);
+            this.actionsMenu.refreshMenu();
+            this.actionsMenu.select(0);
+        };
+        this.battleScene.events.on("PlayerSelect", this._onPlayerSelectFromBattle);
                                
 
         this.message = new Message(this, this.battleScene.events);
@@ -98,25 +103,25 @@ export default class UIScene extends Phaser.Scene {
     }
 
     onSelect() {
-    if(this.currentMenu.getMenuItemIndex() === 0){ // En caso de que se escoja "Attack"
-        this.remapEnemies();
-        this.currentMenu = this.enemiesMenu;
-        this.enemiesMenu.select(0);
-    }
-    else if (this.currentMenu.getMenuItemIndex() === 1){ // en caso de que se escoja "Item"
-        this.remapItems();
-        this.currentMenu = this.itemsMenu;
-        this.itemsMenu.select(0);
-    }
-    else if (this.currentMenu.getMenuItemIndex() === 2){// en caso de que se escoja "Hability"
-        const hero = this.battleScene.heroes[this.heroesMenu.menuItemIndex];
-        if (!hero) return;
+        if(this.currentMenu.getMenuItemIndex() === 0){ // En caso de que se escoja "Attack"
+            this.remapEnemies();
+            this.currentMenu = this.enemiesMenu;
+            this.enemiesMenu.select(0);
+        }
+        else if (this.currentMenu.getMenuItemIndex() === 1){ // en caso de que se escoja "Item"
+            this.remapItems();
+            this.currentMenu = this.itemsMenu;
+            this.itemsMenu.select(0);
+        }
+        else if (this.currentMenu.getMenuItemIndex() === 2){// en caso de que se escoja "Hability"
+            const hero = this.battleScene.heroes[this.heroesMenu.menuItemIndex];
+            if (!hero) return;
 
-        const target = this.battleScene.enemies[0];
-        hero.checkSpecialAttackHeroes(target);
+            const target = this.battleScene.enemies[0];
+            hero.checkSpecialAttackHeroes(target);
 
-        this.actionsMenu.deselect();
-    }
+            this.actionsMenu.deselect();
+        }
     }
 
     // Cuando se ha seleccionado un enemigo al que atacar
@@ -427,12 +432,16 @@ export default class UIScene extends Phaser.Scene {
     }
 
     cleanEvents() {
+         // De BattleScene
+        this.battleScene.events.off("PlayerSelect", this._onFirstPlayerSelect);
+        this.battleScene.events.off("PlayerSelect", this._onPlayerSelectFromBattle);
+
         this.events.off("PlayerSelect", this.onPlayerSelect, this);
         this.events.off("SelectEnemies", this.onSelectEnemies, this);
+        this.events.off("Select", this.onSelect, this);                           
         this.events.off("Enemy", this.onEnemy, this);
         this.events.off("Item", this.onItem, this);
         this.events.off("Back", this.onBack, this);
-
     }
 
     createInventory(){

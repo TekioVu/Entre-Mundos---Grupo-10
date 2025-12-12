@@ -276,14 +276,14 @@ updateSelection(itemIndex, categoryIndex) {
         if(selectedGroup.name === 'Personajes')
         {
             this.boughtCharacters.push(this.characterDict[objeto.name]);
-            console.log("Comprados:", this.boughtCharacters);
+            //console.log("Comprados:", this.boughtCharacters);
 
             // Eliminar del array base de categorías
             const personajesArray = this.categories["Personajes"];
             const indexToRemove = personajesArray.findIndex(item => item.name === objeto.name);
             if (indexToRemove !== -1) {
                 personajesArray.splice(indexToRemove, 1);
-                console.log(`${objeto.name} eliminado permanentemente de la tienda.`);
+                //console.log(`${objeto.name} eliminado permanentemente de la tienda.`);
             }
 
         }else if(this.inv.getLimit() <= this.inventory.currentItems){
@@ -300,8 +300,8 @@ updateSelection(itemIndex, categoryIndex) {
         if (this.currentCoins >= objeto.coins) {
             // Restar monedas
             this.updateCoins(-objeto.coins);
-            console.log(`Compraste ${objeto.name} por ${objeto.coins} monedas.`);
-            console.log(`Te quedan ${this.currentCoins} monedas.`);
+            //console.log(`Compraste ${objeto.name} por ${objeto.coins} monedas.`);
+            //console.log(`Te quedan ${this.currentCoins} monedas.`);
 
             // Destruir elementos visuales
             selectedSlot.rect.destroy();

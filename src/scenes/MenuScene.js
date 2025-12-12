@@ -101,7 +101,7 @@ export default class MenuScene extends Phaser.Scene {
         // this.inventory.insertItem(4);
         // this.inventory.insertItem(4);
         // this.inventory.insertItem(7);
-        // this.inventory.insertItem(7);
+        //this.inventory.insertItem(7);
 
         this.registry.set('inventory', this.inventory);
     }

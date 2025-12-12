@@ -70,8 +70,6 @@ export default class Inventory{
     useItem(id){
         this.itemsArray[id].numDown();
 
-        console.log("INVENTORY SIZE: " + this.currentItems);
-
         if(this.getNum(id) == 0)
         this.currentItems--;
     }
