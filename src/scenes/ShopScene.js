@@ -273,7 +273,7 @@ updateSelection(itemIndex, categoryIndex) {
             this.categories["Personajes"].push(jester);
 
             const king = {
-            name: "King", texture: "king", description: "HAHAHAHAHAHAHA", coins: 500 };
+            name: "King", texture: "king_image", description: "HAHAHAHAHAHAHA", coins: 500 };
             this.categories["Personajes"].push(king);
 
         }
@@ -284,7 +284,7 @@ updateSelection(itemIndex, categoryIndex) {
         const selectedSlot = selectedGroup.itemSlots[this.selectedItemIndex];
         const objeto = selectedSlot.item;
 
-        if(selectedGroup.name === 'Personajes')
+        if(selectedGroup.name === 'Personajes' && this.currentCoins >= objeto.coins)
         {
             this.boughtCharacters.push(this.characterDict[objeto.name]);
             //console.log("Comprados:", this.boughtCharacters);
