@@ -1,3 +1,5 @@
+import Message from "../ui/Message.js";
+
 export default class Unit extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, frame, type, hp, damage, pos, hasHability) {
         super(scene, x, y, texture, frame);
@@ -64,7 +66,8 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             strokeThickness: 2
         }).setOrigin(0.5);
 
-        
+        this.message = new Message(scene, this.scene.events);
+                scene.add.existing(this.message);
     }
 
     // Actualiza la vida en la pantalla
@@ -95,18 +98,18 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         else d = this.damage;
 
         // En caso de ser un golpe critico empieza el minijuego correspondiente al mundo y aumenta el daño
-        const battleScene = this.scene.scene.get("BattleScene");
-        if(r === 0 && !this.isEnemy && (battleScene.currentbook === "FANTASÍA" || battleScene.currentbook === "TERROR" 
-        || battleScene.currentbook === "COMEDIA") ||battleScene.currentbook === "HISTORIA" ||battleScene.currentbook === "THE END" ) 
+        if(r === 0 && (!this.isEnemy)) 
         {
             console.log("crit");
             this.damage *= 1.25;
             this.startMinigame(target);
+
         }
         else{
+            this.message.showMessage(`${this.type} attacks ${target.type} for ${d} damage`);
             target.takeDamage(d, this);
-            this.scene.events.emit("Message", `${this.type} attacks ${target.type} for ${d} damage`);
         }
+
 
         // Hace la animacion de ataque del atacante
         if (!this.stunned)
@@ -368,14 +371,12 @@ export default class Unit extends Phaser.GameObjects.Sprite {
 
                 this.scene.events.emit("Message", `${this.type} is using meteor: ${this.damage} in AREA`);
             }
-            else if(this.isEnemy || battleScene.currentbook !== "FANTASÍA"){
+            else if (this.isEnemy){
                 let d;
                 if (target.pos == 'v') d = this.damage - 5;
                 else d = this.damage;
 
                 target.takeDamage(d, this);
-
-                this.scene.events.emit("Message", `${this.type} attacks ${target.type} for ${d} damage`);
             }
         }else {
             this.scene.events.emit("Message", `${this.type} is stunned`);
