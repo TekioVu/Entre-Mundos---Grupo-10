@@ -21,7 +21,7 @@ export default class KidnapScene extends Phaser.Scene {
             key: "cat_walk",
             frames: this.anims.generateFrameNumbers("cat_idle", {
                 start: 0,
-                end: 11
+                end: 6
             }),
             frameRate: 5,
             repeat: -1,
