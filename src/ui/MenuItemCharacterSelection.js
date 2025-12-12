@@ -1,3 +1,5 @@
+import Message from "../ui/Message.js";
+
 export default class MenuItemCharacterSelection extends Phaser.GameObjects.Container {
     constructor(x, y, item, scene) {
         super(scene, x, y);
@@ -7,7 +9,8 @@ export default class MenuItemCharacterSelection extends Phaser.GameObjects.Conta
         const bgColor = 0x1a1a1a;      // gris muy oscuro
         const bgAlpha = 1;              // opacidad completa
         const borderColor = 0x3a3a3a;   // gris medio para borde
-        const textColor = "#cccccc";    // gris claro para texto
+        let textColor = "#cccccc";    // gris claro para texto
+        if (item === "Vang2") textColor = "#ff0000ff";
 
         this.bg = scene.add.graphics();
 
@@ -24,6 +27,7 @@ export default class MenuItemCharacterSelection extends Phaser.GameObjects.Conta
             this.bg.strokeRoundedRect(-boxWidth / 2, -boxHeight / 2, boxWidth, boxHeight, 4);
 
             this.add(this.bg);
+
 
             // Texto gris claro
             this.text = scene.add.text(0, 0, item, {
@@ -59,11 +63,21 @@ export default class MenuItemCharacterSelection extends Phaser.GameObjects.Conta
 
         this.boxWidth = boxWidth;
         this.boxHeight = boxHeight;
+
+        this.eventsMessage = new Phaser.Events.EventEmitter();
+
+        this.message = new Message(scene, this.eventsMessage);
+        scene.add.existing(this.message);
     }
 
     select() {
         const hoverBg = 0x3a3a3a;      // gris más claro para hover
         const borderColor = 0xffffff;  // borde blanco elegante
+        const msg = `You can't change Timmy's position.`;
+        let color = "#ffffff";
+        if (this.text && this.text.text === "Vang2") {color = "#ff0000ff";
+        this.message.showPermanentMessage(msg);}
+
 
         this.bg.clear();
 
@@ -77,14 +91,18 @@ export default class MenuItemCharacterSelection extends Phaser.GameObjects.Conta
 
         // Texto elegante
         if (this.text) {
-            this.text.setColor("#ffffff"); // blanco puro
+            this.text.setColor(color);
             this.text.setFontStyle("bold");
-        }
+        } 
     }
 
     deselect() {
         const bgColor = 0x1a1a1a;     // gris muy oscuro
         const borderColor = 0x3a3a3a; // gris medio
+        let color = "#cccccc";
+        if (this.text && this.text.text === "Vang2") {color = "#ff0000ff";
+        this.message.hideMessage();}
+
 
         this.bg.clear();
 
@@ -98,7 +116,7 @@ export default class MenuItemCharacterSelection extends Phaser.GameObjects.Conta
 
         // Texto normal
         if (this.text) {
-            this.text.setColor("#cccccc"); // gris claro
+            this.text.setColor(color); // gris claro
             this.text.setFontStyle("normal");
         }
     }

@@ -130,7 +130,7 @@ Estas son las cartas que hemos decidido usar:
 
 ## 2.1 Descripción
 
-En Entre Mundos los jugadores acompañan a Timmy a través de cinco libros, cada uno con un género (Fantasía, Historia, Comedia, Terror) y un último libro THE END. En cada uno de ellos encontrará combates por turnos al estilo clásico enfrentando diferentes mecánicas y personajes (incluyendo un mini-jefe) que posteriormente podrán unirse a su equipo y utilizando un sistema de formación de equipo separado en vanguardia y retaguardia. La historia culmina con un jefe final triple que encarna a la Ira, la Tristeza y el Miedo, donde ponen a prueba todo lo aprendido por el camino.
+En Entre Mundos los jugadores acompañan a Timmy a través de cinco libros, cada uno con un género (Fantasía, Historia, Comedia, Terror) y un último libro THE END. En cada uno de ellos encontrará combates por turnos al estilo clásico enfrentando diferentes mecánicas y personajes (incluyendo un mini-jefe con alguna habilidad especial) que posteriormente podrán unirse a su equipo y utilizando un sistema de formación de equipo separado en vanguardia y retaguardia. La historia culmina con un jefe final triple que encarna a la Ira, la Tristeza y el Miedo, donde ponen a prueba todo lo aprendido por el camino.
 
 ## 2.2 Género
 
@@ -138,13 +138,13 @@ Combate por turnos, fantasía, roguelike.
 
 ## 2.3 Setting
 
-Timmy, un niño apasionado por la lectura, se ve arrastrado a una peligrosa aventura tras el secuestro de su hermano. Para encontrarlo debe adentrarse en diferentes libros para enfrentar enemigos y encontrar aliados que le ayudarán en su búsqueda.
+Timmy, un niño apasionado por la lectura, se ve arrastrado a una peligrosa aventura tras el secuestro de su gato. Para encontrarlo debe adentrarse en diferentes libros para enfrentar enemigos y encontrar aliados que le ayudarán en su búsqueda.
 
 ## 2.4 Características principales
 
-- **Jugabilidad**: El jugador irá entrando por los libros en orden y pasando por combates hasta llegar al jefe del libro y pasar al siguiente libro hasta terminar los 5 y recuperar a su hermano. Al principio de cada combate, el jugador podrá seleccionar los personajes desea usar y dónde ubicarlos. Tras terminar cada libro el jugador podrá acceder a una tienda cuyos objetos cambian tras cada partida aportando ese elemento de roguelike y rejugabilidad.  
+- **Jugabilidad**: El jugador irá entrando por los libros en orden y pasando por combates hasta llegar al jefe del libro y pasar al siguiente libro hasta terminar los 5 y recuperar a su gato. Al principio de cada combate, el jugador podrá seleccionar los personajes desea usar de los que tiene desbloqueados y dónde ubicarlos. Tras terminar cada libro el jugador podrá acceder a una tienda cuyos objetos cambian tras cada partida aportando ese elemento de roguelike y rejugabilidad.  
     
-- **Combate**: El área de combate se divide entre la zona enemiga y la zona aliada, ambas con 3 huecos de vanguardia y 3 de retaguardia. Los equipos se turnaran para atacar, dentro de cada equipo empezará atacando la retaguardia y posteriormente la vanguardia. Cada personaje contará con un ataque básico, y en el caso de los mini-bosses un ataque especial disponible cada cierto números de turnos.
+- **Combate**: El área de combate se divide entre la zona enemiga y la zona aliada, ambas con 3 huecos de vanguardia y 3 de retaguardia. Los equipos se turnan para atacar. Dentro de cada equipo, se va atacando por filas, empezando el personaje de arriba a la izquierda y acabando por el de abajo a la derecha. Cada personaje contará con un ataque básico, y en el caso de los mini-bosses un ataque especial disponible cada cierto números de turnos. Además, dentro del turno de cada personaje, el jugador puede elegir uttilizar un item de los que tenga disponibles en el inventario.
 
 # 3 Gameplay
 
@@ -152,14 +152,14 @@ Timmy, un niño apasionado por la lectura, se ve arrastrado a una peligrosa aven
 
 - **Corto plazo**: Ganar el combate del libro en el que se encuentra el jugador. Si es derrotado (todas sus unidades mueren), pierde la partida. Si por el contrario el jugador derrota a los enemigos, gana el combate y pasa al siguiente combate, al boss del libro o en caso de haberlo terminado, pasa al siguiente libro.  
     
-- **Largo plazo**: Completar los 5 libros. Construir y mejorar el equipo, superar todos los combates y libros y completar la historia (liberar al hermano de Timmy).
+- **Largo plazo**: Completar los 5 libros. Construir y mejorar el equipo, superar todos los combates y libros y completar la historia (liberar al gato de Timmy).
 
 
 ## 3.2 Core loops
 
 **Lucha:** Enfrenta enemigos básicos y mini-jefes en combates por turnos, aprovechando la formación de vanguardia y retaguardia y las habilidades de los aliados para superar cada desafío.
 
-**Mejora tu equipo:** Tras cada combate, obtén recompensas que permiten fortalecer a tus personajes y comprar objetos, nuevos personajes y mejoras en la tienda.
+**Mejora tu equipo:** Tras cada combate, obtén recompensas que permiten fortalecer a tus personajes y comprar objetos y nuevos personajes en la tienda.
 
 **Descubre nuevos libros:** Avanza en la historia atravesando cinco libros, cada uno con su propio género, estilo y mecánicas únicas que renuevan la experiencia.
 
@@ -176,15 +176,15 @@ Descripción:
 - Combate por turnos entre el equipo aliado y el enemigo (empezando siempre el aliado).  
 - **Turno jugador:** 
 
-  \- Personaje A1 \- El jugador escoge entre ataque básico, habilidad, usar objetos o defender y si escoge una opción que lo requiera, el enemigo o aliado al que va dirigido.
+  \- Personaje A1 \- El jugador escoge entre ataque básico, habilidad (si la tiene) o usar objetos y si escoge una opción que lo requiera, el enemigo o aliado al que va dirigido.
 
-  \- Personaje A2 \- El jugador escoge entre ataque básico, habilidad, usar objetos o defender y si escoge una opción que lo requiera, el enemigo o aliado al que va dirigido.
+  \- Personaje A2 \- El jugador escoge entre ataque básico, habilidad (si la tiene) o usar objetos y si escoge una opción que lo requiera, el enemigo o aliado al que va dirigido.
 
-  \* Nota: El personaje A5 siempre es Timmy.
+  \* Nota: El personaje A3 siempre es Timmy.
 
   \- Continúa sucesivamente de la misma forma hasta completar sus seis personajes siguiendo el orden que muestra la imagen.
 
-                    \-     **Turno enemigo:** Funciona de la misma manera que el del jugador.
+                    \-     **Turno enemigo:** Funciona de la misma manera que el del jugador con el orden de la imagen. Los enemigos no utilizan objetos, solo ataques básicos y habilidades los que las tienen.
 
                     \-     Se alternan hasta que uno de los dos equipos quede sin personajes con vida.
 
@@ -192,17 +192,17 @@ Descripción:
 
 ### 4.1.2 Recompensas
 
-Después de cada combate victorioso el jugador será recompensado con una cantidad de oro aleatoria que puede gastar en la tienda y un consumible elegido aleatoriamente.
+Después de cada combate victorioso el jugador será recompensado con una cantidad de oro aleatoria que puede gastar en la tienda.
 
 ## 4.2 Equipo
 
 ### 4.2.1 Adquisición de personajes
 
-El jugador puede comprar personajes pertenecientes a los libros que ya ha completado en la sección de personajes de la tienda, que van cambiando de forma aleatoria a lo largo del juego según los personajes que ya se hayan desbloqueado. Los personajes adquiridos se mantienen durante toda la partida. Si son derrotados en combate no se podrán volver a utilizar hasta el siguiente combate.
+Al principio de la partida el jugador tiene a Timmy. Además, si entra en la tienda podrá comprar al mago, un aliado extra que no requiere haber superado ningún combate para estar disponible. Durante el resto de la partida, el jugador puede comprar personajes pertenecientes a los libros que ya ha completado en la sección de personajes de la tienda, que van cambiando de forma aleatoria a lo largo del juego según los personajes que ya se hayan desbloqueado. Los personajes adquiridos se mantienen durante toda la partida. Si son derrotados en combate no se podrán volver a utilizar hasta el siguiente combate.
 
 ### 4.2.2 Formación de equipo
 
-Antes de comenzar un combate, el jugador tiene un tiempo para organizar a su equipo. Dentro de los seis espacios disponibles en el campo de batalla podrá posicionar hasta cinco personajes que haya comprado en el orden que prefiera para formar el equipo. La posición A5 es fija, en ella siempre está Timmy, no se puede cambiar.
+Antes de comenzar un combate, el jugador tiene un tiempo para organizar a su equipo. Dentro de los seis espacios disponibles en el campo de batalla podrá posicionar hasta cinco personajes (porque el sexto siempre es Timmy) que haya comprado en el orden que prefiera para formar el equipo. La posición A3 (Vanguardia 2) es fija, en ella siempre está Timmy, no se puede cambiar.
 
 ![](images/image4.png)
 
@@ -248,6 +248,30 @@ El jugador podrá acceder a la tienda desde el menú. No es accesible mientras e
 
 El juego se controlará por menús y botones, por lo que principalmente las flechas del teclado para navegar por ellos.
 
+Intro:
+- Espacio para continuar.
+- Enter para omitir.
+
+Menú principal:
+- Flechas derecha e izquierda para moverse por los libros.
+- Escacio para entrar al nivel/tienda.
+
+Menú de selección de personajes:
+- Flechas para navegar por las opciones y entre menús.
+- Escacio para seleccionar héroe/posición.
+- Enter para empezar la batalla.
+- Esc para volver al menú principal.
+
+Menú de batalla:
+- Flechas para navegar por las opciones de un mismo menú.
+- B para volver del menú de enemigos al de acciones.
+- Espacio para seleccionar acción/enemigo/item.
+
+Tienda:
+- Flechas para navegar por las opciones.
+- Espacio para comprar.
+- Esc para volver al menú principal.
+
 ## 5.2 Cámara
 
 ### 5.2.1 Pantalla de combate
@@ -285,128 +309,80 @@ A la izquierda hay un menú con todos los objetos disponibles para comprar y a l
 
 ### 6.1.2 Personajes comunes
 
-Los personajes comunes tendrán todos el mismo comportamiento, solo cambiando sus estadísticas. Dispondrán de un **ataque básico** que hará un daño del **100%** de su ataque, un debuff/buff y un **ataque especial** que podrá usar cada 2 turnos y que hará un daño del **250%** de su ataque.
-
-Los enemigos siempre que puedan usar el ataque especial lo harán, y en caso contrario se elegirá al azar entre el buff/debuff y el ataque básico.
+Los personajes comunes tendrán todos el mismo comportamiento, solo cambiando sus estadísticas. Dispondrán de un **ataque básico** que hará un daño del **100%** de su ataque.
 
 #### 6.1.2.1 Goblin saqueador (Fantasía)
 
     **HP:** 40  
     **Ataque:** 8  
-    **Defensa:** 3  
-      
-    **Ataque básico:** Puñalada  
-    **Buff/Debuff:** Aumenta su ataque durante 2 turnos.  
-    **Ataque especial:** Golpe saqueador
 
 #### 6.1.2.2 Espectro arcano (Fantasía)
 
-**HP:** 45  
-    **Ataque:** 10  
-    **Defensa:** 2
+    **HP:** 45  
+    **Ataque:** 10
 
-    **Ataque básico:** Toque espectral  
-**Buff/Debuff:** Reduce la defensa del jugador un turno  
-    **Ataque especial:** Descarga arcana
+#### 6.1.2.3 Ojo volador (Terror)
 
-#### 6.1.2.3 Amantes (Romance)
+    **HP:** 45  
+    **Ataque:** 10
 
-**HP:** 50  
-    **Ataque:** 8  
-    **Defensa:** 3
+#### 6.1.2.4 Seta (Terror)
 
-    **Ataque básico:** Beso fugaz  
-**Buff/Debuff:** Aplica enamoramiento (reduce ataque del enemigo)  
-**Ataque especial:** Abrazo apasionado
-
-#### 6.1.2.4 Corazón roto (Romance)
-
-**HP:** 55  
-    **Ataque:** 9  
-    **Defensa:** 4
-
-    **Ataque básico:** Latido  
-**Buff/Debuff:** Reduce velocidad del jugador un turno  
-**Ataque especial:** Palpitación intensa
+    **HP:** 45  
+    **Ataque:** 10
 
 #### 6.1.2.5  Faraón (Historia)
 
-**HP:** 60  
-    **Ataque:** 10  
-    **Defensa:** 5
-
-    **Ataque básico:** Bastonazo  
-**Buff/Debuff:** Aumenta su defensa un turno  
-**Ataque especial:** Formación defensiva 
+    **HP:** 60  
+    **Ataque:** 10
 
 #### 6.1.2.6 Escarabajo (Historia)
 
-**HP:** 65  
-    **Ataque:** 11  
-    **Defensa:** 3
-
-**Ataque básico:** Zarpazo  
-**Buff/Debuff:** Rugido aturdidor (puede hacer que el jugador falle su próximo ataque)  
-**Ataque especial:** Embestida salvaje
+    **HP:** 65  
+    **Ataque:** 11
 
 #### 6.1.2.7 Bufón (Comedia)
 
-**HP:** 70  
-    **Ataque:** 15  
-    **Defensa:** 3
-
-    **Ataque básico:** Trompazo  
-**Buff/Debuff:** Confusión (puede hacer que el jugador falle su próximo turno)  
-**Ataque especial:** Broma pesada
-
-#### 6.1.2.8  Comediante frustrado (Comedia)
-
-    **HP:** 80  
-    **Ataque:** 10  
-    **Defensa:** 6  
-      
-**Ataque básico:** Chiste cruel  
-**Buff/Debuff:** Reduce defensa del jugador un turno  
-**Ataque especial:** Travesura fatal
+    **HP:** 70  
+    **Ataque:** 15
 
 ### 6.1.3 Mini \- bosses
 
-Cada libro tendrá un mini-boss al final, a excepción del último (Terror) que simplemente tendrá el combate del final boss.  
-Cada mini-boss aparte del comportamiento de los personajes comunes, tendrá una mecánica propia.
+Cada libro tendrá un mini-boss al final, a excepción del último que simplemente tendrá el combate del final boss.  
+Cada mini-boss aparte del comportamiento de los personajes comunes, tendrá una mecánica propia, su habilidad.
 
-#### 6.1.3.1 Dragon Joven (Fantasía)
+#### 6.1.3.1 Dragon (Fantasía)
 
     **HP:** 300  
     **Ataque:** 15  
-    **Defensa:** 10
 
-    **Mecánica propia:** Cada 3 turnos, inflige daño de área a todos los personajes del jugador.
+    **Habilidad:** Cada 3 turnos, inflige daño de área a todos los personajes del jugador.
 
-#### 6.1.3.2 Cupido (Romance)** {#6.1.3.2-cupido-(romance)}
+#### 6.1.3.3 Cacodaemon (Terror)
 
-**HP:** 500  
-    **Ataque:** 20  
-    **Defensa:** 12  
+    **HP:** 500  
+    **Ataque:** 20
       
-**Mecánica propia:** En el segundo turno, “enamora” a un enemigo, y haciendo que pase a formar parte de su equipo.
+    **Habilidad:** Cada tres turnos stunnea inflinge daño cinco vaces a cinco enemigos aleatorios (puede tocra el mismo enemigo varias veces).
 
-#### 6.1.3.3 Esfinge (Historia)
 
-**HP:** 800  
-    **Ataque:** 30  
-    **Defensa:** 12  
-**Mecánica propia:** Cada 3 turnos invoca 2 faraones (si ya hay 2 faraones no hace nada, si hay 1 invoca otro)
+#### 6.1.3.3 Medusa (Historia)
 
-#### 6.1.3.4 El Payaso del Caos (Comedia)
+    **HP:** 500  
+    **Ataque:** 20
+      
+    **Habilidad:** Cada tres turnos stunnea a todos los personajes del equipo rival durante su siguiente turno.
 
-**HP:** 1000  
+#### 6.1.3.4 Rey (Comedia)
+
+    **HP:** 1000  
     **Ataque:** 35  
-    **Defensa:** 7  
-    **Mecánica propia:** Cada 2 turnos invoca 2 clones de sí mismo.
+    
+    **Mecánica propia:** Invoca tres bufones. Cuando está en el equipo aliado invoca tantos bufones como posiciones vacías haya.
 
 ### 6.1.4 Final boss
 
-El final boss serán en realidad dos personajes: Ira y Miedo. 
+    El final boss serán en realidad tres personajes: Ira, Tristeza y Miedo. 
 
 #### 6.1.4.1 Ira
 
@@ -461,76 +437,33 @@ Cada uno de los cinco libros corresponde a un género literario —Fantasía, Ro
 \-2 Goblins saqueadores  
 \-2 Espectros arcanos
 
-**Mini-boss:** Dragón Joven
+**Mini-boss:** Dragón
 
-### 6.2.2 Romance
+### 6.2.1 Terror
 
-\-2 Amantes  
-\-3 Corazones rotos
+\-2 Ojos voladores  
+\-2 Setas
 
-**Mini-boss:** Cupido
+**Mini-boss:** Cacodaemon
 
 ### 6.2.3 Historia
 
 \-3 Faraón  
 \-2 Escarabajo
 
-**Mini-boss:** Esfinge
+**Mini-boss:** Medusa
 
 ### 6.2.4 Comedia
 
-\-3 Bufones  
-\-3 Comediantes frustrados
+\-3 Bufones
 
-**Mini-boss:** Payaso del Caos
+**Mini-boss:** Rey
 
-### 6.2.5 Terror
+### 6.2.5 The end
 
 Este es el último nivel. El jugador se enfrentará a un triple final boss: Tristeza, Ira y Miedo.
 
-# 7 Minijuegos
-
-Cuando salta crítico (probabilidad de 20%) aparece un evento de minijuego, en el que en función de cómo lo hagas hace más o menos daño. Cada libro tiene su propio minijuego, menos el último libro *"THE END"*.
-
-En este último salta un minijuego aleatorio de los 4 anteriores.  
-Cada minijuego puede tener 3 resultados: **perfecto**, **normal**, y **fallido**.
-
-## 7.1 Fantasía
-En este minijuego hay que arrastrar el orbe pequeño hasta el área de destino en el tiempo especificado.  
-Si el orbe entra perfecto, será resultado perfecto; si entra a medias, normal; y si no entra, fallido.
-
-![](images/Minigame1.png)
-
-## 7.2 Terror
-Hay un cursor que se mueve con vaivén de izquierda a derecha sobre una barra con varias zonas de colores.  
-El jugador deberá parar el cursor presionando **espacio**.
-
-- Si acaba en rojo → **perfecto**  
-- Si acaba en amarillo → **normal**  
-- Si no se presiona a tiempo o acaba en negro → **fallido**
-
-![](images/Minigame2.png)
-
-## 7.3 Historia
-En el centro de la pantalla aparecerá un objeto.  
-A continuación caerán, por efecto de gravedad, 2 objetos diferentes, y el jugador deberá seleccionar el del centro.
-
-- Si acierta → **perfecto**  
-- Si falla → **fallido**
-
-![](images/Minijuego3.png)
-
-## 7.4 Comedia
-En este minijuego aparecerá un payaso en uno de los 6 agujeros.  
-El jugador deberá seleccionarlo a tiempo.
-
-- Si acierta → **perfecto**  
-- Si falla → **fallido**
-
-![](images/Minijuego4.png)
-
-
-# 8 Experiencia de juego
+# 7 Experiencia de juego
 
 Una partida comienza cuando el jugador selecciona un libro. Al hacerlo, Timmy y su equipo entran directamente en un combate por turnos contra enemigos temáticos del género de ese libro.
 
@@ -540,26 +473,24 @@ En cada turno, el jugador decide la acción de sus personajes:
 
 * **Ataque básico**: siempre disponible.
 
-* **Habilidad especial**: elegida previamente y que consume estamina (ST).
+* **Habilidad especial**: solo los minibosses y cada ciertos turnos.
 
-* **Uso de objetos**: desde pociones curativas hasta bombas ofensivas o herramientas de utilidad.
+* **Uso de objetos**: desde pociones curativas hasta bombas ofensivas o herramientas de utilidad, disponible siempre que haya en el inventario.
 
-* **Defensa**: reduce el daño recibido hasta el siguiente turno.
+Al finalizar un combate victorioso, el jugador obtiene **oro**, que le servirá para prepararse de cara al siguiente enfrentamiento.
 
-El orden de ataque está determinado por la formación: primero actúa la **retaguardia** y después la **vanguardia**. Al finalizar un combate victorioso, el jugador obtiene **oro y un objeto consumible aleatorio**, que servirán para prepararse de cara al siguiente enfrentamiento.
-
-Entre combates, el jugador accede a un **menú de formación**, donde puede reorganizar sus personajes, cambiar armas, armaduras y habilidades, o elegir qué seis integrantes usar si dispone de más aliados. Tras completar un libro Timmy accede a la **tienda** donde podrá gastar sus monedas en objetos, mejoras y habilidades nuevas. Los artículos disponibles cambian en cada partida, aportando el componente roguelike.
+Tras completar un libro Timmy accede a la **tienda** donde podrá gastar sus monedas en objetos y personajes nuevos. Los artículos disponibles cambian en cada partida, aportando el componente roguelike.
 
 El progreso continúa libro tras libro, con cada uno introduciendo un **mini-jefe** que exige nuevas estrategias. Finalmente, el jugador se enfrentará a un combate decisivo contra un jefe triple que encarna a la **Ira, la Tristeza y el Miedo**, poniendo a prueba todo lo aprendido en los niveles anteriores.
 
-# 9 Estética y contenido
+# 8 Estética y contenido
 
 La estética del juego será **pixel art**. 
 
 ![](images/image8.png)
 
 
-# 10 Referencias
+# 9 Referencias
 
    ## 9.1 Juegos de referencia
 

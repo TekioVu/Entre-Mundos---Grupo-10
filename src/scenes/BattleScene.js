@@ -29,7 +29,7 @@ export default class BattleScene extends Phaser.Scene {
 
         //Héroes disponibles al inicio de la partida
         this.availableHeroes = [
-        { texture: 'timmy', name: 'Timmy', hp: 100, atk: 20, def: 5 }
+        //{ texture: 'timmy', name: 'Timmy', hp: 100, atk: 20, def: 5 }
         ];
 
         //Añadir los personajes comprados en la tienda los héroes disponibles

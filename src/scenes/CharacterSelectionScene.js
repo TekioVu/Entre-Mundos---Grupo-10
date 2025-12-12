@@ -116,15 +116,53 @@ export default class CharacterSelectionScene extends Phaser.Scene {
                         this.scene.switch("MenuScene");
                 });
 
+                // Colocar a Timmy en Vang2 automáticamente
+                const timmy = {
+                    texture: 'timmy',
+                    name: 'Timmy',
+                    hp: 100,
+                    atk: 20,
+                    def: 5
+                };
+
+                const vang2Index = this.positions.indexOf("Vang2");
+                this.placedHeroes[vang2Index] = timmy;
+                this.positionsOccupied[vang2Index] = true;
+
+                // Emitimos directamente al BattleScene para crear el sprite
+                const positionCoords = [
+                    { x: 200, y: 50 },
+                    { x: 250, y: 50 },
+                    { x: 220, y: 75 }, // Vang2
+                    { x: 270, y: 75 },
+                    { x: 240, y: 100 },
+                    { x: 290, y: 100 },
+                ];
+
+                this.scene.get("BattleScene").events.emit("heroesSelected", {
+                    texture: timmy.texture,
+                    name: timmy.name,
+                    id: timmy.id || 0,
+                    hp: timmy.hp,
+                    atk: timmy.atk,
+                    def: timmy.def,
+                    x: positionCoords[vang2Index].x,
+                    y: positionCoords[vang2Index].y,
+                    positionKey: vang2Index
+                });
+
+
             }
                 
         update(){
             if (this.availableHeroes.length===0)
             {
-                this.scene.stop("CharacterSelectionScene");
-                const validHeroes = this.placedHeroes.filter(h => h !== null);
-                this.events.emit("selectionComplete", validHeroes);
-                this.scene.launch("UIScene");
+                this.add.text(240, 195, "You have no more available\n  heroes left. Press ENTER\n         to start the battle.", {
+                    fontFamily: "Arial Light",
+                    fontSize: "11px",
+                    fill: "#cccccc"
+                }).setOrigin(0.5);
+
             }
         }
         
@@ -174,6 +212,13 @@ export default class CharacterSelectionScene extends Phaser.Scene {
                 menu.select(newIndex);
             } 
             else if (event.code === "Space") {
+                //Si se intenta poner un personaje en la posición de Timmy no hacerlo.
+                if (this.currentMenu === this.positionsMenu) {
+                    const positionName = this.positions[this.positionsMenu.menuItemIndex];
+                    if (positionName === "Vang2") {
+                        return;
+                    }
+                }
                 menu.confirm();
             }
             //else if (event.code === "Escape"){
