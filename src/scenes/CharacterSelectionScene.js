@@ -11,13 +11,16 @@ export default class CharacterSelectionScene extends Phaser.Scene {
 
     create() {
         this.add.text(160, 140, "Characters selection. Press ENTER to start the battle.", {
-            font: "11px Arial",
-            fill: "#ffffffff"
+            font: "Arial",
+            fontSize: 12,
+
         }).setOrigin(0.5);
 
         this.add.text(10, 10, "[ESC] Return to Menu", {
-            font: "11px Arial",
-            fill: "#ffffffff"
+            font: "Arial",
+            fontSize: 11,
+            fill: "#ffffffff",
+
         }).setOrigin(0);
 
         this.id = 0;
@@ -158,9 +161,12 @@ export default class CharacterSelectionScene extends Phaser.Scene {
             if (this.availableHeroes.length===0)
             {
                 this.add.text(240, 195, "You have no more available\n  heroes left. Press ENTER\n         to start the battle.", {
-                    fontFamily: "Arial Light",
-                    fontSize: "11px",
-                    fill: "#cccccc"
+                    font: "Arial",
+                    fontSize: 11,
+                    fill: "#ffffffff",
+                    stroke: "#1b1b1bff",
+                    strokeThickness: 2,
+                    shadow: { offsetX: 1, offsetY: 1, color: '#000', blur: 2, fill: true }
                 }).setOrigin(0.5);
 
             }
