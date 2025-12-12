@@ -64,7 +64,7 @@ export default class BattleScene extends Phaser.Scene {
             this.firstTimeHistoryMinigame = true;
         }
 
-    //Gestión de los turnos
+    // === Gestión de los turnos ===
     nextTurn() {
         this.index = (this.index + 1) % this.units.length;
         const unit = this.units[this.index];
@@ -368,7 +368,7 @@ export default class BattleScene extends Phaser.Scene {
         });
     }
 
-    // Actualiza el inventario
+    // Actualiza el inventario en base a los objetos que tiene el jugador
     createInventory(){
         this.inventory = [];
         for(let i = 0; i < this.itemsArray.size(); i++){

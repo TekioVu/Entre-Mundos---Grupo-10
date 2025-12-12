@@ -193,6 +193,7 @@ export default class UIScene extends Phaser.Scene {
         this.heroesMenu.select(0);
     }
 
+    // Al escoger el heroe a usar
     onPlayerSelect(){
         const hero = this.battleScene.heroes[this.heroesMenu.menuItemIndex];
         this.actionsMenu.setHero(hero);
@@ -203,6 +204,7 @@ export default class UIScene extends Phaser.Scene {
 
     }
 
+    // Recoloca el tamaño y posicion del marcador dependiendo del enemigo
     updateEnemiesMarker() {
         if (this.currentMenu !== this.enemiesMenu) {
         this.enemiesMarker.setVisible(false);
@@ -300,6 +302,7 @@ export default class UIScene extends Phaser.Scene {
         this.enemiesMarker.setVisible(true);
     }
     
+    // == Remaps ==
     remapHeroes() { //Crea los botones de los aliados
         this.heroesMenu.remap(this.battleScene.heroes);
     }
@@ -313,120 +316,115 @@ export default class UIScene extends Phaser.Scene {
     }
 
     onKeyInput(event) {
-const keysToPrevent = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space", "KeyB"];
-if (keysToPrevent.includes(event.code)) event.preventDefault();
+        const keysToPrevent = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space", "KeyB"];
+        if (keysToPrevent.includes(event.code)) event.preventDefault();
 
-if (!this.currentMenu) return;
-
-//Cambiar entre actions y enemies menus
-switch(event.code) { 
-    case "KeyB": 
-    if (this.currentMenu === this.enemiesMenu || this.currentMenu === this.itemsMenu)
-        {this.currentMenu?.deselect(); 
-        this.currentMenu.clear();
-        this.currentMenu = this.actionsMenu; 
-        this.currentMenu.select(0);} 
-        return; 
-}
-
-switch (event.code) {
-    case "ArrowUp":
-        this.currentMenu.moveSelectionUp();
-        break;
-    case "ArrowDown":
-        this.currentMenu.moveSelectionDown();
-        break;
-    case "ArrowLeft":
-        this.currentMenu.moveSelectionLeft();
-    break;
-    case "ArrowRight":
-        this.currentMenu.moveSelectionRight();
-        break;
-    case "Space":
-        this.currentMenu.confirm();
-        break;
-
+        if (!this.currentMenu) return;
         
-}
 
-if (this.currentMenu === this.actionsMenu) {
-    if (this.actionsMenu.getMenuItemIndex() === 2) {
-        const hero = this.battleScene.heroes[this.heroesMenu.menuItemIndex];
 
-        if (hero) {
-            let msg = "";
-
-            switch (hero.type) {
-                case "Dragon":
-                    msg = "Dragon deals area damage to all enemies.";
-                    break;
-
-                case "Cacodaemon":
-                    msg = "Cacodaemon deals damage to five random enemies";
-                    break;
-
-                case "Medusa":
-                    msg = "Medusa petrifies all enemies during the next two turns.";
-                    break;
-
-                case "King":
-                    msg = "King invokes one Jester in each empty position.";
-                    break;
-
-                default:
-                    msg = "Wrong character";
-                    break;
+        switch(event.code) { //Cambiar entre actions y enemies menus
+            case "KeyB": 
+            if (this.currentMenu === this.enemiesMenu || this.currentMenu === this.itemsMenu){
+                {this.currentMenu?.deselect(); 
+                this.currentMenu.clear();
+                this.currentMenu = this.actionsMenu; 
+                this.currentMenu.select(0);} 
+                return; 
             }
-            this.message.showPermanentMessage(msg);
-        }
-    }
-    else this.message.hideMessage();
-}
-
-if (this.currentMenu === this.itemsMenu) {
-    const index = this.itemsMenu.getMenuItemIndex();
-    const item = this.localInventory[index];
-
-    if (item) {
-        let msg = "";
-
-        switch (item.getType()) {
-            case "HealPot":
-                msg = "Heals a hero " + item.hp + "hp.";
-                break;
-            case "DmgPot":
-                msg = "Deals " + item.hp + " damage to one enemy.";
-                break;
-            case "AreaPot":
-                msg = "Deals " + item.hp + " damage to a line of enemies.";
-                break;
-            case "CatPot":
-                msg = "Deals " + item.hp + " damage to all enemies.";
-                break;
-            case "StrPot":
-                msg = "Increases attack temporarily (+" + item.str + ").";
-                break;
-            case "DefPot":
-                msg = "Increases defense temporarily (+" + item.def + ").";
-                break;
-            default:
-                msg = "Unknown item.";
-                break;
         }
 
-        this.message.showPermanentMessage(msg);
+        switch (event.code) {
+            case "ArrowUp":
+                this.currentMenu.moveSelectionUp();
+                break;
+            case "ArrowDown":
+                this.currentMenu.moveSelectionDown();
+                break;
+            case "ArrowLeft":
+                this.currentMenu.moveSelectionLeft();
+            break;
+            case "ArrowRight":
+                this.currentMenu.moveSelectionRight();
+                break;
+            case "Space":
+                this.currentMenu.confirm();
+                break;    
+        }
+
+        if (this.currentMenu === this.actionsMenu) {
+            if (this.actionsMenu.getMenuItemIndex() === 2) {
+                const hero = this.battleScene.heroes[this.heroesMenu.menuItemIndex];
+
+                if (hero) {
+                    let msg = "";
+
+                    switch (hero.type) {
+                        case "Dragon":
+                            msg = "Dragon deals area damage to all enemies.";
+                            break;
+
+                        case "Cacodaemon":
+                            msg = "Cacodaemon deals damage to five random enemies";
+                            break;
+
+                        case "Medusa":
+                            msg = "Medusa petrifies all enemies during the next two turns.";
+                            break;
+
+                        case "King":
+                            msg = "King invokes one Jester in each empty position.";
+                            break;
+
+                        default:
+                            msg = "Wrong character";
+                            break;
+                    }
+                    this.message.showPermanentMessage(msg);
+                }
+            }
+            else this.message.hideMessage();
+        }
+
+        if (this.currentMenu === this.itemsMenu) {
+            const index = this.itemsMenu.getMenuItemIndex();
+            const item = this.localInventory[index];
+
+            if (item) {
+                let msg = "";
+
+                switch (item.getType()) {
+                    case "HealPot":
+                        msg = "Heals a hero " + item.hp + "hp.";
+                        break;
+                    case "DmgPot":
+                        msg = "Deals " + item.hp + " damage to one enemy.";
+                        break;
+                    case "AreaPot":
+                        msg = "Deals " + item.hp + " damage to a line of enemies.";
+                        break;
+                    case "CatPot":
+                        msg = "Deals " + item.hp + " damage to all enemies.";
+                        break;
+                    case "StrPot":
+                        msg = "Increases attack temporarily (+" + item.str + ").";
+                        break;
+                    case "DefPot":
+                        msg = "Increases defense temporarily (+" + item.def + ").";
+                        break;
+                    default:
+                        msg = "Unknown item.";
+                        break;
+                }
+
+                this.message.showPermanentMessage(msg);
+            }
+        } else {
+            this.message.hideMessage();
+        }
+
+        this.updateEnemiesMarker();
     }
-} else {
-    this.message.hideMessage();
-}
-
-
-
-
-this.updateEnemiesMarker();
-
-
-}
 
     cleanEvents() {
         this.events.off("PlayerSelect", this.onPlayerSelect, this);

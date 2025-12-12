@@ -128,7 +128,7 @@ export default class CharacterSelectionScene extends Phaser.Scene {
             }
         }
         
-
+        // Handler de inputs
         onKeyInput(event) {
             const keysToPrevent = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Enter", "Space", "Esc"];
             if (keysToPrevent.includes(event.code)) event.preventDefault();
@@ -184,7 +184,7 @@ export default class CharacterSelectionScene extends Phaser.Scene {
     }
 
 
-
+    // Recoloca la marca y el tamaño al enemigo correspondiente
     updatePositionMarker() {
     if (this.currentMenu !== this.positionsMenu) return;
 
@@ -202,8 +202,8 @@ export default class CharacterSelectionScene extends Phaser.Scene {
     const height = 50;
     const width = 50;
     const cornerLength = 10;
-this.positionMarker.clear();
-        this.positionMarker.lineStyle(4, 0xffffff, 0.8); 
+    this.positionMarker.clear();
+    this.positionMarker.lineStyle(4, 0xffffff, 0.8); 
 
     this.positionMarker.beginPath();
         this.positionMarker.moveTo(coords.x-25, coords.y-25);

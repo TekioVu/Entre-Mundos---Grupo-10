@@ -8,20 +8,24 @@ export default class PlayerCharacter extends Unit {
         this.flipX = true;
     }
 
+    // Aumenta la defensa del heroe
     defUp(boost){
         this.defense += boost;
         this.scene.events.emit("Message", `${this.type} boosts defense by ${boost}`);
     }
 
+    // Devuelve la defensa al estado antes del buff
     restoreDef(){
         this.defense = this.debuffDef;
     }
 
+    // Aumenta el daño del heroe
     dmgUp(boost){
         this.damage += boost;
         this.scene.events.emit("Message", `${this.type} boosts attack by ${boost}`);
     }
 
+    // Devuelve el daño al estado antes del buff
     restoreDmg(){
         this.damage = this.debuffDmg;
     }

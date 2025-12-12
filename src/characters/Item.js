@@ -17,14 +17,17 @@ export default class Item{
         }
     }
 
+    // Getter de la textura del objeto
     getTexture(){
         return this.textureKey;
     }
 
+    // Getter del nombre del objeto
     getName(){
         return this.name;
     }
 
+    // Getter del tipo del objeto
     getType(){
         console.log('Tipo del objeto: ' + this.type);
         return this.type;

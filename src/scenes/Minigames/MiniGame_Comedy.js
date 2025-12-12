@@ -98,7 +98,9 @@ export default class MiniGame_Comedy extends Phaser.Scene {
 
 
     }
+
     update(time,delta){
+        // Mientras que no se termine el temporizador y no sea la primera vez que se ve el minijuego reduce el tiempo
         if(this.finished)return;
         
          if (!this.firstTime) {
@@ -112,6 +114,7 @@ export default class MiniGame_Comedy extends Phaser.Scene {
         }
     }
 
+    // Spawnea el payaso aleatoriamente entre todos los agujeros
     spawnPayaso(){
         const random =  Math.floor(Math.random() * this.holes.length);
         const pos = this.holes[random];
@@ -129,6 +132,7 @@ export default class MiniGame_Comedy extends Phaser.Scene {
         });
     }
 
+    // Handler del click para comprobar si acierta o no
     handleClick(pointer) {
     if (this.finished) return;
 
@@ -144,6 +148,7 @@ export default class MiniGame_Comedy extends Phaser.Scene {
         }
     }
 
+    // Devuelve el resultado del minijuego
     finish(result){
         if (this.finished) return;
         this.finished = true;

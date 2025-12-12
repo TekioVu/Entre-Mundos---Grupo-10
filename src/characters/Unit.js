@@ -67,7 +67,8 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         
     }
 
-    updateHpText() {        
+    // Actualiza la vida en la pantalla
+    updateHpText() {
         this.hpText.setPosition(this.x, this.y - this.hpOffsetY);
         this.hpText.setText(this.hp);
     }
@@ -87,12 +88,13 @@ export default class Unit extends Phaser.GameObjects.Sprite {
 
 
     attack(target) {
-
+        // r = 0 ataque crit, r = 1, 2, 3 ataque normal
         const r = Math.floor(Math.random() * 4);
         let d;
         if (target.pos == 'v') d = this.damage - 5;
         else d = this.damage;
 
+        // En caso de ser un golpe critico empieza el minijuego correspondiente al mundo y aumenta el daño
         const battleScene = this.scene.scene.get("BattleScene");
         if(r === 0 && !this.isEnemy && (battleScene.currentbook === "FANTASÍA" || battleScene.currentbook === "TERROR" 
         || battleScene.currentbook === "COMEDIA") ||battleScene.currentbook === "HISTORIA" ) 
@@ -105,10 +107,11 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             this.scene.events.emit("Message", `${this.type} attacks ${target.type} for ${d} damage`);
         }
 
-        
-       if (!this.stunned)
+        // Hace la animacion de ataque del atacante
+        if (!this.stunned)
         {this.playAnim('attack', () => this.playAnim('idle'));}
         
+        // Conteo de las habilidades especiales
         if (this.specialAttackCounter < 2 && this.type === "Dragon" || this.type === "Cacodaemon") this.specialAttackCounter++;
         else if (this.specialAttackCounter < 3 && this.type === "Medusa") this.specialAttackCounter++;
         if(this.isEnemy)
@@ -122,6 +125,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         this.scene.events.emit("Message", `${this.type} heals ${hp}HP`);
     }
 
+    // Hace daño al area del enemigo seleccionado (vanguardia o retaguardia)
     areaPot(damage, p){
         const battleScene = this.scene.scene.get("BattleScene");
         for (let h of battleScene.enemies) {
@@ -131,6 +135,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         }
     }
 
+    // Hace daño a todos los enemigos
     catPot(damage){
         const battleScene = this.scene.scene.get("BattleScene");
         for (let h of battleScene.enemies) {
@@ -150,6 +155,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         else{
         this.hp -= damage;
         }
+
         this.isDead(bs, attacker);
     }
 
@@ -211,7 +217,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
 
             uiScene.remapHeroes();
             
-
+            // Si no quedan mas enemigos vivos comprueba si queda el miniboss por matar, sino termina el combate
             if (this.scene.enemies.length === 0) {
                 if (battleScene.normalCombatCompleted || battleScene.currentbook === "THE END") {
                     this.scene.time.addEvent({
@@ -237,6 +243,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
                 }
             }
 
+            // Si no quedan mas aliados pasa a la pantalla de derrota
             if (this.scene.heroes.length === 0) {
                 this.scene.time.addEvent({
                     delay: 1000,
@@ -259,6 +266,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
     //Minijuegos
     startMinigame(target)
     {
+        // Depende del libro actual empieza un minijuego u otro
         const battleScene = this.scene.scene.get("BattleScene");
 
         if (battleScene.currentbook === "FANTASÍA") {
@@ -285,7 +293,8 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         const battleScene = this.scene.scene.get("BattleScene");
 
          if(this.stunned == 0)
-        {
+        {   
+            // Si el contador llega a 2 hace el ataque especial personaje correspondiente
             if(this.type === "Dragon" && this.specialAttackCounter == 2)
             {
                 this.specialAttackCounter = 0;
