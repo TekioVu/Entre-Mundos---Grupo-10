@@ -56,6 +56,8 @@ export default class UIScene extends Phaser.Scene {
         this.enemiesMenu = new EnemiesMenu(10, 180, this, true);
         this.itemsMenu = new ItemsMenu(10, 180, this, this.inventory);
 
+        this.enemiesMenu.clear();
+
         this.currentMenu = this.actionsMenu;
         this.menus.add([this.heroesMenu, this.actionsMenu, this.enemiesMenu, this.itemsMenu]);
 
@@ -148,6 +150,8 @@ export default class UIScene extends Phaser.Scene {
     // Cuando se ha seleccionado un item para usar (Sin terminar)
     onItem(itemIndex){
         this.itemsMenu.clear();
+        this.enemiesMenu.clear();
+
         this.currentMenu = this.actionsMenu;
         this.actionsMenu.select(0);
         // Seleccion la accion en base al tipo de objeto usado
@@ -194,6 +198,8 @@ export default class UIScene extends Phaser.Scene {
         const firstHero = this.battleScene.heroes[0];
     if (firstHero) {
         this.actionsMenu.setHero(firstHero);
+        this.enemiesMenu.clear();
+
         this.currentMenu = this.actionsMenu;
         this.actionsMenu.select(0);
     }
@@ -205,6 +211,7 @@ export default class UIScene extends Phaser.Scene {
         const hero = this.battleScene.heroes[this.heroesMenu.menuItemIndex];
         this.actionsMenu.setHero(hero);
         this.actionsMenu.refreshMenu();
+        this.enemiesMenu.clear();
 
         this.currentMenu = this.actionsMenu;
         this.actionsMenu.select(0);
