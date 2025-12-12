@@ -17,7 +17,7 @@ export default class MenuScene extends Phaser.Scene {
         ];
 
         this.selectedIndex = 0;
-        this.unlockedbooks = 3;
+        this.unlockedbooks = 5;
         this.optionObjects = [];
 
         const { width, height } = this.scale;
@@ -109,9 +109,6 @@ export default class MenuScene extends Phaser.Scene {
     // ------------------------------------------------------
     // CREAR ESTANTERÍAS DECORATIVAS
     // ------------------------------------------------------
-    // ------------------------------------------------------
-// CREAR ESTANTERÍAS DECORATIVAS
-// ------------------------------------------------------
 createDecorativeShelf(yPosition) {
     const shelfWidth = this.width;
     const shelfHeight = 20;

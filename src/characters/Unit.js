@@ -97,8 +97,9 @@ export default class Unit extends Phaser.GameObjects.Sprite {
         // En caso de ser un golpe critico empieza el minijuego correspondiente al mundo y aumenta el daño
         const battleScene = this.scene.scene.get("BattleScene");
         if(r === 0 && !this.isEnemy && (battleScene.currentbook === "FANTASÍA" || battleScene.currentbook === "TERROR" 
-        || battleScene.currentbook === "COMEDIA") ||battleScene.currentbook === "HISTORIA" ) 
+        || battleScene.currentbook === "COMEDIA") ||battleScene.currentbook === "HISTORIA" ||battleScene.currentbook === "THE END" ) 
         {
+            console.log("crit");
             this.damage *= 1.25;
             this.startMinigame(target);
         }
@@ -266,6 +267,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
     //Minijuegos
     startMinigame(target)
     {
+        const r = Math.floor(Math.random() * 4);
         // Depende del libro actual empieza un minijuego u otro
         const battleScene = this.scene.scene.get("BattleScene");
 
@@ -283,7 +285,20 @@ export default class Unit extends Phaser.GameObjects.Sprite {
             battleScene.launchComedyMinigame(this, target);
         }else if(battleScene.currentbook === "THE END")
         {
-            
+            switch(r){
+                case(0):
+                battleScene.launchMagicMinigame(this, target);
+                break;
+                case(1):
+                battleScene.launchTerrorMinigame(this, target);
+                break;
+                case(2):
+                battleScene.launchHistoryMinigame(this, target);
+                break;
+                case(3):
+                battleScene.launchComedyMinigame(this, target);
+                break;
+            }
         }
     }
 
